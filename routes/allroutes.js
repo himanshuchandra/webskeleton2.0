@@ -7,11 +7,12 @@ router.post('/checklogin', function(req, res, next) {
 });
 
 router.post('/register',function(request,response){
-    var dbOperations = require("./crudoperation");
+     response.send('Welcome ');
+    /*var dbOperations = require("./crudoperation");
     var data =request.body;
     console.log("DATA is      ",data);
     dbOperations.checkUser(data,response);
-    
+    */
     
     //dbOperations.addUser(data,response);
 });
