@@ -9,7 +9,6 @@ router.post('/checklogin', function(req, res, next) {
 
 router.post('/register',function(request,response){
     
-    console.log("Im here post");
     var data =request.body;
     console.log("DATA is      ",data);
     dbOperations.checkUser(data,response);
@@ -20,7 +19,7 @@ router.post('/register',function(request,response){
 
 router.post('/login',function(request,response){
    
-    var dbOperations = require("./crudoperation");
+    
     var data =request.body;
     console.log("DATA is      ",data);
     dbOperations.doLogin(data,response);
@@ -30,7 +29,7 @@ router.post('/login',function(request,response){
 
 router.post('/fpass',function(request,response){
    
-    var dbOperations = require("./crudoperation");
+    
     var data =request.body;
     console.log("DATA is      ",data);
     dbOperations.sendCode(data,response);
