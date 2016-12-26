@@ -55,7 +55,7 @@ angular.module('webskeletonApp')
             console.log("SUCCESS ",data);
             //console.log(data.data.finaldata);
             var finaldata = data.data.finaldata;
-            signup.passdata(finaldata);
+            //signup.passdata(finaldata);
             //$scope.profilename= data;
             //$scope.result = data.data.msg;
             //$window.location.assign("http://localhost:1234/profile.html");

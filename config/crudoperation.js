@@ -3,7 +3,7 @@ var dbOperations= {
 checkUser:function (userObject,response){
     
     var User = require("./schemadefine");
-   
+    console.log("schemadefine");
     User.find({"useremail":userObject.useremail},function(error,result){
     if(error){
        console.log("Error Occured",error);

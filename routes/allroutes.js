@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var dbOperations = require("../config/crudoperation");
 
 /* GET users listing. */
 router.post('/checklogin', function(req, res, next) {
@@ -7,12 +8,12 @@ router.post('/checklogin', function(req, res, next) {
 });
 
 router.post('/register',function(request,response){
-     response.send('Welcome ');
-    /*var dbOperations = require("./crudoperation");
+    
+    console.log("Im here post");
     var data =request.body;
     console.log("DATA is      ",data);
     dbOperations.checkUser(data,response);
-    */
+    
     
     //dbOperations.addUser(data,response);
 });

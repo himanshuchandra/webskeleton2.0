@@ -1,4 +1,5 @@
-var dbsettings={
+ 
+var dbconfig={
     dburl:"mongodb://localhost:27017/wuserdb"
 }
-module.exports=dbsettings;
+module.exports=dbconfig;
