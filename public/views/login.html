@@ -1,0 +1,20 @@
+    <h1>Login Page</h1>
+     <form name="loginForm"  ng-submit="submitForm(loginForm)" novalidate>
+    <input type="text" ng-model="loginid" name="validloginid" pattern="[a-z,A-Z,0-9,_,.,@,!,#,$,%,^,&,*,-,+,=,>,<,?,/,~,`,',|]{5,}" placeholder="Email/Username" required>
+    <span  ng-show="loginForm.validloginid.$touched && loginForm.validloginid.$error.pattern && !loginForm.validloginid.$error.required">Invalid email/username </span>
+    <span  ng-show="loginForm.validloginid.$touched && loginForm.validloginid.$error.required">Cannot be left empty </span>
+    <span  ng-show="submitted && !loginForm.validloginid.$touched">Cannot be left empty </span>
+    
+
+    <input type="password" ng-model="loginpassword" placeholder="Password" name="validloginpass" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required>
+    <span  ng-show="loginForm.validloginpass.$touched && loginForm.validloginpass.$error.pattern && !loginForm.validloginpass.$error.required">password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+    <span  ng-show="loginForm.validloginpass.$touched && loginForm.validloginpass.$error.required">Cannot be left empty </span>
+    <span  ng-show="submitted && !loginForm.validloginpass.$touched">Cannot be left empty </span>
+    
+    <input type="submit" ng-click="submitted=true;" value="Login">
+    </form>
+    {{result}}
+    
+    <input type="button" value="Forgot Password" ng-click="forgotpass()">
+
+    <H1><a ng-href="#signup">SIGNUP</H1>

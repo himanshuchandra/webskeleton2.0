@@ -77,7 +77,6 @@ User.create(data,function(error,result){
 }
 ,
 doLogin:function (loginObject,response){
-    
     var User = require("./schemadefine");
     
     User.find({
