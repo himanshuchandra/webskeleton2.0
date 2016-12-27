@@ -8,7 +8,7 @@
  * Factory in the webskeletonApp.
  */
 angular.module('webskeletonApp')
-  .factory('signup', function ($http,$q) {
+  .factory('signup', function ($http,$q,requrl) {
    //var data= {key,value};
     var userdata=[];
 
@@ -16,7 +16,7 @@ angular.module('webskeletonApp')
        // mydata:"",
 
         registerUser:function(userObject){
-          var defer = $q.defer(); $http.post('http://localhost:1234/allroutes/register',userObject).then(function(data){
+          var defer = $q.defer(); $http.post(requrl+'/allroutes/register',userObject).then(function(data){
                defer.resolve(data);
            },function(error){
                defer.reject(error);

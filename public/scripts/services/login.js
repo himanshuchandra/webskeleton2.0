@@ -8,11 +8,11 @@
  * Factory in the webskeletonApp.
  */
 angular.module('webskeletonApp')
-  .factory('login', function ($http,$q) {
+  .factory('login', function ($http,$q,requrl) {
     var object = {
         loginUser:function(loginObject){
             
-          var defer = $q.defer(); $http.post('http://localhost:1234/allroutes/login',loginObject).then(function(data){
+          var defer = $q.defer(); $http.post(requrl+'/allroutes/login',loginObject).then(function(data){
                defer.resolve(data);
            },function(error){
                defer.reject(error);

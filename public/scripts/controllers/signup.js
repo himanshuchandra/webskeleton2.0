@@ -45,6 +45,7 @@ angular.module('webskeletonApp')
             "useremail":$scope.useremail,
             "username":$scope.username,
             "password1":$scope.password1,
+            "role":"customer"
             //"forgotpasscode":0,
             /*"mobile":0,
             "address":[{"area":"null","city":"null","state":"null","pincode":0,"country":"null"}]*/

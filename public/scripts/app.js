@@ -14,6 +14,7 @@ angular
     'ngCookies',
     'ngRoute'
   ])
+  .constant("requrl","http://localhost:1234")
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -36,7 +37,13 @@ angular
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
+      })
       .otherwise({
         redirectTo: '/'
       });
   });
+

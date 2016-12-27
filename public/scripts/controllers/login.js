@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('LoginCtrl', function ($scope,login,$window) {
+  .controller('LoginCtrl', function ($scope,login,$window,requrl) {
  
      $scope.submitForm=function(loginForm){
            // console.log(regForm.$valid);
@@ -38,7 +38,7 @@ angular.module('webskeletonApp')
                     }
                 else{
                     $scope.result="Logged in successfully";
-                    $window.location.assign("http://localhost:1234/profile.html");
+                    $window.location.assign(requrl+"/profile.html");
                 }
             
             
@@ -51,6 +51,6 @@ angular.module('webskeletonApp')
     
     
     $scope.forgotpass=function(){
-        window.location.assign("http://localhost:1234/fpass.html");
+        window.location.assign(requrl+"/fpass.html");
     }
   });
