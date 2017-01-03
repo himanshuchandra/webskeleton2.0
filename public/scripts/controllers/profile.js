@@ -9,7 +9,18 @@
  */
 angular.module('webskeletonApp')
   .controller('ProfileCtrl', function ($scope,profile) {
-   
+
+          $scope.submitForm=function (profForm) {  
+              if(profForm.$valid){
+                $scope.saveprof();
+              }
+              else{
+                console.log("Wrong info");
+              }
+
+          }
+
+
           $scope.submitForm=function(passForm){
              if(passForm.$valid){
                     $scope.changePass();

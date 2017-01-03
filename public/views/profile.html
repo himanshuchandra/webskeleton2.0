@@ -1,22 +1,25 @@
 <h1>PROFILE</h1>
+<h5>Email</h5>
+<h3>
+<form name="EditProfile"  ng-submit="submitForm(profForm)" novalidate>
+<h5>NAME</h5>
 
-<h2>NAME</h2>
-<h2>EMAIL</h2>
-<h2>Address</h2>
-<h2>Area</h2>
-<h2>City</h2>
-<h2>State</h2>
-<h2>Pincode</h2>
-<h2>Country</h2>
-<h2>Mobile Number</h2>
-
+<h5>Address</h5>
+<h5>Area</h5>
+<h5>City</h5>
+<h5>State</h5>
+<h5>Pincode</h5>
+<h5>Country</h5>
+<h5>Mobile Number</h5>
+<input type="submit" ng-click=""submitted=true;"" value="Edit Profile">
+</form>
 <form name="passForm"  ng-submit="submitForm(passForm)" novalidate>
-<h2>Old Password</h2>
+<h5>Old Password</h5>
  <input type="password"  ng-model="oldpassword" name="oldpass"  placeholder="Password" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required/>  
     <span  ng-show="passForm.oldpass.$touched && passForm.oldpass.$error.pattern && !passForm.oldpass.$error.required">password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <!--span  ng-show="passForm.oldpass.$touched && passForm.oldpass.$error.required">Cannot be left empty </span-->
     <span  ng-show="submitted && !passForm.oldpass.$touched">Cannot be left empty </span>
-<h2>New password</h2>
+<h5>New password</h5>
  <input type="password"  ng-model="newpassword" name="newpass"  placeholder="Password" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required/>
    <span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.pattern && !passForm.newpass.$error.required">password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <!--span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.required">Cannot be left empty </span-->
