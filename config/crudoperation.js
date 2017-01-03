@@ -1,9 +1,10 @@
+var User = require("./schemadefine");
 var dbOperations= {
+
 
 checkUser:function (userObject,response){
     
-    var User = require("./schemadefine");
-    console.log("schemadefine");
+    
     User.find({"useremail":userObject.useremail},function(error,result){
     if(error){
        console.log("Error Occured",error);
@@ -33,7 +34,6 @@ checkUser:function (userObject,response){
 ,   
 checkUsername:function (userObject,response){
     
-    var User = require("./schemadefine");
     
     User.find({"username":userObject.username},function(error,result){
     if(error){
@@ -61,12 +61,11 @@ checkUsername:function (userObject,response){
 }    
 ,   
 addUser:function(data,response){
-var User = require("./schemadefine");
 User.create(data,function(error,result){
     
      //User.create({"name":"Ram","phone":[2222,3333],"address":[{"state":"Delhi","pincode":2222},{"state":"Delhi","pincode":2222}]},function(error,response){
    if(error){
-       response.json({"msg":"Can't Add Error Occured "});
+       response.json({"msg":"Can't Add Error Occured, Try later"});
    }
     else{
        response.json({"msg":"Register SuccessFully...","finaldata":result});
@@ -77,7 +76,7 @@ User.create(data,function(error,result){
 }
 ,
 doLogin:function (loginObject,response){
-    var User = require("./schemadefine");
+    
     
     User.find({
      "$and":[
@@ -109,7 +108,7 @@ doLogin:function (loginObject,response){
 ,
 sendCode:function (codeObject,response){
     
-    var User = require("./schemadefine");
+
    
     User.find({"useremail":codeObject.cemail},function(error,result){
     if(error){
@@ -146,7 +145,7 @@ sendCode:function (codeObject,response){
 
 forgotpass:function (codeObject,response){
     
-    var User = require("./schemadefine");
+
   
     console.log(codeObject.fcode);
     User.update({useremail:codeObject.cemail}, {$set:{forgotpasscode:codeObject.fcode}},function(error,result){

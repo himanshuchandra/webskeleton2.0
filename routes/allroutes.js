@@ -12,8 +12,7 @@ router.post('/register',function(request,response){
     var data =request.body;
     console.log("DATA is      ",data);
     dbOperations.checkUser(data,response);
-    
-    
+
     //dbOperations.addUser(data,response);
 });
 

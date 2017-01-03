@@ -1,10 +1,15 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 //var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var mfavicon=require("express-favicon");
+var srs = require('secure-random-string');
+var randomstring = require("randomstring");
+var MongoStore = require('connect-mongo')(session);
+
 
 var index = require('./routes/index');
 var allroutes = require('./routes/allroutes');
@@ -20,8 +25,10 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mfavicon(__dirname + '/public/favicon.icon'));
+
 
 app.use('/', index);
 app.use('/allroutes',allroutes);
@@ -43,5 +50,26 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+//for random string generation
+srs(function(err, sr) {
+        return sr;
+     },function(err){
+        return randomstring.generate(35);
+         
+});
+
+app.use(session({
+    secret:srs(),
+    saveUninitialized:true,
+    resave:true,
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/sessions',
+        //ttl: 14 * 24 * 60 * 60,//14 days 
+        ttl:2*60*60,// 2 hours 
+        //mongoOptions: advancedOptions // See below for details 
+    })
+}));
+
 
 module.exports = app;
