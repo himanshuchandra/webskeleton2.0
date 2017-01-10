@@ -28,10 +28,7 @@ router.post('/login',function(request,response){
     //console.log("DATA is      ",data);
 
     dbOperations.doLogin(request,response);
-                request.session.zzzzz="mymail";
-            console.log("session is "+request.session.zzzzz);
-    //console.log("session is "+req.session.ui);
-    //return logintoken;
+
 });
 
 router.post('/fpass',function(request,response){

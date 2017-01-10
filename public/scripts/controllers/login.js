@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('LoginCtrl', function ($scope,login,$window,requrl) {
+  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
  
      $scope.submitForm=function(loginForm){
            // console.log(regForm.$valid);
@@ -21,9 +21,11 @@ angular.module('webskeletonApp')
     
     $scope.doLogin=function(){
         
+        var hashLoginPassword=md5.createHash($scope.loginpassword);
+
         var loginObject = {
             "loginid":$scope.loginid,
-            "loginpassword":$scope.loginpassword,
+            "loginpassword":hashLoginPassword,
         };
         var promise = login.loginUser(loginObject);
         promise.then(function(data){
