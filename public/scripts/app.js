@@ -16,7 +16,7 @@ angular
     'angular-md5'
   ])
   .constant("requrl","http://localhost:1234")
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -46,5 +46,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+      $locationProvider.hashPrefix('');
   });
 
