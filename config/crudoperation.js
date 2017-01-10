@@ -75,9 +75,9 @@ User.create(data,function(error,result){
 });
 }
 ,
-doLogin:function (loginObject,response){
+doLogin:function (request,response){
     
-    
+    var loginObject=request.body;
     User.find({
      "$and":[
         {
@@ -97,9 +97,18 @@ doLogin:function (loginObject,response){
        console.log("Error Occured",error);
    }
     else{ 
+        var message; 
+       console.log(result);
+        if(result.length<1){
+            response.json({msg:"fail"});
+        }
+        else{
+            response.json({msg:"success"});
+            // request.session.zzzzz="mymail";
+            // console.log("session is "+request.session.zzzzz);
+            //response.send("session is "+request.session.zzzzz);
+        }
         
-       console.log(result.data);
-        response.json({result});
         //response.json({msg:"Logged in SuccessFully..."});
        
    }

@@ -28,20 +28,21 @@ angular.module('webskeletonApp')
         var promise = login.loginUser(loginObject);
         promise.then(function(data){
             console.log("SUCCESS ",data);
-            var res = data.data.result;
-            console.log(res);
+           var res = data.data.msg;
+            //console.log(res);
             //var token;
-            
-            if(res.length<1){
-            console.log("nodata");
-                    $scope.result="Wrong email or password";
-                    }
-                else{
+           
+            if(res==="success"){
+    
                     $scope.result="Logged in successfully";
-                    $window.location.assign(requrl+"/profile.html");
+                   // $window.location.assign(requrl+"/profile.html");
+                    
+                    }
+            else{
+                    $scope.result="Wrong email or password";
                 }
-            
-            
+           
+           
             
         
         },function(error){

@@ -10,11 +10,25 @@ var srs = require('secure-random-string');
 var randomstring = require("randomstring");
 var MongoStore = require('connect-mongo')(session);
 
+var app = express();
+
+
+app.use(session({
+    secret:srs(),
+    saveUninitialized:true,
+    resave:true,
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/nses',
+        //ttl: 14 * 24 * 60 * 60,//14 days 
+        ttl:2*60,// 2 hours 
+        //mongoOptions: advancedOptions // See below for details 
+    })
+}));
+
 
 var index = require('./routes/index');
 var allroutes = require('./routes/allroutes');
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,8 +44,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mfavicon(__dirname + '/public/favicon.icon'));
 
 
+
+
+//app.use(session({ secret:"string"}));
 app.use('/', index);
 app.use('/allroutes',allroutes);
+
+//for random string generation
+srs(function(err, sr) {
+        return sr;
+     },function(err){
+        return randomstring.generate(35);
+         
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,26 +77,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-//for random string generation
-srs(function(err, sr) {
-        return sr;
-     },function(err){
-        return randomstring.generate(35);
-         
-});
-
-app.use(session({
-    secret:srs(),
-    saveUninitialized:true,
-    resave:true,
-    store: new MongoStore({
-        url: 'mongodb://localhost:27017/sessions',
-        //ttl: 14 * 24 * 60 * 60,//14 days 
-        ttl:2*60*60,// 2 hours 
-        //mongoOptions: advancedOptions // See below for details 
-    })
-}));
 
 
 module.exports = app;
