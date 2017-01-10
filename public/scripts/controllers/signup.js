@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('SignupCtrl', function ($scope,signup,$window) {
+  .controller('SignupCtrl',function ($scope,signup,$window,md5) {
    
     $scope.passverified=false;
     
@@ -41,10 +41,12 @@ angular.module('webskeletonApp')
    
     $scope.doRegister=function(){
         
+        var hashPassword=md5.createHash($scope.password1);
+
         var userObject = {
             "useremail":$scope.useremail,
             "username":$scope.username,
-            "password1":$scope.password1,
+            "password1":hashPassword,
             "role":"customer"
             //"forgotpasscode":0,
             /*"mobile":0,

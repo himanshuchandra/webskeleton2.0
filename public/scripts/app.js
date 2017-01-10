@@ -12,7 +12,8 @@ angular
   .module('webskeletonApp', [
     'ngAnimate',
     'ngCookies',
-    'ngRoute'
+    'ngRoute',
+    'angular-md5'
   ])
   .constant("requrl","http://localhost:1234")
   .config(function ($routeProvider) {
