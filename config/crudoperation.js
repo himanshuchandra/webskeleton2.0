@@ -103,9 +103,10 @@ doLogin:function (request,response){
             response.json({msg:"fail"});
         }
         else{
+             request.session.zzzzz="mymail";
+             console.log("session is "+request.session.zzzzz);
             response.json({msg:"success"});
-            // request.session.zzzzz="mymail";
-            // console.log("session is "+request.session.zzzzz);
+            
             //response.send("session is "+request.session.zzzzz);
         }
         
