@@ -12,7 +12,8 @@ angular.module('webskeletonApp')
     var object = {
         loginUser:function(loginObject){
             
-          var defer = $q.defer(); $http.post(requrl+'/allroutes/login',loginObject).then(function(data){
+          var defer = $q.defer(); 
+          $http.post(requrl+'/allroutes/login',loginObject).then(function(data){
                defer.resolve(data);
            },function(error){
                console.log(error);

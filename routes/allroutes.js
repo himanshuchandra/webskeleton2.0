@@ -14,19 +14,16 @@ console.log("session is "+req.session.ui);
 
 router.post('/register',function(request,response){
     
-    var data =request.body;
-    console.log("DATA is      ",data);
-    dbOperations.checkUser(data,response);
+    //var data =request.body;
+    //console.log("DATA is      ",data);
+    dbOperations.checkUser(request,response);
  
     //dbOperations.addUser(data,response);
 });
 
 router.post('/login',function(request,response){
-   
-    
    // var data =request.body;
     //console.log("DATA is      ",data);
-
     dbOperations.doLogin(request,response);
 
 });

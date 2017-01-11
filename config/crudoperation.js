@@ -2,9 +2,9 @@ var User = require("./schemadefine");
 var dbOperations= {
 
 
-checkUser:function (userObject,response){
+checkUser:function (request,response){
     
-    
+    var userObject =request.body;
     User.find({"useremail":userObject.useremail},function(error,result){
     if(error){
        console.log("Error Occured",error);
@@ -21,7 +21,7 @@ checkUser:function (userObject,response){
         else
             {
                 console.log("notfound");
-                caller.checkusernamecaller(userObject,response);
+                caller.checkusernamecaller(request,response);
             }
         //response.json({result});
         
@@ -32,8 +32,8 @@ checkUser:function (userObject,response){
 });
 }    
 ,   
-checkUsername:function (userObject,response){
-    
+checkUsername:function (request,response){
+    var userObject =request.body;
     
     User.find({"username":userObject.username},function(error,result){
     if(error){
@@ -51,7 +51,7 @@ checkUsername:function (userObject,response){
         else
             {
                 console.log("notfound");
-                caller.registercaller(userObject,response);
+                caller.registercaller(request,response);
             }
         //response.json({msg:"Logged in SuccessFully..."});
        //loginObject.logintoken=true;
@@ -60,15 +60,19 @@ checkUsername:function (userObject,response){
 });
 }    
 ,   
-addUser:function(data,response){
-User.create(data,function(error,result){
+addUser:function(request,response){
+
+   var data =request.body;
+   User.create(data,function(error,result){
     
      //User.create({"name":"Ram","phone":[2222,3333],"address":[{"state":"Delhi","pincode":2222},{"state":"Delhi","pincode":2222}]},function(error,response){
    if(error){
        response.json({"msg":"Can't Add Error Occured, Try later"});
    }
     else{
-       response.json({"msg":"Register SuccessFully...","finaldata":result});
+        result=[result];
+       fillSession(request,result);
+       response.json({"msg":"Register SuccessFully..."});
         console.log(result);
    }
 
@@ -97,14 +101,15 @@ doLogin:function (request,response){
        console.log("Error Occured",error);
    }
     else{ 
-        var message; 
        console.log(result);
         if(result.length<1){
             response.json({msg:"fail"});
         }
         else{
-             request.session.zzzzz="mymail";
-             console.log("session is "+request.session.zzzzz);
+            result["0"].rememberMe=loginObject.rememberMe;
+            fillSession(request,result);
+            //request.session.zzzzz="mymail";
+            // console.log("session is "+request.session.zzzzz);
             response.json({msg:"success"});
             
             //response.send("session is "+request.session.zzzzz);
@@ -176,14 +181,31 @@ module.exports =dbOperations;
 
 var caller={
     
-    checkusernamecaller:function(data,response){
-        dbOperations.checkUsername(data,response);
+    checkusernamecaller:function(request,response){
+        dbOperations.checkUsername(request,response);
     },
-    registercaller:function(data,response){
-        dbOperations.addUser(data,response);
+    registercaller:function(request,response){
+        dbOperations.addUser(request,response);
     },
     savecode:function(data,response){
         dbOperations.forgotpass(data,response);
     }
+
 }
+
+function fillSession(request,data) {
+    
+    userData=data;
+    userData["0"].password1=undefined;
+    console.log(userData);
+    //console.log(userData);
+    //console.log(userData["0"].password1);
+    //var userData=data;
+    request.session.user=userData;
+    if(userData["0"].rememberMe==true){
+         var thirtyDays = 30*24*60*60*1000;
+         request.session.cookie.expires = new Date(Date.now() + thirtyDays);
+    }
+    //console.log(data["0"].useremail);
+} 
 //findUser("Ram");

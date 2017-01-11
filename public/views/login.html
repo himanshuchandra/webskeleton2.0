@@ -11,6 +11,7 @@
     <span  ng-show="loginForm.validloginpass.$touched && loginForm.validloginpass.$error.required">Cannot be left empty </span>
     <span  ng-show="submitted && !loginForm.validloginpass.$touched">Cannot be left empty </span>
     
+    <input type="checkbox" ng-model="RememberMe" name="rememberMe" value="false">Rememeber Me<br>
     <input type="submit" ng-click="submitted=true;" value="Login">
     </form>
     {{result}}

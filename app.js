@@ -17,6 +17,9 @@ app.use(session({
     secret:srs(),
     saveUninitialized:true,
     resave:true,
+    //httpOnly: true,
+    //secure: true,
+    //ephemeral: true
     store: new MongoStore({
         url: 'mongodb://localhost:27017/nses',
         //ttl: 14 * 24 * 60 * 60,//14 days 

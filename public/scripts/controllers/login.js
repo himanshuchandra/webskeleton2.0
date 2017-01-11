@@ -26,6 +26,7 @@ angular.module('webskeletonApp')
         var loginObject = {
             "loginid":$scope.loginid,
             "loginpassword":hashLoginPassword,
+            "rememberMe":$scope.RememberMe
         };
         var promise = login.loginUser(loginObject);
         promise.then(function(data){
@@ -37,8 +38,8 @@ angular.module('webskeletonApp')
             if(res==="success"){
     
                     $scope.result="Logged in successfully";
-                   // $window.location.assign(requrl+"/profile.html");
-                    
+                    //$window.location.assign(requrl+"/profile");
+                    $location.path(requrl+"/profile");
                     }
             else{
                     $scope.result="Wrong email or password";
