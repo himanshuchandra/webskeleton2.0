@@ -8,10 +8,6 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope) {
+    $scope.loginStatus="jjjjj"
   });

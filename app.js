@@ -23,7 +23,7 @@ app.use(session({
     store: new MongoStore({
         url: 'mongodb://localhost:27017/nses',
         //ttl: 14 * 24 * 60 * 60,//14 days 
-        ttl:2*60,// 2 hours 
+        ttl:2*60*60,// 2 hours 
         //mongoOptions: advancedOptions // See below for details 
     })
 }));

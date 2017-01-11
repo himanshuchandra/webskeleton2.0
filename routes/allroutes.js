@@ -12,6 +12,16 @@ console.log("session is "+req.session.ui);
 
 });
 
+router.post('/webindex', function(request,response) {
+  if(request.session.user){
+       response.send("Hello "+request.session.user["0"].username);
+  }
+  else{
+       response.send("Login/SignUp");
+  }
+});
+
+
 router.post('/register',function(request,response){
     
     //var data =request.body;

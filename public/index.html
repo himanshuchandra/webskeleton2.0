@@ -35,7 +35,8 @@
 
             <a class="navbar-brand" href="#/">webskeleton</a>
           </div>
-           <H1><a ng-href="#login">LOGIN/SIGNUP</H1>     
+          <button type="button" ng-controller="WebindexCtrl"><a ng-href="/#profile">{{loginStatus}}</a></button>
+           <!--H1><a ng-href="#login">LOGIN/SIGNUP</H1-->     
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
@@ -94,6 +95,8 @@
         <script src="scripts/services/login.js"></script>
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/services/profile.js"></script>
+        <script src="scripts/controllers/webindex.js"></script>
+        <script src="scripts/services/webindex.js"></script>
         
         <!-- endbuild -->
 </body>

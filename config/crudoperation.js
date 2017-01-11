@@ -195,6 +195,7 @@ var caller={
 
 function fillSession(request,data) {
     
+    //sessionDestroy(request);
     userData=data;
     userData["0"].password1=undefined;
     console.log(userData);
@@ -208,4 +209,10 @@ function fillSession(request,data) {
     }
     //console.log(data["0"].useremail);
 } 
+
+function sessionDestroy(request){
+     request.session.destroy(function(err) {
+        console.log("cannot access session here"); 
+    });
+}
 //findUser("Ram");
