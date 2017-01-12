@@ -8,16 +8,22 @@
  * Factory in the webskeletonApp.
  */
 angular.module('webskeletonApp')
-  .factory('profile', function () {
-    // Service logic
-    // ...
+  .factory('profile', function ($http,$q,requrl) {
 
-    var meaningOfLife = 42;
+      var object = {
+        getData:function(){
+            
+          var defer = $q.defer(); 
+          $http.post(requrl+'/allroutes/getData').then(function(data){
+               defer.resolve(data);
+           },function(error){
+               console.log(error);
+               defer.reject(error);
+           }) 
+            return defer.promise;
+        }
+        
+        };
+    return object;
 
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
   });

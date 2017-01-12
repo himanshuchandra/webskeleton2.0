@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
-//var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var mfavicon=require("express-favicon");
@@ -12,6 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
+app.use(cookieParser());
 
 app.use(session({
     secret:srs(),

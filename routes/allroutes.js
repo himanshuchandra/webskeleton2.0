@@ -21,6 +21,14 @@ router.post('/webindex', function(request,response) {
   }
 });
 
+router.post('/getData', function(request,response) {
+  if(request.session.user){
+       response.send(request.session.user);
+  }
+  else{
+       response.send("unknown");
+  }
+});
 
 router.post('/register',function(request,response){
     
