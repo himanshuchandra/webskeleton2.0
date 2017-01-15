@@ -38,14 +38,19 @@ angular.module('webskeletonApp')
             if(res==="success"){
     
                     $scope.result="Logged in successfully";
-                    //$window.location.assign(requrl+"/profile");
-                    $location.path(requrl+"/profile");
-                    }
-            else{
-                    $scope.result="Wrong email or password";
-                }
+                    $window.location.assign(requrl+"/#/profile");
+                    $window.location.reload();
+            //         var promise2 = login.redirect(requrl+"/#/profile");
+            //          promise.then(function(data){  
+        
+            //               });
+            //         //$location.path(requrl+"/profile");
+            //         }
+            // else{
+            //         $scope.result="Wrong email or password";
+            //     }
            
-           
+            } 
             
         
         },function(error){

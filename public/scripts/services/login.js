@@ -16,11 +16,12 @@ angular.module('webskeletonApp')
           $http.post(requrl+'/allroutes/login',loginObject).then(function(data){
                defer.resolve(data);
            },function(error){
-               console.log(error);
+               
                defer.reject(error);
            }) 
             return defer.promise;
-        }
+        },
+
         
         };
     return object;

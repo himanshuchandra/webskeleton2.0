@@ -3,14 +3,14 @@ var router = express.Router();
 var dbOperations = require("../config/crudoperation");
 
 /* GET users listing. */
-router.post('/checklogin', function(req, res, next) {
-  //res.send('Welcome '+req.body.userid+" "+req.body.password);
-   var xxxxcccc;
-    req.session.ui="kkk";
-console.log("session is "+req.session.ui);
-    res.send("session is "+req.session.ui);
+// router.post('/checklogin', function(req, res, next) {
+//   //res.send('Welcome '+req.body.userid+" "+req.body.password);
+//    var xxxxcccc;
+//     req.session.ui="kkk";
+// console.log("session is "+req.session.ui);
+//     res.send("session is "+req.session.ui);
 
-});
+// });
 
 router.post('/webindex', function(request,response) {
   if(request.session.user){
@@ -43,6 +43,18 @@ router.post('/login',function(request,response){
    // var data =request.body;
     //console.log("DATA is      ",data);
     dbOperations.doLogin(request,response);
+    //response.redirect('http://localhost:1234/#/profile');
+});
+
+router.post('/redirect',function(request,response){
+
+    var url=request.body;
+    console.log("url is"+url);
+    response.writeHead(301,
+    {
+        Location: ""}
+    );
+    response.end();
 
 });
 

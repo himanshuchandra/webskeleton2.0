@@ -2,29 +2,34 @@ var express = require('express');
 var path = require('path');
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var mfavicon=require("express-favicon");
-var srs = require('secure-random-string');
-var randomstring = require("randomstring");
+//var srs = require('secure-random-string');
+//var randomstring = require("randomstring");
 var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
-app.use(cookieParser());
+var config= require('./config/config');
+
+
+//app.use(cookieParser());
+
 
 app.use(session({
-    secret:srs(),
+    secret:config.sessionKey,
     saveUninitialized:true,
     resave:true,
-    //httpOnly: true,
+    //httpOnly: true, //default true
     //secure: true,
+    //ssl
     //ephemeral: true
     store: new MongoStore({
-        url: 'mongodb://localhost:27017/nses',
+        url: config.mongoUrl,
         //ttl: 14 * 24 * 60 * 60,//14 days 
-        ttl:2*60*60,// 2 hours 
+        ttl: config.defaultSessionDuraion,// 2 hours 
         //mongoOptions: advancedOptions // See below for details 
     })
 }));
@@ -53,15 +58,6 @@ app.use(mfavicon(__dirname + '/public/favicon.icon'));
 //app.use(session({ secret:"string"}));
 app.use('/', index);
 app.use('/allroutes',allroutes);
-
-//for random string generation
-srs(function(err, sr) {
-        return sr;
-     },function(err){
-        return randomstring.generate(35);
-         
-});
-
 
 
 // catch 404 and forward to error handler
