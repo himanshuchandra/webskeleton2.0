@@ -38,8 +38,9 @@ angular.module('webskeletonApp')
             if(res==="success"){
     
                     $scope.result="Logged in successfully";
-                    $window.location.assign(requrl+"/#/profile");
                     $window.location.reload();
+                    $window.location.assign(requrl+"/#/profile");
+                    
             //         var promise2 = login.redirect(requrl+"/#/profile");
             //          promise.then(function(data){  
         

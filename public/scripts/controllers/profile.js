@@ -10,17 +10,32 @@
 angular.module('webskeletonApp')
   .controller('ProfileCtrl', function ($scope,profile) {
 
+            var msg="Not saved";
+
+            $scope.Name=msg;
+
+
       var promise = profile.getData();
         promise.then(function(data){
             console.log("SUCCESS ",data);
 
+            var print=data.data["0"];
+//            console.log(data.data["0"].username);
+
+            $scope.Email=print.useremail;
+            $scope.uName=print.username;
             
-            console.log(data["0"].username);
+            
+            //$scope.Name=data.data["0"].fullname;
+            //$scope.address=data.data["0"].;
+            //$scope.Email=data.data["0"].useremail;
+
+           
             //var finaldata = data.data.finaldata;
             //signup.passdata(finaldata);
             //$scope.profilename= data;
-            
-            $scope.result = data.data.msg;
+            //console.log("sss"+data.data.msg);
+            //$scope.result = data.data.msg;
             //$window.location.assign("http://localhost:1234/profile.html");
         
             
