@@ -15,16 +15,16 @@ angular.module('webskeletonApp')
             console.log("SUCCESS ",data);
 
             var print=data.data["0"];
-            var userInfo=data.data["0"].userinfo["0"];
+            var userInfo=data.data["0"].userinfo;
 //            console.log(data.data["0"].username);
 
             $scope.Email=print.useremail;
             $scope.uName=print.username;
             
             if(userInfo.length!=0){
-              console.log("insiode"+userInfo.fullname);
-                 $scope.Name=userInfo.fullname;
-                 $scope.Pincode=userInfo.pincode;
+              console.log("insiode"+userInfo[0].fullname);
+                 $scope.Name=userInfo[0].fullname;
+                 $scope.Pincode=userInfo[0].pincode;
 
             }
             
@@ -47,9 +47,10 @@ angular.module('webskeletonApp')
         });
       
 
-          $scope.submitForm=function (profForm) {  
+          $scope.submitProfileForm=function (profForm) {  
               if(profForm.$valid){
-                $scope.saveprof();
+                console.log("valid all");
+               // $scope.saveprof();
               }
               else{
                 console.log("Wrong or Incomplete info");
@@ -57,7 +58,7 @@ angular.module('webskeletonApp')
 
           }
 
-          $scope.submitForm=function(mobileForm){
+          $scope.submitMobileForm=function(mobileForm){
              if(mobileForm.$valid){
                     $scope.changeMobile();
            
@@ -67,7 +68,7 @@ angular.module('webskeletonApp')
             }
           }
 
-          $scope.submitForm=function(passForm){
+          $scope.submitPasswordForm=function(passForm){
              if(passForm.$valid){
                     $scope.changePass();
            

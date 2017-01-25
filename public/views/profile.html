@@ -13,31 +13,80 @@
     <h5>Country</h5><p>{{Country||"Not Saved"}}</p>
 </div>
 
-<form name="profileForm"  ng-submit="submitForm(profForm)" novalidate>
-    <input type="text" ng-model="newName" placeholder="Full Name">
-    <input type="text" ng-model="newArea" placeholder="Full Name">
-    <input type="text" ng-model="newCity" placeholder="Full Name">
-    <input type="text" ng-model="newState" placeholder="State">
-    <input type="text" ng-model="newPincode" placeholder="Pincode">
+<form name="profForm" ng-submit="submitProfileForm(profForm)" novalidate>
+
+    <input type="text" name="validName" ng-model="newName" placeholder="Full Name" pattern="[A-Za-z ]{3,30}" required>
+    <span  ng-show="profForm.validName.$touched &&
+     profForm.validName.$error.pattern &&
+      !profForm.validName.$error.required">
+      Invalid name(Should be 3-30 only a-z,A-Z and space allowed) </span>
+    <span  ng-show="profForm.validName.$touched &&
+     profForm.validName.$error.required">Cannot be left empty </span>
+    <span  ng-show="ProfileSubmitted && !profForm.validName.$touched">
+        Cannot be left empty </span>
+
+    <input type="text" name="validArea" ng-model="newArea" placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,30}" required>
+        <span  ng-show="profForm.validArea.$touched &&
+     profForm.validArea.$error.pattern &&
+      !profForm.validArea.$error.required">
+      Invalid Area(Should be 5-30 only a-z,A-Z,0-9,-,. , and space allowed) </span>
+    <span  ng-show="profForm.validArea.$touched &&
+     profForm.validArea.$error.required">Cannot be left empty </span>
+    <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched">
+        Cannot be left empty </span>
+
+    <input type="text" name="validCity" ng-model="newCity" placeholder="City" pattern="[A-Za-z0-9 ]{4,15}" required>
+        <span  ng-show="profForm.validCity.$touched &&
+     profForm.validCity.$error.pattern &&
+      !profForm.validCity.$error.required">
+      Invalid City(Should be 4-15 only a-z,A-Z,0-9 and space allowed) </span>
+    <span  ng-show="profForm.validCity.$touched &&
+     profForm.validCity.$error.required">Cannot be left empty </span>
+    <span  ng-show="ProfileSubmitted && !profForm.validCity.$touched">
+        Cannot be left empty </span>
     
-    <country-select ng-model="newCountry" cs-required cs-priorities="IN, AU, DE, GB, US"></country-select>
+    <input type="text" name="validState" ng-model="newState" placeholder="State" pattern="[A-Za-z0-9 ]{4,15}" required>
+        <span  ng-show="profForm.validState.$touched &&
+     profForm.validState.$error.pattern &&
+      !profForm.validState.$error.required">
+      Invalid State(Should be 4-15 only a-z,A-Z,0-9 and space allowed) </span>
+    <span  ng-show="profForm.validState.$touched &&
+     profForm.validState.$error.required">Cannot be left empty </span>
+    <span  ng-show="ProfileSubmitted && !profForm.validState.$touched">
+        Cannot be left empty </span>
+    
+    <input type="number" name="validPincode" ng-model="newPincode" placeholder="Pincode" pattern="[0-9]{3,15}" required>
+        <span  ng-show="profForm.validPincode.$touched &&
+     profForm.validPincode.$error.pattern &&
+      !profForm.validPincode.$error.required">
+      Invalid Pincode(Should be 3-15 digits only 0-9 allowed) </span>
+    <span  ng-show="profForm.validPincode.$touched &&
+     profForm.validPincode.$error.required">Cannot be left empty </span>
+    <span  ng-show="ProfileSubmitted && !profForm.validPincode.$touched">
+        Cannot be left empty </span>
+
+    <country-select name="validCountry" ng-model="newCountry" cs-required cs-priorities="IN, AU, DE, GB, US" option value="India"></country-select>
+         <span  ng-show="profForm.validCountry.$touched &&
+     profForm.validCountry.$error.required">Cannot be left empty </span>
+    <span  ng-show="ProfileSubmitted && !profForm.validCountry.$touched">
+        Cannot be left empty </span>
+    <!--country-select ng-model="newCountry" cs-only="AU, DE, GB, US"></country-select-->
 
 
-
-<input type="submit" ng-click="submitted=true;" value="Edit Profile">
+<input type="submit" ng-click="ProfileSubmitted=true;" value="Edit Profile">
 </form>
 
 <div>
     <h5>Mobile Number</h5><p>{{Mobile||"Not Saved"}}</p>
 </div>
 
-<form name="mobileForm" ng-submit="submitForm(mobileForm)" novalidate>
+<form name="mobileForm" ng-submit="submitMobileForm(mobileForm)" novalidate>
 <input type="" ng-model="newMobile" name="mobile" placeholder="New Mobile Number">
 
 <input type="submit" ng-click="submitted=true;" value="Verify">
 </form>
 
-<form name="passForm"  ng-submit="submitForm(passForm)" novalidate>
+<form name="passForm"  ng-submit="submitPasswordForm(passForm)" novalidate>
 
 <h5>Old Password</h5>
  <input type="password"  ng-model="oldpassword" name="oldpass"  
