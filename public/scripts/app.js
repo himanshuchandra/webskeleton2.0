@@ -13,7 +13,8 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngRoute',
-    'angular-md5'
+    'angular-md5',
+    'countrySelect'
   ])
   .constant("requrl","http://localhost:1234")
   .config(function ($routeProvider,$locationProvider) {

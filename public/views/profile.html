@@ -1,31 +1,63 @@
 <h1>PROFILE</h1>
 <h5>Email</h5> <p>{{Email}}</p>
 <h3>
-<form name="EditProfile"  ng-submit="submitForm(profForm)" novalidate>
-<h5>Username</h5><p>{{uName||"Not Saved"}}</p>
-<h5>Name</h5><p>{{Name||"Not Saved"}}</p>
-<h5>Address</h5>
-<h5>Area</h5><p>{{Area||"Not Saved"}}</p>
-<h5>City</h5><p>{{City||"Not Saved"}}</p>
-<h5>State</h5><p>{{State||"Not Saved"}}</p>
-<h5>Pincode</h5><p>{{Pincode||"Not Saved"}}</p>
-<h5>Country</h5><p>{{Country||"Not Saved"}}</p>
 
-<h5>Mobile Number</h5><p>{{Mobile}}</p>
-<input type="submit" ng-click=""submitted=true;"" value="Edit Profile">
+<div>
+    <h5>Username</h5><p>{{uName||"Not Saved"}}</p>
+    <h5>Name</h5><p>{{Name||"Not Saved"}}</p>   
+    <h5>Address</h5>
+    <h5>Area</h5><p>{{Area||"Not Saved"}}</p>
+    <h5>City</h5><p>{{City||"Not Saved"}}</p>
+    <h5>State</h5><p>{{State||"Not Saved"}}</p>
+    <h5>Pincode</h5><p>{{Pincode||"Not Saved"}}</p>
+    <h5>Country</h5><p>{{Country||"Not Saved"}}</p>
+</div>
+
+<form name="profileForm"  ng-submit="submitForm(profForm)" novalidate>
+    <input type="text" ng-model="newName" placeholder="Full Name">
+    <input type="text" ng-model="newArea" placeholder="Full Name">
+    <input type="text" ng-model="newCity" placeholder="Full Name">
+    <input type="text" ng-model="newState" placeholder="State">
+    <input type="text" ng-model="newPincode" placeholder="Pincode">
+    
+    <country-select ng-model="newCountry" cs-required cs-priorities="IN, AU, DE, GB, US"></country-select>
+
+
+
+<input type="submit" ng-click="submitted=true;" value="Edit Profile">
 </form>
+
+<div>
+    <h5>Mobile Number</h5><p>{{Mobile||"Not Saved"}}</p>
+</div>
+
+<form name="mobileForm" ng-submit="submitForm(mobileForm)" novalidate>
+<input type="" ng-model="newMobile" name="mobile" placeholder="New Mobile Number">
+
+<input type="submit" ng-click="submitted=true;" value="Verify">
+</form>
+
 <form name="passForm"  ng-submit="submitForm(passForm)" novalidate>
+
 <h5>Old Password</h5>
- <input type="password"  ng-model="oldpassword" name="oldpass"  placeholder="Password" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required/>  
-    <span  ng-show="passForm.oldpass.$touched && passForm.oldpass.$error.pattern && !passForm.oldpass.$error.required">password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+ <input type="password"  ng-model="oldpassword" name="oldpass"  
+ placeholder="Password" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required/>  
+    <span  ng-show="passForm.oldpass.$touched && 
+    passForm.oldpass.$error.pattern && !passForm.oldpass.$error.required">
+    password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <!--span  ng-show="passForm.oldpass.$touched && passForm.oldpass.$error.required">Cannot be left empty </span-->
     <span  ng-show="submitted && !passForm.oldpass.$touched">Cannot be left empty </span>
+
 <h5>New password</h5>
- <input type="password"  ng-model="newpassword" name="newpass"  placeholder="Password" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required/>
-   <span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.pattern && !passForm.newpass.$error.required">password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+ <input type="password"  ng-model="newpassword" name="newpass"  
+ placeholder="Password" pattern="[a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.]{8,}" required/>
+   <span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.pattern &&
+    !passForm.newpass.$error.required">
+    password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <!--span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.required">Cannot be left empty </span-->
     <span  ng-show="submitted && !passForm.newpass.$touched">Cannot be left empty </span>
 
-<input type="submit" ng-click=""submitted=true;"" value="Change password">
+<input type="submit" ng-click="submitted=true;" value="Change password">
 </form>
+
 {{result}}

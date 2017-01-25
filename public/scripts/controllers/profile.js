@@ -52,11 +52,20 @@ angular.module('webskeletonApp')
                 $scope.saveprof();
               }
               else{
-                console.log("Wrong info");
+                console.log("Wrong or Incomplete info");
               }
 
           }
 
+          $scope.submitForm=function(mobileForm){
+             if(mobileForm.$valid){
+                    $scope.changeMobile();
+           
+            }
+            else{
+              $scope.result="Enter a valid mobile number";
+            }
+          }
 
           $scope.submitForm=function(passForm){
              if(passForm.$valid){
@@ -67,6 +76,8 @@ angular.module('webskeletonApp')
               $scope.result="Enter correct password";
             }
           }
+
+
 
           $scope.changePass=function () {  
               $scope.result="passchanged";
