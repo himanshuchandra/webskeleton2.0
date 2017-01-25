@@ -1,7 +1,7 @@
 // Step -3 Represent Schema
 
 var mongoose = require("./connection");
-
+var config = require("./config");
 var Schema = mongoose.Schema;
 // Step -4  Creating Schema for the Collection
 var userSchema= new Schema({useremail:  String,
@@ -11,6 +11,6 @@ var userSchema= new Schema({useremail:  String,
     pincode: Number,country:String }],
   forgotpasscode:Number,role:String});
 
-var User = mongoose.model("wusers",userSchema); 
+var User = mongoose.model(config.dbCollection,userSchema); 
 
 module.exports=User;

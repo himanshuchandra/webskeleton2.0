@@ -2,14 +2,14 @@
 <h5>Email</h5> <p>{{Email}}</p>
 <h3>
 <form name="EditProfile"  ng-submit="submitForm(profForm)" novalidate>
-<h5>Username</h5><p>{{uName}}</p>
-<h5>Name</h5><p>{{Name}}</p>
+<h5>Username</h5><p>{{uName||"Not Saved"}}</p>
+<h5>Name</h5><p>{{Name||"Not Saved"}}</p>
 <h5>Address</h5>
-<h5>Area</h5><p>{{Area}}</p>
-<h5>City</h5><p>{{City}}</p>
-<h5>State</h5><p>{{State}}</p>
-<h5>Pincode</h5><p>{{Pincode}}</p>
-<h5>Country</h5><p>{{Country}}</p>
+<h5>Area</h5><p>{{Area||"Not Saved"}}</p>
+<h5>City</h5><p>{{City||"Not Saved"}}</p>
+<h5>State</h5><p>{{State||"Not Saved"}}</p>
+<h5>Pincode</h5><p>{{Pincode||"Not Saved"}}</p>
+<h5>Country</h5><p>{{Country||"Not Saved"}}</p>
 
 <h5>Mobile Number</h5><p>{{Mobile}}</p>
 <input type="submit" ng-click=""submitted=true;"" value="Edit Profile">

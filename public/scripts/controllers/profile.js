@@ -10,21 +10,23 @@
 angular.module('webskeletonApp')
   .controller('ProfileCtrl', function ($scope,profile) {
 
-            var msg="Not saved";
-
-            $scope.Name=msg;
-
-
       var promise = profile.getData();
         promise.then(function(data){
             console.log("SUCCESS ",data);
 
             var print=data.data["0"];
+            var userInfo=data.data["0"].userinfo["0"];
 //            console.log(data.data["0"].username);
 
             $scope.Email=print.useremail;
             $scope.uName=print.username;
             
+            if(userInfo.length!=0){
+              console.log("insiode"+userInfo.fullname);
+                 $scope.Name=userInfo.fullname;
+                 $scope.Pincode=userInfo.pincode;
+
+            }
             
             //$scope.Name=data.data["0"].fullname;
             //$scope.address=data.data["0"].;
