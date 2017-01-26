@@ -85,9 +85,32 @@
 </div>
 
 <form name="mobileForm" ng-submit="submitMobileForm(mobileForm)" novalidate>
-<input type="" ng-model="newMobile" name="mobile" placeholder="New Mobile Number">
+    <h5>Country Code</h5>
+    <input type="text" ng-model="countryCode" name="validCode" pattern="[0-9+]{3}" required/>
+     <span  ng-show="mobileForm.validCode.$touched &&
+     mobileForm.validCode.$error.pattern &&
+      !mobileForm.validCode.$error.required">
+      Invalid Country code(Should be 3 digits only 0-9,+ allowed) </span>
+    <span  ng-show="mobileForm.validCode.$touched &&
+     mobileForm.validCode.$error.required">Cannot be left empty </span>
+    <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched">
+        Cannot be left empty </span>
 
-<input type="submit" ng-click="MobileSubmitted=true;" value="Verify">
+
+    <h5>Mobile Number</h5>
+    <input type="number" ng-model="newMobile" name="validMobile" placeholder="New Mobile Number" pattern="[0-9]{10}" required/>
+     <span  ng-show="mobileForm.validMobile.$touched &&
+     mobileForm.validMobile.$error.pattern &&
+      !mobileForm.validMobile.$error.required">
+      Invalid Mobile number(Should be 10 digits only 0-9 allowed) </span>
+    <span  ng-show="mobileForm.validMobile.$touched &&
+     mobileForm.validMobile.$error.required">Cannot be left empty </span>
+    <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched">
+        Cannot be left empty </span>
+
+        {{MobileMessage}}
+
+    <input type="submit" ng-click="MobileSubmitted=true;" value="Verify">
 </form>
 
 <form name="passForm"  ng-submit="submitPasswordForm(passForm)" novalidate>
@@ -112,11 +135,11 @@
 
 <h5>New Password Again</h5>
 <input type="password" ng-keyup="checkPassword()" ng-model="newPassword2" placeholder="Password Again" />
-{{passwordMessage}}
+{{PasswordMessage}}
 
 
 
 <input type="submit" ng-click="PasswordSubmitted=true;" value="Change password">
 </form>
 
-{{result}}
+{{PasswordResult}}

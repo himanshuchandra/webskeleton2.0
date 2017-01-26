@@ -95,16 +95,16 @@ angular.module('webskeletonApp')
           {   
               if($scope.newPassword===$scope.newPassword2)
               {   
-                $scope.passwordMessage="Passwords match";
+                $scope.PasswordMessage="Passwords match";
                 arePasswordsSame=true;
                 
               }
               else if($scope.newPassword==undefined){
-                 $scope.passwordMessage=undefined;
+                 $scope.PasswordMessage=undefined;
                  arePasswordsSame=false;
               }
               else{
-                $scope.passwordMessage="Passwords dont match";
+                $scope.PasswordMessage="Passwords dont match";
                 arePasswordsSame=false;
                 
               }
@@ -114,11 +114,11 @@ angular.module('webskeletonApp')
           $scope.submitPasswordForm=function(passForm){
              if(passForm.$valid && arePasswordsSame==true){
                     $scope.changePassword();
-                    $scope.result="Updating Password";
+                    $scope.PasswordResult="Updating Password";
            
             }
             else{
-              $scope.result="Enter correct passwords";
+              $scope.PasswordResult="Enter correct passwords";
             }
           };
           
@@ -134,7 +134,7 @@ angular.module('webskeletonApp')
               var promise=profile.setNewPassword(passwordObject);
               promise.then(function(data) {
                 console.log("ddd",data);
-             
+                //$scope.PasswordResult="Password Changed";
               },function(error) {
                 console.log("error occured");
                 
