@@ -121,6 +121,29 @@ doLogin:function (request,response){
 });
 }
 ,
+
+UpdateProfileData:function (request,response){
+    var profileObject=request.body;
+    var newSession=request.session.user;
+    var userName= newSession["0"].username;
+    console.log("dddd",profileObject,newSession,userName);
+  
+       User.update({"username":userName}, 
+     {$set:{"userinfo":profileObject}},function(error,result){
+     if(error){
+        console.log("Error Occured",error);
+    }
+     else{ 
+       newSession[0].userinfo=profileObject;
+       fillSession(request,newSession);
+       //console.log(newSession);
+       response.json({msg:"success"});
+       
+    }
+});
+}, 
+
+
 sendCode:function (codeObject,response){
     
 
@@ -176,7 +199,8 @@ forgotpass:function (codeObject,response){
 });
 }  
 
-}
+};
+
 module.exports =dbOperations; 
 
 var caller={

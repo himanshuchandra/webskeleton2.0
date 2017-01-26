@@ -6,9 +6,9 @@ var Schema = mongoose.Schema;
 // Step -4  Creating Schema for the Collection
 var userSchema= new Schema({useremail:  String,
   username: String,password1: String,
-  mobile:Number,
-  userinfo: [{ fullname:String, area: String, city:String,state:String,
-    pincode: Number,country:String }],
+  mobile:String,
+  userinfo: { fullname:String, area: String, city:String,state:String,
+    pincode: String,country:String },
   forgotpasscode:Number,role:String});
 
 var User = mongoose.model(config.dbCollection,userSchema); 

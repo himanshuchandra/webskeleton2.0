@@ -21,10 +21,14 @@ angular.module('webskeletonApp')
             $scope.Email=print.useremail;
             $scope.uName=print.username;
             
-            if(userInfo.length!=0){
-              console.log("insiode"+userInfo[0].fullname);
-                 $scope.Name=userInfo[0].fullname;
-                 $scope.Pincode=userInfo[0].pincode;
+            if(userInfo){
+              console.log("insiode",userInfo);
+                $scope.Name=userInfo.fullname;
+                $scope.Area=userInfo.area;
+                $scope.City=userInfo.city;
+                $scope.Pincode=userInfo.pincode;
+                $scope.State=userInfo.state;
+                $scope.Country=userInfo.country;
 
             }
             
@@ -48,15 +52,20 @@ angular.module('webskeletonApp')
       
 
           $scope.submitProfileForm=function (profForm) {  
-              if(profForm.$valid){
-                console.log("valid all");
+              if(profForm.$valid && $scope.newCountry!=undefined){
+                $scope.dataValid="Wait";
+                $scope.changeProfile();
+      
                // $scope.saveprof();
               }
+              else if($scope.newCountry==undefined){
+                $scope.dataValid="Choose a country";
+              }
               else{
-                console.log("Wrong or Incomplete info");
+                $scope.dataValid="Wrong or Incomplete info";
               }
 
-          }
+          };
 
           $scope.submitMobileForm=function(mobileForm){
              if(mobileForm.$valid){
@@ -66,7 +75,7 @@ angular.module('webskeletonApp')
             else{
               $scope.result="Enter a valid mobile number";
             }
-          }
+          };
 
           $scope.submitPasswordForm=function(passForm){
              if(passForm.$valid){
@@ -76,12 +85,33 @@ angular.module('webskeletonApp')
             else{
               $scope.result="Enter correct password";
             }
-          }
+          };
 
+          $scope.changeProfile=function () {
+              var profileObject={
+                "fullname":$scope.newName,
+                "area":$scope.newArea,
+                "city":$scope.newCity,
+                "state":$scope.newState,
+                "pincode":$scope.newPincode,
+                "country":$scope.newCountry,
+
+              };
+              
+              var promise=profile.setProfileData(profileObject);
+              promise.then(function(data) {
+                console.log("ddd",data);
+             
+              },function(error) {
+                console.log("error occured");
+                
+              });
+              
+            };
 
 
           $scope.changePass=function () {  
               $scope.result="passchanged";
-          }
+          };
 
   });

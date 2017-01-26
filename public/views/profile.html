@@ -1,9 +1,10 @@
 <h1>PROFILE</h1>
 <h5>Email</h5> <p>{{Email}}</p>
+<h5>Username</h5><p>{{uName}}</p>
 <h3>
 
 <div>
-    <h5>Username</h5><p>{{uName||"Not Saved"}}</p>
+    
     <h5>Name</h5><p>{{Name||"Not Saved"}}</p>   
     <h5>Address</h5>
     <h5>Area</h5><p>{{Area||"Not Saved"}}</p>
@@ -15,7 +16,8 @@
 
 <form name="profForm" ng-submit="submitProfileForm(profForm)" novalidate>
 
-    <input type="text" name="validName" ng-model="newName" placeholder="Full Name" pattern="[A-Za-z ]{3,30}" required>
+    <input type="text" name="validName" ng-model="newName" 
+    placeholder="Full Name" pattern="[A-Za-z ]{3,30}" required>
     <span  ng-show="profForm.validName.$touched &&
      profForm.validName.$error.pattern &&
       !profForm.validName.$error.required">
@@ -25,7 +27,8 @@
     <span  ng-show="ProfileSubmitted && !profForm.validName.$touched">
         Cannot be left empty </span>
 
-    <input type="text" name="validArea" ng-model="newArea" placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,30}" required>
+    <input type="text" name="validArea" ng-model="newArea" 
+    placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,30}" required>
         <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.pattern &&
       !profForm.validArea.$error.required">
@@ -35,7 +38,8 @@
     <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched">
         Cannot be left empty </span>
 
-    <input type="text" name="validCity" ng-model="newCity" placeholder="City" pattern="[A-Za-z0-9 ]{4,15}" required>
+    <input type="text" name="validCity" ng-model="newCity" 
+    placeholder="City" pattern="[A-Za-z0-9 ]{4,15}" required>
         <span  ng-show="profForm.validCity.$touched &&
      profForm.validCity.$error.pattern &&
       !profForm.validCity.$error.required">
@@ -45,7 +49,8 @@
     <span  ng-show="ProfileSubmitted && !profForm.validCity.$touched">
         Cannot be left empty </span>
     
-    <input type="text" name="validState" ng-model="newState" placeholder="State" pattern="[A-Za-z0-9 ]{4,15}" required>
+    <input type="text" name="validState" ng-model="newState" 
+    placeholder="State" pattern="[A-Za-z0-9 ]{4,15}" required>
         <span  ng-show="profForm.validState.$touched &&
      profForm.validState.$error.pattern &&
       !profForm.validState.$error.required">
@@ -55,7 +60,8 @@
     <span  ng-show="ProfileSubmitted && !profForm.validState.$touched">
         Cannot be left empty </span>
     
-    <input type="number" name="validPincode" ng-model="newPincode" placeholder="Pincode" pattern="[0-9]{3,15}" required>
+    <input type="text" name="validPincode" ng-model="newPincode" 
+    placeholder="Pincode" pattern="[0-9]{3,15}" required>
         <span  ng-show="profForm.validPincode.$touched &&
      profForm.validPincode.$error.pattern &&
       !profForm.validPincode.$error.required">
@@ -65,11 +71,9 @@
     <span  ng-show="ProfileSubmitted && !profForm.validPincode.$touched">
         Cannot be left empty </span>
 
-    <country-select name="validCountry" ng-model="newCountry" cs-required cs-priorities="IN, AU, DE, GB, US" option value="India"></country-select>
-         <span  ng-show="profForm.validCountry.$touched &&
-     profForm.validCountry.$error.required">Cannot be left empty </span>
-    <span  ng-show="ProfileSubmitted && !profForm.validCountry.$touched">
-        Cannot be left empty </span>
+    <country-select name="validCountry" ng-model="newCountry" cs-required 
+    cs-priorities="IN, AU, DE, GB, US" option value="India"></country-select>
+        {{dataValid}}
     <!--country-select ng-model="newCountry" cs-only="AU, DE, GB, US"></country-select-->
 
 

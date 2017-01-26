@@ -16,7 +16,9 @@ angular.module('webskeletonApp')
        // mydata:"",
 
         registerUser:function(userObject){
-          var defer = $q.defer(); $http.post(requrl+'/allroutes/register',userObject).then(function(data){
+          var defer = $q.defer();
+           $http.post(requrl+'/allroutes/register',userObject)
+           .then(function(data){
                defer.resolve(data);
            },function(error){
                defer.reject(error);

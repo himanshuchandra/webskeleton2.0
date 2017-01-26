@@ -46,6 +46,13 @@ router.post('/login',function(request,response){
     //response.redirect('http://localhost:1234/#/profile');
 });
 
+router.post('/UpdateProfileData',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb");
+    //response.send(data);
+    dbOperations.UpdateProfileData(request,response);
+});
+
 router.post('/redirect',function(request,response){
 
     var url=request.body;

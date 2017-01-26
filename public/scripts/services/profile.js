@@ -14,14 +14,28 @@ angular.module('webskeletonApp')
         getData:function(){
             
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/getData').then(function(data){
+          $http.post(requrl+'/allroutes/getData')
+          .then(function(data){
                defer.resolve(data);
            },function(error){
                console.log(error);
                defer.reject(error);
            }) 
             return defer.promise;
-        }
+        },
+
+        setProfileData:function(profileObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/allroutes/UpdateProfileData",profileObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                console.log(error);
+                defer.reject(error);
+            })
+            return defer.promise;
+
+        },
         
         };
     return object;
