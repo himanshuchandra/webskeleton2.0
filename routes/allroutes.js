@@ -53,6 +53,13 @@ router.post('/UpdateProfileData',function(request,response){
     dbOperations.UpdateProfileData(request,response);
 });
 
+router.post('/SetNewPassword',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send(data);
+    dbOperations.CheckPassword(request,response);
+});
+
 router.post('/redirect',function(request,response){
 
     var url=request.body;

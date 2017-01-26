@@ -143,6 +143,56 @@ UpdateProfileData:function (request,response){
 });
 }, 
 
+CheckPassword:function (request,response){
+    var passwordObject=request.body;
+    var userName=request.session.user["0"].username;
+    console.log("dddd",passwordObject,userName);
+  
+    User.find({
+     "$and":[
+        {
+            "username":userName
+        }, 
+         {
+             "password1":passwordObject.oldpassword
+         }
+      ]
+    }
+   ,function(error,result){
+     if(error){
+        console.log("Error Occured",error);
+    }
+     else{ 
+       console.log(result);
+       if(result.length<1){
+            response.json({msg:"fail"});
+        }
+        else{
+            caller.SetNewPassword(request,response);
+            //response.json({msg:"success"});
+        }
+
+       
+    }
+});
+},
+
+SetNewPassword:function (request,response){
+    var passwordObject=request.body;
+    var userName=request.session.user["0"].username;
+    console.log("dddd",passwordObject.password1,userName);
+  
+    User.update({"username":userName}, 
+     {$set:{"password1":passwordObject.password1}},function(error,result){
+     if(error){
+        console.log("Error Occured",error);
+    }
+     else{ 
+       response.json({msg:"success"});
+       
+    }
+});
+}, 
 
 sendCode:function (codeObject,response){
     
@@ -213,7 +263,10 @@ var caller={
     },
     savecode:function(data,response){
         dbOperations.forgotpass(data,response);
-    }
+    },
+    SetNewPassword:function (request,response) {
+        dbOperations.SetNewPassword(request,response);
+    },
 
 }
 

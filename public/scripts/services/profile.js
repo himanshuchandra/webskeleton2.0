@@ -36,6 +36,19 @@ angular.module('webskeletonApp')
             return defer.promise;
 
         },
+
+        setNewPassword:function(passwordObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/allroutes/SetNewPassword",passwordObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                console.log(error);
+                defer.reject(error);
+            })
+            return defer.promise;
+
+        },
         
         };
     return object;

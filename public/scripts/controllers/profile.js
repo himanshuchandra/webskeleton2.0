@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ProfileCtrl', function ($scope,profile) {
+  .controller('ProfileCtrl', function ($scope,profile,md5) {
 
       var promise = profile.getData();
         promise.then(function(data){
@@ -36,6 +36,7 @@ angular.module('webskeletonApp')
             $scope.result = "error occured";
         });
       
+//////////////////////////////////////////////////////////////////////////
 
           $scope.submitProfileForm=function (profForm) {  
               if(profForm.$valid && $scope.newCountry!=undefined){
@@ -74,7 +75,7 @@ angular.module('webskeletonApp')
               });
               
             };
-
+/////////////////////////////////////////////////////////////////////
 
           $scope.submitMobileForm=function(mobileForm){
              if(mobileForm.$valid){
@@ -86,7 +87,7 @@ angular.module('webskeletonApp')
             }
           };
 
-
+///////////////////////////////////////////////////////////////////////
           var arePasswordsSame=false;
     
           $scope.checkPassword=function(){
@@ -120,11 +121,26 @@ angular.module('webskeletonApp')
               $scope.result="Enter correct passwords";
             }
           };
+          
+           $scope.changePassword=function () {
 
+             var hashOldPassword=md5.createHash($scope.oldPassword);
+             var hashNewPassword=md5.createHash($scope.newPassword);
+              var passwordObject={
+                  "oldpassword":hashOldPassword,
+                  "password1":hashNewPassword,
+              };
+              
+              var promise=profile.setNewPassword(passwordObject);
+              promise.then(function(data) {
+                console.log("ddd",data);
+             
+              },function(error) {
+                console.log("error occured");
+                
+              });
+              
+            };
 
-
-          $scope.changePassword=function () {  
-              $scope.result="passchanged";
-          };
 
   });

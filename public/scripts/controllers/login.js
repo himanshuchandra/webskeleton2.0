@@ -46,12 +46,12 @@ angular.module('webskeletonApp')
         
             //               });
             //         //$location.path(requrl+"/profile");
-            //         }
-            // else{
-            //         $scope.result="Wrong email or password";
-            //     }
+            }
+             else{
+                     $scope.result="Wrong email or password";
+                }
            
-            } 
+             
             
         
         },function(error){
