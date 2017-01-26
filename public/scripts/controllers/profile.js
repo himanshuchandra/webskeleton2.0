@@ -32,20 +32,6 @@ angular.module('webskeletonApp')
 
             }
             
-            //$scope.Name=data.data["0"].fullname;
-            //$scope.address=data.data["0"].;
-            //$scope.Email=data.data["0"].useremail;
-
-           
-            //var finaldata = data.data.finaldata;
-            //signup.passdata(finaldata);
-            //$scope.profilename= data;
-            //console.log("sss"+data.data.msg);
-            //$scope.result = data.data.msg;
-            //$window.location.assign("http://localhost:1234/profile.html");
-        
-            
-            
         },function(error){
             $scope.result = "error occured";
         });
@@ -65,26 +51,6 @@ angular.module('webskeletonApp')
                 $scope.dataValid="Wrong or Incomplete info";
               }
 
-          };
-
-          $scope.submitMobileForm=function(mobileForm){
-             if(mobileForm.$valid){
-                    $scope.changeMobile();
-           
-            }
-            else{
-              $scope.result="Enter a valid mobile number";
-            }
-          };
-
-          $scope.submitPasswordForm=function(passForm){
-             if(passForm.$valid){
-                    $scope.changePass();
-           
-            }
-            else{
-              $scope.result="Enter correct password";
-            }
           };
 
           $scope.changeProfile=function () {
@@ -110,7 +76,54 @@ angular.module('webskeletonApp')
             };
 
 
-          $scope.changePass=function () {  
+          $scope.submitMobileForm=function(mobileForm){
+             if(mobileForm.$valid){
+                    $scope.changeMobile();
+           
+            }
+            else{
+              $scope.result="Enter a valid mobile number";
+            }
+          };
+
+
+          var arePasswordsSame=false;
+    
+          $scope.checkPassword=function(){
+          if($scope.newPassword2!=undefined)
+          {   
+              if($scope.newPassword===$scope.newPassword2)
+              {   
+                $scope.passwordMessage="Passwords match";
+                arePasswordsSame=true;
+                
+              }
+              else if($scope.newPassword==undefined){
+                 $scope.passwordMessage=undefined;
+                 arePasswordsSame=false;
+              }
+              else{
+                $scope.passwordMessage="Passwords dont match";
+                arePasswordsSame=false;
+                
+              }
+          }
+        };
+
+          $scope.submitPasswordForm=function(passForm){
+             if(passForm.$valid && arePasswordsSame==true){
+                    $scope.changePassword();
+                    $scope.result="Updating Password";
+           
+            }
+            else{
+              $scope.result="Enter correct passwords";
+            }
+          };
+
+
+
+          $scope.changePassword=function () {  
               $scope.result="passchanged";
           };
 

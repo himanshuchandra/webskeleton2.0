@@ -23,10 +23,10 @@
         Cannot be left empty </span>
     
     <input type="password" ng-keyup="checkp()" ng-model="password1" name="validpass1" 
-     placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,}" required/>
+     placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required/>
        <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.pattern &&
         !regForm.validpass1.$error.required">
-        password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+        password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.required">
         Cannot be left empty </span>
     <span  ng-show="submitted && !regForm.validpass1.$touched">

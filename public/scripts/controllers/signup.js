@@ -10,7 +10,7 @@
 angular.module('webskeletonApp')
   .controller('SignupCtrl',function ($scope,signup,$window,md5) {
    
-    $scope.passverified=false;
+    var passverified=false;
     
     $scope.checkp=function(){
         if($scope.password2!=undefined)
@@ -18,13 +18,16 @@ angular.module('webskeletonApp')
             if($scope.password1===$scope.password2)
             {   
                 $scope.passtext="Passwords match";
-                $scope.passverified=true;
-                
-                
+                passverified=true;  
+            }
+  
+            else if($scope.password1==undefined){
+                 $scope.passtext="";
+                 passverified=false;
             }
             else{
                 $scope.passtext="Passwords dont match";
-                $scope.passverified=false;
+                passverified=false;
                 
             }
         }
@@ -32,7 +35,7 @@ angular.module('webskeletonApp')
     
         $scope.submitForm=function(regForm){
            // console.log(regForm.$valid);
-                if(regForm.$valid && $scope.passverified==true){
+                if(regForm.$valid && passverified==true){
                     $scope.doRegister();
                 }
                 

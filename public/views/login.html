@@ -14,15 +14,15 @@
     
 
     <input type="password" ng-model="loginpassword" placeholder="Password" 
-    name="validloginpass" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,}" required>
+    name="validloginpass" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required>
     <span  ng-show="loginForm.validloginpass.$touched &&
      loginForm.validloginpass.$error.pattern && !loginForm.validloginpass.$error.required">
-     password too small or invalid character,use(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <span  ng-show="loginForm.validloginpass.$touched && loginForm.validloginpass.$error.required">
         Cannot be left empty </span>
     <span  ng-show="submitted && !loginForm.validloginpass.$touched">Cannot be left empty </span>
     
-    <input type="checkbox" ng-model="RememberMe" name="rememberMe" value="false">Rememeber Me<br>
+    <input type="checkbox" ng-model="RememberMe" name="rememberMe" value="false">Remember Me<br>
     
     <input type="submit" ng-click="submitted=true;" value="Login">
 
