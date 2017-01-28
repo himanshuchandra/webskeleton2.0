@@ -15,9 +15,9 @@
 </div>
 
 <form name="profForm" ng-submit="submitProfileForm(profForm)" novalidate>
-
+    <h5>Full Name</h5>
     <input type="text" name="validName" ng-model="newName" 
-    placeholder="Full Name" pattern="[A-Za-z ]{3,30}" required>
+    ng-init="newName=hell" pattern="[A-Za-z ]{3,30}" required>
     <span  ng-show="profForm.validName.$touched &&
      profForm.validName.$error.pattern &&
       !profForm.validName.$error.required">
@@ -27,6 +27,7 @@
     <span  ng-show="ProfileSubmitted && !profForm.validName.$touched">
         Cannot be left empty </span>
 
+    <h5>Area</h5>
     <input type="text" name="validArea" ng-model="newArea" 
     placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,30}" required>
         <span  ng-show="profForm.validArea.$touched &&
@@ -38,6 +39,7 @@
     <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched">
         Cannot be left empty </span>
 
+    <h5>City</h5>
     <input type="text" name="validCity" ng-model="newCity" 
     placeholder="City" pattern="[A-Za-z0-9 ]{4,15}" required>
         <span  ng-show="profForm.validCity.$touched &&
@@ -49,6 +51,7 @@
     <span  ng-show="ProfileSubmitted && !profForm.validCity.$touched">
         Cannot be left empty </span>
     
+    <h5>State</h5>
     <input type="text" name="validState" ng-model="newState" 
     placeholder="State" pattern="[A-Za-z0-9 ]{4,15}" required>
         <span  ng-show="profForm.validState.$touched &&
@@ -60,6 +63,7 @@
     <span  ng-show="ProfileSubmitted && !profForm.validState.$touched">
         Cannot be left empty </span>
     
+    <h5>Pincode</h5>
     <input type="text" name="validPincode" ng-model="newPincode" 
     placeholder="Pincode" pattern="[0-9]{3,15}" required>
         <span  ng-show="profForm.validPincode.$touched &&
@@ -71,6 +75,7 @@
     <span  ng-show="ProfileSubmitted && !profForm.validPincode.$touched">
         Cannot be left empty </span>
 
+    <h5>Country</h5>
     <country-select name="validCountry" ng-model="newCountry" cs-required 
     cs-priorities="IN, AU, DE, GB, US" option value="India"></country-select>
         {{dataValid}}
@@ -98,7 +103,7 @@
 
 
     <h5>Mobile Number</h5>
-    <input type="number" ng-model="newMobile" name="validMobile" placeholder="New Mobile Number" pattern="[0-9]{10}" required/>
+    <input type="tel" ng-model="newMobile" name="validMobile" placeholder="New Mobile number" pattern="[0-9]{10}" required/>
      <span  ng-show="mobileForm.validMobile.$touched &&
      mobileForm.validMobile.$error.pattern &&
       !mobileForm.validMobile.$error.required">
