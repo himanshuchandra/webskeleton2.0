@@ -9,8 +9,9 @@ var mfavicon=require("express-favicon");
 //var srs = require('secure-random-string');
 //var randomstring = require("randomstring");
 var MongoStore = require('connect-mongo')(session);
-
+var nodemailer = require('nodemailer');
 var app = express();
+
 
 var config= require('./config/config');
 
@@ -58,6 +59,7 @@ app.use(mfavicon(__dirname + '/public/favicon.icon'));
 //app.use(session({ secret:"string"}));
 app.use('/', index);
 app.use('/allroutes',allroutes);
+
 
 
 // catch 404 and forward to error handler
