@@ -46,8 +46,8 @@ angular
       })
       .when('/emailactivate', {
         templateUrl: 'views/emailactivate.html',
-        //controller: 'ProfileCtrl',
-        //controllerAs: 'profile'
+        controller: 'EmailactivateCtrl',
+        controllerAs: 'emailactivate'
       })
       .otherwise({
         redirectTo: '/'

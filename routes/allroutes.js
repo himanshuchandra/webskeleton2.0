@@ -63,6 +63,13 @@ router.post('/SetNewPassword',function(request,response){
     dbOperations.CheckPassword(request,response);
 });
 
+router.post('/ActivateEmail',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send(data);
+    dbOperations.UpdateDB(request,response);
+});
+
 router.post('/redirect',function(request,response){
 
     var url=request.body;

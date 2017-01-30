@@ -145,7 +145,7 @@ UpdateProfileData:function (request,response){
        newSession[0].userinfo=profileObject;
        Utils.FillSession(request,newSession);
        //console.log(newSession);
-       response.json({msg:"success"});
+       response.json({result});
        
     }
 });
@@ -201,6 +201,77 @@ SetNewPassword:function (request,response){
     }
 });
 }, 
+
+CheckToken:function(request,response){
+    var ActivationObject=request.body;
+
+    User.find({
+     "$and":[
+        {
+            "useremail":ActivationObject.UserEmail
+        }, 
+         {
+             "emailactivationtoken":ActivationObject.Token
+         }
+      ]
+    }
+   ,function(error,result){
+     if(error){
+        console.log("Error Occured",error);
+    }
+     else{ 
+       console.log(result);
+       if(result.length<1){
+            response.json({msg:"fail"});
+        }
+        else{
+            // var object{
+            //     "Fieldto"
+            // }
+            //caller.UpdateDB(ActivationObject,Field);
+            response.json({msg:"success"});
+        }
+
+     } 
+    });
+
+},
+
+UpdateDB:function(object,response){
+    var Objectz=object.body;
+    console.log("dddd",Objectz.Token);
+    User.findOneAndUpdate({query:{"useremail":"hc160160@gmail.com"},update:{$set:{"password1":"uuuu"}}}
+    // User.findAndModify({
+    //         query:{
+    //             // "$and":[{
+    //                  "useremail":"hc160160@gmail.com"
+    //             // },
+    //             //{
+    //              //   "emailactivationtoken":Objectz.Token
+    //             //}
+    //             //]
+    //         },
+    //         update:
+    //         {
+    //             $set:{
+    //               "password1":"Itried"
+    //             //  "username":"noididnt"
+    //             }
+    //         } 
+    //     }
+        ,function(error,result){
+            comsole.log('bbbb');
+            if(error){
+            console.log("Error Occured",error);
+            response.json({msg:"success"});
+            }
+            else{ 
+                console.log(result);
+                response.json({msg:"success"});
+       
+            }
+    });
+},
 
 
 forgotpass:function (codeObject,response){
