@@ -114,7 +114,7 @@ doLogin:function (request,response){
             fillSession(request,result);
             //request.session.zzzzz="mymail";
             // console.log("session is "+request.session.zzzzz);
-            Utils.SendMail();
+            Utils.SendMail("hc160160@gmail.com","This is myyy subject");
             response.json({msg:"success"});
             
             //response.send("session is "+request.session.zzzzz);
