@@ -44,6 +44,11 @@ angular
         controller: 'ProfileCtrl',
         controllerAs: 'profile'
       })
+      .when('/emailactivate', {
+        templateUrl: 'views/emailactivate.html',
+        //controller: 'ProfileCtrl',
+        //controllerAs: 'profile'
+      })
       .otherwise({
         redirectTo: '/'
       });

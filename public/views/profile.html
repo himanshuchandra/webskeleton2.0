@@ -29,11 +29,11 @@
 
     <h5>Area</h5>
     <input type="text" name="validArea" ng-model="newArea" 
-    placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,30}" required>
+    placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,50}" required>
         <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.pattern &&
       !profForm.validArea.$error.required">
-      Invalid Area(Should be 5-30 only a-z,A-Z,0-9,-,. , and space allowed) </span>
+      Invalid Area(Should be 5-50 only a-z,A-Z,0-9,-,. , and space allowed) </span>
     <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.required">Cannot be left empty </span>
     <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched">

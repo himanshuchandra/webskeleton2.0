@@ -1,6 +1,6 @@
 var User = require("./schemadefine");
 var Utils =require("./utils");
-var config =require("./config");
+var Config =require("./config");
 
 var dbOperations= {
 
@@ -76,7 +76,8 @@ addUser:function(request,response){
     else{
         result=[result];
         Utils.FillSession(request,result);
-        //Utils.SendMail();
+        console.log("eee",result,result[0].useremail);
+        SendLink(result[0].useremail,"emailactivationtoken","emailactivate");
         response.json({"msg":"Register SuccessFully..."});
         console.log(result);
    }
@@ -202,44 +203,6 @@ SetNewPassword:function (request,response){
 }, 
 
 
-
-sendCode:function (codeObject,response){
-    
-
-   
-    User.find({"useremail":codeObject.cemail},function(error,result){
-    if(error){
-       console.log("Error Occured",error);
-   }
-    else{ 
-        
-       console.log(result);
-        //console.log(result[0].useremail);
-       //console.log(result.username); 
-        if(result[0]!=undefined){
-            console.log("found");
-
-            var code = (Math.floor(100000 + Math.random() * 900000)).toString();
-            code = Math.floor(code.substring(-2)/100);   
-            if(code<1000)
-            {
-                code=code+1000;
-            }
-
-            codeObject.fcode=code;
-            caller.savecode(codeObject,response);
-
-        }
-        else
-            {
-                console.log("notfound");
-                response.json({msg:"Email not registered"});
-            }
-       
-   }
-});
-},
-
 forgotpass:function (codeObject,response){
     
 
@@ -279,6 +242,28 @@ var caller={
 
 };
 
+function SendLink(UserEmail,TokenType,Page,response){
 
+    var RandomToken=Utils.RandomStringGenerate();
+    var Query={};
+    Query[TokenType]=RandomToken;
+    var Url= Config.reqUrl+"/#/"+Page+"?t="+RandomToken;
+
+    User.update({
+        "useremail":UserEmail
+    }, 
+    {
+        $set:Query
+    },
+    function(error,result){
+        if(error){
+            console.log("Error Occured",error);
+        }
+        else{ 
+            console.log("succ");
+            Utils.SendMail(UserEmail,"sub",Url);
+        }
+    });
+};
 
 
