@@ -247,7 +247,7 @@ function SendLink(UserEmail,TokenType,Page,response){
     var RandomToken=Utils.RandomStringGenerate();
     var Query={};
     Query[TokenType]=RandomToken;
-    var Url= Config.reqUrl+"/#/"+Page+"?t="+RandomToken;
+    var Url= Config.reqUrl+"/#/"+Page+"?e="+UserEmail+"&t="+RandomToken;
 
     User.update({
         "useremail":UserEmail
