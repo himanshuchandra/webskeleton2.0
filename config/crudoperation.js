@@ -74,7 +74,7 @@ addUser:function(request,response){
    }
     else{
         result=[result];
-        fillSession(request,result);
+        Utils.FillSession(request,result);
         //Utils.SendMail();
         response.json({"msg":"Register SuccessFully..."});
         console.log(result);
@@ -111,10 +111,11 @@ doLogin:function (request,response){
         }
         else{
             result["0"].rememberMe=loginObject.rememberMe;
-            fillSession(request,result);
+            Utils.FillSession(request,result);
             //request.session.zzzzz="mymail";
             // console.log("session is "+request.session.zzzzz);
-            Utils.SendMail("hc160160@gmail.com","This is myyy subject");
+            var string=Utils.RandomStringGenerate();
+            Utils.SendMail("hc160160@gmail.com","This is myyy subject",string);
             response.json({msg:"success"});
             
             //response.send("session is "+request.session.zzzzz);
@@ -140,7 +141,7 @@ UpdateProfileData:function (request,response){
     }
      else{ 
        newSession[0].userinfo=profileObject;
-       fillSession(request,newSession);
+       Utils.FillSession(request,newSession);
        //console.log(newSession);
        response.json({msg:"success"});
        
@@ -198,6 +199,8 @@ SetNewPassword:function (request,response){
     }
 });
 }, 
+
+
 
 sendCode:function (codeObject,response){
     
@@ -275,27 +278,6 @@ var caller={
 
 };
 
-function fillSession(request,data) {
-    
-    //sessionDestroy(request);
-    userData=data;
-    userData["0"].password1=undefined;
-    console.log(userData);
-    //console.log(userData);
-    //console.log(userData["0"].password1);
-    //var userData=data;
-    request.session.user=userData;
-    if(userData["0"].rememberMe==true){
-         var thirtyDays = 30*24*60*60*1000;
-         request.session.cookie.expires = new Date(Date.now() + thirtyDays);
-    }
-    //console.log(data["0"].useremail);
-};
 
-function sessionDestroy(request){
-     request.session.destroy(function(err) {
-        console.log("cannot access session here"); 
-    });
-};
 
 
