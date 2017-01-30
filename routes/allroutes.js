@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dbOperations = require("../config/crudoperation");
-var nodemailer = require('nodemailer');
+
 
 /* GET users listing. */
 // router.post('/checklogin', function(req, res, next) {
@@ -41,28 +41,11 @@ router.post('/register',function(request,response){
 });
 
 router.post('/login',function(request,response){
-var transporter = nodemailer.createTransport('smtps://surveyshimanshu%40gmail.com:surveys9990@smtp.gmail.com');
 
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Fred Foo ?" <h=surveyshimanshu@gmail.com>', // sender address
-    to: ' hc160160@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world ?', // plaintext body
-    html: '<b>Hello world ?</b>' // html body
-};
-
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-});
 
    // var data =request.body;
     //console.log("DATA is      ",data);
-    //dbOperations.doLogin(request,response);
+    dbOperations.doLogin(request,response);
     //response.redirect('http://localhost:1234/#/profile');
 });
 

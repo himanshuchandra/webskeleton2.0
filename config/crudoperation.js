@@ -1,4 +1,7 @@
 var User = require("./schemadefine");
+var Utils =require("./utils");
+var config =require("./config");
+
 var dbOperations= {
 
 
@@ -71,8 +74,9 @@ addUser:function(request,response){
    }
     else{
         result=[result];
-       fillSession(request,result);
-       response.json({"msg":"Register SuccessFully..."});
+        fillSession(request,result);
+        //Utils.SendMail();
+        response.json({"msg":"Register SuccessFully..."});
         console.log(result);
    }
 
@@ -110,6 +114,7 @@ doLogin:function (request,response){
             fillSession(request,result);
             //request.session.zzzzz="mymail";
             // console.log("session is "+request.session.zzzzz);
+            Utils.SendMail();
             response.json({msg:"success"});
             
             //response.send("session is "+request.session.zzzzz);
@@ -268,7 +273,7 @@ var caller={
         dbOperations.SetNewPassword(request,response);
     },
 
-}
+};
 
 function fillSession(request,data) {
     
@@ -285,11 +290,12 @@ function fillSession(request,data) {
          request.session.cookie.expires = new Date(Date.now() + thirtyDays);
     }
     //console.log(data["0"].useremail);
-} 
+};
 
 function sessionDestroy(request){
      request.session.destroy(function(err) {
         console.log("cannot access session here"); 
     });
-}
-//findUser("Ram");
+};
+
+
