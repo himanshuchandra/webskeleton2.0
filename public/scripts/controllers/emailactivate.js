@@ -19,7 +19,8 @@ angular.module('webskeletonApp')
          
     var promise = emailactivate.ActivateEmail(ActivationObject);
     promise.then(function(data){
-      $scope.Result=data;
+      //console.log(data.data);
+      $scope.Result=data.data.msg;
       }
       ,function(error){
         $scope.Result = "Error occured,Try again later";

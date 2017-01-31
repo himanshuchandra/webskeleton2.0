@@ -67,9 +67,9 @@ router.post('/ActivateEmail',function(request,response){
     //var data=request.body;
     //console.log("bbbb",data);
     //response.send(data);
-    dbOperations.UpdateDB(request,response);
+    dbOperations.CheckToken(request,response);
 });
-
+/*
 router.post('/redirect',function(request,response){
 
     var url=request.body;
@@ -91,6 +91,6 @@ router.post('/fpass',function(request,response){
     
     //return logintoken;
 });
-
+*/
 
 module.exports = router;

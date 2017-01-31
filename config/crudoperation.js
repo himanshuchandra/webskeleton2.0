@@ -222,21 +222,21 @@ CheckToken:function(request,response){
      else{ 
        console.log(result);
        if(result.length<1){
-            response.json({msg:"fail"});
+            response.json({msg:"NotFound"});
         }
         else{
             // var object{
             //     "Fieldto"
             // }
-            //caller.UpdateDB(ActivationObject,Field);
-            response.json({msg:"success"});
+            caller.ActivateEmail(ActivationObject.UserEmail,response);
+            //response.json({msg:"success"});
         }
 
      } 
     });
 
 },
-
+/*
 UpdateDB:function(object,response){
     var Objectz=object.body;
     console.log("dddd",Objectz.Token);
@@ -267,30 +267,39 @@ UpdateDB:function(object,response){
             }
             else{ 
                 console.log(result);
+                mongoose.connection.close();
                 response.json({msg:"success"});
-       
+                
             }
     });
 },
+*/
 
 
-forgotpass:function (codeObject,response){
-    
 
-  
-    console.log(codeObject.fcode);
-    User.update({useremail:codeObject.cemail}, {$set:{forgotpasscode:codeObject.fcode}},function(error,result){
-    if(error){
-       console.log("Error Occured",error);
-   }
-    else{ 
+    ActivateEmail:function (UserEmail,response){
         
-       console.log(result);
-       response.json({msg:"found",code:codeObject.fcode});
-       
-   }
-});
-}  
+        console.log("xxxx",UserEmail);
+        User.update({
+            "useremail":UserEmail
+        },
+        {
+            $set:{
+                "emailverified":true,
+                "emailactivationtoken":undefined
+            }
+        },function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{ 
+            
+                console.log(result);
+                response.json({msg:"success"});
+        
+            }
+        });
+    },  
 
 };
 
@@ -309,6 +318,9 @@ var caller={
     },
     SetNewPassword:function (request,response) {
         dbOperations.SetNewPassword(request,response);
+    },
+    ActivateEmail:function (UserEmail,response) {
+        dbOperations.ActivateEmail(UserEmail,response);
     },
 
 };
