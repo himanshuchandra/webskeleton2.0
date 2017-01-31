@@ -11,6 +11,7 @@ angular.module('webskeletonApp')
   .factory('forgotpassword', function ($http,$q,requrl) {
       var object= {
         SendLink:function(ForgotObject){
+          var defer = $q.defer(); 
           $http.post(requrl+'/allroutes/SendLink',ForgotObject).then(function(data){
             defer.resolve(data); 
           },function(error){

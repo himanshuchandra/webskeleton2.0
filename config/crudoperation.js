@@ -301,6 +301,39 @@ UpdateDB:function(object,response){
         });
     },  
 
+    checkEmail:function (request,response){
+    
+        var ForgotObject =request.body;
+        console.log("here");
+        User.find({"useremail":ForgotObject.Email},function(error,result){
+        if(error){
+            console.log("Error Occured",error);
+        }
+        else{ 
+            
+        console.log(result);
+            //console.log(result[0].useremail);
+        //console.log(result.username); 
+            if(result[0]!=undefined){
+                console.log("found");
+                //response.json({msg:"LinkSent"});
+                SendLink(ForgotObject.Email,"forgotpasswordtoken","forgotpassword");
+            response.json({msg:"LinkSent"});
+            }
+            else
+                {
+                    console.log("notfound");
+                    response.json({msg:"Email nOt found"});
+                }
+            //response.json({result});
+            
+            //response.json({msg:"Logged in SuccessFully..."});
+        //loginObject.logintoken=true;
+            //return loginObject.logintoken;
+        }
+        });
+    },    
+
 };
 
 module.exports =dbOperations; 
@@ -325,7 +358,7 @@ var caller={
 
 };
 
-function SendLink(UserEmail,TokenType,Page,response){
+function SendLink(UserEmail,TokenType,Page){
 
     var RandomToken=Utils.RandomStringGenerate();
     var Query={};

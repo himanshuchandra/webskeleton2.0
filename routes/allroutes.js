@@ -74,7 +74,7 @@ router.post('/SendLink',function(request,response){
     //var data=request.body;
     //console.log("bbbb",data);
     //response.send(data);
-    Utils.SendMail(request,response);
+    dbOperations.checkEmail(request,response);
 });
 /*
 router.post('/redirect',function(request,response){

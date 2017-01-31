@@ -10,8 +10,8 @@
 angular.module('webskeletonApp')
   .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,requrl) {
 
-     $scope.submitForm=function(ForgetForm) {
-        if(ForgetForm.$valid){
+     $scope.submitForm=function(forgotForm) {
+        if(forgotForm.$valid){
           $scope.SendLink();
         }
     };
@@ -19,12 +19,14 @@ angular.module('webskeletonApp')
      $scope.SendLink=function() {
       
         var ForgotObject={
-          "Email":$scope.ForgotEmail
+            "Email":$scope.ForgotEmail,
         };
+        
+        
         var promise=forgotpassword.SendLink(ForgotObject);
         promise.then(function(data){
 
-
+          $scope.result = data.data.msg;
       
         },function (error) {
             $scope.result = "error occurred";
