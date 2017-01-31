@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dbOperations = require("../config/crudoperation");
-
+var Utils = require("../config/utils")
 
 /* GET users listing. */
 // router.post('/checklogin', function(req, res, next) {
@@ -68,6 +68,13 @@ router.post('/ActivateEmail',function(request,response){
     //console.log("bbbb",data);
     //response.send(data);
     dbOperations.CheckToken(request,response);
+});
+
+router.post('/SendLink',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send(data);
+    Utils.SendMail(request,response);
 });
 /*
 router.post('/redirect',function(request,response){

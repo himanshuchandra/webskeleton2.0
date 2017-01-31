@@ -8,16 +8,16 @@
  * Factory in the webskeletonApp.
  */
 angular.module('webskeletonApp')
-  .factory('forgotpassword', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
-
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
+  .factory('forgotpassword', function ($http,$q,requrl) {
+      var object= {
+        SendLink:function(ForgotObject){
+          $http.post(requrl+'/allroutes/SendLink',ForgotObject).then(function(data){
+            defer.resolve(data); 
+          },function(error){
+            defer.reject(error);
+          })
+          return defer.promise;
+        },
+      };
+    return object;
   });

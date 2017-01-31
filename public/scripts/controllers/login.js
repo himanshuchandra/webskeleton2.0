@@ -16,7 +16,7 @@ angular.module('webskeletonApp')
                     $scope.doLogin();
                 }
                 
-            }
+            };
     
     
     $scope.doLogin=function(){
@@ -57,6 +57,6 @@ angular.module('webskeletonApp')
         },function(error){
             $scope.result = "error occurred";
         });
-    }
+    };
     
   });
