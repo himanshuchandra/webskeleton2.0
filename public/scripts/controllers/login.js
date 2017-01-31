@@ -59,8 +59,4 @@ angular.module('webskeletonApp')
         });
     }
     
-    
-    $scope.forgotpass=function(){
-        window.location.assign(requrl+"/fpass.html");
-    }
   });
