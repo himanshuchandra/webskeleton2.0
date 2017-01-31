@@ -8,7 +8,8 @@
      !regForm.validemail.$error.required">Invalid email </span>
     <span  ng-show="regForm.validemail.$touched && regForm.validemail.$error.required">
         Cannot be left empty </span>
-    <span  ng-show="submitted && !regForm.validemail.$touched">Cannot be left empty </span>
+    <span  ng-show="submitted && !regForm.validemail.$touched &&
+     regForm.validemail.$error.required">Cannot be left empty </span>
         
         
     <input type="text" name="validusername" ng-model="username" 
@@ -19,7 +20,8 @@
       Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars) </span>
     <span  ng-show="regForm.validusername.$touched &&
      regForm.validusername.$error.required">Cannot be left empty </span>
-    <span  ng-show="submitted && !regForm.validusername.$touched">
+    <span  ng-show="submitted && !regForm.validusername.$touched &&
+     regForm.validusername.$error.required">
         Cannot be left empty </span>
     
     <input type="password" ng-keyup="checkp()" ng-model="password1" name="validpass1" 
@@ -29,7 +31,8 @@
         password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.required">
         Cannot be left empty </span>
-    <span  ng-show="submitted && !regForm.validpass1.$touched">
+    <span  ng-show="submitted && !regForm.validpass1.$touched &&
+     regForm.validpass1.$error.required">
         Cannot be left empty </span>
     
     <input type="password" ng-keyup="checkp()" ng-model="password2" placeholder="Password" />

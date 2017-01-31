@@ -24,7 +24,8 @@
       Invalid name(Should be 3-30 only a-z,A-Z and space allowed) </span>
     <span  ng-show="profForm.validName.$touched &&
      profForm.validName.$error.required">Cannot be left empty </span>
-    <span  ng-show="ProfileSubmitted && !profForm.validName.$touched">
+    <span  ng-show="ProfileSubmitted && !profForm.validName.$touched &&
+     profForm.validName.$error.required">
         Cannot be left empty </span>
 
     <h5>Area</h5>
@@ -36,7 +37,8 @@
       Invalid Area(Should be 5-50 only a-z,A-Z,0-9,-,. , and space allowed) </span>
     <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.required">Cannot be left empty </span>
-    <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched">
+    <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched &&
+     profForm.validArea.$error.required">
         Cannot be left empty </span>
 
     <h5>City</h5>
@@ -48,7 +50,8 @@
       Invalid City(Should be 4-15 only a-z,A-Z,0-9 and space allowed) </span>
     <span  ng-show="profForm.validCity.$touched &&
      profForm.validCity.$error.required">Cannot be left empty </span>
-    <span  ng-show="ProfileSubmitted && !profForm.validCity.$touched">
+    <span  ng-show="ProfileSubmitted && !profForm.validCity.$touched &&
+     profForm.validCity.$error.required">
         Cannot be left empty </span>
     
     <h5>State</h5>
@@ -60,7 +63,8 @@
       Invalid State(Should be 4-15 only a-z,A-Z,0-9 and space allowed) </span>
     <span  ng-show="profForm.validState.$touched &&
      profForm.validState.$error.required">Cannot be left empty </span>
-    <span  ng-show="ProfileSubmitted && !profForm.validState.$touched">
+    <span  ng-show="ProfileSubmitted && !profForm.validState.$touched &&
+     profForm.validState.$error.required">
         Cannot be left empty </span>
     
     <h5>Pincode</h5>
@@ -72,7 +76,8 @@
       Invalid Pincode(Should be 3-15 digits only 0-9 allowed) </span>
     <span  ng-show="profForm.validPincode.$touched &&
      profForm.validPincode.$error.required">Cannot be left empty </span>
-    <span  ng-show="ProfileSubmitted && !profForm.validPincode.$touched">
+    <span  ng-show="ProfileSubmitted && !profForm.validPincode.$touched &&
+     profForm.validPincode.$error.required">
         Cannot be left empty </span>
 
     <h5>Country</h5>
@@ -98,7 +103,8 @@
       Invalid Country code(Should be 3 digits only 0-9,+ allowed) </span>
     <span  ng-show="mobileForm.validCode.$touched &&
      mobileForm.validCode.$error.required">Cannot be left empty </span>
-    <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched">
+    <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched &&
+     mobileForm.validCode.$error.required">
         Cannot be left empty </span>
 
 
@@ -110,7 +116,8 @@
       Invalid Mobile number(Should be 10 digits only 0-9 allowed) </span>
     <span  ng-show="mobileForm.validMobile.$touched &&
      mobileForm.validMobile.$error.required">Cannot be left empty </span>
-    <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched">
+    <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched &&
+     mobileForm.validMobile.$error.required">
         Cannot be left empty </span>
 
         {{MobileMessage}}
@@ -127,7 +134,8 @@
     passForm.oldpass.$error.pattern && !passForm.oldpass.$error.required">
     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <span  ng-show="passForm.oldpass.$touched && passForm.oldpass.$error.required">Cannot be left empty </span>
-    <span  ng-show="PasswordSubmitted && !passForm.oldpass.$touched">Cannot be left empty </span>
+    <span  ng-show="PasswordSubmitted && !passForm.oldpass.$touched &&
+     passForm.oldpass.$error.required">Cannot be left empty </span>
 
 <h5>New password</h5>
  <input type="password" ng-keyup="checkPassword()" ng-model="newPassword" name="newpass"  
@@ -136,7 +144,8 @@
     !passForm.newpass.$error.required">
     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     <span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.required">Cannot be left empty </span>
-    <span  ng-show="PasswordSubmitted && !passForm.newpass.$touched">Cannot be left empty </span>
+    <span  ng-show="PasswordSubmitted && !passForm.newpass.$touched &&
+     passForm.newpass.$error.required">Cannot be left empty </span>
 
 <h5>New Password Again</h5>
 <input type="password" ng-keyup="checkPassword()" ng-model="newPassword2" placeholder="Password Again" />
