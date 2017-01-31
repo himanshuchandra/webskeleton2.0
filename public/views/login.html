@@ -12,8 +12,9 @@
     <span  ng-show="submitted && !loginForm.validloginid.$touched &&
      loginForm.validloginid.$error.required">
         Cannot be left empty </span>
-    <!--span  ng-show="submitted && !loginForm.validloginid.$touched && loginForm.validloginid.$error.pattern">
-        Invalid email/username </span-->
+    <span  ng-show="submitted && !loginForm.validloginid.$touched &&
+     loginForm.validloginid.$error.pattern">
+        Invalid email/username </span>
     
 
     <input type="password" ng-model="loginpassword" placeholder="Password" 
@@ -25,7 +26,10 @@
         Cannot be left empty </span>
     <span  ng-show="submitted && !loginForm.validloginpass.$touched &&
      loginForm.validloginpass.$error.required">Cannot be left empty </span>
-    
+    <span  ng-show="submitted && !loginForm.validloginpass.$touched &&
+     loginForm.validloginpass.$error.pattern">
+     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+
     <input type="checkbox" ng-model="RememberMe" name="rememberMe" value="false">Remember Me<br>
     
     <input type="submit" ng-click="submitted=true;" value="Login">

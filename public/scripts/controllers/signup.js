@@ -38,6 +38,9 @@ angular.module('webskeletonApp')
                 if(regForm.$valid && passverified==true){
                     $scope.doRegister();
                 }
+                else{
+                    $scope.passtext="Enter correct and full info";
+                }
                 
             }
        
