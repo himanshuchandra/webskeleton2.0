@@ -39,7 +39,7 @@ angular.module('webskeletonApp')
                     $scope.doRegister();
                 }
                 else{
-                    $scope.passtext="Enter correct and full info";
+                    $scope.result="Enter correct and full info";
                 }
                 
             }

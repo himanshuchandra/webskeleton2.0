@@ -11,7 +11,7 @@
     <span  ng-show="submitted && !regForm.validemail.$touched &&
      regForm.validemail.$error.required">Cannot be left empty </span>
     <span  ng-show="submitted && !regForm.validemail.$touched &&
-     regForm.validemail.$invalid">
+     regForm.validemail.$invalid && !regForm.validemail.$error.required">
         Invalid email </span>
         
         
@@ -52,6 +52,6 @@
        
         </form>
     {{result}}
-    {{result2}}
+    
 
 <H1><a ng-href="#login">LOGIN</H1>

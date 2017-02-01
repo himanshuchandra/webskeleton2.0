@@ -84,7 +84,7 @@ angular.module('webskeletonApp')
            
             }
             else{
-              $scope.result="Enter a valid mobile number";
+              $scope.result="Enter valid details";
             }
           };
 
