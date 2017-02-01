@@ -19,6 +19,15 @@ angular.module('webskeletonApp')
           })
           return defer.promise;
         },
+        PasswordReset:function(PasswordObject){
+          var defer = $q.defer(); 
+          $http.post(requrl+'/allroutes/PasswordReset',PasswordObject).then(function(data){
+            defer.resolve(data); 
+          },function(error){
+            defer.reject(error);
+          })
+          return defer.promise;
+        },
       };
     return object;
   });

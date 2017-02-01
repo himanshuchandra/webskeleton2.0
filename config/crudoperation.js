@@ -332,7 +332,42 @@ UpdateDB:function(object,response){
             //return loginObject.logintoken;
         }
         });
-    },    
+    }, 
+
+    PasswordReset:function(request,response){
+        var PasswordObject=request.body;
+
+        User.find({
+        "$and":[
+            {
+                "useremail":PasswordObject.UserEmail
+            }, 
+            {
+                "forgotpasswordtoken":PasswordObject.Token
+            }
+        ]
+        }
+        ,function(error,result){
+        if(error){
+            console.log("Error Occured",error);
+        }
+        else{ 
+        console.log(result);
+        if(result.length<1){
+                response.json({msg:"fail"});
+            }
+            else{
+                // var object{
+                //     "Fieldto"
+                // }
+                
+                response.json({msg:"pass"});
+            }
+
+        } 
+        });
+
+    },   
 
 };
 
