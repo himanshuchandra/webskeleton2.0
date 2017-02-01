@@ -15,7 +15,7 @@ angular.module('webskeletonApp')
         //console.log(true,$location.search().e)
         $scope.Form=true;  //hidden
         //$scope.CheckToken();
-        $scope.cc();
+        //$scope.cc();
         
     }
     else{
