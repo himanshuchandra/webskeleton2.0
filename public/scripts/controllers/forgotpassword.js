@@ -9,17 +9,50 @@
  */
 angular.module('webskeletonApp')
   .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,$location,requrl) {
-     $scope.cc=function() {
-      console.log("happpppyy");
-    }
+
+
+    ////////////////////////////////////////////////
+      $scope.CheckToken=function(){
+         
+         $scope.Result="Checking";
+
+          var PasswordObject={
+            "UserEmail":UserEmail,
+            "Token":Token,  
+          }
+         
+          var promise = forgotpassword.PasswordReset(PasswordObject);
+          promise.then(function(data){
+          //console.log(data.data);
+            if(data.data.msg==="fail"){
+              $scope.Result="Link expired.. Send a new one!";
+            }
+            else{
+              UserEmail=PasswordObject.UserEmail;
+              $scope.NewPasswordForm=false;
+              $scope.Result=undefined;
+              //show new password form
+            }
+          }
+          ,function(error){
+            $scope.Result = "Error occured,Try again later";
+          });
+      };
+
+  ///////////////////////////////////////////
+
     $scope.NewPasswordForm=true; 
-    if($location.search().e!=undefined)
+    var UserEmail=$location.search().e;
+    var Token=$location.search().t;
+
+
+    if(UserEmail!=undefined)
     {
         //console.log(true,$location.search().e)
         $scope.SendForm=true;
          //hidden
-        // $scope.CheckToken();
-      $scope.cc();
+        $scope.CheckToken();
+
     }
     else{
         $scope.SendForm=false;
@@ -52,51 +85,56 @@ angular.module('webskeletonApp')
         });
 
       }; 
-////////////////////////////////////////////////
-      $scope.CheckToken=function(){
-         
-         $scope.Result="Checking";
 
-          var PasswordObject={
-            "UserEmail":$location.search().e,
-            "Token":$location.search().t,  
+////////////////////////////////
+          var arePasswordsSame=false;
+    
+          $scope.checkPassword=function(){
+          if($scope.ResetPassword2!=undefined)
+          {   
+              if($scope.ResetPassword===$scope.ResetPassword2)
+              {   
+                $scope.PasswordMessage="Passwords match";
+                arePasswordsSame=true;
+                
+              }
+              else if($scope.ResetPassword==undefined){
+                 $scope.PasswordMessage=undefined;
+                 arePasswordsSame=false;
+              }
+              else{
+                $scope.PasswordMessage="Passwords dont match";
+                arePasswordsSame=false;
+                
+              }
           }
-         
-          var promise = forgotpassword.PasswordReset(PasswordObject);
-          promise.then(function(data){
-          //console.log(data.data);
-            if(data.data.msg==="fail"){
-              $scope.Result="Link expired.. Send a new one!";
+        };
+
+          $scope.submitPasswordForm=function(passForm){
+             if(passForm.$valid && arePasswordsSame==true){
+                    $scope.SaveNewPassword();
+                    $scope.PasswordResult="Updating Password";
+           
             }
             else{
-              $scope.NewPasswordForm=false;
-              //show new password form
+              $scope.PasswordResult="Enter correct passwords";
             }
-          }
-          ,function(error){
-            $scope.Result = "Error occured,Try again later";
-          });
-      };
-////////////////////////////////
+          };
+
       $scope.SaveNewPassword=function(){
          
          $scope.Result="Checking";
 
-          var PasswordObject={
-            "UserEmail":$location.search().e,
-            "Token":$location.search().t,  
+          var NewPasswordObject={
+            "UserEmail":UserEmail,
+            "NewPassword":$scope.ResetPassword,
           }
          
-          var promise = forgotpassword.PasswordReset(PasswordObject);
+          var promise = forgotpassword.SaveNewPassword(NewPasswordObject);
           promise.then(function(data){
-          //console.log(data.data);
-            if(data.data.msg==="fail"){
-              $scope.Result="Link expired.. Send a new one!";
-            }
-            else{
-              $scope.NewPasswordForm=false;
-              //show new password form
-            }
+            console.log("xxx",data);
+            $scope.NewPasswordForm=true; 
+            $scope.Result = "Password Changed";
           }
           ,function(error){
             $scope.Result = "Error occured,Try again later";

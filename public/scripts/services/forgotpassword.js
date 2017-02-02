@@ -28,9 +28,9 @@ angular.module('webskeletonApp')
           })
           return defer.promise;
         },
-        NewPassword:function(NewPasswordObject){
+        SaveNewPassword:function(NewPasswordObject){
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/NewPassword',NewPasswordObject).then(function(data){
+          $http.post(requrl+'/allroutes/SaveNewPassword',NewPasswordObject).then(function(data){
             defer.resolve(data); 
           },function(error){
             defer.reject(error);

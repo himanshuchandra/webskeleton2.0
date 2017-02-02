@@ -369,6 +369,31 @@ UpdateDB:function(object,response){
 
     },   
 
+    SaveNewPassword:function (request,response){
+        
+        var NewPasswordObject=request.body;
+        console.log("xyyy",NewPasswordObject);
+        User.update({
+            "useremail":NewPasswordObject.UserEmail
+        },
+        {
+            $set:{
+                "password1":NewPasswordObject.NewPassword
+               // "emailactivationtoken":undefined
+            }
+        },function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{ 
+            
+                console.log(result);
+                response.json({msg:"success"});
+        
+            }
+        });
+    },  
+
 };
 
 module.exports =dbOperations; 

@@ -83,6 +83,13 @@ router.post('/PasswordReset',function(request,response){
     //response.send(data);
     dbOperations.PasswordReset(request,response);
 });
+
+router.post('/SaveNewpassword',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send({msg:"Hello"});
+    dbOperations.SaveNewPassword(request,response);
+});
 /*
 router.post('/redirect',function(request,response){
 
