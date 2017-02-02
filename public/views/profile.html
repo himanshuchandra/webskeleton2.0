@@ -3,7 +3,7 @@
 <h5>Username</h5><p>{{uName}}</p>
 <h3>
 
-<div>
+<div ng-hide="Profile">
     
     <h5>Name</h5><p>{{Name||"Not Saved"}}</p>   
     <h5>Address</h5>
@@ -12,11 +12,14 @@
     <h5>State</h5><p>{{State||"Not Saved"}}</p>
     <h5>Pincode</h5><p>{{Pincode||"Not Saved"}}</p>
     <h5>Country</h5><p>{{Country||"Not Saved"}}</p>
+    <h5>Mobile Number</h5><p>{{Mobile||"Not Saved"}}</p>
 </div>
 
+<div ng-hide="ProfileForm">
 <form name="profForm" ng-submit="submitProfileForm(profForm)" novalidate>
     <h5>Full Name</h5>
-    <input type="text" ng-model="newName" pattern="[A-Za-z ]{3,30}" required>
+    <input type="text" name="validName" ng-model="newName" 
+    pattern="[A-Za-z ]{3,30}" required>
     <span  ng-show="profForm.validName.$touched &&
      profForm.validName.$error.pattern &&
       !profForm.validName.$error.required">
@@ -97,17 +100,15 @@
     <h5>Country</h5>
     <country-select name="validCountry" ng-model="newCountry" cs-required 
     cs-priorities="IN, AU, DE, GB, US" option value="India"></country-select>
-        {{dataValid}}
+        {{ProfileResult}}
     <!--country-select ng-model="newCountry" cs-only="AU, DE, GB, US"></country-select-->
 
 
-<input type="submit" ng-click="ProfileSubmitted=true;" value="Edit Profile">
+<input type="submit" ng-click="ProfileSubmitted=true;" value="Save Profile">
 </form>
-
-<div>
-    <h5>Mobile Number</h5><p>{{Mobile||"Not Saved"}}</p>
 </div>
 
+<div ng-hide="MobileForm">
 <form name="mobileForm" ng-submit="submitMobileForm(mobileForm)" novalidate>
     <h5>Country Code</h5>
     <input type="text" ng-model="countryCode" name="validCode" pattern="[0-9+]{3}" required/>
@@ -145,7 +146,9 @@
 
     <input type="submit" ng-click="MobileSubmitted=true;" value="Verify">
 </form>
+</div>
 
+<div ng-hide="PasswordForm">
 <form name="passForm"  ng-submit="submitPasswordForm(passForm)" novalidate>
 
 <h5>Old Password</h5>
@@ -180,7 +183,12 @@
 
 
 
-<input type="submit" ng-click="PasswordSubmitted=true;" value="Change password">
+<input type="submit" ng-click="PasswordSubmitted=true;" value="Save Password">
 </form>
 
 {{PasswordResult}}
+</div>
+
+<input type="button" ng-hide="ProfileFormButton" ng-click="ShowProfileForm()" value="Edit Profile" />
+<input type="button" ng-hide="MobileFormButton" ng-click="ShowMobileForm()" value="Edit Mobile" />
+<input type="button" ng-hide="PasswordFormButton" ng-click="ShowPasswordForm()" value="Change Password" />

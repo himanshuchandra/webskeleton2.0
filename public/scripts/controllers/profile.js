@@ -8,7 +8,11 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ProfileCtrl', function ($scope,profile,md5) {
+  .controller('ProfileCtrl', function ($scope,$window,profile,md5) {
+
+    $scope.ProfileForm=true;
+    $scope.MobileForm=true;
+    $scope.PasswordForm=true;
 
       var promise = profile.getData();
         promise.then(function(data){
@@ -30,19 +34,62 @@ angular.module('webskeletonApp')
                 $scope.State=userInfo.state;
                 $scope.Country=userInfo.country;
 
+                $scope.FillPlaceholders();
+
             }
             
         },function(error){
             $scope.result = "error occured";
         });
-      
+ /////////////////////////////////////////////////////////////////////////
+
+          $scope.ShowProfileForm=function(){
+            $scope.ProfileForm=false;
+            $scope.ProfileFormButton=true;
+            $scope.MobileFormButton=false;
+            $scope.PasswordFormButton=false;
+            $scope.MobileForm=true;
+            $scope.PasswordForm=true;
+            $scope.Profile=true;
+
+
+          };
+
+          $scope.ShowMobileForm=function(){
+            $scope.MobileForm=false;
+            $scope.MobileFormButton=true;
+            $scope.ProfileFormButton=false;
+            $scope.PasswordFormButton=false;
+            $scope.PasswordForm=true;
+            $scope.ProfileForm=true;
+            $scope.Profile=false;
+          }
+
+          $scope.ShowPasswordForm=function(){
+            $scope.PasswordForm=false;
+            $scope.PasswordFormButton=true;
+            $scope.ProfileFormButton=false;
+            $scope.MobileFormButton=false;
+            $scope.MobileForm=true;
+            $scope.ProfileForm=true;
+            $scope.Profile=false;
+          }
+
+
 //////////////////////////////////////////////////////////////////////////
           
-          $scope.newName="jjjjj";
+          $scope.FillPlaceholders=function(){
+                $scope.newName=$scope.Name;
+                $scope.newArea=$scope.Area;
+                $scope.newCity=$scope.City;
+                $scope.newPincode=$scope.Pincode; 
+                $scope.newState=$scope.State;
+                $scope.newCountry=$scope.Country;
+          }
 
           $scope.submitProfileForm=function (profForm) {  
               if(profForm.$valid && $scope.newCountry!=undefined){
-                $scope.dataValid="Wait";
+                $scope.ProfileResult="Saving";
                 $scope.changeProfile();
       
                // $scope.saveprof();
@@ -69,10 +116,13 @@ angular.module('webskeletonApp')
               
               var promise=profile.setProfileData(profileObject);
               promise.then(function(data) {
-                console.log("ddd",data);
+                $scope.ProfileResult="Updated";
+                $window.location.reload();
+
              
               },function(error) {
                 console.log("error occured");
+                $scope.ProfileResult="Error! Try again later";
                 
               });
               
@@ -136,6 +186,14 @@ angular.module('webskeletonApp')
               var promise=profile.setNewPassword(passwordObject);
               promise.then(function(data) {
                 console.log("ddd",data);
+                if(data.data.msg==="success"){
+                    $scope.PasswordResult="Updated";
+                    $window.location.reload();
+                }
+                else
+                {
+                    $scope.PasswordResult="Old Password is not correct";
+                }
                 //$scope.PasswordResult="Password Changed";
               },function(error) {
                 console.log("error occured");
