@@ -16,7 +16,7 @@ angular
     'angular-md5',
     'countrySelect'
   ])
-  .constant("requrl","http://192.168.0.101:1234")
+  .constant("requrl","http://localhost:1234")
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {

@@ -9,23 +9,26 @@
  */
 angular.module('webskeletonApp')
   .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,$location,requrl) {
-
+     $scope.cc=function() {
+      console.log("happpppyy");
+    }
+    $scope.NewPasswordForm=true; 
     if($location.search().e!=undefined)
     {
         //console.log(true,$location.search().e)
-        $scope.Form=true;  //hidden
-        //$scope.CheckToken();
-        //$scope.cc();
-        
+        $scope.SendForm=true;
+         //hidden
+        // $scope.CheckToken();
+      $scope.cc();
     }
     else{
-        $scope.Form=false;
-    }
-    
-    $scope.cc=function() {
-      console.log("happpppyy");
+        $scope.SendForm=false;
     }
 
+    // $scope.CheckToken();
+    
+   
+//////////////////////////////////////////////////
      $scope.submitForm=function(forgotForm) {
         if(forgotForm.$valid){
           $scope.SendLink();
@@ -49,7 +52,7 @@ angular.module('webskeletonApp')
         });
 
       }; 
-
+////////////////////////////////////////////////
       $scope.CheckToken=function(){
          
          $scope.Result="Checking";
@@ -62,7 +65,38 @@ angular.module('webskeletonApp')
           var promise = forgotpassword.PasswordReset(PasswordObject);
           promise.then(function(data){
           //console.log(data.data);
-            $scope.Result=data.data.msg;
+            if(data.data.msg==="fail"){
+              $scope.Result="Link expired.. Send a new one!";
+            }
+            else{
+              $scope.NewPasswordForm=false;
+              //show new password form
+            }
+          }
+          ,function(error){
+            $scope.Result = "Error occured,Try again later";
+          });
+      };
+////////////////////////////////
+      $scope.SaveNewPassword=function(){
+         
+         $scope.Result="Checking";
+
+          var PasswordObject={
+            "UserEmail":$location.search().e,
+            "Token":$location.search().t,  
+          }
+         
+          var promise = forgotpassword.PasswordReset(PasswordObject);
+          promise.then(function(data){
+          //console.log(data.data);
+            if(data.data.msg==="fail"){
+              $scope.Result="Link expired.. Send a new one!";
+            }
+            else{
+              $scope.NewPasswordForm=false;
+              //show new password form
+            }
           }
           ,function(error){
             $scope.Result = "Error occured,Try again later";

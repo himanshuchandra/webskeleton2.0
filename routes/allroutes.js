@@ -81,7 +81,7 @@ router.post('/PasswordReset',function(request,response){
     //var data=request.body;
     //console.log("bbbb",data);
     //response.send(data);
-    dbOperations.checkEmail(request,response);
+    dbOperations.PasswordReset(request,response);
 });
 /*
 router.post('/redirect',function(request,response){

@@ -38,7 +38,8 @@ angular.module('webskeletonApp')
       
 //////////////////////////////////////////////////////////////////////////
           
-          $scope.hell="jjjj";
+          $scope.newName="jjjjj";
+
           $scope.submitProfileForm=function (profForm) {  
               if(profForm.$valid && $scope.newCountry!=undefined){
                 $scope.dataValid="Wait";

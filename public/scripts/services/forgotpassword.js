@@ -28,6 +28,15 @@ angular.module('webskeletonApp')
           })
           return defer.promise;
         },
+        NewPassword:function(NewPasswordObject){
+          var defer = $q.defer(); 
+          $http.post(requrl+'/allroutes/NewPassword',NewPasswordObject).then(function(data){
+            defer.resolve(data); 
+          },function(error){
+            defer.reject(error);
+          })
+          return defer.promise;
+        },
       };
     return object;
   });
