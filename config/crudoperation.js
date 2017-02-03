@@ -67,6 +67,7 @@ addUser:function(request,response){
 
    var data =request.body;
    data.registrationdate=new Date();
+   data.emailverified=false;
    User.create(data,function(error,result){
     
      //User.create({"name":"Ram","phone":[2222,3333],"address":[{"state":"Delhi","pincode":2222},{"state":"Delhi","pincode":2222}]},function(error,response){
