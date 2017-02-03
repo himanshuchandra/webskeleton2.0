@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('SignupCtrl',function ($scope,signup,$window,md5) {
+  .controller('SignupCtrl',function ($scope,signup,$window,md5,requrl) {
    
     var passverified=false;
     
@@ -61,20 +61,16 @@ angular.module('webskeletonApp')
         
       var promise = signup.registerUser(userObject);
         promise.then(function(data){
-            console.log("SUCCESS ",data);
-            console.log(data.data);
-            $scope.result = data.data.msg;
-            //$window.location.reload();
-            //$window.location.assign(requrl+"/#/profile");
-            //var finaldata = data.data.finaldata;
-            //signup.passdata(finaldata);
-            //$scope.profilename= data;
-            
-            
-            //$window.location.assign("http://localhost:1234/profile.html");
-            
-            
-            
+           // console.log("SUCCESS ",data);
+           // console.log(data.data);
+           if(data.data.msg==="pass"){
+               $scope.result = "Registered Successfully";
+               $window.location.reload();
+               $window.location.assign(requrl);
+           }
+           else{
+               $scope.result =data.data.msg;
+           }            
         },function(error){
             $scope.result = "Error occured! Try again later";
         });

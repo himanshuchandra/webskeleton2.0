@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ProfileCtrl', function ($scope,$window,profile,md5) {
+  .controller('ProfileCtrl', function ($scope,$window,profile,md5,requrl) {
 
     $scope.ProfileForm=true;
     $scope.MobileForm=true;
@@ -21,12 +21,16 @@ angular.module('webskeletonApp')
             var print=data.data["0"];
             var userInfo=data.data["0"].userinfo;
 //            console.log(data.data["0"].username);
-
-            $scope.Email=print.useremail;
-            $scope.uName=print.username;
+            if(print.useremail==undefined){
+              //console.log("lllll");
+              $window.location.assign(requrl+"/#/login");
+            }
+            else{
+              $scope.Email=print.useremail;
+              $scope.uName=print.username;
             
-            if(userInfo){
-              console.log("insiode",userInfo);
+              if(userInfo){
+                console.log("insiode",userInfo);
                 $scope.Name=userInfo.fullname;
                 $scope.Area=userInfo.area;
                 $scope.City=userInfo.city;
@@ -36,6 +40,7 @@ angular.module('webskeletonApp')
 
                 $scope.FillPlaceholders();
 
+              }
             }
             
         },function(error){

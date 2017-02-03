@@ -79,7 +79,7 @@ addUser:function(request,response){
         Utils.FillSession(request,result);
         console.log("eee",result,result[0].useremail);
         SendLink(result[0].useremail,"emailactivate","emailactivationtoken");
-        response.json({"msg":"Register SuccessFully..."});
+        response.json({"msg":"pass"});
         console.log(result);
    }
 

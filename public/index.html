@@ -35,9 +35,11 @@
 
             <a class="navbar-brand" href="#/">webskeleton</a>
           </div>
-          <button type="button" ng-controller="WebindexCtrl"><a ng-href="/#profile">{{loginStatus}}</a></button>
-          <div ng-controller="WebindexCtrl" ng-hide="ActivationStatus">
+      <div ng-controller="WebindexCtrl">
+          <button type="button">{{loginStatus}}</button>
+          <div ng-hide="ActivationStatus">
                   <p>{{Status}}</p>
+                  <p><a ng-href="/#emailactivate">Send Link Again</a></p>
           </div>
            <!--H1><a ng-href="#login">LOGIN/SIGNUP</H1-->     
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
@@ -46,11 +48,12 @@
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="/#about">About</a></li>
               <li><a ng-href="/#">Contact</a></li>
-              <li><a ng-href="/#signup">Signup</a></li>
-              <li><a ng-href="/#login">Login</a></li>
-              <li><a ng-href="/#profile">Profile</a></li>
+              <li ng-hide="SignupButton"><a ng-href="/#signup">Signup</a></li>
+              <li ng-hide="LoginButton"><a ng-href="/#login">Login</a></li>
+              <li ng-hide="ProfileButton"><a ng-href="/#profile">Profile</a></li>
             </ul>
           </div>
+        </div>  
         </div>
       </div>
     </div>
