@@ -36,8 +36,8 @@
             <a class="navbar-brand" href="#/">webskeleton</a>
           </div>
           <button type="button" ng-controller="WebindexCtrl"><a ng-href="/#profile">{{loginStatus}}</a></button>
-          <div ng-hide="ActivationStatus=true">
-                  <p>Your Email address {{Email}} is not Verified </p>
+          <div ng-controller="WebindexCtrl" ng-hide="ActivationStatus">
+                  <p>{{Status}}</p>
           </div>
            <!--H1><a ng-href="#login">LOGIN/SIGNUP</H1-->     
           <div class="collapse navbar-collapse" id="js-navbar-collapse">

@@ -15,10 +15,18 @@ var Utils = require("../config/utils")
 
 router.post('/webindex', function(request,response) {
   if(request.session.user){
-       response.send("Hello "+request.session.user["0"].username);
+      var Status={
+          "Message":"Hello "+request.session.user["0"].username,
+          "Email":request.session.user["0"].useremail,
+         
+      }
+      dbOperations.CheckActivation(Status,response);
   }
   else{
-       response.send("Login/SignUp");
+    var Status={
+          "Message":"Login/SignUp",
+      }
+       response.send(Status);
   }
 });
 

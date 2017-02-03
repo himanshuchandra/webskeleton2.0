@@ -294,7 +294,7 @@ UpdateDB:function(object,response){
                 console.log("Error Occured",error);
             }
             else{ 
-            
+                
                 console.log(result);
                 response.json({msg:"success"});
         
@@ -399,7 +399,30 @@ UpdateDB:function(object,response){
         
             }
         });
-    },  
+    },
+
+    CheckActivation:function (Status,response){
+        User.find({
+            "useremail":Status.Email
+        }
+        ,function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{ 
+                console.log(result);
+                if(result.length<1){
+                    response.json({msg:"fail"});
+                }
+                else{
+                    Status.ActivationStatus=result[0].emailverified;
+                    response.send(Status);
+                }
+
+       
+        }
+        });
+    },
 
 };
 
