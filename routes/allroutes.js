@@ -98,6 +98,13 @@ router.post('/SaveNewpassword',function(request,response){
     //response.send({msg:"Hello"});
     dbOperations.SaveNewPassword(request,response);
 });
+
+router.post('/SendActivationLink',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send({msg:"Hello"});
+    dbOperations.SendActivationLink(request,response);
+});
 /*
 router.post('/redirect',function(request,response){
 

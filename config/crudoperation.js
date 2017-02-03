@@ -203,6 +203,12 @@ SetNewPassword:function (request,response){
 });
 }, 
 
+    SendActivationLink:function(request,response){
+        var Email=request.body.Email;
+        SendLink(Email,"emailactivate","emailactivationtoken");
+        response.json({"msg":"success"});
+    },
+
 CheckToken:function(request,response){
     var ActivationObject=request.body;
 

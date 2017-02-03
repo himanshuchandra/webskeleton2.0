@@ -16,6 +16,9 @@ angular.module('webskeletonApp')
      $scope.SignupButton=false;
      $scope.ProfileButton=true;
 
+     var Email;
+     $scope.ActivationMessage=undefined;
+     
      var promise = webindex.checkStatus();
         promise.then(function(data){
               $scope.loginStatus=data.data.Message;
@@ -23,6 +26,8 @@ angular.module('webskeletonApp')
                   $scope.LoginButton=true;
                   $scope.SignupButton=true;
                   $scope.ProfileButton=false;
+
+                  Email=data.data.Email;
               }
               if(data.data.ActivationStatus==false){
                   $scope.Status="Your Email address "+data.data.Email+" is not Verified";
@@ -30,4 +35,19 @@ angular.module('webskeletonApp')
              }
       
       });
+
+      ////////////////////////////
+      $scope.SendActivationLink=function(){
+          var EmailObject={
+              "Email":Email
+          }
+          var promise = webindex.SendActivationLink(EmailObject);
+            promise.then(function(data){
+                $scope.ActivationMessage="Link Sent";
+            },function(error){
+                $scope.ActivationMessage="Error,Try again Later";
+        });
+      };
+
+
   });

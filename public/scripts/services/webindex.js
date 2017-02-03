@@ -20,6 +20,17 @@ angular.module('webskeletonApp')
                defer.reject(error);
            }) 
             return defer.promise;
+        },
+        SendActivationLink:function(EmailObject){
+            
+          var defer = $q.defer(); 
+          $http.post(requrl+'/allroutes/SendActivationLink',EmailObject).then(function(data){
+               defer.resolve(data);
+           },function(error){
+               console.log(error);
+               defer.reject(error);
+           }) 
+            return defer.promise;
         }
         
         };
