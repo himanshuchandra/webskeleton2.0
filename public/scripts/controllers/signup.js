@@ -63,17 +63,20 @@ angular.module('webskeletonApp')
         promise.then(function(data){
             console.log("SUCCESS ",data);
             console.log(data.data);
+            $scope.result = data.data.msg;
+            //$window.location.reload();
+            //$window.location.assign(requrl+"/#/profile");
             //var finaldata = data.data.finaldata;
             //signup.passdata(finaldata);
             //$scope.profilename= data;
             
-            $scope.result = data.data.msg;
+            
             //$window.location.assign("http://localhost:1234/profile.html");
-        
+            
             
             
         },function(error){
-            $scope.result = "error occured";
+            $scope.result = "Error occured! Try again later";
         });
     }
   });

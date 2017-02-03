@@ -20,7 +20,7 @@ var userSchema= new Schema({
   emailverified:Boolean,
   emailactivationtoken:String,
   forgotpasswordtoken:String,
-  passwordtokenduration:Date,
+  passwordtokenstamp:Date,
   role:String,
   registrationdate:Date,
 });

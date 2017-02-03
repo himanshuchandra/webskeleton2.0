@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,$location,requrl) {
+  .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,$location,requrl,md5) {
 
 
     ////////////////////////////////////////////////
@@ -124,10 +124,11 @@ angular.module('webskeletonApp')
       $scope.SaveNewPassword=function(){
          
          $scope.Result="Checking";
+         var HashPassword=md5.createHash($scope.ResetPassword);
 
           var NewPasswordObject={
             "UserEmail":UserEmail,
-            "NewPassword":$scope.ResetPassword,
+            "NewPassword":HashPassword,
           }
          
           var promise = forgotpassword.SaveNewPassword(NewPasswordObject);

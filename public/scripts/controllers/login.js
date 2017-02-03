@@ -55,7 +55,7 @@ angular.module('webskeletonApp')
             
         
         },function(error){
-            $scope.result = "error occurred";
+            $scope.result = "Error occurred";
         });
     };
     

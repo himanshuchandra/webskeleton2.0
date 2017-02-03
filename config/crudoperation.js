@@ -77,7 +77,7 @@ addUser:function(request,response){
         result=[result];
         Utils.FillSession(request,result);
         console.log("eee",result,result[0].useremail);
-        SendLink(result[0].useremail,"emailactivationtoken","emailactivate");
+        SendLink(result[0].useremail,"emailactivate","emailactivationtoken");
         response.json({"msg":"Register SuccessFully..."});
         console.log(result);
    }
@@ -117,7 +117,7 @@ doLogin:function (request,response){
             //request.session.zzzzz="mymail";
             // console.log("session is "+request.session.zzzzz);
             var string=Utils.RandomStringGenerate();
-            Utils.SendMail("hc160160@gmail.com","This is myyy subject",string);
+            //Utils.SendMail("hc160160@gmail.com","This is myyy subject",string);
             response.json({msg:"success"});
             
             //response.send("session is "+request.session.zzzzz);
@@ -317,7 +317,7 @@ UpdateDB:function(object,response){
             if(result[0]!=undefined){
                 console.log("found");
                 //response.json({msg:"LinkSent"});
-                SendLink(ForgotObject.Email,"forgotpasswordtoken","forgotpassword");
+                SendLink(ForgotObject.Email,"forgotpassword","forgotpasswordtoken");
             response.json({msg:"LinkSent"});
             }
             else
@@ -336,7 +336,7 @@ UpdateDB:function(object,response){
 
     PasswordReset:function(request,response){
         var PasswordObject=request.body;
-
+        
         User.find({
         "$and":[
             {
@@ -352,8 +352,13 @@ UpdateDB:function(object,response){
             console.log("Error Occured",error);
         }
         else{ 
-        console.log(result);
-        if(result.length<1){
+            
+            var date=new Date();
+            
+            if(result.length<1){
+                response.json({msg:"fail"});
+            }
+            else if((Math.abs(date-result[0].passwordtokenstamp))>86400000){
                 response.json({msg:"fail"});
             }
             else{
@@ -361,7 +366,7 @@ UpdateDB:function(object,response){
                 //     "Fieldto"
                 // }
                 
-                response.json({msg:"pass"});
+                    response.json({msg:"pass"});
             }
 
         } 
@@ -378,8 +383,9 @@ UpdateDB:function(object,response){
         },
         {
             $set:{
-                "password1":NewPasswordObject.NewPassword
-               // "emailactivationtoken":undefined
+                "password1":NewPasswordObject.NewPassword,
+                "emailverified":true,
+                "forgotpasswordtoken":undefined,
             }
         },function(error,result){
             if(error){
@@ -418,10 +424,13 @@ var caller={
 
 };
 
-function SendLink(UserEmail,TokenType,Page){
+function SendLink(UserEmail,Page,TokenType){
 
     var RandomToken=Utils.RandomStringGenerate();
     var Query={};
+    if(TokenType==="forgotpasswordtoken"){
+        Query["passwordtokenstamp"]=new Date();
+    }
     Query[TokenType]=RandomToken;
     var Url= Config.reqUrl+"/#/"+Page+"?e="+UserEmail+"&t="+RandomToken;
 
