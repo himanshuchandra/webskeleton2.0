@@ -55,7 +55,7 @@ angular.module('webskeletonApp')
           var promise = webindex.Logout();
             promise.then(function(data){
                 $window.location.reload();
-                $window.location.assign(requrl);
+                $window.location.assign(requrl+"/#/login");
             },function(error){
                 $scope.LogoutMessage="Error,Try again Later";
         });

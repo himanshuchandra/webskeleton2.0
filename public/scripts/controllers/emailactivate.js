@@ -21,6 +21,8 @@ angular.module('webskeletonApp')
     promise.then(function(data){
       //console.log(data.data);
       $scope.Result=data.data.msg;
+      $window.location.reload();
+      $window.location.assign(requrl);
       }
       ,function(error){
         $scope.Result = "Error occured,Try again later";

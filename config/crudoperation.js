@@ -6,7 +6,7 @@ var dbOperations= {
 
 
 checkUser:function (request,response){
-    
+    var that=this;
     var userObject =request.body;
     User.find({"useremail":userObject.useremail},function(error,result){
     if(error){
@@ -24,7 +24,8 @@ checkUser:function (request,response){
         else
             {
                 console.log("notfound");
-                caller.checkusernamecaller(request,response);
+                that.checkUsername(request,response);
+                
             }
         //response.json({result});
         
@@ -36,6 +37,7 @@ checkUser:function (request,response){
 }    
 ,   
 checkUsername:function (request,response){
+    var that=this;
     var userObject =request.body;
     
     User.find({"username":userObject.username},function(error,result){
@@ -54,7 +56,7 @@ checkUsername:function (request,response){
         else
             {
                 console.log("notfound");
-                caller.registercaller(request,response);
+                that.addUser(request,response);
             }
         //response.json({msg:"Logged in SuccessFully..."});
        //loginObject.logintoken=true;
@@ -153,6 +155,7 @@ UpdateProfileData:function (request,response){
 }, 
 
 CheckPassword:function (request,response){
+    var that=this;
     var passwordObject=request.body;
     var userName=request.session.user["0"].username;
     console.log("dddd",passwordObject,userName);
@@ -177,7 +180,7 @@ CheckPassword:function (request,response){
             response.json({msg:"fail"});
         }
         else{
-            caller.SetNewPassword(request,response);
+           that.SetNewPassword(request,response);
             //response.json({msg:"success"});
         }
 
@@ -210,6 +213,7 @@ SetNewPassword:function (request,response){
     },
 
 CheckToken:function(request,response){
+    var that=this;
     var ActivationObject=request.body;
 
     User.find({
@@ -235,7 +239,7 @@ CheckToken:function(request,response){
             // var object{
             //     "Fieldto"
             // }
-            caller.ActivateEmail(ActivationObject.UserEmail,response);
+            that.ActivateEmail(ActivationObject.UserEmail,response);
             //response.json({msg:"success"});
         }
 
@@ -433,26 +437,6 @@ UpdateDB:function(object,response){
 };
 
 module.exports =dbOperations; 
-
-var caller={
-    
-    checkusernamecaller:function(request,response){
-        dbOperations.checkUsername(request,response);
-    },
-    registercaller:function(request,response){
-        dbOperations.addUser(request,response);
-    },
-    savecode:function(data,response){
-        dbOperations.forgotpass(data,response);
-    },
-    SetNewPassword:function (request,response) {
-        dbOperations.SetNewPassword(request,response);
-    },
-    ActivateEmail:function (UserEmail,response) {
-        dbOperations.ActivateEmail(UserEmail,response);
-    },
-
-};
 
 function SendLink(UserEmail,Page,TokenType){
 
