@@ -31,8 +31,18 @@ angular.module('webskeletonApp')
                defer.reject(error);
            }) 
             return defer.promise;
+        },
+        Logout:function(){
+            
+          var defer = $q.defer(); 
+          $http.post(requrl+'/allroutes/Logout').then(function(data){
+               defer.resolve(data);
+           },function(error){
+               console.log(error);
+               defer.reject(error);
+           }) 
+            return defer.promise;
         }
-        
         };
     return object;
   });

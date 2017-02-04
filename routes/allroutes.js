@@ -105,6 +105,14 @@ router.post('/SendActivationLink',function(request,response){
     //response.send({msg:"Hello"});
     dbOperations.SendActivationLink(request,response);
 });
+
+router.post('/Logout',function(request,response){
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send({msg:"Hello"});
+    Utils.SessionDestroy(request);
+    response.send({msg:"success"});
+});
 /*
 router.post('/redirect',function(request,response){
 

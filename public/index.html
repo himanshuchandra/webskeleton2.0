@@ -41,6 +41,8 @@
                   <p>{{Status}}</p>
                   <p><a ng-click="SendActivationLink()">Send Link Again</a>{{ActivationMessage}}</p>
           </div>
+
+          <div ng-hide="LogoutButton"><button type="button" ng-click="Logout()">Logout</button>{{LogoutMessage}}</div>
            <!--H1><a ng-href="#login">LOGIN/SIGNUP</H1-->     
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 

@@ -28,6 +28,7 @@ var Utils={
         request.session.destroy(function(err) {
             console.log("cannot access session here"); 
         });
+        
     },
 
     SendMail:function(To,Subject,EmailText,Html_Body){

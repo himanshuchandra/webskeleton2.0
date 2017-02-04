@@ -8,13 +8,14 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('WebindexCtrl', function ($scope,webindex) {
+  .controller('WebindexCtrl', function ($scope,webindex,requrl,$window) {
 
      $scope.loginStatus="Login/SignUp";
      $scope.ActivationStatus=true;
      $scope.LoginButton=false;
      $scope.SignupButton=false;
      $scope.ProfileButton=true;
+     $scope.LogoutButton=true;
 
      var Email;
      $scope.ActivationMessage=undefined;
@@ -26,7 +27,7 @@ angular.module('webskeletonApp')
                   $scope.LoginButton=true;
                   $scope.SignupButton=true;
                   $scope.ProfileButton=false;
-
+                  $scope.LogoutButton=false;
                   Email=data.data.Email;
               }
               if(data.data.ActivationStatus==false){
@@ -46,6 +47,17 @@ angular.module('webskeletonApp')
                 $scope.ActivationMessage="Link Sent";
             },function(error){
                 $scope.ActivationMessage="Error,Try again Later";
+        });
+      };
+
+      ///////////////////////////////
+      $scope.Logout=function(){
+          var promise = webindex.Logout();
+            promise.then(function(data){
+                $window.location.reload();
+                $window.location.assign(requrl);
+            },function(error){
+                $scope.LogoutMessage="Error,Try again Later";
         });
       };
 
