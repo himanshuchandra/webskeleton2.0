@@ -113,6 +113,14 @@ router.post('/Logout',function(request,response){
     Utils.SessionDestroy(request);
     response.send({msg:"success"});
 });
+
+router.post('/UpdateMobile',function(request,response){
+    // var data=request.body;
+    // console.log("bbbb",data);
+    // response.send(data);
+    //Utils.SendSms(request);
+    dbOperations.SendVerificationCode(request,response);
+});
 /*
 router.post('/redirect',function(request,response){
 

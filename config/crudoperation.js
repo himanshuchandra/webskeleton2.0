@@ -4,7 +4,8 @@ var Config =require("./config");
 
 var dbOperations= {
 
-
+////////////////Adding new user//////////////////////////
+////////Checking if email exists
 checkUser:function (request,response){
     var that=this;
     var userObject =request.body;
@@ -35,7 +36,9 @@ checkUser:function (request,response){
    }
 });
 }    
-,   
+,
+
+////////Checking if username exists   
 checkUsername:function (request,response){
     var that=this;
     var userObject =request.body;
@@ -65,6 +68,7 @@ checkUsername:function (request,response){
 });
 }    
 ,   
+/////////////Adding new user
 addUser:function(request,response){
 
    var data =request.body;
@@ -88,6 +92,7 @@ addUser:function(request,response){
 });
 }
 ,
+/////////////////////Login////////////////
 doLogin:function (request,response){
     
     var loginObject=request.body;
@@ -132,7 +137,8 @@ doLogin:function (request,response){
 });
 }
 ,
-
+////////////////Updating user Profile//////////////////////
+////updating info
 UpdateProfileData:function (request,response){
     var profileObject=request.body;
     var newSession=request.session.user;
@@ -153,7 +159,7 @@ UpdateProfileData:function (request,response){
     }
 });
 }, 
-
+//////Checking old password
 CheckPassword:function (request,response){
     var that=this;
     var passwordObject=request.body;
@@ -188,7 +194,7 @@ CheckPassword:function (request,response){
     }
 });
 },
-
+//////////////Setting new password
 SetNewPassword:function (request,response){
     var passwordObject=request.body;
     var userName=request.session.user["0"].username;
@@ -206,12 +212,15 @@ SetNewPassword:function (request,response){
 });
 }, 
 
+////////////////Email activation//////////////////
+/////////Send email activation link
     SendActivationLink:function(request,response){
         var Email=request.body.Email;
         SendLink(Email,"emailactivate","emailactivationtoken");
         response.json({"msg":"success"});
     },
 
+////////Checking token for activation
 CheckToken:function(request,response){
     var that=this;
     var ActivationObject=request.body;
@@ -287,7 +296,7 @@ UpdateDB:function(object,response){
 */
 
 
-
+//////////Activating email
     ActivateEmail:function (UserEmail,response){
         
         console.log("xxxx",UserEmail);
@@ -312,6 +321,31 @@ UpdateDB:function(object,response){
         });
     },  
 
+    //To show activation status
+    CheckActivation:function (Status,response){
+        User.find({
+            "useremail":Status.Email
+        }
+        ,function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{ 
+                console.log(result);
+                if(result.length<1){
+                    response.json({msg:"fail"});
+                }
+                else{
+                    Status.ActivationStatus=result[0].emailverified;
+                    response.send(Status);
+                }
+
+       
+        }
+        });
+    },
+/////////////Resetting Password////////////////////////////////////
+/////Sending link with token
     checkEmail:function (request,response){
     
         var ForgotObject =request.body;
@@ -345,6 +379,7 @@ UpdateDB:function(object,response){
         });
     }, 
 
+/////checking token
     PasswordReset:function(request,response){
         var PasswordObject=request.body;
         
@@ -384,7 +419,7 @@ UpdateDB:function(object,response){
         });
 
     },   
-
+/////////Saving new password
     SaveNewPassword:function (request,response){
         
         var NewPasswordObject=request.body;
@@ -410,27 +445,34 @@ UpdateDB:function(object,response){
             }
         });
     },
-
-    CheckActivation:function (Status,response){
-        User.find({
-            "useremail":Status.Email
-        }
-        ,function(error,result){
+/////////////Mobile Number Verifiction//////////
+////Send Sms
+    SendVerificationCode:function(request,response){
+        var MobileObject=request.body;
+        var Session=request.session.user;
+        var UserEmail= Session["0"].useremail;
+        var number=MobileObject.CountryCode+MobileObject.MobileNumber;
+        var code = Math.floor((Math.random()*999999)+111111);
+        var body='Your verification code is '+code;
+        //sms is sent even if the useris not found
+        User.update({
+            "useremail":UserEmail
+        }, 
+        {
+            $set:{
+                "temporarymobile":number,
+                "mobileverificationcode":code
+            }
+        },
+        function(error,result){
             if(error){
                 console.log("Error Occured",error);
             }
             else{ 
-                console.log(result);
-                if(result.length<1){
-                    response.json({msg:"fail"});
-                }
-                else{
-                    Status.ActivationStatus=result[0].emailverified;
-                    response.send(Status);
-                }
-
-       
-        }
+                console.log(UserEmail,result);
+                Utils.SendSms(number,body);
+                response.json({"msg":"success"});
+            }
         });
     },
 
@@ -463,6 +505,5 @@ function SendLink(UserEmail,Page,TokenType){
             Utils.SendMail(UserEmail,"sub",Url);
         }
     });
+
 };
-
-

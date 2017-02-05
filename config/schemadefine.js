@@ -21,6 +21,8 @@ var userSchema= new Schema({
   emailactivationtoken:String,
   forgotpasswordtoken:String,
   passwordtokenstamp:Date,
+  mobileverificationcode:String,
+  temporarymobile:String,
   role:String,
   registrationdate:Date,
 });

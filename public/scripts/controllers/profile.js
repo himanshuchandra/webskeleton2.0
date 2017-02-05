@@ -136,12 +136,34 @@ angular.module('webskeletonApp')
 
           $scope.submitMobileForm=function(mobileForm){
              if(mobileForm.$valid){
-                    $scope.changeMobile();
+                    $scope.ChangeMobile();
            
             }
             else{
               $scope.result="Enter valid details";
             }
+          };
+
+          $scope.ChangeMobile=function(){
+        
+              var MobileObject={
+                "CountryCode":$scope.countryCode,
+                "MobileNumber":$scope.newMobile,
+              };
+
+              var promise=profile.UpdateMobile(MobileObject);
+              promise.then(function(data) {
+              console.log(data);
+                $scope.MobileMessage="Updated";
+                //$window.location.reload();
+
+             
+              },function(error) {
+                console.log("error occured");
+                $scope.MobileMessage="Error! Try again later";
+                
+              });    
+
           };
 
 ///////////////////////////////////////////////////////////////////////

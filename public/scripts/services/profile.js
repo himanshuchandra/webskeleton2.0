@@ -50,6 +50,18 @@ angular.module('webskeletonApp')
 
         },
         
+        UpdateMobile:function(MobileObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/allroutes/UpdateMobile",MobileObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                console.log(error);
+                defer.reject(error);
+            })
+            return defer.promise;
+
+        },
         };
     return object;
 

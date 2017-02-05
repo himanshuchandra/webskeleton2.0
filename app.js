@@ -9,7 +9,7 @@ var mfavicon=require("express-favicon");
 //var srs = require('secure-random-string');
 //var randomstring = require("randomstring");
 var MongoStore = require('connect-mongo')(session);
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 var app = express();
 
 

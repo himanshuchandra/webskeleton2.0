@@ -1,5 +1,6 @@
 const NodeMailer = require("nodemailer");
 const RandomString = require("randomstring");
+const Twilio = require("twilio");
 
 var Config =require("./config");
 var Utils={
@@ -59,6 +60,25 @@ var Utils={
         return RandomString.generate(32);
     },
 
+    SendSms:function(number,body){
+        var accountSid = Config.TWILIO_ACCOUNT_SID; 
+        var authToken = Config.TWILIO_AUTH_TOKEN;   
+
+        var client = new Twilio.RestClient(accountSid, authToken);
+
+        client.messages.create({
+            body: body,
+            to: number,  // Text this number
+            from: Config.VALID_TWILIO_NUMBER, // From a valid Twilio number
+        }, function(err, message) {
+            if(err){
+                console.log(err);
+                //response.json({"msg":"error"});
+            }
+            console.log(message.sid);
+        });
+
+    },
 
 
 };
