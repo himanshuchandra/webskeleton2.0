@@ -13,6 +13,8 @@ var Utils={
         userData["0"].passwordtokenstamp=undefined;
         userData["0"].emailactivationtoken=undefined;
         userData["0"].forgotpasswordtoken=undefined;
+        userData["0"].mobileverificationcode=undefined;
+
         console.log(userData);
         //console.log(userData);
         //console.log(userData["0"].password1);
@@ -56,8 +58,8 @@ var Utils={
         });
     },
 
-    RandomStringGenerate:function(){
-        return RandomString.generate(32);
+    RandomStringGenerate:function(x){
+        return RandomString.generate(x);
     },
 
     SendSms:function(number,body){

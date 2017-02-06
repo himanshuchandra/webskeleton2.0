@@ -124,7 +124,7 @@ doLogin:function (request,response){
             Utils.FillSession(request,result);
             //request.session.zzzzz="mymail";
             // console.log("session is "+request.session.zzzzz);
-            var string=Utils.RandomStringGenerate();
+            //var string=Utils.RandomStringGenerate();
             //Utils.SendMail("hc160160@gmail.com","This is myyy subject",string);
             response.json({msg:"success"});
             
@@ -452,7 +452,8 @@ UpdateDB:function(object,response){
         var Session=request.session.user;
         var UserEmail= Session["0"].useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
-        var code = Math.floor((Math.random()*999999)+111111);
+        var code=Utils.RandomStringGenerate(6);
+        //var code = Math.floor((Math.random()*999999)+111111);
         var body='Your verification code is '+code;
         //sms is sent even if the useris not found
         User.update({
@@ -476,13 +477,79 @@ UpdateDB:function(object,response){
         });
     },
 
+    VerifyCode:function(request,response){
+        var that=this;
+        var Session=request.session.user;
+        var UserEmail= Session["0"].useremail;
+        var CodeObject=request.body;
+        
+        User.find({
+        "$and":[
+            {
+                "useremail":UserEmail
+            }, 
+            {
+                "mobileverificationcode":CodeObject.VCode
+            }
+        ]
+        }
+        ,function(error,result){
+        if(error){
+            console.log("Error Occured",error);
+        }
+        else{ 
+ 
+            if(result.length<1){
+                response.json({message:"fail"});
+            }
+            else{
+                that.SetMobile(result,request,response);
+                //response.json({msg:"pass"});
+            }
+
+        } 
+        });
+
+    },   
+
+    SetMobile:function(result,request,response){
+        var CodeObject=request.body;
+        var TemporaryMobile=result[0].temporarymobile;
+        var newSession=request.session.user;
+        var UserEmail= newSession["0"].useremail;
+        console.log("xyyy",CodeObject,UserEmail);
+        User.update({
+            "useremail":UserEmail
+        },
+        {
+            $set:{
+                "mobile":TemporaryMobile,
+                "temporarymobile":undefined,
+                "mobileverificationcode":undefined,
+            }
+        },function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{ 
+            
+                console.log(result);
+                newSession[0].mobile=TemporaryMobile;
+                Utils.FillSession(request,newSession);
+                response.json({message:"pass"});
+        
+            }
+        });
+    }
+    
+
 };
 
 module.exports =dbOperations; 
 
 function SendLink(UserEmail,Page,TokenType){
 
-    var RandomToken=Utils.RandomStringGenerate();
+    var RandomToken=Utils.RandomStringGenerate(32);
     var Query={};
     if(TokenType==="forgotpasswordtoken"){
         Query["passwordtokenstamp"]=new Date();

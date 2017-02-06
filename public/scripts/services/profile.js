@@ -62,6 +62,19 @@ angular.module('webskeletonApp')
             return defer.promise;
 
         },
+        VerifyCode:function(CodeObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/allroutes/VerifyCode",CodeObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                console.log(error);
+                defer.reject(error);
+            })
+            return defer.promise;
+
+        },
+
         };
     return object;
 

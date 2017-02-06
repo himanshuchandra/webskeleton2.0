@@ -109,43 +109,69 @@
 </div>
 
 <div ng-hide="MobileForm">
-<form name="mobileForm" ng-submit="submitMobileForm(mobileForm)" novalidate>
-    <h5>Country Code</h5>
-    <input type="text" ng-model="countryCode" name="validCode" pattern="[0-9+]{3}" required/>
-     <span  ng-show="mobileForm.validCode.$touched &&
-     mobileForm.validCode.$error.pattern &&
-      !mobileForm.validCode.$error.required">
-      Invalid Country code(Should be 3 digits only 0-9,+ allowed) </span>
-    <span  ng-show="mobileForm.validCode.$touched &&
-     mobileForm.validCode.$error.required">Cannot be left empty </span>
-    <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched &&
-     mobileForm.validCode.$error.required">
-        Cannot be left empty </span>
-    <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched &&
-     mobileForm.validCode.$error.pattern">
-    Invalid Country code(Should be 3 digits only 0-9,+ allowed) </span>
-    
+    <div ng-hide="HideMobileForm" >
+        <form name="mobileForm" ng-submit="submitMobileForm(mobileForm)" novalidate>
+            <h5>Country Code</h5>
+            +<input type="text" ng-model="countryCode" name="validCode" pattern="[0-9]{1,3}" required/>
+            <span  ng-show="mobileForm.validCode.$touched &&
+            mobileForm.validCode.$error.pattern &&
+            !mobileForm.validCode.$error.required">
+            Invalid Country code(Should be 1-3 digits only 0-9) </span>
+            <span  ng-show="mobileForm.validCode.$touched &&
+            mobileForm.validCode.$error.required">Cannot be left empty </span>
+            <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched &&
+            mobileForm.validCode.$error.required">
+                Cannot be left empty </span>
+            <span  ng-show="MobileSubmitted && !mobileForm.validCode.$touched &&
+            mobileForm.validCode.$error.pattern">
+            Invalid Country code(Should be 1-3 digits only 0-9) </span>
+            
 
 
-    <h5>Mobile Number</h5>
-    <input type="tel" ng-model="newMobile" name="validMobile" placeholder="New Mobile number" pattern="[0-9]{10}" required/>
-     <span  ng-show="mobileForm.validMobile.$touched &&
-     mobileForm.validMobile.$error.pattern &&
-      !mobileForm.validMobile.$error.required">
-      Invalid Mobile number(Should be 10 digits only 0-9 allowed) </span>
-    <span  ng-show="mobileForm.validMobile.$touched &&
-     mobileForm.validMobile.$error.required">Cannot be left empty </span>
-    <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched &&
-     mobileForm.validMobile.$error.required">
-        Cannot be left empty </span>
-    <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched &&
-     mobileForm.validMobile.$error.pattern">
-     Invalid Mobile number(Should be 10 digits only 0-9 allowed) </span>
+            <h5>Mobile Number</h5>
+            <input type="tel" ng-model="newMobile" name="validMobile" placeholder="New Mobile number" pattern="[0-9]{10}" required/>
+            <span  ng-show="mobileForm.validMobile.$touched &&
+            mobileForm.validMobile.$error.pattern &&
+            !mobileForm.validMobile.$error.required">
+            Invalid Mobile number(Should be 10 digits only 0-9 allowed)</span>
+            <span  ng-show="mobileForm.validMobile.$touched &&
+            mobileForm.validMobile.$error.required">Cannot be left empty </span>
+            <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched &&
+            mobileForm.validMobile.$error.required">
+                Cannot be left empty </span>
+            <span  ng-show="MobileSubmitted && !mobileForm.validMobile.$touched &&
+            mobileForm.validMobile.$error.pattern">
+            Invalid Mobile number(Should be 10 digits only 0-9 allowed) </span>
+            <br>
+                {{MobileMessage}}
 
-        {{MobileMessage}}
+            <input type="submit" ng-click="MobileSubmitted=true;" value="Verify">
+        </form>
+    </div>
+    <div ng-hide=HideCodeForm>
+        <form name="codeForm" ng-submit="submitCode(codeForm)" novalidate>
+            <h5>Enter 6 digit verification code from your mobile that we just sent you</h5>
+            <input type="text" ng-model="VCode" name="vCode" pattern="[a-z0-9A-Z]{6}" required/>
+            <span  ng-show="codeForm.vCode.$touched &&
+            codeForm.vCode.$error.pattern &&
+            !codeForm.vCode.$error.required">
+            Invalid Code Format</span>
+            <!--<span  ng-show="codeForm.vCode.$touched &&
+            codeForm.vCode.$error.required">Cannot be left empty </span>-->
+            <!--<span  ng-show="CodeSubmitted && !codeForm.vCode.$touched &&
+            codeForm.vCode.$error.required">
+                Cannot be left empty </span>-->
+            <span  ng-show="CodeSubmitted && !codeForm.vCode.$touched &&
+            codeForm.vCode.$error.pattern">
+            Invalid code Format</span>
+            <br>
+                {{CodeMessage}}
 
-    <input type="submit" ng-click="MobileSubmitted=true;" value="Verify">
-</form>
+            <input type="submit" ng-click="CodeSubmitted=true;" value="Verify">
+            <input type="button" ng-click="SendAgain()" value="Send Again">
+        </form>         
+        
+    </div>
 </div>
 
 <div ng-hide="PasswordForm">

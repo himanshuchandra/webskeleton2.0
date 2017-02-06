@@ -13,6 +13,7 @@ angular.module('webskeletonApp')
     $scope.ProfileForm=true;
     $scope.MobileForm=true;
     $scope.PasswordForm=true;
+    
 
       var promise = profile.getData();
         promise.then(function(data){
@@ -37,7 +38,7 @@ angular.module('webskeletonApp')
                 $scope.Pincode=userInfo.pincode;
                 $scope.State=userInfo.state;
                 $scope.Country=userInfo.country;
-
+                $scope.Mobile=print.mobile;
                 $scope.FillPlaceholders();
 
               }
@@ -133,6 +134,9 @@ angular.module('webskeletonApp')
               
             };
 /////////////////////////////////////////////////////////////////////
+          $scope.HideMobileForm=false;
+          $scope.HideCodeForm=true;
+          $scope.countryCode="91";
 
           $scope.submitMobileForm=function(mobileForm){
              if(mobileForm.$valid){
@@ -140,23 +144,24 @@ angular.module('webskeletonApp')
            
             }
             else{
-              $scope.result="Enter valid details";
+              $scope.MobileMessage="Enter valid details";
             }
           };
 
           $scope.ChangeMobile=function(){
         
               var MobileObject={
-                "CountryCode":$scope.countryCode,
+                "CountryCode":"+"+$scope.countryCode,
                 "MobileNumber":$scope.newMobile,
               };
 
               var promise=profile.UpdateMobile(MobileObject);
               promise.then(function(data) {
               console.log(data);
-                $scope.MobileMessage="Updated";
+                //$scope.MobileMessage="Updated";
+              $scope.HideMobileForm=true;
+              $scope.HideCodeForm=false;
                 //$window.location.reload();
-
              
               },function(error) {
                 console.log("error occured");
@@ -164,6 +169,52 @@ angular.module('webskeletonApp')
                 
               });    
 
+          };
+
+          $scope.submitCode=function(codeForm){
+            if(codeForm.$valid){
+              $scope.CodeMessage="Checking Code..";
+              $scope.VerifyCode();
+           
+            }
+            else{
+              $scope.CodeMessage="Enter valid code";
+            }
+          };
+
+          $scope.VerifyCode=function(){
+              var CodeObject={
+                "VCode":$scope.VCode,
+              };
+
+              var promise=profile.VerifyCode(CodeObject);
+              promise.then(function(data) {
+              console.log(data);
+              if(data.data.message==="pass"){
+                $scope.CodeMessage="Verified & Updated";
+                $window.location.reload();
+              }
+              else if(data.data.message==="fail"){
+                $scope.CodeMessage="Wrong Code entered";
+              }
+              else{
+                $scope.CodeMessage="Error! Try again later";
+              }
+                //$scope.MobileMessage="Updated";
+                
+                //$window.location.reload();
+              },function(error) {
+                console.log("error occured");
+                $scope.CodeMessage="Error! Try again later";
+                
+              });    
+          };
+
+          $scope.SendAgain=function(){
+              $scope.VCode=null;
+              $scope.CodeMessage=undefined;
+              $scope.HideMobileForm=false;
+              $scope.HideCodeForm=true;
           };
 
 ///////////////////////////////////////////////////////////////////////

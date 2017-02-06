@@ -114,6 +114,7 @@ router.post('/Logout',function(request,response){
     response.send({msg:"success"});
 });
 
+////////////Mobile no. verification///////////////////////
 router.post('/UpdateMobile',function(request,response){
     // var data=request.body;
     // console.log("bbbb",data);
@@ -121,6 +122,16 @@ router.post('/UpdateMobile',function(request,response){
     //Utils.SendSms(request);
     dbOperations.SendVerificationCode(request,response);
 });
+
+router.post('/VerifyCode',function(request,response){
+     //var data=request.body;
+     //console.log("bbbb",data);
+    // response.send(data);
+    //Utils.SendSms(request);
+    dbOperations.VerifyCode(request,response);
+});
+///////////////////////////////////////////////////////////
+
 /*
 router.post('/redirect',function(request,response){
 
@@ -134,15 +145,6 @@ router.post('/redirect',function(request,response){
 
 });
 
-router.post('/fpass',function(request,response){
-   
-    
-    var data =request.body;
-    console.log("DATA is      ",data);
-    dbOperations.sendCode(data,response);
-    
-    //return logintoken;
-});
 */
 
 module.exports = router;
