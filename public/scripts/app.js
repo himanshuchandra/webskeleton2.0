@@ -14,9 +14,18 @@ angular
     'ngCookies',
     'ngRoute',
     'angular-md5',
-    'countrySelect'
+    'countrySelect',
+    'googleplus'
   ])
+
   .constant("requrl","http://localhost:1234")
+
+  .config(function(GooglePlusProvider) {
+     GooglePlusProvider.init({
+        clientId:'11067462844-4s6bjl47j6m7v2g4it1ndnfbgirk7m3g.apps.googleusercontent.com',
+        apiKey: 'AIzaSyA7-XiSE26yWofo9OO0Za34DrgU5q775o4'
+     });
+  })
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {

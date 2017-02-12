@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
+  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5,GooglePlus) {
  
      $scope.submitForm=function(loginForm){
            // console.log(regForm.$valid);
@@ -56,6 +56,19 @@ angular.module('webskeletonApp')
         
         },function(error){
             $scope.result = "Error occurred";
+        });
+    };
+
+    $scope.SignInGoogle = function () {
+        GooglePlus.login().then(function (authResult) {
+            console.log(authResult);
+            
+            GooglePlus.getUser().then(function (user) {
+                console.log(user);
+            });
+        },
+        function (err) {
+            console.log(err);
         });
     };
     
