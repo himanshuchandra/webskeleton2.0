@@ -8,8 +8,8 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5,GooglePlus) {
- 
+  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
+      
      $scope.submitForm=function(loginForm){
            // console.log(regForm.$valid);
                 if(loginForm.$valid){
@@ -39,13 +39,8 @@ angular.module('webskeletonApp')
     
                     $scope.result="Logged in successfully";
                     $window.location.reload();
-                    $window.location.assign(requrl+"/#/profile");
-                    
-            //         var promise2 = login.redirect(requrl+"/#/profile");
-            //          promise.then(function(data){  
-        
-            //               });
-            //         //$location.path(requrl+"/profile");
+                    $window.location.assign(requrl);
+            
             }
              else{
                      $scope.result="Wrong email or password";
@@ -58,18 +53,5 @@ angular.module('webskeletonApp')
             $scope.result = "Error occurred";
         });
     };
-
-    $scope.SignInGoogle = function () {
-        GooglePlus.login().then(function (authResult) {
-            console.log(authResult);
-            
-            GooglePlus.getUser().then(function (user) {
-                console.log(user);
-            });
-        },
-        function (err) {
-            console.log(err);
-        });
-    };
-    
+  
   });

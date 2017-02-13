@@ -3,15 +3,6 @@ var router = express.Router();
 var dbOperations = require("../config/crudoperation");
 var Utils = require("../config/utils")
 
-/* GET users listing. */
-// router.post('/checklogin', function(req, res, next) {
-//   //res.send('Welcome '+req.body.userid+" "+req.body.password);
-//    var xxxxcccc;
-//     req.session.ui="kkk";
-// console.log("session is "+req.session.ui);
-//     res.send("session is "+req.session.ui);
-
-// });
 
 router.post('/webindex', function(request,response) {
   if(request.session.user){
@@ -40,99 +31,66 @@ router.post('/getData', function(request,response) {
 });
 
 router.post('/register',function(request,response){
-    
-    //var data =request.body;
-    //console.log("DATA is      ",data);
     dbOperations.checkUser(request,response);
- 
-    //dbOperations.addUser(data,response);
 });
 
 router.post('/login',function(request,response){
-
-
-   // var data =request.body;
-    //console.log("DATA is      ",data);
     dbOperations.doLogin(request,response);
-    //response.redirect('http://localhost:1234/#/profile');
 });
 
 router.post('/UpdateProfileData',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb");
-    //response.send(data);
     dbOperations.UpdateProfileData(request,response);
 });
 
 router.post('/SetNewPassword',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send(data);
     dbOperations.CheckPassword(request,response);
 });
 
 router.post('/ActivateEmail',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send(data);
     dbOperations.CheckToken(request,response);
 });
 
 router.post('/SendLink',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send(data);
     dbOperations.checkEmail(request,response);
 });
 
 router.post('/PasswordReset',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send(data);
     dbOperations.PasswordReset(request,response);
 });
 
 router.post('/SaveNewpassword',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send({msg:"Hello"});
     dbOperations.SaveNewPassword(request,response);
 });
 
 router.post('/SendActivationLink',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send({msg:"Hello"});
     dbOperations.SendActivationLink(request,response);
 });
 
 router.post('/Logout',function(request,response){
-    //var data=request.body;
-    //console.log("bbbb",data);
-    //response.send({msg:"Hello"});
     Utils.SessionDestroy(request);
     response.send({msg:"success"});
 });
 
 ////////////Mobile no. verification///////////////////////
 router.post('/UpdateMobile',function(request,response){
-    // var data=request.body;
-    // console.log("bbbb",data);
-    // response.send(data);
-    //Utils.SendSms(request);
     dbOperations.SendVerificationCode(request,response);
 });
 
 router.post('/VerifyCode',function(request,response){
-     //var data=request.body;
-     //console.log("bbbb",data);
-    // response.send(data);
-    //Utils.SendSms(request);
     dbOperations.VerifyCode(request,response);
+});
+/////////////GoogleSignIn/////////////////
+router.post('/GoogleSignin',function(request,response){
+    dbOperations.GoogleSignin(request,response);
 });
 ///////////////////////////////////////////////////////////
 
-/*
+module.exports = router;
+
+/*res.send("session is "+req.session.ui);
+    //var data=request.body;
+    //console.log("bbbb",data);
+    //response.send(data);
 router.post('/redirect',function(request,response){
 
     var url=request.body;
@@ -147,4 +105,4 @@ router.post('/redirect',function(request,response){
 
 */
 
-module.exports = router;
+

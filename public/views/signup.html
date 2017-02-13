@@ -54,4 +54,14 @@
     {{result}}
     
 
-<H1><a ng-href="#login">LOGIN</a></H1>>
+<H1><a ng-href="#login">LOGIN</a></H1>
+
+<div ng-controller="GoogleCtrl">     
+    <input type="button" ng-click="SignInGoogle()" value="Sign in with google" />
+    {{GoogleMessage}}
+</div>
+
+<div>     
+    <input type="button" ng-click="SignInFacebook()" value="Sign in with facebook" />
+    {{FacebookMessage}}
+</div>

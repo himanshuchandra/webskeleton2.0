@@ -66,7 +66,7 @@ angular.module('webskeletonApp')
            if(data.data.msg==="pass"){
                $scope.result = "Registered Successfully";
                $window.location.reload();
-               $window.location.assign(requrl);
+               $window.location.assign(requrl+"/#/profile");
            }
            else{
                $scope.result =data.data.msg;

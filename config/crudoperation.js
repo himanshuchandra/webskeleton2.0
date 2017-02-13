@@ -100,11 +100,11 @@ doLogin:function (request,response){
      "$and":[
         {
             "$or": [{
-        "useremail":loginObject.loginid
-        }, 
-                       {
-        "username": loginObject.loginid
-        }]
+                "useremail":loginObject.loginid
+            }, 
+            {
+                "username": loginObject.loginid
+            }]
         },
          {
              "password1":loginObject.loginpassword
@@ -540,7 +540,61 @@ UpdateDB:function(object,response){
         
             }
         });
-    }
+    },
+
+//////////////////Google Signin//////////////////////////
+///////////Check if user exists
+    GoogleSignin:function(request,response){
+        var that=this;
+        var GoogleObject=request.body;
+        
+        User.find({
+            "useremail":GoogleObject.Email
+        }
+        ,function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else if(result){
+                if(result[0]==undefined){
+                    that.GoogleRegister(request,response);
+
+                }
+                else{
+                    Utils.FillSession(request,result);
+                    response.json({"message":"Logged In"});
+                }
+            };
+        })
+    },   
+/////////////Register new User
+    GoogleRegister:function(request,response){
+        var GoogleObject =request.body;
+        var UserData={};
+        UserData.userinfo={};
+        UserData.useremail=GoogleObject.Email;
+        UserData.username=GoogleObject.Email;
+        UserData.password1="google";
+        UserData.role="customer";
+        UserData.registrationdate=new Date();
+        UserData.userinfo.fullname=GoogleObject.FullName;
+        UserData.emailverified=true;
+        
+        console.log("google",UserData);
+
+        User.create(UserData,function(error,result){
+            if(error){
+                response.json({"message":"Can't Add Error Occured, Try later"});
+            }
+            else{
+                result=[result];
+                Utils.FillSession(request,result);
+                //console.log("eee",result,result[0].useremail);
+                response.json({"message":"Registered"});
+            }
+
+        });
+    },
     
 
 };
