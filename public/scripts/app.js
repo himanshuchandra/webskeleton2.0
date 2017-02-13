@@ -22,8 +22,8 @@ angular
 
   .config(function(GooglePlusProvider) {
      GooglePlusProvider.init({
-        clientId:'CLIENT ID',
-        apiKey: 'API KEY'
+        clientId:'clientId',
+        apiKey: 'apiKey'
      });
   })
   .config(function ($routeProvider,$locationProvider) {
