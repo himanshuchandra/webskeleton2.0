@@ -542,14 +542,14 @@ UpdateDB:function(object,response){
         });
     },
 
-//////////////////Google Signin//////////////////////////
+//////////////////Social Signin//////////////////////////
 ///////////Check if user exists
-    GoogleSignin:function(request,response){
+    SocialSignin:function(request,response){
         var that=this;
-        var GoogleObject=request.body;
+        var SocialObject=request.body;
         
         User.find({
-            "useremail":GoogleObject.Email
+            "useremail":SocialObject.Email
         }
         ,function(error,result){
             if(error){
@@ -557,7 +557,7 @@ UpdateDB:function(object,response){
             }
             else if(result){
                 if(result[0]==undefined){
-                    that.GoogleRegister(request,response);
+                    that.SocialRegister(request,response);
 
                 }
                 else{
@@ -568,19 +568,20 @@ UpdateDB:function(object,response){
         })
     },   
 /////////////Register new User
-    GoogleRegister:function(request,response){
-        var GoogleObject =request.body;
+    SocialRegister:function(request,response){
+        var SocialObject =request.body;
         var UserData={};
         UserData.userinfo={};
-        UserData.useremail=GoogleObject.Email;
-        UserData.username=GoogleObject.Email;
-        UserData.password1="google";
+        UserData.useremail=SocialObject.Email;
+        UserData.username=SocialObject.Email;
+        UserData.password1="social";
         UserData.role="customer";
         UserData.registrationdate=new Date();
-        UserData.userinfo.fullname=GoogleObject.FullName;
+        UserData.userinfo.fullname=SocialObject.FullName;
         UserData.emailverified=true;
+        UserData.socialconnection=SocialObject.Social;
         
-        console.log("google",UserData);
+        console.log("Social",UserData);
 
         User.create(UserData,function(error,result){
             if(error){

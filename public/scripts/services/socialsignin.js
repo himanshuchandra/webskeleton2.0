@@ -2,18 +2,18 @@
 
 /**
  * @ngdoc service
- * @name webskeletonApp.google
+ * @name webskeletonApp.socialsignin
  * @description
- * # google
+ * # socialsignin
  * Factory in the webskeletonApp.
  */
 angular.module('webskeletonApp')
-  .factory('google', function ($http,$q,requrl) {
+  .factory('socialsignin', function ($q,$http,requrl) {
     var object = {
-        GoogleSignin:function(GoogleObject){
+        SocialSignin:function(SocialObject){
             
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/GoogleSignin',GoogleObject).then(function(data){
+          $http.post(requrl+'/allroutes/SocialSignin',SocialObject).then(function(data){
                defer.resolve(data);
            },function(error){
                
@@ -23,6 +23,6 @@ angular.module('webskeletonApp')
         },
 
         
-        };
+      };
     return object;
   });

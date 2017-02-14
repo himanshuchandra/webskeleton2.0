@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('GoogleCtrl', function ($scope,$window,requrl,google,GooglePlus) {
+  .controller('GoogleCtrl', function ($scope,$window,requrl,socialsignin,GooglePlus) {
 
 
     var AuthToken=null;
@@ -24,7 +24,7 @@ angular.module('webskeletonApp')
                 //console.log(user);
                 GEmail=user.email;
                 FullName=user.name;
-                console.log(GEmail,FullName);
+                //console.log(GEmail,FullName);
                 if(GEmail!=undefined){
                     $scope.DoSignInGoogle();
                 }
@@ -35,7 +35,6 @@ angular.module('webskeletonApp')
             });
         },
         function (err) {
-            console.log(err);
             $scope.GoogleMessage="Error connecting to Google! Try again later."
         });
     };  
@@ -66,10 +65,11 @@ angular.module('webskeletonApp')
         $scope.DoSignInGoogle=function(){
             var GoogleObject={
                 "Email":GEmail,
-                "FullName":FullName
+                "FullName":FullName,
+                "Social":"Google"
             }
 
-            var promise = google.GoogleSignin(GoogleObject);
+            var promise = socialsignin.SocialSignin(GoogleObject);
             promise.then(function(data){
                 console.log("SUCCESS ",data);
                 $scope.GoogleMessage=data.data.message;

@@ -79,9 +79,9 @@ router.post('/UpdateMobile',function(request,response){
 router.post('/VerifyCode',function(request,response){
     dbOperations.VerifyCode(request,response);
 });
-/////////////GoogleSignIn/////////////////
-router.post('/GoogleSignin',function(request,response){
-    dbOperations.GoogleSignin(request,response);
+/////////////Social SignIn/////////////////
+router.post('/SocialSignin',function(request,response){
+    dbOperations.SocialSignin(request,response);
 });
 ///////////////////////////////////////////////////////////
 

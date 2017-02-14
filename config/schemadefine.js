@@ -25,6 +25,7 @@ var userSchema= new Schema({
   temporarymobile:String,
   role:String,
   registrationdate:Date,
+  socialconnection:String,
 });
 
 var User = mongoose.model(config.dbCollection,userSchema); 

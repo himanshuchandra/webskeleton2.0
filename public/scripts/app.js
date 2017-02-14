@@ -15,7 +15,8 @@ angular
     'ngRoute',
     'angular-md5',
     'countrySelect',
-    'googleplus'
+    'googleplus',
+    'ngFacebook'
   ])
 
   .constant("requrl","http://localhost:1234")
@@ -26,6 +27,11 @@ angular
         apiKey: 'apiKey'
      });
   })
+  .config( function( $facebookProvider ) {
+    $facebookProvider.setAppId('appid');
+  })
+
+  
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {

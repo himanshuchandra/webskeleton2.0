@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc service
- * @name webskeletonApp.facebook
+ * @name webskeletonApp.socialsignin
  * @description
- * # facebook
+ * # socialsignin
  * Factory in the webskeletonApp.
  */
 angular.module('webskeletonApp')
-  .factory('facebook', function () {
+  .factory('socialsignin', function () {
     // Service logic
     // ...
 
