@@ -6,8 +6,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <script src="bower_components/please-wait/build/please-wait.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/please-wait/build/please-wait.css" />
+    <link rel="stylesheet" href="bower_components/SpinKit/css/spinkit.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -19,7 +23,8 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+<div ng-controller="WebindexCtrl">
+  <div ng-cloak>
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
@@ -35,14 +40,14 @@
 
             <a class="navbar-brand" href="#/">webskeleton</a>
           </div>
-      <div ng-controller="WebindexCtrl">
-          <button type="button">{{loginStatus}}</button>
-          <div ng-hide="ActivationStatus">
+      <div>
+          <button type="button" ng-cloak>{{loginStatus}}</button>
+          <div ng-cloak ng-hide="ActivationStatus">
                   <p>{{Status}}</p>
-                  <p><a ng-click="SendActivationLink()">Send Link Again</a>{{ActivationMessage}}</p>
+                  <p ng-cloak><a ng-click="SendActivationLink()">Send Link Again</a>{{ActivationMessage}}</p>
           </div>
 
-          <div ng-hide="LogoutButton"><button type="button" ng-click="Logout()">Logout</button>{{LogoutMessage}}</div>
+          <div ng-hide="LogoutButton" ng-cloak><button type="button" ng-click="Logout()">Logout</button>{{LogoutMessage}}</div>
            <!--H1><a ng-href="#login">LOGIN/SIGNUP</H1-->     
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
@@ -59,7 +64,6 @@
         </div>
       </div>
     </div>
-
     <div class="container">
     <div ng-view=""></div>
     </div>
@@ -69,7 +73,10 @@
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
     </div>
-
+    <div ng-controller="FinalizeCtrl">
+    </div>
+  </div>
+</div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -85,7 +92,6 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -117,7 +123,7 @@
         <script src="scripts/controllers/google.js"></script>       
         <script src="scripts/controllers/facebook.js"></script>
         <script src="scripts/services/socialsignin.js"></script>        
-        
+        <script src="scripts/controllers/finalize.js"></script>
         <!-- endbuild -->
 </body>
 </html>

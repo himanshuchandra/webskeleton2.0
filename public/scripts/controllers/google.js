@@ -16,27 +16,35 @@ angular.module('webskeletonApp')
     var FullName=null;
 
     $scope.SignInGoogle = function () {
-        GooglePlus.login().then(function (authResult) {
-            //console.log(authResult);
-            AuthToken=authResult.access_token;
-            console.log(AuthToken);
-            GooglePlus.getUser().then(function (user) {
-                //console.log(user);
-                GEmail=user.email;
-                FullName=user.name;
-                //console.log(GEmail,FullName);
-                if(GEmail!=undefined){
-                    $scope.DoSignInGoogle();
-                }
-                else{
-                    $scope.GoogleMessage="Error occured! Try again later."
-                }
+        try{
+            GooglePlus.login().then(function (authResult) {
+                //console.log(authResult);
+                AuthToken=authResult.access_token;
+                console.log(AuthToken);
+                GooglePlus.getUser().then(function (user) {
+                    //console.log(user);
+                    GEmail=user.email;
+                    FullName=user.name;
+                    //console.log(GEmail,FullName);
+                    if(GEmail!=undefined){
+                        $scope.DoSignInGoogle();
+                    }
+                    else{
+                        $scope.GoogleMessage="Error occured! Try again later."
+                    }
 
+                },
+                function(err){
+                    $scope.GoogleMessage="Error occured! Try again later."
+                });
+            },
+            function (err) {
+                $scope.GoogleMessage="Error connecting to Google! Try again later."
             });
-        },
-        function (err) {
+        }
+        catch(exception){
             $scope.GoogleMessage="Error connecting to Google! Try again later."
-        });
+        }
     };  
     //OPTIONAL
     //Verified fields from google that can be accessed

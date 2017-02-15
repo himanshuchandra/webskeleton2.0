@@ -35,9 +35,14 @@ angular.module('webskeletonApp')
   var FullName=null;
 
   $scope.SignInFacebook = function() {
-    $facebook.login().then(function() {
-      $scope.Refresh();
-    });
+    try{
+      $facebook.login().then(function() {
+        $scope.Refresh();
+      });
+    }
+    catch(exception){
+            $scope.FacebookMessage="Error connecting to Facebook! Try again later."
+        }
   };
 
   $scope.Refresh = function() {
@@ -51,12 +56,12 @@ angular.module('webskeletonApp')
             $scope.DoSignInFacebook();
         }
         else{
-            $scope.FacebookMessage="Error occured! Try again later."
+            $scope.FacebookMessage="No Email recieved from facebook!"
         }
 
       },
       function(err) {
-        $scope.FacebookMessage = "Error connecting to facebook! Try again later.";
+        $scope.FacebookMessage = "Error connecting to facebook!";
       });
   };
 

@@ -10,6 +10,16 @@
 angular.module('webskeletonApp')
   .controller('WebindexCtrl', function ($scope,webindex,requrl,$window) {
 
+    $scope.loading_screen = pleaseWait({
+        logo: "../images/Loading_Text.png",
+        backgroundColor: '#11B8FF',
+        //loadingHtml: "<div class='sk-wandering-cubes'><div class='sk-cube sk-cube1'></div><div class='sk-cube sk-cube2'></div></div>"
+        loadingHtml:"<div class='sk-wave'><div class='sk-rect sk-rect1'></div><div class='sk-rect sk-rect2'></div><div class='sk-rect sk-rect3'></div><div class='sk-rect sk-rect4'></div><div class='sk-rect sk-rect5'></div></div>"
+        //look in spinkit.css for more loading animations
+    });
+
+
+
      $scope.loginStatus="Login/SignUp";
      $scope.ActivationStatus=true;
      $scope.LoginButton=false;
@@ -60,6 +70,5 @@ angular.module('webskeletonApp')
                 $scope.LogoutMessage="Error,Try again Later";
         });
       };
-
 
   });
