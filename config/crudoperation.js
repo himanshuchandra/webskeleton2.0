@@ -12,7 +12,7 @@ checkUser:function (request,response){
     User.find({"useremail":userObject.useremail},function(error,result){
     if(error){
        console.log("Error Occured",error);
-   }
+    }
     else{ 
         
        console.log(result);
@@ -20,16 +20,27 @@ checkUser:function (request,response){
        //console.log(result.username); 
         if(result[0]!=undefined){
             console.log("found");
-            response.json({msg:"Email already registered"});
+            response.json({message:"Email already registered"});
         }
         else
-            {
-                console.log("notfound");
-                that.checkUsername(request,response);
+        {
+            console.log("notfound1");
+            var obj={
+                "username":userObject.username,
+                "notFound":undefined
+            };
+            that.checkUsername(obj,function(){
+                console.log("njjj3",obj.notFound);
+                if(obj.notFound==true){
                 
-            }
+                    that.addUser(request,response);
+                }
+                else{
+                    response.json({message:"Username is already taken"});
+                }
+            });
         //response.json({result});
-        
+        }
         //response.json({msg:"Logged in SuccessFully..."});
        //loginObject.logintoken=true;
         //return loginObject.logintoken;
@@ -39,32 +50,31 @@ checkUser:function (request,response){
 ,
 
 ////////Checking if username exists   
-checkUsername:function (request,response){
-    var that=this;
-    var userObject =request.body;
-    
-    User.find({"username":userObject.username},function(error,result){
+checkUsername:function (object,callback){
+    //var userObject =request.body;
+    User.find({"username":object.username},function(error,result){
     if(error){
        console.log("Error Occured",error);
-   }
-    else{ 
-        
-      console.log(result);
+    }
+    else{
+        console.log(result);
         //console.log(result[0].useremail);
        //console.log(result.username); 
         if(result[0]!=undefined){
+            
             console.log("found");
-            response.json({msg:"Username is already taken"});
+            object.notFound=false;
+        //    response.json({msg:"Username is already taken"});
         }
         else
-            {
-                console.log("notfound");
-                that.addUser(request,response);
-            }
-        //response.json({msg:"Logged in SuccessFully..."});
-       //loginObject.logintoken=true;
-        //return loginObject.logintoken;
-   }
+        {
+            
+            object.notFound=true;
+            console.log("notfound2",object.notFound);
+        //      that.addUser(request,response);
+        }
+    }
+    callback();
 });
 }    
 ,   
@@ -78,14 +88,14 @@ addUser:function(request,response){
     
      //User.create({"name":"Ram","phone":[2222,3333],"address":[{"state":"Delhi","pincode":2222},{"state":"Delhi","pincode":2222}]},function(error,response){
    if(error){
-       response.json({"msg":"Can't Add Error Occured, Try later"});
+       response.json({"message":"Can't Add Error Occured, Try later"});
    }
     else{
         result=[result];
         Utils.FillSession(request,result);
         console.log("eee",result,result[0].useremail);
         SendLink(result[0].useremail,"emailactivate","emailactivationtoken");
-        response.json({"msg":"pass"});
+        response.json({"message":"pass"});
         console.log(result);
    }
 
@@ -138,6 +148,46 @@ doLogin:function (request,response){
 }
 ,
 ////////////////Updating user Profile//////////////////////
+//Updating username
+    ChangeUsername:function(request,response){
+        var that=this; 
+        var UsernameObject=request.body;
+        var newSession=request.session.user;
+        var userEmail= newSession["0"].useremail;
+        console.log("dddd",UsernameObject,newSession,userEmail);
+        
+        var obj={
+            "username":UsernameObject.Username,
+            "notFound":undefined
+        };
+        that.checkUsername(obj,function(){
+            console.log("vvvv",obj.notFound);
+            if(obj.notFound==true){
+                User.update({"useremail":userEmail}, 
+                {
+                    $set:{
+                        "username":obj.username
+                    }
+                },
+                function(error,result){
+                    if(error){
+                        console.log("Error Occured",error);
+                    }
+                    else{ 
+                        newSession[0].username=obj.username;
+                        Utils.FillSession(request,newSession);
+                        response.json({"message":"success"});
+                    }
+                });
+            }
+            else{
+                response.json({message:"taken"});
+            }
+        });      
+    },
+
+
+
 ////updating info
 UpdateProfileData:function (request,response){
     var profileObject=request.body;
@@ -445,7 +495,7 @@ UpdateDB:function(object,response){
             }
         });
     },
-/////////////Mobile Number Verifiction//////////
+/////////////Mobile Number Verifiction and adding to profile//////////
 ////Send Sms
     SendVerificationCode:function(request,response){
         var MobileObject=request.body;

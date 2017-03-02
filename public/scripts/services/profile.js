@@ -74,6 +74,18 @@ angular.module('webskeletonApp')
             return defer.promise;
 
         },
+       ChangeUsername:function(UsernameObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/allroutes/ChangeUsername",UsernameObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                console.log(error);
+                defer.reject(error);
+            })
+            return defer.promise;
+
+        }
 
         };
     return object;

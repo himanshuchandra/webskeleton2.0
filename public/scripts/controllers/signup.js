@@ -63,13 +63,13 @@ angular.module('webskeletonApp')
         promise.then(function(data){
            // console.log("SUCCESS ",data);
            // console.log(data.data);
-           if(data.data.msg==="pass"){
+           if(data.data.message==="pass"){
                $scope.result = "Registered Successfully";
                $window.location.reload();
-               $window.location.assign(requrl+"/#/profile");
+               $window.location.assign(requrl);
            }
            else{
-               $scope.result =data.data.msg;
+               $scope.result =data.data.message;
            }            
         },function(error){
             $scope.result = "Error occured! Try again later";

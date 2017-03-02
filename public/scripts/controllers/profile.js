@@ -13,6 +13,9 @@ angular.module('webskeletonApp')
     $scope.ProfileForm=true;
     $scope.MobileForm=true;
     $scope.PasswordForm=true;
+    $scope.UsernameForm=true;
+    $scope.toggleButton=false;
+    $scope.EditUsername="Edit Username";
     
 
       var promise = profile.getData();
@@ -47,7 +50,7 @@ angular.module('webskeletonApp')
         },function(error){
             $scope.result = "error occured";
         });
- /////////////////////////////////////////////////////////////////////////
+ ////////////////////// Show-Hide form button logic  ///////////////////////////////////////////////////
 
           $scope.ShowProfileForm=function(){
             $scope.ProfileForm=false;
@@ -57,6 +60,9 @@ angular.module('webskeletonApp')
             $scope.MobileForm=true;
             $scope.PasswordForm=true;
             $scope.Profile=true;
+            $scope.UsernameForm=true;
+            $scope.toggleButton=false;
+            $scope.EditUsername="Edit Username";
 
 
           };
@@ -69,6 +75,9 @@ angular.module('webskeletonApp')
             $scope.PasswordForm=true;
             $scope.ProfileForm=true;
             $scope.Profile=false;
+            $scope.UsernameForm=true;
+            $scope.toggleButton=false;
+            $scope.EditUsername="Edit Username";
           }
 
           $scope.ShowPasswordForm=function(){
@@ -79,10 +88,33 @@ angular.module('webskeletonApp')
             $scope.MobileForm=true;
             $scope.ProfileForm=true;
             $scope.Profile=false;
+            $scope.UsernameForm=true;
+            $scope.toggleButton=false;
+            $scope.EditUsername="Edit Username";
           }
 
+          $scope.toggleUsernameForm=function(){
+            $scope.ProfileForm=true;
+            $scope.ProfileFormButton=false;
+            $scope.MobileFormButton=false;
+            $scope.PasswordFormButton=false;
+            $scope.MobileForm=true;
+            $scope.PasswordForm=true;
+            $scope.Profile=false;
+    
+            if($scope.UsernameForm==true){
+              $scope.UsernameForm=false;
+              $scope.EditUsername="Cancel";
+            }
+            else{
+              $scope.UsernameForm=true;
+              $scope.EditUsername="Edit Username";
+            }
+            
+        };
 
-//////////////////////////////////////////////////////////////////////////
+
+////////////////////// Edit profile logic ////////////////////////////////////////////////////
           
           $scope.FillPlaceholders=function(){
                 $scope.newName=$scope.Name;
@@ -133,7 +165,7 @@ angular.module('webskeletonApp')
               });
               
             };
-/////////////////////////////////////////////////////////////////////
+////////////////////// Add/Change Mobile no. logic ///////////////////////////////////////////////
           $scope.HideMobileForm=false;
           $scope.HideCodeForm=true;
           $scope.countryCode="91";
@@ -217,7 +249,7 @@ angular.module('webskeletonApp')
               $scope.HideCodeForm=true;
           };
 
-///////////////////////////////////////////////////////////////////////
+/////////////////// Change Password Logic ////////////////////////////////////////////////////
           var arePasswordsSame=false;
     
           $scope.checkPassword=function(){
@@ -279,6 +311,48 @@ angular.module('webskeletonApp')
               });
               
             };
+          
+/////////////////////////////  Change Username  ///////////////////////////////////
 
+            $scope.submitUsernameForm=function(usernameForm){
+              
+           // console.log(regForm.$valid);
+                if(usernameForm.$valid){
+                    if($scope.newUsername===$scope.uName){
+                      $scope.UsernameResult="Same as current username";
+                    }
+                    else{
+                      $scope.toggleButton=true;
+                      $scope.UsernameResult="Checking username..";
+                      $scope.ChangeUsername();
+                    }
+                }
+                else{
+                    $scope.UsernameResult="Enter a valid username";
+                }
+                
+            };
+
+            $scope.ChangeUsername=function(){
+              var UsernameObject={
+                "Username":$scope.newUsername
+              }
+              var promise=profile.ChangeUsername(UsernameObject);
+              promise.then(function(data){
+                if(data.data.message==="success"){
+                  $scope.UsernameResult="Username changed";
+                  $window.location.reload();
+                }
+                else{
+                  $scope.UsernameResult="Username already taken";
+                  $scope.toggleButton=false;
+                }
+              },
+              function(error){
+                console.log("error occured!Try again Later");
+              });
+
+            };
+       
 
   });

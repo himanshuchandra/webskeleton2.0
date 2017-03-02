@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dbOperations = require("../config/crudoperation");
-var Utils = require("../config/utils")
+var Utils = require("../config/utils");
 
 
 router.post('/webindex', function(request,response) {
@@ -83,7 +83,10 @@ router.post('/VerifyCode',function(request,response){
 router.post('/SocialSignin',function(request,response){
     dbOperations.SocialSignin(request,response);
 });
-///////////////////////////////////////////////////////////
+/////////////Change Username//////////////////////////////////////////////
+router.post('/ChangeUsername',function(request,response){
+    dbOperations.ChangeUsername(request,response);
+});
 
 module.exports = router;
 
