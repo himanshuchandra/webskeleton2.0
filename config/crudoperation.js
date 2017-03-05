@@ -20,7 +20,7 @@ checkUser:function (request,response){
        //console.log(result.username); 
         if(result[0]!=undefined){
             console.log("found");
-            response.json({message:"Email already registered"});
+            response.json({message:"EmailTaken"});
         }
         else
         {
@@ -36,14 +36,10 @@ checkUser:function (request,response){
                     that.addUser(request,response);
                 }
                 else{
-                    response.json({message:"Username is already taken"});
+                    response.json({message:"UsernameTaken"});
                 }
             });
-        //response.json({result});
         }
-        //response.json({msg:"Logged in SuccessFully..."});
-       //loginObject.logintoken=true;
-        //return loginObject.logintoken;
    }
 });
 }    

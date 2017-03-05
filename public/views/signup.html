@@ -3,7 +3,7 @@
    
    <form name="regForm"  ng-submit="submitForm(regForm)" novalidate>
     
-    <input type="email" name="validemail" ng-model="useremail" placeholder="Email" required/>
+    <input type="email" name="validemail" ng-model="useremail" placeholder="Email" ng-keyup="enableRegister(regForm);" required/>
     <span  ng-show="regForm.validemail.$touched && regForm.validemail.$invalid &&
      !regForm.validemail.$error.required">Invalid email </span>
     <span  ng-show="regForm.validemail.$touched && regForm.validemail.$error.required">
@@ -15,12 +15,12 @@
         Invalid email </span>
         
         
-    <input type="text" name="validusername" ng-model="username" 
+    <input type="text" name="validusername" ng-model="username" ng-keyup="checkUsername(regForm);"
     placeholder="Username" pattern="[a-zA-Z0-9_.]{5,20}" required/>
     <span  ng-show="regForm.validusername.$touched &&
      regForm.validusername.$error.pattern &&
       !regForm.validusername.$error.required">
-      Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars) </span>
+      Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
     <span  ng-show="regForm.validusername.$touched &&
      regForm.validusername.$error.required">Cannot be left empty </span>
     <span  ng-show="submitted && !regForm.validusername.$touched &&
@@ -28,9 +28,11 @@
         Cannot be left empty </span>
     <span  ng-show="submitted && !regForm.validusername.$touched &&
      regForm.validusername.$error.pattern">
-     Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars) </span>
-    
-    <input type="password" ng-keyup="checkp()" ng-model="password1" name="validpass1" 
+     Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
+    {{UsernameMessage}}
+
+
+    <input type="password" ng-keyup="checkp(regForm)" ng-model="password1" name="validpass1" 
      placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required/>
        <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.pattern &&
         !regForm.validpass1.$error.required">
@@ -44,11 +46,11 @@
      regForm.validpass1.$error.pattern">
      password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
     
-    <input type="password" ng-keyup="checkp()" ng-model="password2" placeholder="Password" />
+    <input type="password" ng-keyup="checkp(regForm)" ng-model="password2" placeholder="Password" />
     {{passtext}}
     
-    <input type="submit" ng-click="submitted=true;"
-     value="Register">
+    <input type="submit" ng-click="submitted=true;" ng-model="isNotValid"
+     value="Register" ng-disabled="isNotValid">
        
         </form>
     {{result}}

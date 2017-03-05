@@ -13,7 +13,18 @@ angular.module('webskeletonApp')
     var userdata=[];
 
     var object = {
-       // mydata:"",
+        
+        checkUsername:function(usernameObj){
+           var defer = $q.defer();
+           $http.post(requrl+'/allroutes/checkUsername',usernameObj)
+           .then(function(data){
+               defer.resolve(data);
+           },function(error){
+               defer.reject(error);
+           }) 
+            return defer.promise;
+
+        },
 
         registerUser:function(userObject){
           var defer = $q.defer();
@@ -25,15 +36,7 @@ angular.module('webskeletonApp')
            }) 
             return defer.promise;
         }
-       /* ,
-        passdata:function(finaldata){
-            console.log("DATA IS................ ",finaldata);
-            this.mydata = finaldata;
-            console.log("After MYDATA ",this.mydata);
-           //setdata(finaldata);//return finaldata;
-           console.log(this.userdata);
-        } 
-        */
+      
         };
         
      

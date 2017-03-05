@@ -28,7 +28,7 @@ angular
      });
   })
   .config( function( $facebookProvider ) {
-    $facebookProvider.setAppId('AppId');
+    $facebookProvider.setAppId('appid');
   })
 
   

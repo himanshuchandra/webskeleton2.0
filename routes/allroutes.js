@@ -87,6 +87,20 @@ router.post('/SocialSignin',function(request,response){
 router.post('/ChangeUsername',function(request,response){
     dbOperations.ChangeUsername(request,response);
 });
+////////////CheckUsername if already exists////////////////
+router.post('/checkUsername',function(request,response){
+    var usernameObj=request.body;
+    usernameObj.notFound=undefined;
+    dbOperations.checkUsername(usernameObj,function(){
+        if(usernameObj.notFound==true){
+            response.json({"message":"notfound"});
+        }
+        else{
+            response.json({"message":"found"});
+        }
+    });
+});
+
 
 module.exports = router;
 

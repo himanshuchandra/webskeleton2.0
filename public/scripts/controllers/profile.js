@@ -314,45 +314,82 @@ angular.module('webskeletonApp')
           
 /////////////////////////////  Change Username  ///////////////////////////////////
 
-            $scope.submitUsernameForm=function(usernameForm){
-              
-           // console.log(regForm.$valid);
-                if(usernameForm.$valid){
-                    if($scope.newUsername===$scope.uName){
-                      $scope.UsernameResult="Same as current username";
-                    }
-                    else{
-                      $scope.toggleButton=true;
-                      $scope.UsernameResult="Checking username..";
-                      $scope.ChangeUsername();
-                    }
-                }
-                else{
-                    $scope.UsernameResult="Enter a valid username";
-                }
-                
-            };
+    $scope.UsernameMessage=null;
+    var isUsernameNew=false;
+    $scope.disableButton=true;
 
-            $scope.ChangeUsername=function(){
-              var UsernameObject={
-                "Username":$scope.newUsername
-              }
-              var promise=profile.ChangeUsername(UsernameObject);
-              promise.then(function(data){
-                if(data.data.message==="success"){
-                  $scope.UsernameResult="Username changed";
-                  $window.location.reload();
-                }
-                else{
-                  $scope.UsernameResult="Username already taken";
-                  $scope.toggleButton=false;
-                }
-              },
-              function(error){
-                console.log("error occured!Try again Later");
-              });
+    $scope.checkUsername=function(usernameForm){
+        $scope.disableButton=true;
+        isUsernameNew=false;
+        $scope.UsernameMessage=null;
+        if($scope.newUsername===$scope.uName){
+          $scope.UsernameMessage="Same as current username";
+        }
+        else if(usernameForm.newusername.$valid){
+          $scope.UsernameMessage="Checking...";
+          $scope.checkInDb();
+        }
+    };
 
-            };
+    $scope.checkInDb=function(){
+        var usernameObj = {
+          "username":$scope.newUsername,
+        };
+        
+        var promise = profile.checkUsername(usernameObj);
+        promise.then(function(data){
+          // console.log("SUCCESS ",data);
+          // console.log(data.data);
+          if(data.data.message==="found"){
+              $scope.UsernameMessage = "Username Taken";
+          }
+          else{
+              $scope.UsernameMessage = "Nice Choice!";
+              isUsernameNew=true;
+              $scope.disableButton=false;
+          }            
+        },function(error){
+          // $scope.result = "Error occured! Try again later";
+        });
+    };
+
+
+    $scope.submitUsernameForm=function(usernameForm){
+      
+      if(usernameForm.$valid && isUsernameNew==true){
+        $scope.toggleButton=true;
+        $scope.UsernameResult="Checking username..";
+        $scope.ChangeUsername();
+          
+      }
+      else{
+          $scope.UsernameResult="Enter a valid username";
+      }
+        
+    };
+
+    $scope.ChangeUsername=function(){
+      
+      var UsernameObject={
+        "Username":$scope.newUsername
+      }
+      var promise=profile.ChangeUsername(UsernameObject);
+      promise.then(function(data){
+        if(data.data.message==="success"){
+          $scope.UsernameResult="Username changed";
+          $window.location.reload();
+        }
+        else{
+          isUsernameNew=false;
+          $scope.UsernameMessage = "Username Taken";
+          $scope.UsernameResult="Username already taken";
+          $scope.toggleButton=false;
+        }
+      },
+      function(error){
+        $scope.UsernameResult="error occured!Try again Later";
+      });
+
+    };
        
-
   });
