@@ -86,16 +86,21 @@ angular.module('webskeletonApp')
         }
     }
     
-        $scope.submitForm=function(regForm){
-           // console.log(regForm.$valid);
-                if(regForm.$valid && passverified==true && isUsernameNew==true){
-                    $scope.doRegister();
-                }
-                else{
-                    $scope.result="Enter correct and full info";
-                }
-                
-            }
+/////////////////////////Password Encryption///////////////////////////////
+
+
+
+
+
+////////////////////Registering The user////////////////////////////////////    
+    $scope.submitForm=function(regForm){
+        if(regForm.$valid && passverified==true && isUsernameNew==true){
+            $scope.doRegister();
+        }
+        else{
+            $scope.result="Enter correct and full info";
+        }
+    };
        
    
     $scope.doRegister=function(){

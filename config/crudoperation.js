@@ -14,10 +14,6 @@ checkUser:function (request,response){
        console.log("Error Occured",error);
     }
     else{ 
-        
-       console.log(result);
-        //console.log(result[0].useremail);
-       //console.log(result.username); 
         if(result[0]!=undefined){
             console.log("found");
             response.json({message:"EmailTaken"});
@@ -47,27 +43,22 @@ checkUser:function (request,response){
 
 ////////Checking if username exists   
 checkUsername:function (object,callback){
-    //var userObject =request.body;
+
     User.find({"username":object.username},function(error,result){
     if(error){
        console.log("Error Occured",error);
     }
-    else{
-        console.log(result);
-        //console.log(result[0].useremail);
-       //console.log(result.username); 
+    else{ 
         if(result[0]!=undefined){
             
             console.log("found");
             object.notFound=false;
-        //    response.json({msg:"Username is already taken"});
         }
         else
         {
             
             object.notFound=true;
             console.log("notfound2",object.notFound);
-        //      that.addUser(request,response);
         }
     }
     callback();
@@ -76,13 +67,19 @@ checkUsername:function (object,callback){
 ,   
 /////////////Adding new user
 addUser:function(request,response){
-
    var data =request.body;
+
+   const encrypt=require('./encrypt');
+   var salt=encrypt.genRandomString(16);
+   var encryptedData=encrypt.sha512(data.password1,salt);
+
+   data.password1=encryptedData.hash;
+   data.salt=encryptedData.salt;
+
    data.registrationdate=new Date();
    data.emailverified=false;
    User.create(data,function(error,result){
     
-     //User.create({"name":"Ram","phone":[2222,3333],"address":[{"state":"Delhi","pincode":2222},{"state":"Delhi","pincode":2222}]},function(error,response){
    if(error){
        response.json({"message":"Can't Add Error Occured, Try later"});
    }
@@ -94,7 +91,6 @@ addUser:function(request,response){
         response.json({"message":"pass"});
         console.log(result);
    }
-
 });
 }
 ,
@@ -103,19 +99,13 @@ doLogin:function (request,response){
     
     var loginObject=request.body;
     User.find({
-     "$and":[
-        {
-            "$or": [{
+        "$or": [{
                 "useremail":loginObject.loginid
             }, 
             {
                 "username": loginObject.loginid
             }]
-        },
-         {
-             "password1":loginObject.loginpassword
-         }
-      ]
+        
     },function(error,result){
     if(error){
        console.log("Error Occured",error);
@@ -126,23 +116,26 @@ doLogin:function (request,response){
             response.json({msg:"fail"});
         }
         else{
-            result["0"].rememberMe=loginObject.rememberMe;
-            Utils.FillSession(request,result);
-            //request.session.zzzzz="mymail";
-            // console.log("session is "+request.session.zzzzz);
-            //var string=Utils.RandomStringGenerate();
-            //Utils.SendMail("hc160160@gmail.com","This is myyy subject",string);
-            response.json({msg:"success"});
-            
-            //response.send("session is "+request.session.zzzzz);
-        }
-        
-        //response.json({msg:"Logged in SuccessFully..."});
-       
+            const encrypt=require('./encrypt');
+            var salt=result["0"].salt;
+            var encryptedData=encrypt.sha512(loginObject.loginpassword,salt);
+
+            loginObject.loginpassword=encryptedData.hash;
+            if(result["0"].password1===loginObject.loginpassword){
+                result["0"].rememberMe=loginObject.rememberMe;
+                Utils.FillSession(request,result);
+                response.json({msg:"success"});   
+            }
+            else{
+                response.json({msg:"fail"});
+            }  
+        }  
    }
 });
+
 }
 ,
+
 ////////////////Updating user Profile//////////////////////
 //Updating username
     ChangeUsername:function(request,response){
@@ -213,14 +206,7 @@ CheckPassword:function (request,response){
     console.log("dddd",passwordObject,userName);
   
     User.find({
-     "$and":[
-        {
-            "username":userName
-        }, 
-         {
-             "password1":passwordObject.oldpassword
-         }
-      ]
+        "username":userName 
     }
    ,function(error,result){
      if(error){
@@ -232,31 +218,53 @@ CheckPassword:function (request,response){
             response.json({msg:"fail"});
         }
         else{
-           that.SetNewPassword(request,response);
-            //response.json({msg:"success"});
-        }
+            const encrypt=require('./encrypt');
+            var salt=result["0"].salt;
+            var encryptedData=encrypt.sha512(passwordObject.oldpassword,salt);
 
-       
+            passwordObject.oldpassword=encryptedData.hash;
+            if(result["0"].password1===passwordObject.oldpassword){
+                that.SetNewPassword(request,response);
+            }
+            else{
+                response.json({msg:"fail"});
+            }  
+        }  
     }
 });
 },
 //////////////Setting new password
 SetNewPassword:function (request,response){
     var passwordObject=request.body;
+
+    const encrypt=require('./encrypt');
+    var salt=encrypt.genRandomString(16);
+    var encryptedData=encrypt.sha512(passwordObject.password1,salt);
+
+    passwordObject.password1=encryptedData.hash;
+    passwordObject.salt=encryptedData.salt;
+
     var userName=request.session.user["0"].username;
     console.log("dddd",passwordObject.password1,userName);
   
-    User.update({"username":userName}, 
-     {$set:{"password1":passwordObject.password1}},function(error,result){
+    User.update({
+        "username":userName
+    }, 
+    {
+        $set:{
+            "password1":passwordObject.password1,
+            "salt":passwordObject.salt
+        }
+    },function(error,result){
      if(error){
         console.log("Error Occured",error);
     }
      else{ 
        response.json({msg:"success"});
-       
     }
 });
-}, 
+},
+
 
 ////////////////Email activation//////////////////
 /////////Send email activation link
@@ -291,56 +299,11 @@ CheckToken:function(request,response){
             response.json({msg:"NotFound"});
         }
         else{
-            // var object{
-            //     "Fieldto"
-            // }
             that.ActivateEmail(ActivationObject.UserEmail,response);
-            //response.json({msg:"success"});
         }
-
      } 
     });
-
 },
-/*
-UpdateDB:function(object,response){
-    var Objectz=object.body;
-    console.log("dddd",Objectz.Token);
-    User.findOneAndUpdate({query:{"useremail":"hc160160@gmail.com"},update:{$set:{"password1":"uuuu"}}}
-    // User.findAndModify({
-    //         query:{
-    //             // "$and":[{
-    //                  "useremail":"hc160160@gmail.com"
-    //             // },
-    //             //{
-    //              //   "emailactivationtoken":Objectz.Token
-    //             //}
-    //             //]
-    //         },
-    //         update:
-    //         {
-    //             $set:{
-    //               "password1":"Itried"
-    //             //  "username":"noididnt"
-    //             }
-    //         } 
-    //     }
-        ,function(error,result){
-            comsole.log('bbbb');
-            if(error){
-            console.log("Error Occured",error);
-            response.json({msg:"success"});
-            }
-            else{ 
-                console.log(result);
-                mongoose.connection.close();
-                response.json({msg:"success"});
-                
-            }
-    });
-},
-*/
-
 
 //////////Activating email
     ActivateEmail:function (UserEmail,response){
@@ -401,13 +364,8 @@ UpdateDB:function(object,response){
             console.log("Error Occured",error);
         }
         else{ 
-            
-        console.log(result);
-            //console.log(result[0].useremail);
-        //console.log(result.username); 
             if(result[0]!=undefined){
                 console.log("found");
-                //response.json({msg:"LinkSent"});
                 SendLink(ForgotObject.Email,"forgotpassword","forgotpasswordtoken");
             response.json({msg:"LinkSent"});
             }
@@ -416,11 +374,6 @@ UpdateDB:function(object,response){
                     console.log("notfound");
                     response.json({msg:"Email nOt found"});
                 }
-            //response.json({result});
-            
-            //response.json({msg:"Logged in SuccessFully..."});
-        //loginObject.logintoken=true;
-            //return loginObject.logintoken;
         }
         });
     }, 
@@ -453,11 +406,7 @@ UpdateDB:function(object,response){
             else if((Math.abs(date-result[0].passwordtokenstamp))>86400000){
                 response.json({msg:"fail"});
             }
-            else{
-                // var object{
-                //     "Fieldto"
-                // }
-                
+            else{            
                     response.json({msg:"pass"});
             }
 
@@ -468,14 +417,24 @@ UpdateDB:function(object,response){
 /////////Saving new password
     SaveNewPassword:function (request,response){
         
-        var NewPasswordObject=request.body;
-        console.log("xyyy",NewPasswordObject);
+        var newPasswordObject=request.body;
+
+        const encrypt=require('./encrypt');
+        var salt=encrypt.genRandomString(16);
+        var encryptedData=encrypt.sha512(newPasswordObject.NewPassword,salt);
+
+        newPasswordObject.NewPassword=encryptedData.hash;
+        newPasswordObject.salt=encryptedData.salt;
+
+
+        console.log("xyyy",newPasswordObject);
         User.update({
-            "useremail":NewPasswordObject.UserEmail
+            "useremail":newPasswordObject.UserEmail
         },
         {
             $set:{
-                "password1":NewPasswordObject.NewPassword,
+                "password1":newPasswordObject.NewPassword,
+                "salt":newPasswordObject.salt,
                 "emailverified":true,
                 "forgotpasswordtoken":undefined,
             }
@@ -499,7 +458,6 @@ UpdateDB:function(object,response){
         var UserEmail= Session["0"].useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
         var code=Utils.RandomStringGenerate(6);
-        //var code = Math.floor((Math.random()*999999)+111111);
         var body='Your verification code is '+code;
         //sms is sent even if the useris not found
         User.update({

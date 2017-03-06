@@ -10,6 +10,7 @@ var Utils={
         //sessionDestroy(request);
         userData=data;
         userData["0"].password1=undefined;
+        userData["0"].salt=undefined;
         userData["0"].passwordtokenstamp=undefined;
         userData["0"].emailactivationtoken=undefined;
         userData["0"].forgotpasswordtoken=undefined;
