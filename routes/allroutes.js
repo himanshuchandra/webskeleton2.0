@@ -101,19 +101,41 @@ router.post('/activateEmail',function(request,response){
         response.json({message:"fail"});
     }
 });
-
+////////////////////Forgot Password page//////////////////
+/////////////////Forgot Password > Send Link
 router.post('/SendLink',function(request,response){
-    dbOperations.checkEmail(request,response);
+    var forgotObject=request.body;
+    var isValidUserEmail=validate.email(forgotObject.Email);
+    if(isValidUserEmail===true){
+        dbOperations.checkEmail(request,response);
+    }
+    else{
+        response.json({message:"fail"});
+    }
 });
-
+/////////////Forgot Password > Check Token
 router.post('/PasswordReset',function(request,response){
-    dbOperations.PasswordReset(request,response);
+    var passwordObject=request.body;
+    var isValidUserEmail=validate.email(passwordObject.UserEmail);
+    var isValidToken=validate.string(passwordObject.Token);
+    var isValidPassword;
+    if(passwordObject.NewPassword!=undefined){
+        isValidPassword=validate.password(passwordObject.NewPassword);
+        if(isValidUserEmail===true && isValidToken===true && isValidPassword===true){
+            dbOperations.PasswordReset(request,response);
+        }
+        else{
+            response.json({message:"fail"});
+        }
+    }
+    else if(isValidUserEmail===true && isValidToken===true){
+        dbOperations.PasswordReset(request,response);
+    }
+    else{
+        response.json({message:"fail"});
+    }
 });
-
-router.post('/SaveNewpassword',function(request,response){
-    dbOperations.SaveNewPassword(request,response);
-});
-
+////////////////////////////////////////////////////////////
 router.post('/SendActivationLink',function(request,response){
     dbOperations.SendActivationLink(request,response);
 });

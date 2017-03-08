@@ -182,7 +182,6 @@ UpdateProfileData:function (request,response){
     var profileObject=request.body;
     var newSession=request.session.user;
     var userName= newSession["0"].username;
-    console.log("dddd",profileObject,newSession,userName);
   
     User.update({"username":userName}, 
      {$set:{"userinfo":profileObject}},function(error,result){
@@ -241,7 +240,6 @@ SetNewPassword:function (request,response){
     passwordObject.salt=encryptedData.salt;
 
     var userName=request.session.user["0"].username;
-    console.log("dddd",passwordObject.password1,userName);
   
     User.update({
         "username":userName
@@ -346,21 +344,18 @@ checkToken:function(request,response){
     checkEmail:function (request,response){
     
         var ForgotObject =request.body;
-        console.log("here");
         User.find({"useremail":ForgotObject.Email},function(error,result){
         if(error){
             console.log("Error Occured",error);
         }
         else{ 
             if(result[0]!=undefined){
-                console.log("found");
                 SendLink(ForgotObject.Email,"forgotpassword","forgotpasswordtoken");
-            response.json({msg:"LinkSent"});
+                response.json({message:"sent"});
             }
             else
                 {
-                    console.log("notfound");
-                    response.json({msg:"Email nOt found"});
+                    response.json({message:"notFound"});
                 }
         }
         });
@@ -368,6 +363,7 @@ checkToken:function(request,response){
 
 /////checking token
     PasswordReset:function(request,response){
+        var that=this;
         var PasswordObject=request.body;
         
         User.find({
@@ -388,13 +384,18 @@ checkToken:function(request,response){
             var date=new Date();
             
             if(result.length<1){
-                response.json({msg:"fail"});
+                response.json({message:"fail"});
             }
             else if((Math.abs(date-result[0].passwordtokenstamp))>86400000){
-                response.json({msg:"fail"});
+                response.json({message:"fail"});
             }
-            else{            
-                    response.json({msg:"pass"});
+            else{
+                if(PasswordObject.NewPassword!=undefined){
+                    that.SaveNewPassword(request,response);
+                }
+                else{
+                    response.json({message:"pass"});
+                }
             }
         } 
         });
@@ -426,8 +427,7 @@ checkToken:function(request,response){
                 console.log("Error Occured",error);
             }
             else{ 
-                console.log(result);
-                response.json({msg:"success"});
+                response.json({message:"success"});
             }
         });
     },
