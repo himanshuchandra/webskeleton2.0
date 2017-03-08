@@ -24,9 +24,7 @@ angular.module('webskeletonApp')
 
             var print=data.data["0"];
             var userInfo=data.data["0"].userinfo;
-//            console.log(data.data["0"].username);
             if(print.useremail==undefined){
-              //console.log("lllll");
               $window.location.assign(requrl+"/#/login");
             }
             else{
@@ -154,17 +152,22 @@ angular.module('webskeletonApp')
               
               var promise=profile.setProfileData(profileObject);
               promise.then(function(data) {
-                $scope.ProfileResult="Updated";
-                $window.location.reload();
-
-             
+                if(data.data.message==="unknown"){
+                  $scope.ProfileResult="Not LoggedIn";
+                  $window.location.reload();
+                }
+                else if(data.data.message==="success"){
+                  $scope.ProfileResult="Updated";
+                  $window.location.reload();
+                }
+                else{
+                  $scope.ProfileResult="Error! Try again later";
+                }
               },function(error) {
-                console.log("error occured");
-                $scope.ProfileResult="Error! Try again later";
-                
+                  $scope.ProfileResult="Error! Try again later";
               });
-              
             };
+
 ////////////////////// Add/Change Mobile no. logic ///////////////////////////////////////////////
           $scope.HideMobileForm=false;
           $scope.HideCodeForm=true;
@@ -189,12 +192,16 @@ angular.module('webskeletonApp')
 
               var promise=profile.UpdateMobile(MobileObject);
               promise.then(function(data) {
-              console.log(data);
-                //$scope.MobileMessage="Updated";
-              $scope.HideMobileForm=true;
-              $scope.HideCodeForm=false;
-                //$window.location.reload();
-             
+              if(data.data.message==="unknown"){
+                $window.location.reload();
+              }
+              else if(data.data.message==="success"){
+                $scope.HideMobileForm=true;
+                $scope.HideCodeForm=false;
+              }
+              else{
+                $scope.MobileMessage="Error! Try again later";
+              }
               },function(error) {
                 console.log("error occured");
                 $scope.MobileMessage="Error! Try again later";
@@ -228,6 +235,10 @@ angular.module('webskeletonApp')
               }
               else if(data.data.message==="fail"){
                 $scope.CodeMessage="Wrong Code entered";
+              }
+              else if(data.data.message==="unknown"){
+                $scope.CodeMessage="Not LoggedIn";
+                $window.location.reload();
               }
               else{
                 $scope.CodeMessage="Error! Try again later";
@@ -268,7 +279,6 @@ angular.module('webskeletonApp')
               else{
                 $scope.PasswordMessage="Passwords dont match";
                 arePasswordsSame=false;
-                
               }
           }
         };
@@ -277,7 +287,6 @@ angular.module('webskeletonApp')
              if(passForm.$valid && arePasswordsSame==true){
                     $scope.changePassword();
                     $scope.PasswordResult="Updating Password";
-           
             }
             else{
               $scope.PasswordResult="Enter correct passwords";
@@ -295,21 +304,23 @@ angular.module('webskeletonApp')
               
               var promise=profile.setNewPassword(passwordObject);
               promise.then(function(data) {
-                console.log("ddd",data);
-                if(data.data.msg==="success"){
+                if(data.data.message==="success"){
                     $scope.PasswordResult="Updated";
                     $window.location.reload();
                 }
-                else
-                {
+                else if(data.data.message==="unknown"){
+                    $scope.PasswordResult="Not LoggedIn";
+                    $window.location.reload();
+                }
+                else if(data.data.message===fail){
                     $scope.PasswordResult="Old Password is not correct";
                 }
-                //$scope.PasswordResult="Password Changed";
-              },function(error) {
-                console.log("error occured");
-                
-              });
-              
+                else{
+                    $scope.PasswordResult="Error occured! Try again later";
+                }
+                },function(error) {
+                    $scope.PasswordResult="Error occured! Try again later";
+                });
             };
           
 /////////////////////////////  Change Username  ///////////////////////////////////
@@ -360,12 +371,10 @@ angular.module('webskeletonApp')
         $scope.toggleButton=true;
         $scope.UsernameResult="Checking username..";
         $scope.ChangeUsername();
-          
       }
       else{
           $scope.UsernameResult="Enter a valid username";
       }
-        
     };
 
     $scope.ChangeUsername=function(){
@@ -377,6 +386,10 @@ angular.module('webskeletonApp')
       promise.then(function(data){
         if(data.data.message==="success"){
           $scope.UsernameResult="Username changed";
+          $window.location.reload();
+        }
+        else if(data.data.message==="unknown"){
+          $scope.UsernameResult="Not LoggedIn";
           $window.location.reload();
         }
         else{

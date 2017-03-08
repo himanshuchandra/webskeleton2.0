@@ -16,35 +16,26 @@ angular.module('webskeletonApp')
     var FullName=null;
 
     $scope.SignInGoogle = function () {
-        try{
-            GooglePlus.login().then(function (authResult) {
-                //console.log(authResult);
-                AuthToken=authResult.access_token;
-                console.log(AuthToken);
-                GooglePlus.getUser().then(function (user) {
-                    //console.log(user);
-                    GEmail=user.email;
-                    FullName=user.name;
-                    //console.log(GEmail,FullName);
-                    if(GEmail!=undefined){
-                        $scope.DoSignInGoogle();
-                    }
-                    else{
-                        $scope.GoogleMessage="Error occured! Try again later."
-                    }
-
-                },
-                function(err){
+        GooglePlus.login().then(function (authResult) {
+            AuthToken=authResult.access_token;
+            console.log(AuthToken);
+            GooglePlus.getUser().then(function (user) {
+                GEmail=user.email;
+                FullName=user.name;
+                if(GEmail!=undefined){
+                    $scope.DoSignInGoogle();
+                }
+                else{
                     $scope.GoogleMessage="Error occured! Try again later."
-                });
+                }
             },
-            function (err) {
-                $scope.GoogleMessage="Error connecting to Google! Try again later."
+            function(err){
+                $scope.GoogleMessage="Error occured! Try again later."
             });
-        }
-        catch(exception){
+        },
+        function (err) {
             $scope.GoogleMessage="Error connecting to Google! Try again later."
-        }
+        });
     };  
     //OPTIONAL
     //Verified fields from google that can be accessed
@@ -79,15 +70,11 @@ angular.module('webskeletonApp')
 
             var promise = socialsignin.SocialSignin(GoogleObject);
             promise.then(function(data){
-                console.log("SUCCESS ",data);
                 $scope.GoogleMessage=data.data.message;
                 $window.location.reload();
                 $window.location.assign(requrl);
-   
             },function(error){
                 $scope.GoogleMessage = "Error occurred";
             });
         };
-
-
   });

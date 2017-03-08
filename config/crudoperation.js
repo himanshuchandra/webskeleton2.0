@@ -1,8 +1,9 @@
-var User = require("./schemadefine");
-var Utils =require("./utils");
-var Config =require("./config");
+'use strict';
 
-var dbOperations= {
+const User = require("./schemadefine");
+const utils =require("./utils");
+
+const dbOperations= {
 
 ////////////////Adding new user//////////////////////////
 ////////Checking if email exists
@@ -56,7 +57,6 @@ checkUsername:function (object,callback){
         }
         else
         {
-            
             object.notFound=true;
             console.log("notfound2",object.notFound);
         }
@@ -81,14 +81,14 @@ addUser:function(request,response){
    User.create(data,function(error,result){
     
    if(error){
-       response.json({"message":"Can't Add Error Occured, Try later"});
+       console.log("Error Occured",error);
    }
     else{
         result=[result];
-        Utils.FillSession(request,result);
+        utils.FillSession(request,result);
         console.log("eee",result,result[0].useremail);
         SendLink(result[0].useremail,"emailactivate","emailactivationtoken");
-        response.json({"message":"pass"});
+        response.json({message:"pass"});
         console.log(result);
    }
 });
@@ -123,7 +123,7 @@ doLogin:function (request,response){
             loginObject.loginpassword=encryptedData.hash;
             if(result["0"].password1===loginObject.loginpassword){
                 result["0"].rememberMe=loginObject.rememberMe;
-                Utils.FillSession(request,result);
+                utils.FillSession(request,result);
                 response.json({msg:"success"});   
             }
             else{
@@ -164,8 +164,8 @@ doLogin:function (request,response){
                     }
                     else{ 
                         newSession[0].username=obj.username;
-                        Utils.FillSession(request,newSession);
-                        response.json({"message":"success"});
+                        utils.FillSession(request,newSession);
+                        response.json({message:"success"});
                     }
                 });
             }
@@ -184,17 +184,15 @@ UpdateProfileData:function (request,response){
     var userName= newSession["0"].username;
     console.log("dddd",profileObject,newSession,userName);
   
-       User.update({"username":userName}, 
+    User.update({"username":userName}, 
      {$set:{"userinfo":profileObject}},function(error,result){
      if(error){
         console.log("Error Occured",error);
     }
      else{ 
        newSession[0].userinfo=profileObject;
-       Utils.FillSession(request,newSession);
-       //console.log(newSession);
-       response.json({result});
-       
+       utils.FillSession(request,newSession);
+       response.json({message:"success"});
     }
 });
 }, 
@@ -203,7 +201,6 @@ CheckPassword:function (request,response){
     var that=this;
     var passwordObject=request.body;
     var userName=request.session.user["0"].username;
-    console.log("dddd",passwordObject,userName);
   
     User.find({
         "username":userName 
@@ -213,9 +210,8 @@ CheckPassword:function (request,response){
         console.log("Error Occured",error);
     }
      else{ 
-       console.log(result);
        if(result.length<1){
-            response.json({msg:"fail"});
+            response.json({message:"fail"});
         }
         else{
             const encrypt=require('./encrypt');
@@ -227,7 +223,7 @@ CheckPassword:function (request,response){
                 that.SetNewPassword(request,response);
             }
             else{
-                response.json({msg:"fail"});
+                response.json({message:"fail"});
             }  
         }  
     }
@@ -260,7 +256,7 @@ SetNewPassword:function (request,response){
         console.log("Error Occured",error);
     }
      else{ 
-       response.json({msg:"success"});
+       response.json({message:"success"});
     }
 });
 },
@@ -271,21 +267,21 @@ SetNewPassword:function (request,response){
     SendActivationLink:function(request,response){
         var Email=request.body.Email;
         SendLink(Email,"emailactivate","emailactivationtoken");
-        response.json({"msg":"success"});
+        response.json({msg:"success"});
     },
 
 ////////Checking token for activation
-CheckToken:function(request,response){
+checkToken:function(request,response){
     var that=this;
-    var ActivationObject=request.body;
+    var activationObject=request.body;
 
     User.find({
      "$and":[
         {
-            "useremail":ActivationObject.UserEmail
+            "useremail":activationObject.userEmail
         }, 
          {
-             "emailactivationtoken":ActivationObject.Token
+             "emailactivationtoken":activationObject.token
          }
       ]
     }
@@ -294,23 +290,20 @@ CheckToken:function(request,response){
         console.log("Error Occured",error);
     }
      else{ 
-       console.log(result);
        if(result.length<1){
-            response.json({msg:"NotFound"});
+            response.json({message:"fail"});
         }
         else{
-            that.ActivateEmail(ActivationObject.UserEmail,response);
+            that.ActivateEmail(activationObject.userEmail,response);
         }
      } 
     });
 },
 
 //////////Activating email
-    ActivateEmail:function (UserEmail,response){
-        
-        console.log("xxxx",UserEmail);
+    ActivateEmail:function (userEmail,response){
         User.update({
-            "useremail":UserEmail
+            "useremail":userEmail
         },
         {
             $set:{
@@ -322,10 +315,7 @@ CheckToken:function(request,response){
                 console.log("Error Occured",error);
             }
             else{ 
-                
-                console.log(result);
-                response.json({msg:"success"});
-        
+                response.json({message:"success"});
             }
         });
     },  
@@ -348,8 +338,6 @@ CheckToken:function(request,response){
                     Status.ActivationStatus=result[0].emailverified;
                     response.send(Status);
                 }
-
-       
         }
         });
     },
@@ -397,7 +385,6 @@ CheckToken:function(request,response){
             console.log("Error Occured",error);
         }
         else{ 
-            
             var date=new Date();
             
             if(result.length<1){
@@ -409,10 +396,8 @@ CheckToken:function(request,response){
             else{            
                     response.json({msg:"pass"});
             }
-
         } 
         });
-
     },   
 /////////Saving new password
     SaveNewPassword:function (request,response){
@@ -426,8 +411,6 @@ CheckToken:function(request,response){
         newPasswordObject.NewPassword=encryptedData.hash;
         newPasswordObject.salt=encryptedData.salt;
 
-
-        console.log("xyyy",newPasswordObject);
         User.update({
             "useremail":newPasswordObject.UserEmail
         },
@@ -443,10 +426,8 @@ CheckToken:function(request,response){
                 console.log("Error Occured",error);
             }
             else{ 
-            
                 console.log(result);
                 response.json({msg:"success"});
-        
             }
         });
     },
@@ -457,7 +438,7 @@ CheckToken:function(request,response){
         var Session=request.session.user;
         var UserEmail= Session["0"].useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
-        var code=Utils.RandomStringGenerate(6);
+        var code=utils.RandomStringGenerate(6);
         var body='Your verification code is '+code;
         //sms is sent even if the useris not found
         User.update({
@@ -475,8 +456,8 @@ CheckToken:function(request,response){
             }
             else{ 
                 console.log(UserEmail,result);
-                Utils.SendSms(number,body);
-                response.json({"msg":"success"});
+                utils.SendSms(number,body);
+                response.json({message:"success"});
             }
         });
     },
@@ -502,18 +483,14 @@ CheckToken:function(request,response){
             console.log("Error Occured",error);
         }
         else{ 
- 
             if(result.length<1){
                 response.json({message:"fail"});
             }
             else{
                 that.SetMobile(result,request,response);
-                //response.json({msg:"pass"});
             }
-
         } 
         });
-
     },   
 
     SetMobile:function(result,request,response){
@@ -539,7 +516,7 @@ CheckToken:function(request,response){
             
                 console.log(result);
                 newSession[0].mobile=TemporaryMobile;
-                Utils.FillSession(request,newSession);
+                utils.FillSession(request,newSession);
                 response.json({message:"pass"});
         
             }
@@ -565,8 +542,8 @@ CheckToken:function(request,response){
 
                 }
                 else{
-                    Utils.FillSession(request,result);
-                    response.json({"message":"Logged In"});
+                    utils.FillSession(request,result);
+                    response.json({message:"Logged In"});
                 }
             };
         })
@@ -589,13 +566,13 @@ CheckToken:function(request,response){
 
         User.create(UserData,function(error,result){
             if(error){
-                response.json({"message":"Can't Add Error Occured, Try later"});
+                response.json({message:"Can't Add Error Occured, Try later"});
             }
             else{
                 result=[result];
-                Utils.FillSession(request,result);
+                utils.FillSession(request,result);
                 //console.log("eee",result,result[0].useremail);
-                response.json({"message":"Registered"});
+                response.json({message:"Registered"});
             }
 
         });
@@ -607,14 +584,14 @@ CheckToken:function(request,response){
 module.exports =dbOperations; 
 
 function SendLink(UserEmail,Page,TokenType){
-
-    var RandomToken=Utils.RandomStringGenerate(32);
+    const config =require("./config");
+    var RandomToken=utils.RandomStringGenerate(32);
     var Query={};
     if(TokenType==="forgotpasswordtoken"){
         Query["passwordtokenstamp"]=new Date();
     }
     Query[TokenType]=RandomToken;
-    var Url= Config.reqUrl+"/#/"+Page+"?e="+UserEmail+"&t="+RandomToken;
+    var Url= config.reqUrl+"/#/"+Page+"?e="+UserEmail+"&t="+RandomToken;
 
     User.update({
         "useremail":UserEmail
@@ -628,7 +605,7 @@ function SendLink(UserEmail,Page,TokenType){
         }
         else{ 
             console.log("succ");
-            Utils.SendMail(UserEmail,"sub",Url);
+            utils.SendMail(UserEmail,"sub",Url);
         }
     });
 

@@ -61,11 +61,11 @@
 
     <h5>Area</h5>
     <input type="text" name="validArea" ng-model="newArea" 
-    placeholder="Area" pattern="[A-Za-z0-9,-. ]{5,50}" required>
+    placeholder="Area" pattern="[A-Za-z0-9,-.' ]{5,50}" required>
         <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.pattern &&
       !profForm.validArea.$error.required">
-      Invalid Area(Should be 5-50 only a-z,A-Z,0-9,-,. , and space allowed) </span>
+      Invalid Area(Should be 5-50 only a-z,A-Z,0-9,-,',. , and space allowed) </span>
     <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.required">Cannot be left empty </span>
     <span  ng-show="ProfileSubmitted && !profForm.validArea.$touched &&
@@ -77,11 +77,11 @@
 
     <h5>City</h5>
     <input type="text" name="validCity" ng-model="newCity" 
-    placeholder="City" pattern="[A-Za-z0-9 ]{4,15}" required>
+    placeholder="City" pattern="[A-Za-z0-9' ]{4,15}" required>
         <span  ng-show="profForm.validCity.$touched &&
      profForm.validCity.$error.pattern &&
       !profForm.validCity.$error.required">
-      Invalid City(Should be 4-15 only a-z,A-Z,0-9 and space allowed) </span>
+      Invalid City(Should be 4-15 only a-z,A-Z,0-9,' and space allowed) </span>
     <span  ng-show="profForm.validCity.$touched &&
      profForm.validCity.$error.required">Cannot be left empty </span>
     <span  ng-show="ProfileSubmitted && !profForm.validCity.$touched &&
@@ -93,11 +93,11 @@
     
     <h5>State</h5>
     <input type="text" name="validState" ng-model="newState" 
-    placeholder="State" pattern="[A-Za-z0-9 ]{4,15}" required>
+    placeholder="State" pattern="[A-Za-z0-9' ]{4,15}" required>
         <span  ng-show="profForm.validState.$touched &&
      profForm.validState.$error.pattern &&
       !profForm.validState.$error.required">
-      Invalid State(Should be 4-15 only a-z,A-Z,0-9 and space allowed) </span>
+      Invalid State(Should be 4-15 only a-z,A-Z,0-9,' and space allowed) </span>
     <span  ng-show="profForm.validState.$touched &&
      profForm.validState.$error.required">Cannot be left empty </span>
     <span  ng-show="ProfileSubmitted && !profForm.validState.$touched &&

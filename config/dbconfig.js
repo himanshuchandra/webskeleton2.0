@@ -1,6 +1,8 @@
-var url=require("./config") 
+'use strict';
 
-var dbconfig={
+const url=require("./config") 
+
+const dbconfig={
     dburl:url.dbUrl
 }
 module.exports=dbconfig;

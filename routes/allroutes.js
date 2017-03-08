@@ -1,7 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var dbOperations = require("../config/crudoperation");
-var Utils = require("../config/utils");
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+const dbOperations = require("../config/crudoperation");
+const utils = require("../config/utils");
+const validate =require("../config/validate");
 
 
 router.post('/webindex', function(request,response) {
@@ -21,15 +24,6 @@ router.post('/webindex', function(request,response) {
   }
 });
 
-router.post('/getData', function(request,response) {
-  if(request.session.user){
-       response.send(request.session.user);
-  }
-  else{
-       response.send("unknown");
-  }
-});
-
 router.post('/register',function(request,response){
     dbOperations.checkUser(request,response);
 });
@@ -38,16 +32,74 @@ router.post('/login',function(request,response){
     dbOperations.doLogin(request,response);
 });
 
+////////////Profile Page Routes/////////////////////
+///////////Show Profile Data
+router.post('/getData', function(request,response) {
+  if(request.session.user){
+       response.send(request.session.user);
+  }
+  else{
+       response.send("unknown");
+  }
+});
+////////////Edit/Update profile data
 router.post('/UpdateProfileData',function(request,response){
-    dbOperations.UpdateProfileData(request,response);
+    if(request.session.user){
+        dbOperations.UpdateProfileData(request,response);
+      }
+    else{
+       response.json({"message":"unknown"});
+    }
+});
+/////////////Change Username
+router.post('/ChangeUsername',function(request,response){
+    if(request.session.user){
+        dbOperations.ChangeUsername(request,response);
+      }
+    else{
+       response.json({"message":"unknown"});
+    }
+});
+////////////Mobile no. verification
+router.post('/UpdateMobile',function(request,response){
+    if(request.session.user){
+        dbOperations.SendVerificationCode(request,response);
+      }
+    else{
+       response.json({"message":"unknown"});
+    }
 });
 
+router.post('/VerifyCode',function(request,response){
+    if(request.session.user){
+        dbOperations.VerifyCode(request,response);
+      }
+    else{
+       response.json({"message":"unknown"});
+    }
+});
+////////////Change Password
 router.post('/SetNewPassword',function(request,response){
-    dbOperations.CheckPassword(request,response);
+    if(request.session.user){
+        dbOperations.CheckPassword(request,response);
+      }
+    else{
+       response.json({"message":"unknown"});
+    }
 });
 
-router.post('/ActivateEmail',function(request,response){
-    dbOperations.CheckToken(request,response);
+///////////////////////////////////////////
+
+router.post('/activateEmail',function(request,response){
+    var activationObject=request.body;
+    var isValidUserEmail=validate.email(activationObject.userEmail);
+    var isValidToken=validate.string(activationObject.token);
+    if(isValidUserEmail===true && isValidToken===true){
+        dbOperations.checkToken(request,response);
+    }
+    else{
+        response.json({message:"fail"});
+    }
 });
 
 router.post('/SendLink',function(request,response){
@@ -67,26 +119,15 @@ router.post('/SendActivationLink',function(request,response){
 });
 
 router.post('/Logout',function(request,response){
-    Utils.SessionDestroy(request);
-    response.send({msg:"success"});
+    utils.SessionDestroy(request);
+    response.send({message:"success"});
 });
 
-////////////Mobile no. verification///////////////////////
-router.post('/UpdateMobile',function(request,response){
-    dbOperations.SendVerificationCode(request,response);
-});
-
-router.post('/VerifyCode',function(request,response){
-    dbOperations.VerifyCode(request,response);
-});
 /////////////Social SignIn/////////////////
 router.post('/SocialSignin',function(request,response){
     dbOperations.SocialSignin(request,response);
 });
-/////////////Change Username//////////////////////////////////////////////
-router.post('/ChangeUsername',function(request,response){
-    dbOperations.ChangeUsername(request,response);
-});
+
 ////////////CheckUsername if already exists////////////////
 router.post('/checkUsername',function(request,response){
     var usernameObj=request.body;

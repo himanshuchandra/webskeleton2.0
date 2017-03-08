@@ -10,13 +10,12 @@
 angular.module('webskeletonApp')
   .factory('emailactivate', function ($http,$q,requrl) {
         var object = {
-          ActivateEmail:function(ActivationObject){
+          activateEmail:function(activationObject){
             
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/ActivateEmail',ActivationObject).then(function(data){
+          $http.post(requrl+'/allroutes/activateEmail',activationObject).then(function(data){
                defer.resolve(data);
            },function(error){
-               
                defer.reject(error);
            }) 
             return defer.promise;

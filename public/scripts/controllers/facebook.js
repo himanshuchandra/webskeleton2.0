@@ -50,15 +50,12 @@ angular.module('webskeletonApp')
       function(response) {
         FEmail=response.email;
         FullName=response.name;
-        //console.log(response);
-        //console.log(FEmail,FullName);
         if(FEmail!=undefined){
             $scope.DoSignInFacebook();
         }
         else{
             $scope.FacebookMessage="No Email recieved from facebook!"
         }
-
       },
       function(err) {
         $scope.FacebookMessage = "Error connecting to facebook!";
@@ -83,7 +80,6 @@ angular.module('webskeletonApp')
         $scope.FacebookMessage = "Error occurred";
     });
 };
-
 
 });
 //End Urls For facebook
