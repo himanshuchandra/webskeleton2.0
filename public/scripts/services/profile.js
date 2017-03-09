@@ -10,96 +10,86 @@
 angular.module('webskeletonApp')
   .factory('profile', function ($http,$q,requrl) {
 
-      var object = {
+    var object = {
+
         getData:function(){
-            
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/getData')
+          $http.post(requrl+'/profile/getData')
           .then(function(data){
                defer.resolve(data);
            },function(error){
-               console.log(error);
                defer.reject(error);
            }) 
             return defer.promise;
         },
 
-        setProfileData:function(profileObject){
-            var defer=$q.defer();
-            $http.post(requrl+"/allroutes/UpdateProfileData",profileObject)
-            .then(function(data){
-                defer.resolve(data); 
-            },function(error){
-                console.log(error);
-                defer.reject(error);
-            })
-            return defer.promise;
-
-        },
-
-        setNewPassword:function(passwordObject){
-            var defer=$q.defer();
-            $http.post(requrl+"/allroutes/SetNewPassword",passwordObject)
-            .then(function(data){
-                defer.resolve(data); 
-            },function(error){
-                console.log(error);
-                defer.reject(error);
-            })
-            return defer.promise;
-
-        },
-        
-        UpdateMobile:function(MobileObject){
-            var defer=$q.defer();
-            $http.post(requrl+"/allroutes/UpdateMobile",MobileObject)
-            .then(function(data){
-                defer.resolve(data); 
-            },function(error){
-                console.log(error);
-                defer.reject(error);
-            })
-            return defer.promise;
-
-        },
-        VerifyCode:function(CodeObject){
-            var defer=$q.defer();
-            $http.post(requrl+"/allroutes/VerifyCode",CodeObject)
-            .then(function(data){
-                defer.resolve(data); 
-            },function(error){
-                console.log(error);
-                defer.reject(error);
-            })
-            return defer.promise;
-
-        },
-       ChangeUsername:function(UsernameObject){
-            var defer=$q.defer();
-            $http.post(requrl+"/allroutes/ChangeUsername",UsernameObject)
-            .then(function(data){
-                defer.resolve(data); 
-            },function(error){
-                console.log(error);
-                defer.reject(error);
-            })
-            return defer.promise;
-
-        },
         checkUsername:function(usernameObj){
            var defer = $q.defer();
-           $http.post(requrl+'/allroutes/checkUsername',usernameObj)
+           $http.post(requrl+'/commonroutes/checkUsername',usernameObj)
            .then(function(data){
                defer.resolve(data);
            },function(error){
                defer.reject(error);
            }) 
             return defer.promise;
-
+        },
+        
+       changeUsername:function(UsernameObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/profile/changeUsername",UsernameObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                defer.reject(error);
+            })
+            return defer.promise;
         },
 
+        updateProfileData:function(profileObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/profile/updateProfileData",profileObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                defer.reject(error);
+            })
+            return defer.promise;
+        },
 
-        };
+        updateMobile:function(MobileObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/profile/updateMobile",MobileObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                defer.reject(error);
+            })
+            return defer.promise;
+        },
+
+        verifyCode:function(CodeObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/profile/verifyCode",CodeObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                defer.reject(error);
+            })
+            return defer.promise;
+        },
+
+        setNewPassword:function(passwordObject){
+            var defer=$q.defer();
+            $http.post(requrl+"/profile/setNewPassword",passwordObject)
+            .then(function(data){
+                defer.resolve(data); 
+            },function(error){
+                defer.reject(error);
+            })
+            return defer.promise;
+        },
+
+    };
     return object;
 
   });

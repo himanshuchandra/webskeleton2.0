@@ -18,7 +18,6 @@ angular.module('webskeletonApp')
     $scope.SignInGoogle = function () {
         GooglePlus.login().then(function (authResult) {
             AuthToken=authResult.access_token;
-            console.log(AuthToken);
             GooglePlus.getUser().then(function (user) {
                 GEmail=user.email;
                 FullName=user.name;
@@ -26,15 +25,15 @@ angular.module('webskeletonApp')
                     $scope.DoSignInGoogle();
                 }
                 else{
-                    $scope.GoogleMessage="Error occured! Try again later."
+                    $scope.GoogleMessage="Error! Try again later or use the login form."
                 }
             },
             function(err){
-                $scope.GoogleMessage="Error occured! Try again later."
+                $scope.GoogleMessage="Error! Try again later or use the login form."
             });
         },
         function (err) {
-            $scope.GoogleMessage="Error connecting to Google! Try again later."
+            $scope.GoogleMessage="Error connecting to Google! Try again later or use the login form."
         });
     };  
     //OPTIONAL
@@ -68,13 +67,23 @@ angular.module('webskeletonApp')
                 "Social":"Google"
             }
 
-            var promise = socialsignin.SocialSignin(GoogleObject);
+            var promise = socialsignin.socialSignin(GoogleObject);
             promise.then(function(data){
-                $scope.GoogleMessage=data.data.message;
-                $window.location.reload();
-                $window.location.assign(requrl);
+                if(data.data.message==="loggedIn"){
+                    $scope.GoogleMessage="Successfully LoggedIn";
+                    $window.location.reload();
+                    $window.location.assign(requrl);
+                }
+                else if(data.data.message==="registered"){
+                    $scope.GoogleMessage="Successfully Registered & LoggedIn";
+                    $window.location.reload();
+                    $window.location.assign(requrl);
+                }
+                else{
+                    $scope.GoogleMessage="Error! Try again later or use the login form.";
+                }
             },function(error){
-                $scope.GoogleMessage = "Error occurred";
+                $scope.GoogleMessage = "Error! Try again later or use the login form.";
             });
         };
   });

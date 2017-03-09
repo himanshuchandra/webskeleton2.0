@@ -55,7 +55,27 @@ const validate={
   string:function(string){
       var string=string.trim();
       var letters = /^[A-Za-z0-9-/_',. ]+$/;
-      if(string.length<3 || string.length>50 || string.match(letters)===null){
+      if(string.length<2 || string.length>50 || string.match(letters)===null){
+          return false;
+      }
+      else{
+          return true;
+      }  
+  },
+  name:function(string){
+      var string=string.trim();
+      var letters = /^[A-Za-z ]+$/;
+      if(string.length<3 || string.length>30 || string.match(letters)===null){
+          return false;
+      }
+      else{
+          return true;
+      }  
+  },
+  code:function(string){
+      var string=string.trim();
+      var letters = /^[A-Za-z0-9+]+$/;
+      if(string.length<2 || string.length>16 || string.match(letters)===null){
           return false;
       }
       else{

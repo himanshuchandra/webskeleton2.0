@@ -39,7 +39,11 @@ app.use(session({
 }));
 
 const index = require('./routes/index');
-const allroutes = require('./routes/allroutes');
+const commonroutes = require('./routes/commonroutes');
+const signup = require('./routes/signup');
+const login = require('./routes/login');
+const profile = require('./routes/profile');
+const forgotpassword = require('./routes/forgotpassword');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,7 +60,11 @@ app.use(mfavicon(__dirname + '/public/favicon.icon'));
 
 //app.use(session({ secret:"string"}));
 app.use('/', index);
-app.use('/allroutes',allroutes);
+app.use('/commonroutes',commonroutes);
+app.use('/signup',signup);
+app.use('/login',login);
+app.use('/profile',profile);
+app.use('/forgotpassword',forgotpassword);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

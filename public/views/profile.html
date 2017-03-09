@@ -44,7 +44,7 @@
 <div ng-hide="ProfileForm">
 <form name="profForm" ng-submit="submitProfileForm(profForm)" novalidate>
     <h5>Full Name</h5>
-    <input type="text" name="validName" ng-model="newName" 
+    <input type="text" name="validName" ng-model="newName" placeholder="Full Name"
     pattern="[A-Za-z ]{3,30}" required>
     <span  ng-show="profForm.validName.$touched &&
      profForm.validName.$error.pattern &&

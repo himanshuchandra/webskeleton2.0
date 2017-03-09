@@ -21,9 +21,8 @@ angular.module('webskeletonApp')
             "Token":Token,  
           }
          
-          var promise = forgotpassword.PasswordReset(PasswordObject);
+          var promise = forgotpassword.passwordReset(PasswordObject);
           promise.then(function(data){
-          //console.log(data.data);
             if(data.data.message==="fail"){
               $scope.Result="Link expired.. Send a new one!";
             }
@@ -73,7 +72,7 @@ angular.module('webskeletonApp')
             "Email":$scope.ForgotEmail,
         };
         
-        var promise=forgotpassword.SendLink(ForgotObject);
+        var promise=forgotpassword.sendLink(ForgotObject);
         promise.then(function(data){
           if(data.data.message==="sent"){
             $scope.result = "Link Sent";
@@ -142,7 +141,7 @@ angular.module('webskeletonApp')
             "NewPassword":HashPassword,
           }
          
-          var promise = forgotpassword.PasswordReset(NewPasswordObject);
+          var promise = forgotpassword.passwordReset(NewPasswordObject);
           promise.then(function(data){
             if(data.data.message==="fail"){
               $scope.Result = "Error occured,Try again later";

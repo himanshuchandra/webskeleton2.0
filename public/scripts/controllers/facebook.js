@@ -41,7 +41,7 @@ angular.module('webskeletonApp')
       });
     }
     catch(exception){
-            $scope.FacebookMessage="Error connecting to Facebook! Try again later."
+            $scope.FacebookMessage="Error connecting to Facebook! Try again later or use the login form."
         }
   };
 
@@ -54,11 +54,11 @@ angular.module('webskeletonApp')
             $scope.DoSignInFacebook();
         }
         else{
-            $scope.FacebookMessage="No Email recieved from facebook!"
+            $scope.FacebookMessage="No Email recieved from facebook! Try again later or use the login form."
         }
       },
       function(err) {
-        $scope.FacebookMessage = "Error connecting to facebook!";
+        $scope.FacebookMessage = "Error connecting to facebook! Try again later or use the login form.";
       });
   };
 
@@ -69,17 +69,25 @@ angular.module('webskeletonApp')
         "Social":"Faceboook"
     }
 
-    var promise = socialsignin.SocialSignin(FacebookObject);
+    var promise = socialsignin.socialSignin(FacebookObject);
     promise.then(function(data){
-        console.log("SUCCESS ",data);
-        $scope.FacebookMessage=data.data.message;
-        $window.location.reload();
-        $window.location.assign(requrl);
-
+        if(data.data.message==="loggedIn"){
+            $scope.FacebookMessage="Successfully LoggedIn";
+            $window.location.reload();
+            $window.location.assign(requrl);
+        }
+        else if(data.data.message==="registered"){
+            $scope.FacebookMessage="Successfully Registered & LoggedIn";
+            $window.location.reload();
+            $window.location.assign(requrl);
+        }
+        else{
+            $scope.FacebookMessage="Error! Try again later or use the login form.";
+        }
     },function(error){
-        $scope.FacebookMessage = "Error occurred";
+        $scope.FacebookMessage = "Error! Try again later or use the login form.";
     });
-};
+  };
 
 });
 //End Urls For facebook

@@ -5,7 +5,6 @@ const utils={
 
     FillSession:function(request,data) {
     
-        //sessionDestroy(request);
         var userData=data;
         userData["0"].password1=undefined;
         userData["0"].salt=undefined;
@@ -14,23 +13,19 @@ const utils={
         userData["0"].forgotpasswordtoken=undefined;
         userData["0"].mobileverificationcode=undefined;
 
-        console.log(userData);
-        //console.log(userData);
-        //console.log(userData["0"].password1);
-        //var userData=data;
         request.session.user=userData;
         if(userData["0"].rememberMe==true){
             var thirtyDays = 30*24*60*60*1000;
             request.session.cookie.expires = new Date(Date.now() + thirtyDays);
         }
-        //console.log(data["0"].useremail);
     },
 
-    SessionDestroy:function(request){
+    sessionDestroy:function(request){
         request.session.destroy(function(err) {
-            console.log("cannot access session here"); 
+            if(err){
+                console.log(err);
+            }
         });
-        
     },
 
     SendMail:function(To,Subject,EmailText,Html_Body){
@@ -76,13 +71,10 @@ const utils={
         }, function(err, message) {
             if(err){
                 console.log(err);
-                //response.json({"msg":"error"});
             }
             console.log(message.sid);
         });
-
     },
-
 
 };
 
