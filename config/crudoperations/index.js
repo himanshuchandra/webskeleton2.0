@@ -35,10 +35,9 @@ const dbOperations= {
     },
 
     //////Session destroy
-    destroySession:function(){
+    destroySession:function(request,response){
         const utils = require("../utils");
-        utils.sessionDestroy(request);
-        response.send({message:"success"});
+        utils.sessionDestroy(request,response);
     }
 
 };

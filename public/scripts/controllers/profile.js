@@ -289,7 +289,7 @@ angular.module('webskeletonApp')
           $scope.PasswordResult="Not LoggedIn";
           $window.location.reload();
       }
-      else if(data.data.message===fail){
+      else if(data.data.message==="fail"){
           $scope.PasswordResult="Old Password is not correct";
       }
       else{

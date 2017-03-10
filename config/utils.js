@@ -20,10 +20,13 @@ const utils={
         }
     },
 
-    sessionDestroy:function(request){
+    sessionDestroy:function(request,response){
         request.session.destroy(function(err) {
             if(err){
                 console.log(err);
+            }
+            else{
+                response.json({message:"success"});
             }
         });
     },

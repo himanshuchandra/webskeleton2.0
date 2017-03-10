@@ -49,7 +49,7 @@ router.post('/sendActivationLink',function(request,response){
 
 ///Logging out
 router.post('/logout',function(request,response){
-    dbOperations.destroySession(request);
+    dbOperations.destroySession(request,response);
 });
 
 module.exports = router;
