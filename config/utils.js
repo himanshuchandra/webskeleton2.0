@@ -3,7 +3,7 @@
 const config =require("./config");
 const utils={
 
-    FillSession:function(request,data) {
+    fillSession:function(request,data) {
     
         var userData=data;
         userData["0"].password1=undefined;
@@ -28,9 +28,8 @@ const utils={
         });
     },
 
-    SendMail:function(To,Subject,EmailText,Html_Body){
+    sendMail:function(To,Subject,EmailText,Html_Body){
         const nodeMailer = require("nodemailer");
-        //console.log(To);
         var URL="smtps://"+config.SMTPS_EMAIL+":"+config.SMTPS_PASSWORD+"@"+config.SMTPS_URL;
         
         var transporter = nodeMailer.createTransport(URL);
@@ -52,12 +51,12 @@ const utils={
         });
     },
 
-    RandomStringGenerate:function(x){
+    randomStringGenerate:function(x){
         const randomString = require("randomstring");
         return randomString.generate(x);
     },
 
-    SendSms:function(number,body){
+    sendSms:function(number,body){
         const twilio = require("twilio");
         var accountSid = config.TWILIO_ACCOUNT_SID; 
         var authToken = config.TWILIO_AUTH_TOKEN;   

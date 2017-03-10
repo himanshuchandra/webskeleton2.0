@@ -49,9 +49,7 @@ router.post('/sendActivationLink',function(request,response){
 
 ///Logging out
 router.post('/logout',function(request,response){
-    const utils = require("../config/utils");
-    utils.sessionDestroy(request);
-    response.send({message:"success"});
+    dbOperations.destroySession(request);
 });
 
 module.exports = router;

@@ -60,30 +60,30 @@ angular.module('webskeletonApp')
         var Url2=https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="Enter token recieved"
         */
 
-        $scope.DoSignInGoogle=function(){
-            var GoogleObject={
-                "Email":GEmail,
-                "FullName":FullName,
-                "Social":"Google"
-            }
+    $scope.DoSignInGoogle=function(){
+        var GoogleObject={
+            "Email":GEmail,
+            "FullName":FullName,
+            "Social":"Google"
+        }
 
-            var promise = socialsignin.socialSignin(GoogleObject);
-            promise.then(function(data){
-                if(data.data.message==="loggedIn"){
-                    $scope.GoogleMessage="Successfully LoggedIn";
-                    $window.location.reload();
-                    $window.location.assign(requrl);
-                }
-                else if(data.data.message==="registered"){
-                    $scope.GoogleMessage="Successfully Registered & LoggedIn";
-                    $window.location.reload();
-                    $window.location.assign(requrl);
-                }
-                else{
-                    $scope.GoogleMessage="Error! Try again later or use the login form.";
-                }
-            },function(error){
-                $scope.GoogleMessage = "Error! Try again later or use the login form.";
-            });
-        };
-  });
+        var promise = socialsignin.socialSignin(GoogleObject);
+        promise.then(function(data){
+            if(data.data.message==="loggedIn"){
+                $scope.GoogleMessage="Successfully LoggedIn";
+                $window.location.reload();
+                $window.location.assign(requrl);
+            }
+            else if(data.data.message==="registered"){
+                $scope.GoogleMessage="Successfully Registered & LoggedIn";
+                $window.location.reload();
+                $window.location.assign(requrl);
+            }
+            else{
+                $scope.GoogleMessage="Error! Try again later or use the login form.";
+            }
+        },function(error){
+            $scope.GoogleMessage = "Error! Try again later or use the login form.";
+        });
+    };
+});

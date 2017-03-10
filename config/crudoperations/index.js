@@ -1,7 +1,6 @@
 'use strict';
 
 const User = require("../schemadefine");
-const utils =require("../utils");
 const commonOperations=require("./commonoperations");
 
 const dbOperations= {
@@ -31,8 +30,16 @@ const dbOperations= {
     sendActivationLink:function(emailObject,response){
         var email=emailObject.email;
         commonOperations.sendLink(email,"emailactivate","emailactivationtoken");
+        //need to be a callback function
         response.json({message:"success"});
     },
+
+    //////Session destroy
+    destroySession:function(){
+        const utils = require("../utils");
+        utils.sessionDestroy(request);
+        response.send({message:"success"});
+    }
 
 };
 

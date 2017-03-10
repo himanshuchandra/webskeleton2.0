@@ -1,7 +1,6 @@
 'use strict';
 
 const User = require("../schemadefine");
-const utils =require("../utils");
 const commonOperations=require("./commonoperations");
 
 const dbOperations= {
@@ -17,6 +16,7 @@ const dbOperations= {
             else{ 
                 if(result[0]!=undefined){
                     commonOperations.sendLink(ForgotObject.Email,"forgotpassword","forgotpasswordtoken");
+                    //need to be a callback function
                     response.json({message:"sent"});
                 }
                 else

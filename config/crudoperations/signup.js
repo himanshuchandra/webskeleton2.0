@@ -1,7 +1,7 @@
 'use strict';
 
 const User = require("../schemadefine");
-const utils =require("../utils");
+
 const commonOperations=require("./commonoperations");
 
 const dbOperations={
@@ -42,6 +42,7 @@ const dbOperations={
     },
     /////////////Adding new user
     addUser:function(request,response){
+        const utils =require("../utils");
         var data =request.body;
 
         const encrypt=require('../encrypt');
@@ -60,7 +61,7 @@ const dbOperations={
             }
             else{
                 result=[result];
-                utils.FillSession(request,result);
+                utils.fillSession(request,result);
                 commonOperations.sendLink(result[0].useremail,"emailactivate","emailactivationtoken");
                 response.json({message:"pass"});
             }

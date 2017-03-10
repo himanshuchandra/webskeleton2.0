@@ -17,7 +17,7 @@ const dbOperations={
             "notFound":undefined
         };
         commonOperations.checkUsername(obj,function(){
-            if(obj.notFound==true){
+            if(obj.notFound===true){
                 User.update({"useremail":userEmail}, 
                 {
                     $set:{
@@ -30,7 +30,7 @@ const dbOperations={
                     }
                     else{ 
                         newSession[0].username=obj.username;
-                        utils.FillSession(request,newSession);
+                        utils.fillSession(request,newSession);
                         response.json({message:"success"});
                     }
                 });
@@ -61,7 +61,7 @@ const dbOperations={
             }
             else{ 
                 newSession[0].userinfo=profileObject;
-                utils.FillSession(request,newSession);
+                utils.fillSession(request,newSession);
                 response.json({message:"success"});
             }
         });
@@ -73,7 +73,7 @@ const dbOperations={
         var Session=request.session.user;
         var UserEmail= Session["0"].useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
-        var code=utils.RandomStringGenerate(6);
+        var code=utils.randomStringGenerate(6);
         var body='Your verification code is '+code;
         //sms is sent even if the useris not found
         User.update({
@@ -90,7 +90,8 @@ const dbOperations={
                 console.log("Error Occured",error);
             }
             else{ 
-                utils.SendSms(number,body);
+                utils.sendSms(number,body);
+                //need to be a callback function
                 response.json({message:"success"});
             }
         });
@@ -150,7 +151,7 @@ const dbOperations={
             }
             else{ 
                 newSession[0].mobile=TemporaryMobile;
-                utils.FillSession(request,newSession);
+                utils.fillSession(request,newSession);
                 response.json({message:"pass"});
             }
         });
@@ -179,7 +180,7 @@ const dbOperations={
 
                     passwordObject.oldpassword=encryptedData.hash;
                     if(result["0"].password1===passwordObject.oldpassword){
-                        that.SetNewPassword(request,response);
+                        that.setNewPassword(request,response);
                     }
                     else{
                         response.json({message:"fail"});
@@ -189,7 +190,7 @@ const dbOperations={
         });
     },
     //////////////Setting new password
-    SetNewPassword:function (request,response){
+    setNewPassword:function (request,response){
         var passwordObject=request.body;
 
         const encrypt=require('../encrypt');

@@ -50,14 +50,14 @@ const dbOperations= {
                     response.json({message:"fail"});
                 }
                 else{
-                    that.ActivateEmail(activationObject.userEmail,response);
+                    that.activateEmail(activationObject.userEmail,response);
                 }
             } 
         });
     },
 
     //////////Activating email
-    ActivateEmail:function (userEmail,response){
+    activateEmail:function (userEmail,response){
         User.update({
             "useremail":userEmail
         },
@@ -96,10 +96,13 @@ const dbOperations= {
                     that.socialRegister(request,response);
                 }
                 else{
-                    utils.FillSession(request,result);
+                    utils.fillSession(request,result);
                     response.json({message:"loggedIn"});
                 }
-            };
+            }
+            else{
+                response.json({message:"fail"});
+            }
         })
     },   
     
@@ -123,7 +126,7 @@ const dbOperations= {
             }
             else{
                 result=[result];
-                utils.FillSession(request,result);
+                utils.fillSession(request,result);
                 response.json({message:"registered"});
             }
         });
@@ -132,7 +135,7 @@ const dbOperations= {
     ////////////Send Activation/forgotpassword link//////////////
     sendLink:function(UserEmail,Page,TokenType){
         const config =require("../config");
-        var RandomToken=utils.RandomStringGenerate(32);
+        var RandomToken=utils.randomStringGenerate(32);
         var Query={};
         if(TokenType==="forgotpasswordtoken"){
             Query["passwordtokenstamp"]=new Date();
@@ -151,8 +154,7 @@ const dbOperations= {
                 console.log("Error Occured",error);
             }
             else{ 
-                console.log("succ");
-                utils.SendMail(UserEmail,"sub",Url);
+                utils.sendMail(UserEmail,"sub",Url);
             }
         });
         

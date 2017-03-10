@@ -1,12 +1,13 @@
 'use strict';
 
 const User = require("../schemadefine");
-const utils =require("../utils");
+
 
 const dbOperations={
 
     //Check login id and password > Fill Session
     doLogin:function (request,response){
+        const utils =require("../utils");
         var loginObject=request.body;
 
         User.find({
@@ -33,7 +34,7 @@ const dbOperations={
                     loginObject.loginpassword=encryptedData.hash;
                     if(result["0"].password1===loginObject.loginpassword){
                         result["0"].rememberMe=loginObject.rememberMe;
-                        utils.FillSession(request,result);
+                        utils.fillSession(request,result);
                         response.json({message:"success"});   
                     }
                     else{
