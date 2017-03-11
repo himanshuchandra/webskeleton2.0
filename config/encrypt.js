@@ -1,7 +1,8 @@
+'use strict';
 
 const crypto = require('crypto');
 
-var encrypt={
+const encrypt={
 
     /*
     * generates random string of characters i.e salt

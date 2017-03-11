@@ -10,22 +10,35 @@
 angular.module('webskeletonApp')
   .controller('EmailactivateCtrl', function ($scope,$location,emailactivate,$window,requrl) {
     
-    $scope.Result="Activating your Email";
+    $scope.result="Activating your Email";
 
-    var ActivationObject={
-        "UserEmail":$location.search().e,
-        "Token":$location.search().t,  
-    }
-         
-    var promise = emailactivate.ActivateEmail(ActivationObject);
-    promise.then(function(data){
-      //console.log(data.data);
-      $scope.Result=data.data.msg;
-      $window.location.reload();
-      $window.location.assign(requrl);
+    $scope.checkToken=function(){
+      var promise = emailactivate.activateEmail(activationObject);
+      promise.then(function(data){
+        if(data.data.message==="success"){
+          $scope.result=data.data.message;
+        }
+        else{
+          $scope.result="Not Found";
+        }
+        $window.location.reload();
+        $window.location.assign(requrl);
       }
       ,function(error){
-        $scope.Result = "Error occured,Try again later";
+        $scope.result = "Error occured,Try again later";
       });
+    };
+
+    var activationObject={
+        "userEmail":$location.search().e,
+        "token":$location.search().t,  
+    }
+
+    if(activationObject.userEmail!=undefined && activationObject.token!=undefined){
+      $scope.checkToken();
+    }
+    else{
+      $window.location.assign(requrl);
+    }
 
   });

@@ -9,40 +9,43 @@
  */
 angular.module('webskeletonApp')
   .factory('webindex', function ($http,$q,requrl) {
+      
       var object = {
+
         checkStatus:function(){
-            
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/webindex').then(function(data){
+          $http.post(requrl+'/webindex')
+          .then(function(data){
                defer.resolve(data);
            },function(error){
-               console.log(error);
                defer.reject(error);
            }) 
             return defer.promise;
         },
-        SendActivationLink:function(EmailObject){
-            
+
+        sendActivationLink:function(){
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/SendActivationLink',EmailObject).then(function(data){
+          $http.post(requrl+'/sendActivationLink')
+          .then(function(data){
                defer.resolve(data);
            },function(error){
-               console.log(error);
                defer.reject(error);
            }) 
             return defer.promise;
         },
-        Logout:function(){
-            
+        
+        logout:function(){
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/Logout').then(function(data){
+          $http.post(requrl+'/logout')
+          .then(function(data){
                defer.resolve(data);
            },function(error){
-               console.log(error);
                defer.reject(error);
            }) 
             return defer.promise;
         }
-        };
+
+    };
     return object;
+
   });

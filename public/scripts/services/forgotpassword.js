@@ -9,34 +9,32 @@
  */
 angular.module('webskeletonApp')
   .factory('forgotpassword', function ($http,$q,requrl) {
+      
       var object= {
-        SendLink:function(ForgotObject){
+
+        sendLink:function(ForgotObject){
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/SendLink',ForgotObject).then(function(data){
+          $http.post(requrl+'/forgotpassword/sendLink',ForgotObject)
+          .then(function(data){
             defer.resolve(data); 
           },function(error){
             defer.reject(error);
           })
           return defer.promise;
         },
-        PasswordReset:function(PasswordObject){
+
+        passwordReset:function(PasswordObject){
           var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/PasswordReset',PasswordObject).then(function(data){
+          $http.post(requrl+'/forgotpassword/passwordReset',PasswordObject)
+          .then(function(data){
             defer.resolve(data); 
           },function(error){
             defer.reject(error);
           })
           return defer.promise;
         },
-        SaveNewPassword:function(NewPasswordObject){
-          var defer = $q.defer(); 
-          $http.post(requrl+'/allroutes/SaveNewPassword',NewPasswordObject).then(function(data){
-            defer.resolve(data); 
-          },function(error){
-            defer.reject(error);
-          })
-          return defer.promise;
-        },
+
       };
     return object;
+
   });

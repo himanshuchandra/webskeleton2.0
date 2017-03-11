@@ -19,7 +19,6 @@ angular.module('webskeletonApp')
     });
 
 
-
      $scope.loginStatus="Login/SignUp";
      $scope.ActivationStatus=true;
      $scope.LoginButton=false;
@@ -32,29 +31,41 @@ angular.module('webskeletonApp')
      
      var promise = webindex.checkStatus();
         promise.then(function(data){
-              $scope.loginStatus=data.data.Message;
-              if(data.data.Email!=undefined){
-                  $scope.LoginButton=true;
-                  $scope.SignupButton=true;
-                  $scope.ProfileButton=false;
-                  $scope.LogoutButton=false;
-                  Email=data.data.Email;
-              }
-              if(data.data.ActivationStatus==false){
-                  $scope.Status="Your Email address "+data.data.Email+" is not Verified";
-                  $scope.ActivationStatus=false;
-             }
-      
+            if(data.data.message==="fail"){
+                $scope.loginStatus="Login/SignUp";
+            }
+            else if(data.data.Message!=undefined){
+                $scope.loginStatus=data.data.Message;
+                if(data.data.Email!=undefined){
+                    $scope.LoginButton=true;
+                    $scope.SignupButton=true;
+                    $scope.ProfileButton=false;
+                    $scope.LogoutButton=false;
+                    Email=data.data.Email;
+                    if(data.data.ActivationStatus===false){
+                        $scope.Status="Your Email address "+data.data.Email+" is not Verified";
+                        $scope.ActivationStatus=false;
+                    }
+                }
+            }
+            else{
+                $scope.loginStatus="Login/SignUp";
+            }
       });
 
       ////////////////////////////
       $scope.SendActivationLink=function(){
-          var EmailObject={
-              "Email":Email
-          }
-          var promise = webindex.SendActivationLink(EmailObject);
+          var promise = webindex.sendActivationLink();
             promise.then(function(data){
-                $scope.ActivationMessage="Link Sent";
+                if(data.data.message==="success"){
+                    $scope.ActivationMessage="Link Sent";
+                }
+                else if(data.data.message==="unknown"){
+                    $window.location.reload();
+                }
+                else{
+                    $scope.ActivationMessage="Error,Try again Later";
+                }
             },function(error){
                 $scope.ActivationMessage="Error,Try again Later";
         });
@@ -62,7 +73,7 @@ angular.module('webskeletonApp')
 
       ///////////////////////////////
       $scope.Logout=function(){
-          var promise = webindex.Logout();
+          var promise = webindex.logout();
             promise.then(function(data){
                 $window.location.reload();
                 $window.location.assign(requrl+"/#/login");

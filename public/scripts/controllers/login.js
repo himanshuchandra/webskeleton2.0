@@ -11,12 +11,14 @@ angular.module('webskeletonApp')
   .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
       
      $scope.submitForm=function(loginForm){
-           // console.log(regForm.$valid);
-                if(loginForm.$valid){
-                    $scope.doLogin();
-                }
-                
-            };
+        if(loginForm.$valid){
+            $scope.result="Checking..";
+            $scope.doLogin();
+        }
+        else{
+            $scope.result="Invalid info.";
+        }
+    };
     
     
     $scope.doLogin=function(){
@@ -30,27 +32,19 @@ angular.module('webskeletonApp')
         };
         var promise = login.loginUser(loginObject);
         promise.then(function(data){
-            console.log("SUCCESS ",data);
-           var res = data.data.msg;
-            //console.log(res);
-            //var token;
-           
-            if(res==="success"){
-    
-                    $scope.result="Logged in successfully";
-                    $window.location.reload();
-                    $window.location.assign(requrl);
-            
+            if(data.data.message==="success"){
+                $scope.result="Logged in successfully";
+                $window.location.reload();
+                $window.location.assign(requrl);
             }
-             else{
-                     $scope.result="Wrong email or password";
-                }
-           
-             
-            
-        
+            else if(data.data.message==="fail"){
+                $scope.result="Wrong email or password";
+            }
+            else{
+                $scope.result="Error occurred! Try again later.";
+            }
         },function(error){
-            $scope.result = "Error occurred";
+            $scope.result = "Error occurred! Try again later.";
         });
     };
   

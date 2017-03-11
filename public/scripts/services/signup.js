@@ -9,26 +9,23 @@
  */
 angular.module('webskeletonApp')
   .factory('signup', function ($http,$q,requrl) {
-   //var data= {key,value};
-    var userdata=[];
 
     var object = {
         
         checkUsername:function(usernameObj){
            var defer = $q.defer();
-           $http.post(requrl+'/allroutes/checkUsername',usernameObj)
+           $http.post(requrl+'/commonroutes/checkUsername',usernameObj)
            .then(function(data){
                defer.resolve(data);
            },function(error){
                defer.reject(error);
            }) 
             return defer.promise;
-
         },
 
         registerUser:function(userObject){
           var defer = $q.defer();
-           $http.post(requrl+'/allroutes/register',userObject)
+           $http.post(requrl+'/signup/registerUser',userObject)
            .then(function(data){
                defer.resolve(data);
            },function(error){
@@ -36,10 +33,8 @@ angular.module('webskeletonApp')
            }) 
             return defer.promise;
         }
-      
-        };
         
-     
-
+    };
     return object;
+
   });

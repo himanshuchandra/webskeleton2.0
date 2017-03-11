@@ -9,5 +9,4 @@
  */
 angular.module('webskeletonApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.loginStatus="jjjjj"
   });

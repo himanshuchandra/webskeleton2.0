@@ -1,5 +1,6 @@
+'use strict';
 
-var secrets={
+const secrets={
     dbUrl:"mongodb://localhost:27017/wuserdb",
     dbCollection:"wuser2",
     sessionKey:["ggggg","aaaaa","sssssss","hhhhh","ffff","kkkkkk","ttt","aaaa"],
