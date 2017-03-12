@@ -44,7 +44,7 @@
           <button type="button" ng-cloak>{{loginStatus}}</button>
           <div ng-cloak ng-hide="ActivationStatus">
                   <p>{{Status}}</p>
-                  <p ng-cloak><a ng-click="SendActivationLink()">Send Link Again</a>{{ActivationMessage}}</p>
+                  <p ng-cloak><a ng-hide="sendLinkButton" ng-click="SendActivationLink()">Send Link Again</a>{{ActivationMessage}}</p>
           </div>
 
           <div ng-hide="LogoutButton" ng-cloak><button type="button" ng-click="Logout()">Logout</button>{{LogoutMessage}}</div>

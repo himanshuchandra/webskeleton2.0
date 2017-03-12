@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('WebindexCtrl', function ($scope,webindex,requrl,$window) {
+  .controller('WebindexCtrl', function ($scope,webindex,requrl,$window,$timeout) {
 
     $scope.loading_screen = pleaseWait({
         logo: "../images/Loading_Text.png",
@@ -54,11 +54,18 @@ angular.module('webskeletonApp')
       });
 
       ////////////////////////////
+      $scope.sendLinkButton=false;
+
       $scope.SendActivationLink=function(){
           var promise = webindex.sendActivationLink();
             promise.then(function(data){
                 if(data.data.message==="success"){
-                    $scope.ActivationMessage="Link Sent";
+                    $scope.ActivationMessage="Link Sent. Wait for 1 minute to send new link";
+                    $scope.sendLinkButton=true;
+                    $timeout(function(){
+                        $scope.sendLinkButton=false;
+                        $scope.ActivationMessage=undefined;
+                    }, 60000);
                 }
                 else if(data.data.message==="unknown"){
                     $window.location.reload();

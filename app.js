@@ -65,6 +65,7 @@ app.use('/signup',signup);
 app.use('/login',login);
 app.use('/profile',profile);
 app.use('/forgotpassword',forgotpassword);
+app.use('*',index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
