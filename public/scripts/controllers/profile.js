@@ -107,20 +107,20 @@ angular.module('webskeletonApp')
 
 ///////////// Edit profile logic //////////////
     $scope.FillPlaceholders=function(){
-          $scope.newName=$scope.Name;
-          $scope.newArea=$scope.Area;
-          $scope.newCity=$scope.City;
-          $scope.newPincode=$scope.Pincode; 
-          $scope.newState=$scope.State;
-          $scope.newCountry=$scope.Country;
+          $scope.profile.newName=$scope.Name;
+          $scope.profile.newArea=$scope.Area;
+          $scope.profile.newCity=$scope.City;
+          $scope.profile.newPincode=$scope.Pincode; 
+          $scope.profile.newState=$scope.State;
+          $scope.profile.newCountry=$scope.Country;
     }
 
     $scope.submitProfileForm=function (profForm) {  
-        if(profForm.$valid && $scope.newCountry!=undefined){
+        if(profForm.$valid && $scope.profile.newCountry!=undefined){
           $scope.ProfileResult="Saving";
           $scope.changeProfile();
         }
-        else if($scope.newCountry==undefined){
+        else if($scope.profile.newCountry==undefined){
           $scope.dataValid="Choose a country";
         }
         else{
@@ -129,13 +129,13 @@ angular.module('webskeletonApp')
     };
 
     $scope.changeProfile=function () {
-        var country=$scope.newCountry.replace(/['"]+/g,'');
+        var country=$scope.profile.newCountry.replace(/['"]+/g,'');
         var profileObject={
-          "fullname":$scope.newName,
-          "area":$scope.newArea,
-          "city":$scope.newCity,
-          "state":$scope.newState,
-          "pincode":$scope.newPincode,
+          "fullname":$scope.profile.newName,
+          "area":$scope.profile.newArea,
+          "city":$scope.profile.newCity,
+          "state":$scope.profile.newState,
+          "pincode":$scope.profile.newPincode,
           "country":country,
         };
         
@@ -160,7 +160,6 @@ angular.module('webskeletonApp')
 ///////////////Add/Change Mobile no. logic ////////////////
     $scope.HideMobileForm=false;
     $scope.HideCodeForm=true;
-    $scope.countryCode="91";
 
     $scope.submitMobileForm=function(mobileForm){
         if(mobileForm.$valid){
@@ -174,8 +173,8 @@ angular.module('webskeletonApp')
     $scope.ChangeMobile=function(){
   
         var MobileObject={
-          "CountryCode":"+"+$scope.countryCode,
-          "MobileNumber":$scope.newMobile,
+          "CountryCode":"+"+$scope.profile.countryCode,
+          "MobileNumber":$scope.profile.newMobile,
         };
 
         var promise=profile.updateMobile(MobileObject);
@@ -207,7 +206,7 @@ angular.module('webskeletonApp')
 
     $scope.VerifyCode=function(){
         var CodeObject={
-          "VCode":$scope.VCode,
+          "VCode":$scope.profile.VCode,
         };
 
         var promise=profile.verifyCode(CodeObject);
@@ -232,7 +231,7 @@ angular.module('webskeletonApp')
     };
 
     $scope.SendAgain=function(){
-        $scope.VCode=null;
+        $scope.profile.VCode=null;
         $scope.CodeMessage=undefined;
         $scope.HideMobileForm=false;
         $scope.HideCodeForm=true;
@@ -242,14 +241,14 @@ angular.module('webskeletonApp')
     var arePasswordsSame=false;
 
     $scope.checkPassword=function(){
-      if($scope.newPassword2!=undefined)
+      if($scope.profile.newPassword2!=undefined)
       {   
-          if($scope.newPassword===$scope.newPassword2)
+          if($scope.profile.newPassword===$scope.profile.newPassword2)
           {   
             $scope.PasswordMessage="Passwords match";
             arePasswordsSame=true;            
           }
-          else if($scope.newPassword==undefined){
+          else if($scope.profile.newPassword==undefined){
               $scope.PasswordMessage=undefined;
               arePasswordsSame=false;
           }
@@ -272,8 +271,8 @@ angular.module('webskeletonApp')
     
     $scope.changePassword=function () {
 
-      var hashOldPassword=md5.createHash($scope.oldPassword);
-      var hashNewPassword=md5.createHash($scope.newPassword);
+      var hashOldPassword=md5.createHash($scope.profile.oldPassword);
+      var hashNewPassword=md5.createHash($scope.profile.newPassword);
       var passwordObject={
           "oldpassword":hashOldPassword,
           "password1":hashNewPassword,
@@ -309,7 +308,7 @@ angular.module('webskeletonApp')
         $scope.disableButton=true;
         isUsernameNew=false;
         $scope.UsernameMessage=null;
-        if($scope.newUsername===$scope.uName){
+        if($scope.profile.newUsername===$scope.uName){
           $scope.UsernameMessage="Same as current username";
         }
         else if(usernameForm.newusername.$valid){
@@ -320,7 +319,7 @@ angular.module('webskeletonApp')
 
     $scope.checkInDb=function(){
         var usernameObj = {
-          "username":$scope.newUsername,
+          "username":$scope.profile.newUsername,
         };
         
         var promise = profile.checkUsername(usernameObj);
@@ -354,7 +353,7 @@ angular.module('webskeletonApp')
     $scope.ChangeUsername=function(){
       
       var UsernameObject={
-        "Username":$scope.newUsername
+        "Username":$scope.profile.newUsername
       }
       var promise=profile.changeUsername(UsernameObject);
       promise.then(function(data){

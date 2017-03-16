@@ -23,12 +23,12 @@ angular.module('webskeletonApp')
     
     $scope.doLogin=function(){
         
-        var hashLoginPassword=md5.createHash($scope.loginpassword);
+        var hashLoginPassword=md5.createHash($scope.login.loginpassword);
 
         var loginObject = {
-            "loginid":$scope.loginid,
+            "loginid":$scope.login.loginid,
             "loginpassword":hashLoginPassword,
-            "rememberMe":$scope.RememberMe
+            "rememberMe":$scope.login.RememberMe
         };
         var promise = login.loginUser(loginObject);
         promise.then(function(data){

@@ -69,7 +69,7 @@ angular.module('webskeletonApp')
      $scope.SendLink=function() {
       
         var ForgotObject={
-            "Email":$scope.ForgotEmail,
+            "Email":$scope.forgotpassword.ForgotEmail,
         };
         
         var promise=forgotpassword.sendLink(ForgotObject);
@@ -93,7 +93,7 @@ angular.module('webskeletonApp')
       $scope.sendAgain=function(){
         $scope.SendForm=false;
         $scope.sendAgainButton=true;
-        $scope.ForgotEmail=undefined;
+        $scope.forgotpassword.ForgotEmail=undefined;
         $scope.result=undefined;
       };
 
@@ -101,15 +101,15 @@ angular.module('webskeletonApp')
           var arePasswordsSame=false;
     
           $scope.checkPassword=function(){
-          if($scope.ResetPassword2!=undefined)
+          if($scope.forgotpassword.ResetPassword2!=undefined)
           {   
-              if($scope.ResetPassword===$scope.ResetPassword2)
+              if($scope.forgotpassword.ResetPassword===$scope.forgotpassword.ResetPassword2)
               {   
                 $scope.PasswordMessage="Passwords match";
                 arePasswordsSame=true;
                 
               }
-              else if($scope.ResetPassword==undefined){
+              else if($scope.forgotpassword.ResetPassword==undefined){
                  $scope.PasswordMessage=undefined;
                  arePasswordsSame=false;
               }
@@ -133,7 +133,7 @@ angular.module('webskeletonApp')
       $scope.SaveNewPassword=function(){
          
          $scope.Result="Checking";
-         var HashPassword=md5.createHash($scope.ResetPassword);
+         var HashPassword=md5.createHash($scope.forgotpassword.ResetPassword);
 
           var NewPasswordObject={
             "UserEmail":verifiedUserEmail,

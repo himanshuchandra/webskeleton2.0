@@ -5,7 +5,7 @@
     <form name="usernameForm" ng-submit="submitUsernameForm(usernameForm)" novalidate>
 
 <h5>New Username</h5>
-    <input type="text" name="newusername" ng-model="newUsername" ng-keyup="checkUsername(usernameForm)" pattern="[a-zA-Z0-9_.]{5,20}" required/>
+    <input type="text" name="newusername" ng-model="profile.newUsername" ng-keyup="checkUsername(usernameForm)" pattern="[a-zA-Z0-9_.]{5,20}" required/>
     <span  ng-show="usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.pattern &&
       !usernameForm.newusername.$error.required">
@@ -19,7 +19,7 @@
      usernameForm.newusername.$error.pattern">
      Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
 
-<input type="submit" ng-model="disableButton" ng-disabled="disableButton" ng-click="UsernameSubmitted=true;" value="Save">
+<input type="submit" ng-disabled="disableButton" ng-click="UsernameSubmitted=true;" value="Save">
 </form>
 {{UsernameMessage}}
 {{UsernameResult}}
@@ -44,7 +44,7 @@
 <div ng-hide="ProfileForm">
 <form name="profForm" ng-submit="submitProfileForm(profForm)" novalidate>
     <h5>Full Name</h5>
-    <input type="text" name="validName" ng-model="newName" placeholder="Full Name"
+    <input type="text" name="validName" ng-model="profile.newName" placeholder="Full Name"
     pattern="[A-Za-z ]{3,30}" required>
     <span  ng-show="profForm.validName.$touched &&
      profForm.validName.$error.pattern &&
@@ -60,7 +60,7 @@
       Invalid name(Should be 3-30 only a-z,A-Z and space allowed) </span>
 
     <h5>Area</h5>
-    <input type="text" name="validArea" ng-model="newArea" 
+    <input type="text" name="validArea" ng-model="profile.newArea" 
     placeholder="Area" pattern="[A-Za-z0-9,-.' ]{5,50}" required>
         <span  ng-show="profForm.validArea.$touched &&
      profForm.validArea.$error.pattern &&
@@ -76,7 +76,7 @@
      Invalid Area(Should be 5-50 only a-z,A-Z,0-9,-,. , and space allowed) </span>
 
     <h5>City</h5>
-    <input type="text" name="validCity" ng-model="newCity" 
+    <input type="text" name="validCity" ng-model="profile.newCity" 
     placeholder="City" pattern="[A-Za-z0-9' ]{4,15}" required>
         <span  ng-show="profForm.validCity.$touched &&
      profForm.validCity.$error.pattern &&
@@ -92,7 +92,7 @@
      Invalid City(Should be 4-15 only a-z,A-Z,0-9 and space allowed)</span>
     
     <h5>State</h5>
-    <input type="text" name="validState" ng-model="newState" 
+    <input type="text" name="validState" ng-model="profile.newState" 
     placeholder="State" pattern="[A-Za-z0-9' ]{4,15}" required>
         <span  ng-show="profForm.validState.$touched &&
      profForm.validState.$error.pattern &&
@@ -108,7 +108,7 @@
      Invalid State(Should be 4-15 only a-z,A-Z,0-9 and space allowed)</span>
     
     <h5>Pincode</h5>
-    <input type="text" name="validPincode" ng-model="newPincode" 
+    <input type="text" name="validPincode" ng-model="profile.newPincode" 
     placeholder="Pincode" pattern="[0-9]{3,15}" required>
         <span  ng-show="profForm.validPincode.$touched &&
      profForm.validPincode.$error.pattern &&
@@ -124,10 +124,10 @@
      Invalid Pincode(Should be 3-15 digits only 0-9 allowed) </span>
 
     <h5>Country</h5>
-    <country-select name="validCountry" ng-model="newCountry" cs-required 
+    <country-select name="validCountry" ng-model="profile.newCountry" cs-required 
     cs-priorities="IN, AU, DE, GB, US" option value="India"></country-select>
         {{ProfileResult}}
-    <!--country-select ng-model="newCountry" cs-only="AU, DE, GB, US"></country-select-->
+    <!--country-select ng-model="profile.newCountry" cs-only="AU, DE, GB, US"></country-select-->
 
 
 <input type="submit" ng-click="ProfileSubmitted=true;" value="Save Profile">
@@ -138,7 +138,7 @@
     <div ng-hide="HideMobileForm" >
         <form name="mobileForm" ng-submit="submitMobileForm(mobileForm)" novalidate>
             <h5>Country Code</h5>
-            +<input type="text" ng-model="countryCode" name="validCode" pattern="[0-9]{1,3}" required/>
+            +<input type="text" ng-model="profile.countryCode" name="validCode" pattern="[0-9]{1,3}" required/>
             <span  ng-show="mobileForm.validCode.$touched &&
             mobileForm.validCode.$error.pattern &&
             !mobileForm.validCode.$error.required">
@@ -155,7 +155,7 @@
 
 
             <h5>Mobile Number</h5>
-            <input type="tel" ng-model="newMobile" name="validMobile" placeholder="New Mobile number" pattern="[0-9]{10}" required/>
+            <input type="tel" ng-model="profile.newMobile" name="validMobile" placeholder="New Mobile number" pattern="[0-9]{10}" required/>
             <span  ng-show="mobileForm.validMobile.$touched &&
             mobileForm.validMobile.$error.pattern &&
             !mobileForm.validMobile.$error.required">
@@ -177,7 +177,7 @@
     <div ng-hide=HideCodeForm>
         <form name="codeForm" ng-submit="submitCode(codeForm)" novalidate>
             <h5>Enter 6 digit verification code from your mobile that we just sent you</h5>
-            <input type="text" ng-model="VCode" name="vCode" pattern="[a-z0-9A-Z]{6}" required/>
+            <input type="text" ng-model="profile.VCode" name="vCode" pattern="[a-z0-9A-Z]{6}" required/>
             <span  ng-show="codeForm.vCode.$touched &&
             codeForm.vCode.$error.pattern &&
             !codeForm.vCode.$error.required">
@@ -204,7 +204,7 @@
 <form name="passForm"  ng-submit="submitPasswordForm(passForm)" novalidate>
 
 <h5>Old Password</h5>
- <input type="password"  ng-model="oldPassword" name="oldpass"  
+ <input type="password"  ng-model="profile.oldPassword" name="oldpass"  
  placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required/>  
     <span  ng-show="passForm.oldpass.$touched && 
     passForm.oldpass.$error.pattern && !passForm.oldpass.$error.required">
@@ -217,7 +217,7 @@
      password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
 
 <h5>New password</h5>
- <input type="password" ng-keyup="checkPassword()" ng-model="newPassword" name="newpass"  
+ <input type="password" ng-keyup="checkPassword()" ng-model="profile.newPassword" name="newpass"  
  placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required/>
    <span  ng-show="passForm.newpass.$touched && passForm.newpass.$error.pattern &&
     !passForm.newpass.$error.required">
@@ -230,7 +230,7 @@
      password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
 
 <h5>New Password Again</h5>
-<input type="password" ng-keyup="checkPassword()" ng-model="newPassword2" placeholder="Password Again" />
+<input type="password" ng-keyup="checkPassword()" ng-model="profile.newPassword2" placeholder="Password Again" />
 {{PasswordMessage}}
 
 
