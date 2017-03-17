@@ -10,6 +10,12 @@
 angular.module('webskeletonApp')
   .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,$location,requrl,md5) {
 
+    //all ng-models declared
+    $scope.forgotpassword={
+      ForgotEmail:"",
+      ResetPassword:"",
+      ResetPassword2:""
+    };
 
     ////////////////////////////////////////////////
       $scope.CheckToken=function(){

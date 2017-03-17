@@ -10,6 +10,26 @@
 angular.module('webskeletonApp')
   .controller('ProfileCtrl', function ($scope,$window,profile,md5,requrl) {
 
+    //all ng-models declared
+    $scope.profile={
+        newUsername:"",
+        newName:"",
+        newArea:"",
+        newCity:"",
+        newState:"",
+        newPincode:"",
+        newCountry:"",
+        countryCode:"",
+        newMobile:"",
+        VCode:"",
+        oldPassword:"",
+        newPassword:"",
+        newPassword2:""
+    };
+
+
+///////////////////////////////
+
     $scope.ProfileForm=true;
     $scope.MobileForm=true;
     $scope.PasswordForm=true;

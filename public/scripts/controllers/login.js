@@ -9,6 +9,13 @@
  */
 angular.module('webskeletonApp')
   .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
+
+    //all ng-models declared 
+      $scope.login={
+        loginid:"",
+        loginpassword:"",
+        RememberMe:undefined
+      };
       
      $scope.submitForm=function(loginForm){
         if(loginForm.$valid){

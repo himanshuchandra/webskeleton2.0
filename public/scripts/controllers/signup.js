@@ -9,6 +9,14 @@
  */
 angular.module('webskeletonApp')
   .controller('SignupCtrl',function ($scope,signup,$window,md5,requrl) {
+
+    //all ng-models declared
+      $scope.signup={
+        useremail:"",
+        username:"",
+        password1:"",
+        password2:""
+    };
    
 ////////////Checking if username exists//////////////
     $scope.UsernameMessage=null;

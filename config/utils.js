@@ -74,7 +74,9 @@ const utils={
             if(err){
                 console.log(err);
             }
-            console.log(message.sid);
+            else{
+                console.log(message.sid);
+            }
         });
     },
 
