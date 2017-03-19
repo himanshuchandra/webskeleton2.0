@@ -24,7 +24,7 @@ app.use(function(request,response,next) {
 
 app.use(session({
     secret:config.sessionKey,
-    saveUninitialized:true,
+    saveUninitialized:false,
     resave:true,
     //httpOnly: true, //default true
     //secure: true,

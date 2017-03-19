@@ -44,6 +44,7 @@ angular.module('webskeletonApp')
         var print=data.data["0"];
         var userInfo=data.data["0"].userinfo;
         if(print.useremail==undefined){
+          $window.location.reload();
           $window.location.assign(requrl+"/#/login");
         }
         else{
@@ -63,6 +64,7 @@ angular.module('webskeletonApp')
           }
         }
     },function(error){
+        $window.location.reload();
         $window.location.assign(requrl+"/#/login");
     });
 
