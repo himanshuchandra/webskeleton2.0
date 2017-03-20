@@ -60,9 +60,8 @@ const dbOperations={
                 console.log("Error Occured",error);
             }
             else{
-                result=[result];
                 utils.fillWebSession(request,result);
-                commonOperations.sendLink(result[0].useremail,"emailactivate","emailactivationtoken");
+                commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 response.json({message:"pass"});
             }
         });

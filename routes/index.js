@@ -21,8 +21,8 @@ router.get('/', function(req, res, next) {
 router.post('/webindex', function(request,response) {
   if(request.session.user){
       var Status={
-          "Message":"Hello "+request.session.user["0"].username,
-          "Email":request.session.user["0"].useremail, 
+          "Message":"Hello "+request.session.user.username,
+          "Email":request.session.user.useremail, 
       }
       dbOperations.checkActivation(Status,response);
   }
@@ -38,7 +38,7 @@ router.post('/webindex', function(request,response) {
 router.post('/sendActivationLink',function(request,response){
     if(request.session.user){
         var emailObject={
-              "email":request.session.user["0"].useremail
+              "email":request.session.user.useremail
         }
         dbOperations.sendActivationLink(emailObject,response);
     }

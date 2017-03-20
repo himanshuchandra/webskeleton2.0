@@ -96,7 +96,8 @@ const dbOperations= {
                     that.socialRegister(request,response);
                 }
                 else{
-                    utils.fillWebSession(request,result);
+                    var sessionData=result["0"];
+                    utils.fillWebSession(request,sessionData);
                     response.json({message:"loggedIn"});
                 }
             }
@@ -125,7 +126,6 @@ const dbOperations= {
                 response.json({message:"Can't Add Error Occured, Try later"});
             }
             else{
-                result=[result];
                 utils.fillWebSession(request,result);
                 response.json({message:"registered"});
             }

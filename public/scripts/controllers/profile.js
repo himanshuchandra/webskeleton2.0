@@ -41,8 +41,8 @@ angular.module('webskeletonApp')
     var promise = profile.getData();
     promise.then(function(data){
 
-        var print=data.data["0"];
-        var userInfo=data.data["0"].userinfo;
+        var print=data.data;
+        var userInfo=data.data.userinfo;
         if(print.useremail==undefined){
           $window.location.reload();
           $window.location.assign(requrl+"/#/login");

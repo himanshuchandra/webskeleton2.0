@@ -6,22 +6,31 @@ const utils={
     fillWebSession:function(request,data) {
     
         var userData=data;
-        userData["0"].password1=undefined;
-        userData["0"].salt=undefined;
-        userData["0"].passwordtokenstamp=undefined;
-        userData["0"].emailactivationtoken=undefined;
-        userData["0"].forgotpasswordtoken=undefined;
-        userData["0"].mobileverificationcode=undefined;
+        userData.password1=undefined;
+        userData.salt=undefined;
+        userData.passwordtokenstamp=undefined;
+        userData.emailactivationtoken=undefined;
+        userData.forgotpasswordtoken=undefined;
+        userData.mobileverificationcode=undefined;
 
         request.session.user=userData;
-        if(userData["0"].rememberMe==true){
+        if(userData.rememberMe==true){
             var thirtyDays = 30*24*60*60*1000;
             request.session.cookie.expires = new Date(Date.now() + thirtyDays);
         }
     },
     
-    fillAppSession:function(){
+    fillAppSession:function(data){
+        const AppSession=require('./appsessdbschema');
 
+        AppSession.create(data,function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{
+                response.json({message:"pass"});
+            }
+        });
     },
 
     sessionDestroy:function(request,response){

@@ -10,7 +10,7 @@ const dbOperations={
     changeUsername:function(request,response){
         var UsernameObject=request.body;
         var newSession=request.session.user;
-        var userEmail= newSession["0"].useremail;
+        var userEmail= newSession.useremail;
         
         var obj={
             "username":UsernameObject.Username,
@@ -29,7 +29,7 @@ const dbOperations={
                         console.log("Error Occured",error);
                     }
                     else{ 
-                        newSession[0].username=obj.username;
+                        newSession.username=obj.username;
                         utils.fillWebSession(request,newSession);
                         response.json({message:"success"});
                     }
@@ -45,7 +45,7 @@ const dbOperations={
     updateProfileData:function (request,response){
         var profileObject=request.body;
         var newSession=request.session.user;
-        var userName= newSession["0"].username;
+        var userName= newSession.username;
     
         User.update({
             "username":userName
@@ -60,7 +60,7 @@ const dbOperations={
                 console.log("Error Occured",error);
             }
             else{ 
-                newSession[0].userinfo=profileObject;
+                newSession.userinfo=profileObject;
                 utils.fillWebSession(request,newSession);
                 response.json({message:"success"});
             }
@@ -71,7 +71,7 @@ const dbOperations={
     sendVerificationCode:function(request,response){
         var MobileObject=request.body;
         var Session=request.session.user;
-        var UserEmail= Session["0"].useremail;
+        var UserEmail= Session.useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
         var code=utils.randomStringGenerate(6);
         var body='Your verification code is '+code;
@@ -101,7 +101,7 @@ const dbOperations={
     verifyCode:function(request,response){
         var that=this;
         var Session=request.session.user;
-        var UserEmail= Session["0"].useremail;
+        var UserEmail= Session.useremail;
         var CodeObject=request.body;
         
         User.find({
@@ -134,7 +134,7 @@ const dbOperations={
         var CodeObject=request.body;
         var TemporaryMobile=result[0].temporarymobile;
         var newSession=request.session.user;
-        var UserEmail= newSession["0"].useremail;
+        var UserEmail= newSession.useremail;
 
         User.update({
             "useremail":UserEmail
@@ -150,7 +150,7 @@ const dbOperations={
                 console.log("Error Occured",error);
             }
             else{ 
-                newSession[0].mobile=TemporaryMobile;
+                newSession.mobile=TemporaryMobile;
                 utils.fillWebSession(request,newSession);
                 response.json({message:"pass"});
             }
@@ -161,7 +161,7 @@ const dbOperations={
     checkPassword:function (request,response){
         var that=this;
         var passwordObject=request.body;
-        var userName=request.session.user["0"].username;
+        var userName=request.session.user.username;
         User.find({
             "username":userName 
         }
@@ -200,7 +200,7 @@ const dbOperations={
         passwordObject.password1=encryptedData.hash;
         passwordObject.salt=encryptedData.salt;
 
-        var userName=request.session.user["0"].username;
+        var userName=request.session.user.username;
     
         User.update({
             "username":userName

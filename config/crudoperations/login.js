@@ -34,7 +34,8 @@ const dbOperations={
                     loginObject.loginpassword=encryptedData.hash;
                     if(result["0"].password1===loginObject.loginpassword){
                         result["0"].rememberMe=loginObject.rememberMe;
-                        utils.fillWebSession(request,result);
+                        var sessionData=result["0"];
+                        utils.fillWebSession(request,sessionData);
                         response.json({message:"success"});   
                     }
                     else{
