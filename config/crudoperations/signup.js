@@ -61,7 +61,7 @@ const dbOperations={
             }
             else{
                 result=[result];
-                utils.fillSession(request,result);
+                utils.fillWebSession(request,result);
                 commonOperations.sendLink(result[0].useremail,"emailactivate","emailactivationtoken");
                 response.json({message:"pass"});
             }

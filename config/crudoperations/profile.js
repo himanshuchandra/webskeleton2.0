@@ -30,7 +30,7 @@ const dbOperations={
                     }
                     else{ 
                         newSession[0].username=obj.username;
-                        utils.fillSession(request,newSession);
+                        utils.fillWebSession(request,newSession);
                         response.json({message:"success"});
                     }
                 });
@@ -61,7 +61,7 @@ const dbOperations={
             }
             else{ 
                 newSession[0].userinfo=profileObject;
-                utils.fillSession(request,newSession);
+                utils.fillWebSession(request,newSession);
                 response.json({message:"success"});
             }
         });
@@ -151,7 +151,7 @@ const dbOperations={
             }
             else{ 
                 newSession[0].mobile=TemporaryMobile;
-                utils.fillSession(request,newSession);
+                utils.fillWebSession(request,newSession);
                 response.json({message:"pass"});
             }
         });

@@ -96,7 +96,7 @@ const dbOperations= {
                     that.socialRegister(request,response);
                 }
                 else{
-                    utils.fillSession(request,result);
+                    utils.fillWebSession(request,result);
                     response.json({message:"loggedIn"});
                 }
             }
@@ -126,7 +126,7 @@ const dbOperations= {
             }
             else{
                 result=[result];
-                utils.fillSession(request,result);
+                utils.fillWebSession(request,result);
                 response.json({message:"registered"});
             }
         });

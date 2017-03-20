@@ -3,7 +3,7 @@
 const config =require("./config");
 const utils={
 
-    fillSession:function(request,data) {
+    fillWebSession:function(request,data) {
     
         var userData=data;
         userData["0"].password1=undefined;
@@ -18,6 +18,10 @@ const utils={
             var thirtyDays = 30*24*60*60*1000;
             request.session.cookie.expires = new Date(Date.now() + thirtyDays);
         }
+    },
+    
+    fillAppSession:function(){
+
     },
 
     sessionDestroy:function(request,response){
