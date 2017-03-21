@@ -37,7 +37,12 @@ const dbOperations= {
     //////Session destroy
     destroySession:function(request,response){
         const utils = require("../utils");
-        utils.sessionDestroy(request,response);
+        if(request.body.appCall===true && request.body.sessionid!=""){
+            utils.appSessionDestroy(request.body.sessionid,response);
+        }
+        else{
+            utils.webSessionDestroy(request,response);
+        }
     }
 
 };

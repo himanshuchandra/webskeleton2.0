@@ -4,7 +4,7 @@ const config =require("./config");
 const utils={
 
     fillWebSession:function(request,data) {
-    
+        //data is freezed object so no issue till not adding any new property
         var userData=data;
         userData.password1=undefined;
         userData.salt=undefined;
@@ -20,23 +20,45 @@ const utils={
         }
     },
     
-    fillAppSession:function(data){
+    fillAppSession:function(data,string){
         const AppSession=require('./appsessdbschema');
 
-        AppSession.create(data,function(error,result){
+        var userData=data;
+        userData._id=undefined; //prevent duplicate record error
+        userData.password1=undefined;
+        userData.salt=undefined;
+        userData.passwordtokenstamp=undefined;
+        userData.emailactivationtoken=undefined;
+        userData.forgotpasswordtoken=undefined;
+        userData.mobileverificationcode=undefined;
+
+        userData=userData.toObject();
+        userData.sessionid=string;
+        
+        AppSession.create(userData,function(error,result){
             if(error){
                 console.log("Error Occured",error);
-            }
-            else{
-                response.json({message:"pass"});
             }
         });
     },
 
-    sessionDestroy:function(request,response){
-        request.session.destroy(function(err) {
-            if(err){
-                console.log(err);
+    webSessionDestroy:function(request,response){
+        request.session.destroy(function(error) {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.json({message:"success"});
+            }
+        });
+    },
+
+    appSessionDestroy:function(id,response){
+        const AppSession=require('./appsessdbschema');
+
+        AppSession.find({sessionid:id}).remove(function(error,result){
+            if(error){
+                console.log(error);
             }
             else{
                 response.json({message:"success"});

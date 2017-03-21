@@ -1,12 +1,12 @@
 'use strict';
 
 const secrets={
-    dbUrl:"mongodb://localhost:27017/wuserdb",
-    dbCollection:"wuser2",
+    dbUrl:"mongodb://localhost:27017/iluzexdb",
+    dbCollection:"ilusers",
     sessionCollection:"appsessions",
     sessionKey:["ggggg","aaaaa","sssssss","hhhhh","ffff","kkkkkk","ttt","aaaa"],
     reqUrl:"http://localhost:1234",
-    mongoUrl:'mongodb://localhost:27017/wuserdb',
+    mongoUrl:'mongodb://localhost:27017/iluzexdb',
     defaultSessionDuration:2*60*60,
     SMTPS_EMAIL:"surveyshimanshu@gmail.com",
     SMTPS_PASSWORD:"surveys9990",

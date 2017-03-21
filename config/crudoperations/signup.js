@@ -60,9 +60,16 @@ const dbOperations={
                 console.log("Error Occured",error);
             }
             else{
-                utils.fillWebSession(request,result);
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
-                response.json({message:"pass"});
+                if(data.appCall===true){
+                    var randomString=utils.randomStringGenerate(32);
+                    utils.fillAppSession(result,randomString);
+                    response.json({message:"pass",sessionid:randomString});
+                }
+                else{
+                    utils.fillWebSession(request,result);
+                    response.json({message:"pass"});
+                }
             }
         });
     },

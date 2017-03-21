@@ -35,8 +35,15 @@ const dbOperations={
                     if(result["0"].password1===loginObject.loginpassword){
                         result["0"].rememberMe=loginObject.rememberMe;
                         var sessionData=result["0"];
-                        utils.fillWebSession(request,sessionData);
-                        response.json({message:"success"});   
+                        if(loginObject.appCall===true){
+                            var randomString=utils.randomStringGenerate(32);
+                            utils.fillAppSession(sessionData,randomString);
+                            response.json({message:"success",sessionid:randomString});
+                        }
+                        else{
+                            utils.fillWebSession(request,sessionData);
+                            response.json({message:"success"});
+                        }  
                     }
                     else{
                         response.json({message:"fail"});

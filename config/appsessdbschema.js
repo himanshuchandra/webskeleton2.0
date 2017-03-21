@@ -6,7 +6,7 @@ const config = require("./config");
 const schema = mongoose.Schema;
 
 const sessionSchema= new schema({
-    _id: String,
+    sessionid: {type:String,unique:true},
     useremail: String,
     username: String,
     role: String,
