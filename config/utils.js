@@ -3,16 +3,7 @@
 const config =require("./config");
 const utils={
 
-    fillWebSession:function(request,data) {
-        //data is freezed object so no issue till not adding any new property
-        var userData=data;
-        userData.password1=undefined;
-        userData.salt=undefined;
-        userData.passwordtokenstamp=undefined;
-        userData.emailactivationtoken=undefined;
-        userData.forgotpasswordtoken=undefined;
-        userData.mobileverificationcode=undefined;
-
+    fillWebSession:function(request,userData) {
         request.session.user=userData;
         if(userData.rememberMe==true){
             var thirtyDays = 30*24*60*60*1000;
@@ -20,18 +11,10 @@ const utils={
         }
     },
     
-    fillAppSession:function(data,string){
+    fillAppSession:function(userData,string){
         const AppSession=require('./appsessdbschema');
-
-        var userData=data;
+    
         userData._id=undefined; //prevent duplicate record error
-        userData.password1=undefined;
-        userData.salt=undefined;
-        userData.passwordtokenstamp=undefined;
-        userData.emailactivationtoken=undefined;
-        userData.forgotpasswordtoken=undefined;
-        userData.mobileverificationcode=undefined;
-
         userData=userData.toObject();
         userData.sessionid=string;
         
@@ -40,6 +23,29 @@ const utils={
                 console.log("Error Occured",error);
             }
         });
+    },
+
+    fillSession:function(request,response,result,responseObject){
+
+        //data is freezed object so no issue till not adding any new property
+        var userData=result;
+        userData.password1=undefined;
+        userData.salt=undefined;
+        userData.passwordtokenstamp=undefined;
+        userData.emailactivationtoken=undefined;
+        userData.forgotpasswordtoken=undefined;
+        userData.mobileverificationcode=undefined;
+        userData.updated=undefined;
+        
+        if(request.body.appCall===true){
+            var randomString=this.randomStringGenerate(32);
+            this.fillAppSession(userData,randomString);
+            responseObject.sessionid=randomString;
+        }
+        else{
+            this.fillWebSession(request,userData);
+        }
+        response.send(responseObject);
     },
 
     webSessionDestroy:function(request,response){

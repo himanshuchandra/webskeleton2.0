@@ -61,15 +61,10 @@ const dbOperations={
             }
             else{
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
-                if(data.appCall===true){
-                    var randomString=utils.randomStringGenerate(32);
-                    utils.fillAppSession(result,randomString);
-                    response.json({message:"pass",sessionid:randomString});
-                }
-                else{
-                    utils.fillWebSession(request,result);
-                    response.json({message:"pass"});
-                }
+                var responseObject={
+                    message:"pass",
+                };
+                utils.fillSession(request,response,result,responseObject);
             }
         });
     },

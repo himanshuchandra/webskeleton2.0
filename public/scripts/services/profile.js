@@ -34,9 +34,9 @@ angular.module('webskeletonApp')
             return defer.promise;
         },
         
-       changeUsername:function(UsernameObject){
+       changeUsername:function(usernameObject){
             var defer=$q.defer();
-            $http.post(requrl+"/profile/changeUsername",UsernameObject)
+            $http.post(requrl+"/profile/changeUsername",usernameObject)
             .then(function(data){
                 defer.resolve(data); 
             },function(error){
@@ -56,9 +56,9 @@ angular.module('webskeletonApp')
             return defer.promise;
         },
 
-        updateMobile:function(MobileObject){
+        updateMobile:function(mobileObject){
             var defer=$q.defer();
-            $http.post(requrl+"/profile/updateMobile",MobileObject)
+            $http.post(requrl+"/profile/updateMobile",mobileObject)
             .then(function(data){
                 defer.resolve(data); 
             },function(error){
@@ -67,9 +67,9 @@ angular.module('webskeletonApp')
             return defer.promise;
         },
 
-        verifyCode:function(CodeObject){
+        verifyCode:function(codeObject){
             var defer=$q.defer();
-            $http.post(requrl+"/profile/verifyCode",CodeObject)
+            $http.post(requrl+"/profile/verifyCode",codeObject)
             .then(function(data){
                 defer.resolve(data); 
             },function(error){

@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$window,$location,requrl,md5) {
+  .controller('ForgotpasswordCtrl', function ($scope,forgotpassword,$location,requrl,md5) {
 
     //all ng-models declared
     $scope.forgotpassword={

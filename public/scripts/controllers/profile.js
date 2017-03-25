@@ -185,11 +185,12 @@ angular.module('webskeletonApp')
 
     $scope.submitMobileForm=function(mobileForm){
         if(mobileForm.$valid){
-              $scope.ChangeMobile();
-      }
-      else{
-        $scope.MobileMessage="Enter valid details";
-      }
+            $scope.MobileMessage="Sending..";
+            $scope.ChangeMobile();
+        }
+        else{
+          $scope.MobileMessage="Enter valid details";
+        }
     };
 
     $scope.ChangeMobile=function(){
@@ -243,6 +244,12 @@ angular.module('webskeletonApp')
           else if(data.data.message==="unknown"){
             $scope.CodeMessage="Not LoggedIn";
             $window.location.reload();
+          }
+          else if(data.data.message==="exists"){
+            $scope.CodeMessage=undefined;
+            $scope.HideMobileForm=false;
+            $scope.HideCodeForm=true;
+            $scope.MobileMessage="Mobile no. is already registered! Try another one";
           }
           else{
             $scope.CodeMessage="Error! Try again later";

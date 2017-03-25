@@ -96,9 +96,11 @@ const dbOperations= {
                     that.socialRegister(request,response);
                 }
                 else{
-                    var sessionData=result["0"];
-                    utils.fillWebSession(request,sessionData);
-                    response.json({message:"loggedIn"});
+                    var sessionData=result[0];
+                    var responseObject={
+                        message:"loggedIn",
+                    };
+                    utils.fillSession(request,response,sessionData,responseObject);
                 }
             }
             else{
@@ -126,8 +128,10 @@ const dbOperations= {
                 response.json({message:"Can't Add Error Occured, Try later"});
             }
             else{
-                utils.fillWebSession(request,result);
-                response.json({message:"registered"});
+                var responseObject={
+                    message:"registered",
+                };
+                utils.fillSession(request,response,result,responseObject);
             }
         });
     },
@@ -158,7 +162,22 @@ const dbOperations= {
             }
         });
         
-    }
+    },
+
+    ///////// Mobile Application only operations////////////
+
+    getProfileData:function(id,userData,callback){
+        const AppSession=require('../appsessdbschema');
+        AppSession.find({sessionid:id},function(error,result){
+            if(error){
+                console.log(error);
+            }
+            else{
+                userData=result[0];
+            }
+            callback(userData);
+        });
+    },
 };
 
 module.exports =dbOperations; 

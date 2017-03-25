@@ -7,10 +7,9 @@ const commonOperations=require("./commonoperations");
 const dbOperations={
 
     //Updating username
-    changeUsername:function(request,response){
+    changeUsername:function(request,response,session){
         var UsernameObject=request.body;
-        var newSession=request.session.user;
-        var userEmail= newSession.useremail;
+        var userEmail= session.useremail;
         
         var obj={
             "username":UsernameObject.Username,
@@ -21,7 +20,8 @@ const dbOperations={
                 User.update({"useremail":userEmail}, 
                 {
                     $set:{
-                        "username":obj.username
+                        "username":obj.username,
+                        "updated":true
                     }
                 },
                 function(error,result){
@@ -29,8 +29,6 @@ const dbOperations={
                         console.log("Error Occured",error);
                     }
                     else{ 
-                        newSession.username=obj.username;
-                        utils.fillWebSession(request,newSession);
                         response.json({message:"success"});
                     }
                 });
@@ -42,17 +40,17 @@ const dbOperations={
     },
 
     ////updating info
-    updateProfileData:function (request,response){
+    updateProfileData:function (request,response,session){
         var profileObject=request.body;
-        var newSession=request.session.user;
-        var userName= newSession.username;
+        var userName= session.username;
     
         User.update({
             "username":userName
         }, 
         {
             $set:{
-                "userinfo":profileObject
+                "userinfo":profileObject,
+                "updated":true,
             }
         }
         ,function(error,result){
@@ -60,22 +58,19 @@ const dbOperations={
                 console.log("Error Occured",error);
             }
             else{ 
-                newSession.userinfo=profileObject;
-                utils.fillWebSession(request,newSession);
                 response.json({message:"success"});
             }
         });
     }, 
     /////////////Mobile Number Verifiction 
     ////Send Sms
-    sendVerificationCode:function(request,response){
+    sendVerificationCode:function(request,response,session){
         var MobileObject=request.body;
-        var Session=request.session.user;
-        var UserEmail= Session.useremail;
+        var UserEmail= session.useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
         var code=utils.randomStringGenerate(6);
         var body='Your verification code is '+code;
-        //sms is sent even if the useris not found
+       
         User.update({
             "useremail":UserEmail
         }, 
@@ -98,10 +93,9 @@ const dbOperations={
     },
 
     ////verify code
-    verifyCode:function(request,response){
+    verifyCode:function(request,response,session){
         var that=this;
-        var Session=request.session.user;
-        var UserEmail= Session.useremail;
+        var UserEmail= session.useremail;
         var CodeObject=request.body;
         
         User.find({
@@ -123,18 +117,38 @@ const dbOperations={
                     response.json({message:"fail"});
                 }
                 else{
-                    that.setMobile(result,request,response);
+                    that.checkMobileExists(result,response);
                 }
             } 
         });
     },
 
+     ////Check if mobile no. already exists
+    checkMobileExists:function(result,response){
+        var that=this;
+        var oldResult=result;
+
+        User.find({
+            "mobile":result[0].temporarymobile
+        },function(error,result){
+            if(error){
+                console.log("Error Occured",error);
+            }
+            else{
+                if(result[0]!=undefined){
+                    response.json({message:"exists"});
+                }
+                else{
+                    that.setMobile(oldResult,response);
+                }
+            }
+        });        
+    },
+
     ////Updating Mobileno.
-    setMobile:function(result,request,response){
-        var CodeObject=request.body;
+    setMobile:function(result,response){
         var TemporaryMobile=result[0].temporarymobile;
-        var newSession=request.session.user;
-        var UserEmail= newSession.useremail;
+        var UserEmail=result[0].useremail;
 
         User.update({
             "useremail":UserEmail
@@ -144,24 +158,23 @@ const dbOperations={
                 "mobile":TemporaryMobile,
                 "temporarymobile":undefined,
                 "mobileverificationcode":undefined,
+                "updated":true
             }
         },function(error,result){
             if(error){
                 console.log("Error Occured",error);
             }
             else{ 
-                newSession.mobile=TemporaryMobile;
-                utils.fillWebSession(request,newSession);
                 response.json({message:"pass"});
             }
         });
     },
 
     //////Checking old password
-    checkPassword:function (request,response){
+    checkPassword:function (request,response,session){
         var that=this;
         var passwordObject=request.body;
-        var userName=request.session.user.username;
+        var userName=session.username;
         User.find({
             "username":userName 
         }
@@ -175,11 +188,11 @@ const dbOperations={
                 }
                 else{
                     const encrypt=require('../encrypt');
-                    var salt=result["0"].salt;
+                    var salt=result[0].salt;
                     var encryptedData=encrypt.sha512(passwordObject.oldpassword,salt);
 
                     passwordObject.oldpassword=encryptedData.hash;
-                    if(result["0"].password1===passwordObject.oldpassword){
+                    if(result[0].password1===passwordObject.oldpassword){
                         that.setNewPassword(request,response);
                     }
                     else{
@@ -220,6 +233,7 @@ const dbOperations={
             }
         });
     },
+
 };
 
 module.exports =dbOperations;

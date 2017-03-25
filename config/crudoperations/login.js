@@ -28,22 +28,17 @@ const dbOperations={
                 }
                 else{
                     const encrypt=require('../encrypt');
-                    var salt=result["0"].salt;
+                    var salt=result[0].salt;
                     var encryptedData=encrypt.sha512(loginObject.loginpassword,salt);
 
                     loginObject.loginpassword=encryptedData.hash;
-                    if(result["0"].password1===loginObject.loginpassword){
-                        result["0"].rememberMe=loginObject.rememberMe;
-                        var sessionData=result["0"];
-                        if(loginObject.appCall===true){
-                            var randomString=utils.randomStringGenerate(32);
-                            utils.fillAppSession(sessionData,randomString);
-                            response.json({message:"success",sessionid:randomString});
-                        }
-                        else{
-                            utils.fillWebSession(request,sessionData);
-                            response.json({message:"success"});
-                        }  
+                    if(result[0].password1===loginObject.loginpassword){
+                        result[0].rememberMe=loginObject.rememberMe;
+                        var sessionData=result[0];
+                        var responseObject={
+                            message:"success",
+                        };
+                        utils.fillSession(request,response,sessionData,responseObject); 
                     }
                     else{
                         response.json({message:"fail"});

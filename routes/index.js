@@ -19,28 +19,48 @@ router.get('/', function(req, res, next) {
 
 ///Check login Status
 router.post('/webindex', function(request,response) {
-  if(request.session.user){
-      var Status={
-          "Message":"Hello "+request.session.user.username,
-          "Email":request.session.user.useremail, 
-      }
-      dbOperations.checkActivation(Status,response);
-  }
-  else{
-        var Status={
-            "Message":"Login/SignUp",
-      }
-      response.send(Status);
-  }
+    if(request.body.appCall===true && request.body.sessionid!=undefined){
+        const validate=require("../config/validate");
+        var isValidSessionid=validate.string(request.body.sessionid);
+        if(isValidSessionid===true){
+            var userData={};
+            const commonOperations=require("../config/crudoperations/commonoperations");
+            commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
+                dbOperations.checkSession(request,response,userData);
+            });
+        }
+        else{
+            response.json({message:"fail"});
+        }
+    }
+    else if(request.session.user){
+        dbOperations.checkSession(request,response,request.session.user);
+    }
+    else{
+        response.json({message:"fail"});
+    }
 });
 
 ///Send email activation link
 router.post('/sendActivationLink',function(request,response){
-    if(request.session.user){
-        var emailObject={
-              "email":request.session.user.useremail
+    if(request.body.appCall===true && request.body.sessionid!=undefined){
+        const validate=require("../config/validate");
+        var isValidSessionid=validate.string(request.body.sessionid);
+        if(isValidSessionid===true){
+            var userData={};
+            const commonOperations=require("../config/crudoperations/commonoperations");
+            commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
+                var userEmail=userData.useremail;
+                dbOperations.sendActivationLink(userEmail,response);
+            });
         }
-        dbOperations.sendActivationLink(emailObject,response);
+        else{
+            response.json({message:"unknown"});
+        }
+    }
+    else if(request.session.user){
+        var userEmail=request.session.useremail;
+        dbOperations.sendActivationLink(userEmail,response);
     }
     else{
         response.json({message:"unknown"});
@@ -49,6 +69,16 @@ router.post('/sendActivationLink',function(request,response){
 
 ///Logging out
 router.post('/logout',function(request,response){
+    if(request.body.appCall===true && request.body.sessionid!=undefined){
+        const validate=require('../config/validate');
+        var isValidSessionid=validate.string(request.body.sessionid)
+        if(isValidSessionid===true){
+            request.body.sessionidValid=true;
+        }
+        else{
+            response.json({message:"success"});
+        }
+    }
     dbOperations.destroySession(request,response);
 });
 

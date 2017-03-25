@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('FinalizeCtrl', function ($timeout,$scope,$window) {
+  .controller('FinalizeCtrl', function ($timeout,$scope) {
   $scope.loading_screen.finish();
 });
 
