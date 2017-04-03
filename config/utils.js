@@ -50,7 +50,7 @@ const utils={
                 });
             }
             var randomString=this.randomStringGenerate(32);
-            responseObject.sessionid=randomString;
+            responseObject.sessionid=randomString+userData.username;
             responseObject.userData=userData;
             this.fillAppSession(userData,responseObject,response);
         }
