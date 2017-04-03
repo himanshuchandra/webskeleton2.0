@@ -21,7 +21,6 @@ const dbOperations={
                 {
                     $set:{
                         "username":obj.username,
-                        "updated":true
                     }
                 },
                 function(error,result){
@@ -42,15 +41,22 @@ const dbOperations={
     ////updating info
     updateProfileData:function (request,response,session){
         var profileObject=request.body;
-        var userName= session.username;
+        var userInfo={};
+        userInfo.fullname=profileObject.fullname;
+        userInfo.area=profileObject.area;
+        userInfo.city=profileObject.city;
+        userInfo.state=profileObject.state;
+        userInfo.pincode=profileObject.pincode;
+        userInfo.country=profileObject.country;
+
+        var userEmail= session.useremail;
     
         User.update({
-            "username":userName
+            "useremail":userEmail
         }, 
         {
             $set:{
-                "userinfo":profileObject,
-                "updated":true,
+                "userinfo":userInfo,
             }
         }
         ,function(error,result){
@@ -158,7 +164,6 @@ const dbOperations={
                 "mobile":TemporaryMobile,
                 "temporarymobile":undefined,
                 "mobileverificationcode":undefined,
-                "updated":true
             }
         },function(error,result){
             if(error){
@@ -174,9 +179,9 @@ const dbOperations={
     checkPassword:function (request,response,session){
         var that=this;
         var passwordObject=request.body;
-        var userName=session.username;
+        var userEmail=session.useremail;
         User.find({
-            "username":userName 
+            "useremail":userEmail
         }
         ,function(error,result){
             if(error){
@@ -193,7 +198,7 @@ const dbOperations={
 
                     passwordObject.oldpassword=encryptedData.hash;
                     if(result[0].password1===passwordObject.oldpassword){
-                        that.setNewPassword(request,response);
+                        that.setNewPassword(request,response,session);
                     }
                     else{
                         response.json({message:"fail"});
@@ -203,7 +208,7 @@ const dbOperations={
         });
     },
     //////////////Setting new password
-    setNewPassword:function (request,response){
+    setNewPassword:function (request,response,session){
         var passwordObject=request.body;
 
         const encrypt=require('../encrypt');
@@ -213,10 +218,10 @@ const dbOperations={
         passwordObject.password1=encryptedData.hash;
         passwordObject.salt=encryptedData.salt;
 
-        var userName=request.session.user.username;
+        var userEmail=session.useremail;
     
         User.update({
-            "username":userName
+            "useremail":userEmail
         }, 
         {
             $set:{

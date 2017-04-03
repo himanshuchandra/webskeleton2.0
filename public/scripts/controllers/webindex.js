@@ -26,32 +26,40 @@ angular.module('webskeletonApp')
      $scope.ProfileButton=true;
      $scope.LogoutButton=true;
 
-     var Email;
      $scope.ActivationMessage=undefined;
      
-     var promise = webindex.checkStatus();
+     $scope.loadData=function(){
+        var promise = webindex.checkStatus();
         promise.then(function(data){
             if(data.data.message==="fail"){
                 $scope.loginStatus="Login/SignUp";
             }
             else if(data.data.Message!=undefined){
                 $scope.loginStatus=data.data.Message;
-                if(data.data.Email!=undefined){
-                    $scope.LoginButton=true;
-                    $scope.SignupButton=true;
-                    $scope.ProfileButton=false;
-                    $scope.LogoutButton=false;
-                    Email=data.data.Email;
-                    if(data.data.ActivationStatus===false){
-                        $scope.Status="Your Email address "+data.data.Email+" is not Verified";
-                        $scope.ActivationStatus=false;
-                    }
+                webindex.userData=data.data.userData;
+
+                if(data.data.Email!=undefined && data.data.ActivationStatus===false){
+                    $scope.Status="Your Email address "+data.data.Email+" is not Verified";
+                    $scope.ActivationStatus=false;
+                    
                 }
+                $scope.LoginButton=true;
+                $scope.SignupButton=true;
+                $scope.ProfileButton=false;
+                $scope.LogoutButton=false;
             }
             else{
                 $scope.loginStatus="Login/SignUp";
             }
-      });
+            webindex.needReload=false;
+        });
+      };
+      
+      $scope.$watch(function(){return webindex.needReload},function(newValue,oldValue){
+        if(webindex.needReload===true){
+          $scope.loadData(); 
+        }
+      },true);
 
       ////////////////////////////
       $scope.sendLinkButton=false;

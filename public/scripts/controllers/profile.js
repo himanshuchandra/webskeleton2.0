@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ProfileCtrl', function ($scope,$window,profile,md5,requrl) {
+  .controller('ProfileCtrl', function ($scope,$window,webindex,profile,md5,requrl,$route) {
 
     //all ng-models declared
     $scope.profile={
@@ -36,8 +36,42 @@ angular.module('webskeletonApp')
     $scope.UsernameForm=true;
     $scope.toggleButton=false;
     $scope.EditUsername="Edit Username";
-    
 
+//////Loading data from index service 
+    $scope.loadData=function(){
+        if(webindex.userData.useremail!=undefined){
+            var print=webindex.userData;
+            var userInfo=webindex.userData.userinfo;
+
+            $scope.Email=print.useremail;
+            $scope.uName=print.username;
+            if(print.mobile!=undefined){
+                $scope.Mobile=print.mobile;
+            }
+            if(userInfo){
+                $scope.Name=userInfo.fullname;
+                $scope.Area=userInfo.area;
+                $scope.City=userInfo.city;
+                $scope.Pincode=userInfo.pincode;
+                $scope.State=userInfo.state;
+                $scope.Country=userInfo.country;
+                $scope.FillPlaceholders();
+            }
+        }
+        else{  
+            $window.location.reload(); 
+            $window.location.assign(requrl+"/#/login");
+        }
+    };
+
+    $scope.$watch(function(){return webindex.userData},function(newValue,oldValue){
+        if(!angular.equals(webindex.userData, {})){
+            $scope.loadData(); 
+        }
+    },true);
+
+    
+/*  Optional function to load profile data from session instead of index service
     var promise = profile.getData();
     promise.then(function(data){
 
@@ -67,6 +101,7 @@ angular.module('webskeletonApp')
         $window.location.reload();
         $window.location.assign(requrl+"/#/login");
     });
+  */
 
  //////////// Show-Hide form button logic  ////////
     $scope.ShowProfileForm=function(){
@@ -169,7 +204,8 @@ angular.module('webskeletonApp')
           }
           else if(data.data.message==="success"){
             $scope.ProfileResult="Updated";
-            $window.location.reload();
+            webindex.needReload=true;
+            $route.reload();
           }
           else{
             $scope.ProfileResult="Error! Try again later";
@@ -236,7 +272,8 @@ angular.module('webskeletonApp')
         promise.then(function(data) {
           if(data.data.message==="pass"){
             $scope.CodeMessage="Verified & Updated";
-            $window.location.reload();
+            webindex.needReload=true;
+            $route.reload();
           }
           else if(data.data.message==="fail"){
             $scope.CodeMessage="Wrong Code entered";
@@ -249,6 +286,7 @@ angular.module('webskeletonApp')
             $scope.CodeMessage=undefined;
             $scope.HideMobileForm=false;
             $scope.HideCodeForm=true;
+            $scope.profile.VCode=undefined;
             $scope.MobileMessage="Mobile no. is already registered! Try another one";
           }
           else{
@@ -262,6 +300,7 @@ angular.module('webskeletonApp')
     $scope.SendAgain=function(){
         $scope.profile.VCode=null;
         $scope.CodeMessage=undefined;
+        $scope.MobileMessage=undefined;
         $scope.HideMobileForm=false;
         $scope.HideCodeForm=true;
     };
@@ -311,7 +350,7 @@ angular.module('webskeletonApp')
     promise.then(function(data) {
       if(data.data.message==="success"){
           $scope.PasswordResult="Updated";
-          $window.location.reload();
+          $route.reload();
       }
       else if(data.data.message==="unknown"){
           $scope.PasswordResult="Not LoggedIn";
@@ -388,7 +427,8 @@ angular.module('webskeletonApp')
       promise.then(function(data){
         if(data.data.message==="success"){
           $scope.UsernameResult="Username changed";
-          $window.location.reload();
+          webindex.needReload=true;
+          $route.reload();
         }
         else if(data.data.message==="unknown"){
           $scope.UsernameResult="Not LoggedIn";

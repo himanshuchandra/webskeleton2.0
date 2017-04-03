@@ -11,7 +11,7 @@ angular.module('webskeletonApp')
   .factory('profile', function ($http,$q,requrl) {
 
     var object = {
-
+        /* Optional call if loading data from session
         getData:function(){
           var defer = $q.defer(); 
           $http.post(requrl+'/profile/getData')
@@ -21,7 +21,7 @@ angular.module('webskeletonApp')
                defer.reject(error);
            }) 
             return defer.promise;
-        },
+        },*/
 
         checkUsername:function(usernameObj){
            var defer = $q.defer();

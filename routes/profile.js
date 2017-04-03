@@ -9,6 +9,7 @@ const dbOperations = require("../config/crudoperations/profile");
 const commonOperations=require("../config/crudoperations/commonoperations");
 const validate =require("../config/validate");
 
+/*Optional call if loading data from session
 ///////////Show Profile Data
 router.post('/getData', function(request,response) {
     if(request.body.appCall===true && request.body.sessionid!=undefined){
@@ -30,7 +31,7 @@ router.post('/getData', function(request,response) {
         response.send("unknown");
     }
 });
-
+*/
 /////////////Change Username
 router.post('/changeUsername',function(request,response){
    
@@ -53,7 +54,12 @@ router.post('/changeUsername',function(request,response){
     else if(isValidUsername===true && isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-            dbOperations.changeUsername(request,response,userData);
+            if(userData!=undefined){
+                dbOperations.changeUsername(request,response,userData);
+            }
+            else{
+                response.json({message:"unknown"});
+            }
         });
     }
     else{
@@ -90,7 +96,12 @@ router.post('/updateProfileData',function(request,response){
         && isValidPincode===true && isValidCountry===true && isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-            dbOperations.updateProfileData(request,response,userData);
+            if(userData!=undefined){
+                dbOperations.updateProfileData(request,response,userData);
+            }
+            else{
+                response.json({message:"unknown"});
+            }
         });
     }
     else{
@@ -123,7 +134,12 @@ router.post('/updateMobile',function(request,response){
     else if(isValidCountryCode===true && isValidMobile===true && isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-            dbOperations.sendVerificationCode(request,response,userData);
+            if(userData!=undefined){
+                dbOperations.sendVerificationCode(request,response,userData);
+            }
+            else{
+                response.json({message:"unknown"});
+            }
         });
     }
     else{
@@ -154,7 +170,12 @@ router.post('/verifyCode',function(request,response){
     else if(isValidCode===true && isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-            dbOperations.verifyCode(request,response,userData);
+            if(userData!=undefined){
+                dbOperations.verifyCode(request,response,userData);
+            }
+            else{
+                response.json({message:"unknown"});
+            }
         });
     }
     else{
@@ -186,7 +207,12 @@ router.post('/setNewPassword',function(request,response){
     else if(isValidOldPassword===true && isValidNewPassword===true && isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-            dbOperations.checkPassword(request,response,userData);
+            if(userData!=undefined){
+                dbOperations.checkPassword(request,response,userData);
+            }
+            else{
+                response.json({message:"unknown"});
+            }
         });
     }
     else{

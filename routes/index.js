@@ -26,7 +26,12 @@ router.post('/webindex', function(request,response) {
             var userData={};
             const commonOperations=require("../config/crudoperations/commonoperations");
             commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-                dbOperations.checkSession(request,response,userData);
+                if(userData!=undefined){
+                    dbOperations.checkSession(request,response,userData);
+                }
+                else{
+                    response.json({message:"fail"});
+                }
             });
         }
         else{
@@ -50,8 +55,13 @@ router.post('/sendActivationLink',function(request,response){
             var userData={};
             const commonOperations=require("../config/crudoperations/commonoperations");
             commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-                var userEmail=userData.useremail;
-                dbOperations.sendActivationLink(userEmail,response);
+                if(userData!=undefined){
+                    var userEmail=userData.useremail;
+                    dbOperations.sendActivationLink(userEmail,response);
+                }
+                else{
+                    response.json({message:"unknown"});
+                }
             });
         }
         else{

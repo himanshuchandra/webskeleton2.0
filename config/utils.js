@@ -1,6 +1,8 @@
 'use strict';
 
 const config =require("./config");
+const AppSession=require('./appsessdbschema');
+
 const utils={
 
     fillWebSession:function(request,userData) {
@@ -11,16 +13,18 @@ const utils={
         }
     },
     
-    fillAppSession:function(userData,string){
-        const AppSession=require('./appsessdbschema');
-    
+    fillAppSession:function(userData,responseObject,response){
+        
         userData._id=undefined; //prevent duplicate record error
         userData=userData.toObject();
-        userData.sessionid=string;
+        userData.sessionid=responseObject.sessionid;
         
         AppSession.create(userData,function(error,result){
             if(error){
                 console.log("Error Occured",error);
+            }
+            else{
+                response.send(responseObject);
             }
         });
     },
@@ -38,14 +42,23 @@ const utils={
         userData.updated=undefined;
         
         if(request.body.appCall===true){
+            if(request.body.sessionid!=undefined){
+                AppSession.find({sessionid:request.body.sessionid}).remove(function(error,result){
+                    if(error){
+                        console.log(error);
+                    }
+                });
+            }
             var randomString=this.randomStringGenerate(32);
-            this.fillAppSession(userData,randomString);
             responseObject.sessionid=randomString;
+            responseObject.userData=userData;
+            this.fillAppSession(userData,responseObject,response);
         }
         else{
             this.fillWebSession(request,userData);
+            responseObject.userData=userData;
+            response.send(responseObject);
         }
-        response.send(responseObject);
     },
 
     webSessionDestroy:function(request,response){
@@ -60,7 +73,6 @@ const utils={
     },
 
     appSessionDestroy:function(id,response){
-        const AppSession=require('./appsessdbschema');
 
         AppSession.find({sessionid:id}).remove(function(error,result){
             if(error){

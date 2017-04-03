@@ -32,39 +32,18 @@ const dbOperations= {
                     status.Message="Hello "+result[0].username;
                     status.Email=result[0].useremail;
                     status.ActivationStatus=result[0].emailverified;
-            
-                    if(result[0].updated===true){
+                    if(result[0].username!=userData.username || result[0].userinfo!=userData.userinfo){
                         var sessionData=result[0];
-                        that.updateSession(request,response,sessionData,status);
+                        const utils = require("../utils");
+                        utils.fillSession(request,response,sessionData,status); 
                     }
                     else{
+                        status.userData=userData;
                         response.send(status);
                     }
                 }
             }
         })
-    },
-
-    ////update session
-    updateSession:function(request,response,sessionData,status){
-        var userEmail=sessionData.useremail;
-        User.update({
-            useremail:userEmail
-        },
-        {
-            $set:{
-                "updated":false,
-            }
-        },
-        function(error,result){
-            if(error){
-                console.log("Error occured",error);
-            }
-            else{
-                const utils = require("../utils");
-                utils.fillSession(request,response,sessionData,status); 
-            }
-        }); 
     },
 
     //////Session destroy

@@ -43,8 +43,13 @@ const dbOperations={
     /////////////Adding new user
     addUser:function(request,response){
         const utils =require("../utils");
-        var data =request.body;
 
+        var data={};
+        data.useremail=request.body.useremail;
+        data.username=request.body.username;
+        data.password1=request.body.password1;
+        data.role="customer";
+    
         const encrypt=require('../encrypt');
         var salt=encrypt.genRandomString(16);
         var encryptedData=encrypt.sha512(data.password1,salt);

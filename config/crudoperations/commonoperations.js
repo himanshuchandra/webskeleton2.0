@@ -112,10 +112,13 @@ const dbOperations= {
     ////////Register new User
     socialRegister:function(request,response){
         var SocialObject =request.body;
+        var aPosition=SocialObject.Email.indexOf("@");
+        var userName=SocialObject.Email.substring(0,aPosition);
+
         var UserData={};
         UserData.userinfo={};
         UserData.useremail=SocialObject.Email;
-        UserData.username=SocialObject.Email;
+        UserData.username=userName;
         UserData.password1="social";
         UserData.role="customer";
         UserData.registrationdate=new Date();

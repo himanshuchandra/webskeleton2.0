@@ -12,6 +12,9 @@ angular.module('webskeletonApp')
       
       var object = {
 
+        needReload:true,
+        userData:{},
+
         checkStatus:function(){
           var defer = $q.defer(); 
           $http.post(requrl+'/webindex')

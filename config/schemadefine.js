@@ -6,14 +6,14 @@ const config = require("./config");
 const schema = mongoose.Schema;
 // Step -4  Creating Schema for the Collection
 const userSchema= new schema({
-  useremail:  {type:String,unique:true},
-  username: {type:String,unique:true},
-  password1: String,
-  salt: String,
-  mobile:{type:String,unique:true},
+  useremail:String,
+  username:String,
+  password1:String,
+  salt:String,
+  mobile:String,
   userinfo: {
     fullname:String,
-    area: String,
+    area:String,
     city:String,
     state:String,
     pincode: String,

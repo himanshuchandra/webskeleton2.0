@@ -3,7 +3,7 @@
     <form name="loginForm"  ng-submit="submitForm(loginForm)" novalidate>
 
     <input type="text" ng-model="login.loginid" name="validloginid"
-     pattern="[a-zA-Z0-9_.@!#$%^&*-+=><?/~`'|]{5,}" placeholder="Email/Username" required>
+     pattern="[a-zA-Z0-9_.@!#$%^&*-+=><?/~`'|]{5,50}" placeholder="Email/Username" required>
     <span  ng-show="loginForm.validloginid.$touched &&
      loginForm.validloginid.$error.pattern && !loginForm.validloginid.$error.required">
      Invalid email/username </span>
