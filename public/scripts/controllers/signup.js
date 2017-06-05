@@ -8,7 +8,11 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('SignupCtrl',function ($scope,signup,$window,md5,requrl) {
+  .controller('SignupCtrl',function ($scope,signup,webindex,$window,md5,requrl) {
+
+    if(webindex.userData.useremail!=undefined){
+        $window.location.assign(requrl);
+    }
 
     //all ng-models declared
       $scope.signup={

@@ -29,12 +29,13 @@ angular.module('webskeletonApp')
    }());
 })
 
-.controller('FacebookCtrl', function ($scope,$window,requrl,$facebook,socialsignin) {
+.controller('FacebookCtrl', function ($scope,$window,requrl,$facebook,socialsignin,$location,$http) {
+
 
   var FEmail=null;
   var FullName=null;
 
-  $scope.SignInFacebook = function() {
+  $scope.SignInFacebookold = function() {
     try{
       $facebook.login().then(function() {
         $scope.Refresh();
@@ -88,6 +89,16 @@ angular.module('webskeletonApp')
         $scope.FacebookMessage = "Error! Try again later or use the login form.";
     });
   };
+
+    // $scope.SignInFacebook=function(){
+    //     // var promise=socialsignin.socialFacebook();
+    //     // promise.then(function(data){
+    //     //     console.log(data);
+    //     // },function(error){
+    //     // $scope.FacebookMessage = error;
+    //     // })
+    //     $http.post('/social/socialFacebook');
+    // };
 
 });
 //End Urls For facebook

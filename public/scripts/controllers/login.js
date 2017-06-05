@@ -8,7 +8,11 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
+  .controller('LoginCtrl', function ($scope,login,webindex,$window,requrl,md5) {
+
+    if(webindex.userData.useremail!=undefined){
+        $window.location.assign(requrl);
+    }
 
     //all ng-models declared 
       $scope.login={
@@ -44,8 +48,11 @@ angular.module('webskeletonApp')
                 $window.location.reload();
                 $window.location.assign(requrl);
             }
+            else if(data.data.message==="conflict"){
+                $scope.result="Please specify country code if using Mobile number";
+            }
             else if(data.data.message==="fail"){
-                $scope.result="Wrong email or password";
+                $scope.result="Wrong Email/Username/Mobile or password";
             }
             else{
                 $scope.result="Error occurred! Try again later.";

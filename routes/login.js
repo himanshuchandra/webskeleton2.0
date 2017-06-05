@@ -13,8 +13,9 @@ router.post('/login',function(request,response){
     var loginObject=request.body;
     var isValidUserEmail=validate.email(loginObject.loginid);
     var isValidUsername=validate.username(loginObject.loginid);
+    var isValidMobile=validate.mobile(loginObject.loginid);
     var isValidPassword=validate.password(loginObject.loginpassword);
-    if((isValidUserEmail===true || isValidUsername===true) && isValidPassword===true
+    if((isValidUserEmail===true || isValidUsername===true || isValidMobile===true) && isValidPassword===true
     && (loginObject.rememberMe===true || loginObject.rememberMe===false || loginObject.rememberMe===undefined)){
         dbOperations.doLogin(request,response);
     }
