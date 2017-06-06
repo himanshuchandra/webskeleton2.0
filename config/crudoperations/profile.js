@@ -191,6 +191,9 @@ const dbOperations={
                 if(result.length<1){
                     response.json({message:"notFound"});
                 }
+                else if(result[0].salt===undefined){
+                    response.json({message:"fail"});
+                }
                 else{
                     const encrypt=require('../encrypt');
                     var salt=result[0].salt;
