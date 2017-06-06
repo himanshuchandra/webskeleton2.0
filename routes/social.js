@@ -3,31 +3,62 @@
 ///Routing for Oauth calls
 
 const express = require('express');
-const router = express.Router();
 
+const app = require("../app");
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+app.use(passport.initialize());
+
+const router = express.Router();
+
+const dbOperations = require("../config/crudoperations/commonoperations");
+const secrets= require("../config/config");
 
 passport.use(new FacebookStrategy({
-    clientID: "1853899954884964",
-    clientSecret: "0f5d1a490c0febe2af3a4d531c236acd",
-    callbackURL: "http://localhost:1234/social/auth/facebook/callback",
-    passReqToCallback : true,
-    profileFields: ['id', 'emails', 'name']
+    passReqToCallback: true,
+    clientID: secrets.FACEBOOK_CLIENT_ID,  // AppId
+    clientSecret: secrets.FACEBOOK_CLIENT_SECRET,  // AppSecret
+    callbackURL: secrets.reqUrl+"/social/auth/facebook/callback",
+	profileFields:['id','email','name']
   },
-  function (accessToken, refreshToken, profile, done) {      
-      console.log("CCCCCCCC");      
-            process.nextTick(function () {                
-               console.log("aCCCESSS TOKKKEN",accessToken);
-            });                 
-    }
-       
-));
+  function(request,accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+	    
+        passport.serializeUser(function(user, done) {
+            done(null, user);
+        });
+
+        passport.deserializeUser(function(user, done) {
+            done(null, user);
+        });	
+
+        if(profile._json.email===undefined){
+            return done(null);
+        }
+        else{
+            request.body.Email=profile._json.email;
+            request.body.FullName=profile._json.first_name+" "+profile._json.last_name;
+            request.body.facebookId=profile._json.id;
+            request.body.accessToken=accessToken;
+            request.body.Social="Facebook";
+            var response={
+                send:function(){
+                    return;
+                }
+            };
+            dbOperations.socialSignin(request,response,done);
+        }
+	}
+)
+}));
+
 
 router.get('/socialFacebook', passport.authenticate('facebook',{ scope: ['email']}));
 
- router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+router.get('/auth/facebook/callback', passport.authenticate('facebook',{
+    successRedirect: '/',
+    failureRedirect: '/' 
+}));
 
 
 module.exports = router;

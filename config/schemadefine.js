@@ -28,7 +28,9 @@ const userSchema= new schema({
   role:String,
   registrationdate:Date,
   socialconnection:String,
-  updated:Boolean
+  updated:Boolean,
+  facebookId:String,
+  facebookAccessToken:String
 });
 
 const User = mongoose.model(config.dbCollection,userSchema); 

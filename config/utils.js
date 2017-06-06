@@ -40,6 +40,7 @@ const utils={
         userData.forgotpasswordtoken=undefined;
         userData.mobileverificationcode=undefined;
         userData.updated=undefined;
+        userData.facebookAccessToken=undefined;
         
         if(request.body.appCall===true){
             if(request.body.sessionid!=undefined){

@@ -78,9 +78,73 @@ const dbOperations= {
     },  
 
 
+    // //////////////////Social Signin//////////////////////////
+    // ///////////Check if user exists
+    // socialSignin:function(request,response){
+    //     var that=this;
+    //     var SocialObject=request.body;
+        
+    //     User.find({
+    //         "useremail":SocialObject.Email
+    //     }
+    //     ,function(error,result){
+    //         if(error){
+    //             console.log("Error Occured",error);
+    //         }
+    //         else if(result){
+    //             if(result[0]===undefined){
+    //                 that.socialRegister(request,response);
+    //             }
+    //             else{
+    //                 var sessionData=result[0];
+    //                 var responseObject={
+    //                     message:"loggedIn",
+    //                 };
+    //                 utils.fillSession(request,response,sessionData,responseObject);
+    //             }
+    //         }
+    //         else{
+    //             response.json({message:"fail"});
+    //         }
+    //     })
+    // },   
+
+
+    
+    
+    // ////////Register new User
+    // socialRegister:function(request,response){
+    //     var SocialObject =request.body;
+    //     var aPosition=SocialObject.Email.indexOf("@");
+    //     var userName=SocialObject.Email.substring(0,aPosition);
+
+    //     var UserData={};
+    //     UserData.userinfo={};
+    //     UserData.useremail=SocialObject.Email;
+    //     UserData.username=userName;
+    //     UserData.password1="social";
+    //     UserData.role="customer";
+    //     UserData.registrationdate=new Date();
+    //     UserData.userinfo.fullname=SocialObject.FullName;
+    //     UserData.emailverified=true;
+    //     UserData.socialconnection=SocialObject.Social;
+
+    //     User.create(UserData,function(error,result){
+    //         if(error){
+    //             response.json({message:"Can't Add Error Occured, Try later"});
+    //         }
+    //         else{
+    //             var responseObject={
+    //                 message:"registered",
+    //             };
+    //             utils.fillSession(request,response,result,responseObject);
+    //         }
+    //     });
+    // },
+
     //////////////////Social Signin//////////////////////////
     ///////////Check if user exists
-    socialSignin:function(request,response){
+    socialSignin:function(request,response,done){
         var that=this;
         var SocialObject=request.body;
         
@@ -90,27 +154,32 @@ const dbOperations= {
         ,function(error,result){
             if(error){
                 console.log("Error Occured",error);
+                return done(null);
             }
             else if(result){
                 if(result[0]===undefined){
-                    that.socialRegister(request,response);
+                    that.socialRegister(request,response,done);
                 }
                 else{
                     var sessionData=result[0];
-                    var responseObject={
+                    var responseObject={    //No use
                         message:"loggedIn",
                     };
                     utils.fillSession(request,response,sessionData,responseObject);
+                    return done(null);
                 }
             }
             else{
-                response.json({message:"fail"});
+                return done(null);
             }
         })
     },   
+
+
+    
     
     ////////Register new User
-    socialRegister:function(request,response){
+    socialRegister:function(request,response,done){
         var SocialObject =request.body;
         var aPosition=SocialObject.Email.indexOf("@");
         var userName=SocialObject.Email.substring(0,aPosition);
@@ -125,19 +194,24 @@ const dbOperations= {
         UserData.userinfo.fullname=SocialObject.FullName;
         UserData.emailverified=true;
         UserData.socialconnection=SocialObject.Social;
+        UserData.facebookId=SocialObject.facebookId;
+        UserData.facebookAccessToken=SocialObject.accessToken;
 
         User.create(UserData,function(error,result){
             if(error){
                 response.json({message:"Can't Add Error Occured, Try later"});
+                return done(null);
             }
             else{
-                var responseObject={
+                var responseObject={     //No use
                     message:"registered",
                 };
                 utils.fillSession(request,response,result,responseObject);
+                return done(null);
             }
         });
     },
+
 
     ////////////Send Activation/forgotpassword link//////////////
     sendLink:function(UserEmail,Page,TokenType){

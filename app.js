@@ -37,6 +37,7 @@ app.use(session({
         //mongoOptions: advancedOptions // See below for details 
     })
 }));
+module.exports=app;
 
 const index = require('./routes/index');
 const commonroutes = require('./routes/commonroutes');
