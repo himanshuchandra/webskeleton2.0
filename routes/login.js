@@ -10,6 +10,7 @@ const validate =require("../config/validate");
 
 ///Logging in 
 router.post('/login',function(request,response){
+    request.body.loginid=request.body.loginid.toLowerCase();
     var loginObject=request.body;
     var isValidUserEmail=validate.email(loginObject.loginid);
     var isValidUsername=validate.username(loginObject.loginid);

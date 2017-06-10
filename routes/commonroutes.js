@@ -21,22 +21,23 @@ router.post('/activateEmail',function(request,response){
     }
 });
 
-/////////////Social SignIn
-router.post('/socialSignin',function(request,response){
-    var socialObject=request.body;
-    var isValidUserEmail=validate.email(socialObject.Email);
-    var isValidName=validate.name(socialObject.FullName);
-    var isValidSocial=validate.name(socialObject.Social);
-    if(isValidUserEmail===true && isValidSocial===true && isValidName===true){
-        dbOperations.socialSignin(request,response);
-    }
-    else{
-        response.json({message:"fail"});
-    }
-});
+// /////////////Social SignIn
+// router.post('/socialSignin',function(request,response){
+//     var socialObject=request.body;
+//     var isValidUserEmail=validate.email(socialObject.Email);
+//     var isValidName=validate.name(socialObject.FullName);
+//     var isValidSocial=validate.name(socialObject.Social);
+//     if(isValidUserEmail===true && isValidSocial===true && isValidName===true){
+//         dbOperations.socialSignin(request,response);
+//     }
+//     else{
+//         response.json({message:"fail"});
+//     }
+// });
 
 ////////////CheckUsername if already exists
 router.post('/checkUsername',function(request,response){
+    request.body.username=request.body.username.toLowerCase();
     var usernameObj=request.body;
     usernameObj.notFound=undefined;
     dbOperations.checkUsername(usernameObj,function(){

@@ -45,6 +45,7 @@ router.post('/changeUsername',function(request,response){
         webSessionExist=true;
     }
     
+    request.body.Username=request.body.Username.toLowerCase();
     var isValidUsername=validate.username(request.body.Username);
 
     if(isValidUsername===true && webSessionExist===true){

@@ -4,7 +4,7 @@
 
 const express = require('express');
 
-const app = require("../app");
+const app = require("../index");
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 app.use(passport.initialize());
@@ -36,7 +36,7 @@ passport.use(new FacebookStrategy({
             return done(null);
         }
         else{
-            request.body.Email=profile._json.email;
+            request.body.Email=profile._json.email.toLowerCase();
             request.body.FullName=profile._json.first_name+" "+profile._json.last_name;
             request.body.facebookId=profile._json.id;
             request.body.accessToken=accessToken;

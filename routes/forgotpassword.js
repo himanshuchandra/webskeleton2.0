@@ -10,6 +10,7 @@ const validate =require("../config/validate");
 
 //////Send Link
 router.post('/sendLink',function(request,response){
+    request.body.Email=request.body.Email.toLowerCase();
     var forgotObject=request.body;
     var isValidUserEmail=validate.email(forgotObject.Email);
     if(isValidUserEmail===true){

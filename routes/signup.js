@@ -10,6 +10,8 @@ const validate =require("../config/validate");
 
 ////User registration
 router.post('/registerUser',function(request,response){
+    request.body.useremail=request.body.useremail.toLowerCase();
+    request.body.username=request.body.username.toLowerCase();
     var userObject=request.body;
     var isValidUserEmail=validate.email(userObject.useremail);
     var isValidUsername=validate.username(userObject.username);
