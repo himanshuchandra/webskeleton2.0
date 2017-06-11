@@ -22,9 +22,14 @@ const encrypt={
      * @param {string} salt - Data to be validated.
      */
     sha512 : function(string, salt){
-        var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
-        hash.update(string);
-        var value = hash.digest('hex');
+        try{
+            var hash = crypto.createHmac('sha512', salt);
+            hash.update(string);
+            var value = hash.digest('hex'); /** Hashing algorithm sha512 */
+        }
+        catch(e){
+            console.log(e);
+        }
         return {
             salt:salt,
             hash:value

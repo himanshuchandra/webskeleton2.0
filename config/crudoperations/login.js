@@ -34,16 +34,21 @@ const dbOperations={
                     var numberOfUsersFound=0;
                     const encrypt=require('../encrypt');
                     while(i<result.length){
-                        var salt=result[i].salt;
-                        var encryptedData=encrypt.sha512(loginObject.loginpassword,salt);
-
-                        var encryptedPassword=encryptedData.hash;
-                        if(result[i].password1===encryptedPassword){
-                            result[i].rememberMe=loginObject.rememberMe;
-                            numberOfUsersFound++;
-                            var sessionData=result[i];
+                        if(result[i].salt===undefined){
+                            i++;
                         }
-                        i++; 
+                        else{
+                            var salt=result[i].salt;
+                            var encryptedData=encrypt.sha512(loginObject.loginpassword,salt);
+
+                            var encryptedPassword=encryptedData.hash;
+                            if(result[i].password1===encryptedPassword){
+                                result[i].rememberMe=loginObject.rememberMe;
+                                numberOfUsersFound++;
+                                var sessionData=result[i];
+                            }
+                            i++;    
+                       }
                     }
                     if(numberOfUsersFound===1){
                         var responseObject={
