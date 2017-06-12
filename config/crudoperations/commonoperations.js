@@ -182,7 +182,8 @@ const dbOperations= {
     socialRegister:function(request,response,done){
         var SocialObject =request.body;
         var aPosition=SocialObject.Email.indexOf("@");
-        var userName=SocialObject.Email.substring(0,aPosition);
+        var userName=SocialObject.Email.substring(0,aPosition+1);
+        userName=userName+SocialObject.Social;
 
         var UserData={};
         UserData.userinfo={};
