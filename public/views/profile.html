@@ -29,6 +29,27 @@
 
 <h3>
 
+<div>
+    <img ng-src={{profileUrl}} alt="Profile Pic"><br>
+         <form name="uploadForm" ng-hide="uploadPicForm">
+        
+            <input 
+               type="file" 
+               ngf-select 
+               ng-model="profile.pic" 
+               name="file" 
+               ngf-pattern="'image/*'"
+               accept="image/*" 
+               ngf-max-size="1MB" 
+               />
+            Image thumbnail: <img style="width:100px;" ngf-thumbnail="profile.pic || '/thumb.jpg'"/>
+            <i ng-show="uploadForm.file.$error.maxSize">File too large : max 1MB</i>
+            <button type="submit" ng-click="uploadPic()">Upload</button>
+        </form>
+        {{picMessage}}
+        <button ng-click="toggleImageForm()" ng-hide="toggleButton">{{uploadButton}}</button>
+</div>
+
 <div ng-hide="Profile">
     
     <h5>Name</h5><p>{{Name||"Not Saved"}}</p>   

@@ -15,6 +15,7 @@ angular
     'ngRoute',
     'angular-md5',
     'countrySelect',
+    'ngFileUpload'
   ])
 
   .constant("requrl","http://localhost:1234")

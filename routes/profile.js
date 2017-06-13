@@ -8,6 +8,82 @@ const router = express.Router();
 const dbOperations = require("../config/crudoperations/profile");
 const commonOperations=require("../config/crudoperations/commonoperations");
 const validate =require("../config/validate");
+const multer = require('multer');
+
+var picStorage = multer.diskStorage({
+    destination: function (request, file, callback) {
+        callback(null, "./public/User_data");
+    },
+    filename: function (request, file, callback) {
+        callback(null,request.session.user.useremail+"profile.jpeg");
+    }
+});
+
+var uploadPic = multer({ 
+    storage: picStorage,
+    limits: { fileSize: 1000000 },
+    fileFilter: function (request, file, cb) {
+        if (file.mimetype != 'image/jpeg' && file.mimetype != 'image/png') {
+            request.fileValidationError = true;
+            return cb(null, false, new Error('Invalid file type'));
+        }
+        cb(null, true);
+    }
+}).single('file');
+
+router.post('/uploadPic', function(request, response) {
+    var isValidSessionid=false;
+    var webSessionExist=false;
+    var canUpload=false;
+
+    if(request.body.appCall===true && request.body.sessionid!=undefined){
+        isValidSessionid=validate.string(request.body.sessionid);
+    }
+    else if(request.session.user){
+        webSessionExist=true;
+    }
+    
+    if(webSessionExist===true){
+        canUpload=true;
+    }
+    else if(isValidSessionid===true){
+        var userData={};
+        commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
+            if(userData!=undefined){
+                request.session.user={useremail:userData.useremail};
+                canUpload=true;
+            }
+            else{
+                response.json({message:"unknown"});
+            }
+        });
+    }
+    else{
+        response.json({message:"unknown"});
+    }
+
+    if(canUpload===true){
+        request.fileValidationError=false;
+        try{
+            uploadPic(request,response,function(error){
+                if(error){
+                    console.log(error);
+                    response.json({message:"fail"});
+                }else if(request.fileValidationError===true){
+                    console.log("request.fileValidationError",request.fileValidationError);
+                    response.json({message:"fail"});
+                }
+                else{
+                    response.json({message:"success"});
+                }
+            })
+        }
+        catch(e){
+            console.log("error",e);
+        }
+    }
+    
+});
 
 /*Optional call if loading data from session
 ///////////Show Profile Data

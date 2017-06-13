@@ -13,6 +13,7 @@ angular.module('webskeletonApp')
       var object = {
 
         needReload:true,
+        loaded:false,
         userData:{},
 
         checkStatus:function(){

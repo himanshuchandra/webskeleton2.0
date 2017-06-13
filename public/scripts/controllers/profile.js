@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ProfileCtrl', function ($scope,$window,webindex,profile,md5,requrl,$route) {
+  .controller('ProfileCtrl', function ($scope,$window,webindex,profile,md5,requrl,$route,Upload) {
 
     //all ng-models declared
     $scope.profile={
@@ -24,9 +24,9 @@ angular.module('webskeletonApp')
         VCode:"",
         oldPassword:"",
         newPassword:"",
-        newPassword2:""
+        newPassword2:"",
+        pic:"",
     };
-
 
 ///////////////////////////////
 
@@ -34,10 +34,14 @@ angular.module('webskeletonApp')
     $scope.MobileForm=true;
     $scope.PasswordForm=true;
     $scope.UsernameForm=true;
+    $scope.uploadPicForm=true;
     $scope.toggleButton=false;
     $scope.EditUsername="Edit Username";
+    $scope.uploadButton="Upload image";
+    $scope.profileUrl="/User_data/"+webindex.userData.useremail+"profile.jpeg";
 
 //////Loading data from index service 
+    
     $scope.loadData=function(){
         if(webindex.userData.useremail!=undefined){
             var print=webindex.userData;
@@ -63,6 +67,14 @@ angular.module('webskeletonApp')
             $window.location.assign(requrl+"/#/login");
         }
     };
+
+    var unregister=$scope.$watch(webindex.loaded,function(newValue,oldValue){
+        if(!angular.equals(webindex.loaded, false)){
+            $scope.loadData(); 
+            unregister();
+        }
+    },true);
+
 
     $scope.$watch(function(){return webindex.userData},function(newValue,oldValue){
         if(!angular.equals(webindex.userData, {})){
@@ -112,9 +124,11 @@ angular.module('webskeletonApp')
       $scope.MobileForm=true;
       $scope.PasswordForm=true;
       $scope.Profile=true;
-      $scope.UsernameForm=true;
       $scope.toggleButton=false;
+      $scope.UsernameForm=true;
       $scope.EditUsername="Edit Username";
+      $scope.uploadPicForm=true;
+      $scope.uploadButton="Upload image";
     };
 
     $scope.ShowMobileForm=function(){
@@ -125,9 +139,11 @@ angular.module('webskeletonApp')
       $scope.PasswordForm=true;
       $scope.ProfileForm=true;
       $scope.Profile=false;
-      $scope.UsernameForm=true;
       $scope.toggleButton=false;
+      $scope.UsernameForm=true;
       $scope.EditUsername="Edit Username";
+      $scope.uploadPicForm=true;
+      $scope.uploadButton="Upload image";
     }
 
     $scope.ShowPasswordForm=function(){
@@ -138,9 +154,11 @@ angular.module('webskeletonApp')
       $scope.MobileForm=true;
       $scope.ProfileForm=true;
       $scope.Profile=false;
-      $scope.UsernameForm=true;
       $scope.toggleButton=false;
+      $scope.UsernameForm=true;
       $scope.EditUsername="Edit Username";
+      $scope.uploadPicForm=true;
+      $scope.uploadButton="Upload image";
     }
 
     $scope.toggleUsernameForm=function(){
@@ -159,6 +177,25 @@ angular.module('webskeletonApp')
       else{
         $scope.UsernameForm=true;
         $scope.EditUsername="Edit Username";
+      }  
+  };
+
+  $scope.toggleImageForm=function(){
+      $scope.ProfileFormButton=false;
+      $scope.MobileFormButton=false;
+      $scope.PasswordFormButton=false;
+      $scope.ProfileForm=true;
+      $scope.MobileForm=true;
+      $scope.PasswordForm=true;
+      $scope.Profile=false;
+
+      if($scope.uploadPicForm==true){
+        $scope.uploadPicForm=false;
+        $scope.uploadButton="Cancel";
+      }
+      else{
+        $scope.uploadPicForm=true;
+        $scope.uploadButton="Upload image";
       }  
   };
 
@@ -447,6 +484,42 @@ angular.module('webskeletonApp')
       function(error){
         $scope.UsernameResult="Error occured!Try again Later";
       });
+    };
+
+    ////////////// Profile pic upload //////////////
+    $scope.uploadPic=function(){
+       if ($scope.uploadForm.file.$valid && $scope.profile.pic) { 
+            $scope.upload($scope.profile.pic); 
+            $scope.picMessage="Uploading.."
+       }
+       else{
+            $scope.picMessage="Invalid image";
+       }
+    }
+
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: requrl+'/profile/uploadPic', //webAPI exposed to upload the file
+            data:{file:file}               //pass file as data, should be user ng-model
+        }).then(function (data) {        
+            if(data.data.message==="success"){ 
+                $scope.picMessage="Upload successfull";
+                var random = (new Date()).toString();
+                $scope.profileUrl = $scope.profileUrl + "?cb=" + random;
+                $scope.uploadPicForm=true;
+                $scope.uploadButton="Upload";
+                $scope.picMessage=undefined;
+            }
+            else if(data.data.message==="unknown"){
+              $scope.picMessage="Not LoggedIn";
+              $window.location.reload();
+            }
+            else{
+                $scope.picMessage="Upload fail";
+            }
+        }, function (error) {
+            $scope.picMessage="Upload fail";
+        });
     };
        
   });

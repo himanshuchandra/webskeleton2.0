@@ -52,6 +52,7 @@ angular.module('webskeletonApp')
                 $scope.loginStatus="Login/SignUp";
             }
             webindex.needReload=false;
+            webindex.loaded=true;
         });
       };
       
