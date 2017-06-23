@@ -12,10 +12,10 @@
       Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
     <span  ng-show="usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.required">Cannot be left empty </span>
-    <span  ng-show="submitted && !usernameForm.newusername.$touched &&
+    <span  ng-show="UsernameSubmitted && !usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.required">
         Cannot be left empty </span>
-    <span  ng-show="submitted && !usernameForm.newusername.$touched &&
+    <span  ng-show="UsernameSubmitted && !usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.pattern">
      Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
 
