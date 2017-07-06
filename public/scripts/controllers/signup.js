@@ -97,7 +97,13 @@ angular.module('webskeletonApp')
     
 ////////////////////Registering The user////////////////////////////////////    
     $scope.submitForm=function(regForm){
-        if(regForm.$valid && passverified==true && isUsernameNew==true){
+        var comValid=true;
+        var atpos = $scope.signup.useremail.indexOf("@");
+        var dotpos = $scope.signup.useremail.lastIndexOf(".");
+        if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= $scope.signup.useremail.length) {
+            comValid=false;
+        }
+        if(regForm.$valid && passverified==true && isUsernameNew==true && comValid!=false){
             $scope.result = "Checking..";
             $scope.doRegister();
         }
