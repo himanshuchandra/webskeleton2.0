@@ -31,6 +31,26 @@ var uploadPic = multer({
     }
 }).single('file');
 
+// serverside file validation{
+// limits - object - Various limits on incoming data. Valid properties are:
+
+// fieldNameSize - integer - Max field name size (in bytes) (Default: 100 bytes).
+
+// fieldSize - integer - Max field value size (in bytes) (Default: 1MB).
+
+// fields - integer - Max number of non-file fields (Default: Infinity).
+
+// fileSize - integer - For multipart forms, the max file size (in bytes) (Default: Infinity).
+
+// files - integer - For multipart forms, the max number of file fields (Default: Infinity).
+
+// parts - integer - For multipart forms, the max number of parts (fields + files) (Default: Infinity).
+
+// headerPairs - integer - For multipart forms, the max number of header key=>value pairs to parse Default: 2000 (same as node's http).
+
+// }
+
+
 router.post('/uploadPic', function(request, response) {
     var isValidSessionid=false;
     var webSessionExist=false;

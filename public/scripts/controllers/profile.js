@@ -521,5 +521,10 @@ angular.module('webskeletonApp')
             $scope.picMessage="Upload fail";
         });
     };
+    //Addons possible
+    // can be dynamic path
+    // file size
+    // progress bar
+    // show file size with validation text
        
   });
