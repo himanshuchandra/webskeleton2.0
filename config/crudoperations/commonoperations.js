@@ -7,7 +7,11 @@ const dbOperations= {
 
     ////////Checking if username exists  ///////////////////// 
     checkUsername:function (object,callback){
-
+         const logger = require("../logger");
+            logger.debug('debuggggg');
+            logger.error('errorrrrrr');
+       
+		
         User.find({"username":object.username},function(error,result){
             if(error){
                 console.log("Error Occured",error);
