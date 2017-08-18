@@ -2,12 +2,12 @@
 
 const User = require("../userschema");
 const utils = require("../utils");
+const logger = require("../logger");
 
 const dbOperations = {
 
     ////////Checking if username exists  ///////////////////// 
     checkUsername: function (object, callback) {
-        const logger = require("../logger");
         logger.debug('debuggggg');
         logger.error('errorrrrrr');
 
@@ -223,11 +223,17 @@ const dbOperations = {
 
     ////////////Send Activation/forgotpassword link//////////////
     sendLink: function (UserEmail, Page, TokenType) {
+        logger.debug('crud common sendLink');
         const config = require("../config");
         var RandomToken = utils.randomStringGenerate(32);
         var Query = {};
+        var userData = {};
         if (TokenType === "forgotpasswordtoken") {
             Query["passwordtokenstamp"] = new Date();
+            userData.type = "forgotpassword";
+        }
+        else {
+            userData.type = "verificationlink";
         }
         Query[TokenType] = RandomToken;
         var Url = config.reqUrl + "/#/" + Page + "?e=" + UserEmail + "&t=" + RandomToken;
@@ -240,10 +246,14 @@ const dbOperations = {
             },
             function (error, result) {
                 if (error) {
-                    console.log("Error Occured", error);
+                    logger.error(error);
                 }
                 else {
-                    utils.sendMail(UserEmail, "sub", Url);
+                    logger.debug('crud result' + result);
+                    userData.email = UserEmail;
+                    userData.url = Url;
+
+                    utils.createMail(userData, userData.type);
                 }
             });
 

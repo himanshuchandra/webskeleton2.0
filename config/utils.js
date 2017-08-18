@@ -2,6 +2,7 @@
 
 const config =require("./config");
 const AppSession=require('./appsessdbschema');
+const logger = require("./logger");
 
 const utils={
 
@@ -132,6 +133,31 @@ const utils={
             }
         });
     },
+
+    createMail: function (userdata, type) {
+        logger.debug('utils create mail',type,userdata);
+        const emails = require('./emails');
+        var that = this;
+        var text = "";
+        switch (type) {
+            case "verificationlink":
+                text = "Please verify your email by clicking " + userdata.url;
+                that.sendMail(userdata.email, emails.verification.subject, text, emails.verification.htmlBody);
+                break;
+
+            case "forgotpassword":
+                text = "Set a new password by clicking " + userdata.url;
+                that.sendMail(userdata.email, emails.password.subject, text, emails.password.htmlBody);
+                break;
+
+            case "signupadmin":
+                var to = [emails.admin];
+                text = "New " + userdata.role + " registered with email: " + userdata.useremail;
+                that.sendMail(to, emails.signupAdmin.subject, text, emails.signupAdmin.htmlBody);
+                break;
+
+        }
+    }
 
 };
 
