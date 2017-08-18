@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require("../schemadefine");
+const User = require("../userschema");
 
 const commonOperations=require("./commonoperations");
 
@@ -56,6 +56,8 @@ const dbOperations={
 
         data.password1=encryptedData.hash;
         data.salt=encryptedData.salt;
+
+        data.userid = utils.randomStringGenerate(32);
 
         data.registrationdate=new Date();
         data.emailverified=false;

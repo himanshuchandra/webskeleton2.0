@@ -124,8 +124,7 @@ angular.module('webskeletonApp')
         promise.then(function(data){
            if(data.data.message==="pass"){
                $scope.result = "Registered Successfully";
-               $window.location.reload();
-               $window.location.assign(requrl);
+               webindex.needReload = true;
            }
            else if(data.data.message==="usernameTaken"){
                $scope.UsernameMessage = "Username Taken";

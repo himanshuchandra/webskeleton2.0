@@ -7,6 +7,7 @@ const schema = mongoose.Schema;
 
 const sessionSchema= new schema({
     sessionid: String,
+    userid: String,
     useremail: String,
     username: String,
     role: String,

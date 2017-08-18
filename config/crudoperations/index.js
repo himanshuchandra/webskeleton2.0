@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require("../schemadefine");
+const User = require("../userschema");
 const commonOperations=require("./commonoperations");
 
 const dbOperations= {

@@ -39,8 +39,7 @@ const utils={
         userData.emailactivationtoken=undefined;
         userData.forgotpasswordtoken=undefined;
         userData.mobileverificationcode=undefined;
-        userData.updated=undefined;
-        userData.facebookAccessToken=undefined;
+        userData.social=undefined;
         
         if(request.body.appCall===true){
             if(request.body.sessionid!=undefined){

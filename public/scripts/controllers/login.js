@@ -42,8 +42,7 @@ angular.module('webskeletonApp')
         promise.then(function(data){
             if(data.data.message==="success"){
                 $scope.result="Logged in successfully";
-                $window.location.reload();
-                $window.location.assign(requrl);
+                webindex.needReload = true;
             }
             else if(data.data.message==="conflict"){
                 $scope.result="Please specify country code if using Mobile number";

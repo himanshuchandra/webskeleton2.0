@@ -38,7 +38,7 @@ passport.use(new FacebookStrategy({
         else{
             request.body.Email=profile._json.email.toLowerCase();
             request.body.FullName=profile._json.first_name+" "+profile._json.last_name;
-            request.body.facebookId=profile._json.id;
+            request.body.socialId=profile._json.id;
             request.body.accessToken=accessToken;
             request.body.Social="Facebook";
             var response={
