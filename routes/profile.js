@@ -9,6 +9,7 @@ const dbOperations = require("../config/crudoperations/profile");
 const commonOperations=require("../config/crudoperations/commonoperations");
 const validate =require("../config/validate");
 const multer = require('multer');
+const logger = require("../config/logger");
 
 var picStorage = multer.diskStorage({
     destination: function (request, file, callback) {
@@ -52,6 +53,7 @@ var uploadPic = multer({
 
 
 router.post('/uploadPic', function(request, response) {
+    logger.debug('routes profile uploadPic');
     var isValidSessionid=false;
     var webSessionExist=false;
     var canUpload=false;
@@ -87,10 +89,10 @@ router.post('/uploadPic', function(request, response) {
         try{
             uploadPic(request,response,function(error){
                 if(error){
-                    console.log(error);
+                    logger.error(error);
                     response.json({message:"fail"});
                 }else if(request.fileValidationError===true){
-                    console.log("request.fileValidationError",request.fileValidationError);
+                    logger.error("request.fileValidationError",request.fileValidationError);
                     response.json({message:"fail"});
                 }
                 else{
@@ -98,8 +100,8 @@ router.post('/uploadPic', function(request, response) {
                 }
             })
         }
-        catch(e){
-            console.log("error",e);
+        catch(error){
+            logger.error(error);
         }
     }
     
@@ -130,6 +132,7 @@ router.post('/getData', function(request,response) {
 */
 /////////////Change Username
 router.post('/changeUsername',function(request,response){
+    logger.debug('routes profile changeUsername');
    
     var isValidSessionid=false;
     var webSessionExist=false;
@@ -166,6 +169,7 @@ router.post('/changeUsername',function(request,response){
 
 ////////////Edit/Update profile data
 router.post('/updateProfileData',function(request,response){
+    logger.debug('routes profile updateProfileData');
     var isValidSessionid=false;
     var webSessionExist=false;
 
@@ -209,6 +213,7 @@ router.post('/updateProfileData',function(request,response){
 ////////////Mobile no. verification
 /////Send Code
 router.post('/updateMobile',function(request,response){
+    logger.debug('routes profile updateMobile');
 
     var isValidSessionid=false;
     var webSessionExist=false;
@@ -246,6 +251,7 @@ router.post('/updateMobile',function(request,response){
 
 //////////////Verify Code
 router.post('/verifyCode',function(request,response){
+    logger.debug('routes profile verifyCode');
 
     var isValidSessionid=false;
     var webSessionExist=false;
@@ -282,6 +288,7 @@ router.post('/verifyCode',function(request,response){
 
 ////////////Change Password
 router.post('/setNewPassword',function(request,response){
+    logger.debug('routes profile setNewPassword');
 
     var isValidSessionid=false;
     var webSessionExist=false;

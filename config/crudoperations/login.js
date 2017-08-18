@@ -1,12 +1,14 @@
 'use strict';
 
 const User = require("../userschema");
+const logger = require("../logger");
 
 
 const dbOperations={
 
     //Check login id and password > Fill Session
     doLogin:function (request,response){
+        logger.debug('crud login doLogin');
         const utils =require("../utils");
         var loginObject=request.body;
 
@@ -23,9 +25,10 @@ const dbOperations={
         },
         function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 if(result.length<1){
                     response.json({message:"fail"});
                 }

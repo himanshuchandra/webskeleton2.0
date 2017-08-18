@@ -13,6 +13,7 @@ const router = express.Router();
 
 const dbOperations = require("../config/crudoperations/commonoperations");
 const secrets= require("../config/config");
+const logger = require("../config/logger");
 
 passport.use(new FacebookStrategy({
     passReqToCallback: true,
@@ -36,6 +37,7 @@ passport.use(new FacebookStrategy({
             return done(null);
         }
         else{
+            logger.debug('routes social fb');
             request.body.Email=profile._json.email.toLowerCase();
             request.body.FullName=profile._json.first_name+" "+profile._json.last_name;
             request.body.socialId=profile._json.id;

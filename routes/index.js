@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 const dbOperations = require("../config/crudoperations/index");
+const logger = require("../config/logger");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,6 +20,7 @@ router.get('/', function(req, res, next) {
 
 ///Check login Status
 router.post('/webindex', function(request,response) {
+    logger.debug('routes index webindex');
     if(request.body.appCall===true && request.body.sessionid!=undefined){
         const validate=require("../config/validate");
         var isValidSessionid=validate.string(request.body.sessionid);
@@ -48,6 +50,7 @@ router.post('/webindex', function(request,response) {
 
 ///Send email activation link
 router.post('/sendActivationLink',function(request,response){
+    logger.debug('routes index sendActivationLink');
     if(request.body.appCall===true && request.body.sessionid!=undefined){
         const validate=require("../config/validate");
         var isValidSessionid=validate.string(request.body.sessionid);
@@ -79,6 +82,7 @@ router.post('/sendActivationLink',function(request,response){
 
 ///Logging out
 router.post('/logout',function(request,response){
+    logger.debug('routes index logout');
     if(request.body.appCall===true && request.body.sessionid!=undefined){
         const validate=require('../config/validate');
         var isValidSessionid=validate.string(request.body.sessionid)

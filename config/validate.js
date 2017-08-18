@@ -1,8 +1,10 @@
 'use strict';
+const logger = require("./logger");
 
 const validate = {
 
     username: function (string) {
+        logger.debug('validate username');
         if (string === undefined) {
             return false;
         }
@@ -16,6 +18,7 @@ const validate = {
         }
     },
     password: function (string) {
+        logger.debug('validate password');
         if (string === undefined) {
             return false;
         }
@@ -29,6 +32,7 @@ const validate = {
         }
     },
     email: function (string) {
+        logger.debug('validate email');
         if (string === undefined) {
             return false;
         }
@@ -48,6 +52,7 @@ const validate = {
         }
     },
     mobile: function (string) {
+        logger.debug('validate mobile');
         if (string === undefined) {
             return false;
         }
@@ -61,6 +66,7 @@ const validate = {
         }
     },
     number: function (string) {
+        logger.debug('validate number');
         if (string === undefined) {
             return false;
         }
@@ -74,6 +80,7 @@ const validate = {
         }
     },
     string: function (string) {
+        logger.debug('validate string');
         if (string === undefined) {
             return false;
         }
@@ -87,6 +94,7 @@ const validate = {
         }
     },
     name: function (string) {
+        logger.debug('validate name');
         if (string === undefined) {
             return false;
         }
@@ -100,6 +108,7 @@ const validate = {
         }
     },
     code: function (string) {
+        logger.debug('validate code');
         if (string === undefined) {
             return false;
         }

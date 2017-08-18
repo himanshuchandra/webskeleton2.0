@@ -7,9 +7,11 @@ const router = express.Router();
 
 const dbOperations = require("../config/crudoperations/commonoperations");
 const validate =require("../config/validate");
+const logger = require("../config/logger");
 
 ////////////Activate Email
 router.post('/activateEmail',function(request,response){
+    logger.debug('routes common activateemail');
     var activationObject=request.body;
     var isValidUserEmail=validate.email(activationObject.userEmail);
     var isValidToken=validate.string(activationObject.token);
@@ -37,6 +39,7 @@ router.post('/activateEmail',function(request,response){
 
 ////////////CheckUsername if already exists
 router.post('/checkUsername',function(request,response){
+    logger.debug('routes common checkUsername');
     request.body.username=request.body.username.toLowerCase();
     var usernameObj=request.body;
     usernameObj.notFound=undefined;

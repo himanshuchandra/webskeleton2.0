@@ -8,15 +8,14 @@ const dbOperations = {
 
     ////////Checking if username exists  ///////////////////// 
     checkUsername: function (object, callback) {
-        logger.debug('debuggggg');
-        logger.error('errorrrrrr');
-
-
+        logger.debug('crud common checkUsername');
+        
         User.find({ "username": object.username }, function (error, result) {
             if (error) {
-                console.log("Error Occured", error);
+                logger.error(error);
             }
             else {
+                logger.debug('crud result'+ result); 
                 if (result[0] != undefined) {
                     object.notFound = false;
                 }
@@ -31,6 +30,7 @@ const dbOperations = {
     ///////////Email activation /////////////////////////
     ////////Checking token for activation
     checkToken: function (request, response) {
+        logger.debug('crud common checkToken');
         var that = this;
         var activationObject = request.body;
 
@@ -46,9 +46,10 @@ const dbOperations = {
         }
             , function (error, result) {
                 if (error) {
-                    console.log("Error Occured", error);
+                    logger.error(error);
                 }
                 else {
+                    logger.debug('crud result'+ result); 
                     if (result.length < 1) {
                         response.json({ message: "fail" });
                     }
@@ -61,6 +62,7 @@ const dbOperations = {
 
     //////////Activating email
     activateEmail: function (userEmail, response) {
+        logger.debug('crud common activateEmail');
         User.update({
             "useremail": userEmail
         },
@@ -72,9 +74,10 @@ const dbOperations = {
             },
             function (error, result) {
                 if (error) {
-                    console.log("Error Occured", error);
+                    logger.error(error);
                 }
                 else {
+                    logger.debug('crud result'+ result); 
                     response.json({ message: "success" });
                 }
             });
@@ -92,7 +95,7 @@ const dbOperations = {
     //     }
     //     ,function(error,result){
     //         if(error){
-    //             console.log("Error Occured",error);
+    //             logger.error(error);
     //         }
     //         else if(result){
     //             if(result[0]===undefined){
@@ -148,6 +151,7 @@ const dbOperations = {
     //////////////////Social Signin//////////////////////////
     ///////////Check if user exists
     socialSignin: function (request, response, done) {
+        logger.debug('crud common socialSignin');
         var that = this;
         var SocialObject = request.body;
 
@@ -156,10 +160,11 @@ const dbOperations = {
         }
             , function (error, result) {
                 if (error) {
-                    console.log("Error Occured", error);
+                    logger.error(error);
                     return done(null);
                 }
                 else if (result) {
+                    logger.debug('crud result'+ result); 
                     if (result[0] === undefined) {
                         that.socialRegister(request, response, done);
                     }
@@ -183,6 +188,7 @@ const dbOperations = {
 
     ////////Register new User
     socialRegister: function (request, response, done) {
+        logger.debug('crud common socialRegister');
         var SocialObject = request.body;
         var aPosition = SocialObject.Email.indexOf("@");
         var userName = SocialObject.Email.substring(0, aPosition + 1);
@@ -207,10 +213,12 @@ const dbOperations = {
 
         User.create(UserData, function (error, result) {
             if (error) {
+                logger.error(error);
                 response.json({ message: "Can't Add Error Occured, Try later" });
                 return done(null);
             }
             else {
+                logger.debug('crud result'+ result); 
                 var responseObject = {     //No use
                     message: "registered",
                 };
@@ -262,12 +270,14 @@ const dbOperations = {
     ///////// Mobile Application only operations////////////
 
     getProfileData: function (id, userData, callback) {
+        logger.debug('crud common getProfileData');
         const AppSession = require('../appsessdbschema');
         AppSession.find({ sessionid: id }, function (error, result) {
             if (error) {
-                console.log(error);
+                logger.error(error);
             }
             else {
+                logger.debug('crud result'+ result); 
                 userData = result[0];
             }
             callback(userData);

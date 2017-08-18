@@ -7,9 +7,11 @@ const router = express.Router();
 
 const dbOperations = require("../config/crudoperations/login");
 const validate =require("../config/validate");
+const logger = require("../config/logger");
 
 ///Logging in 
 router.post('/login',function(request,response){
+    logger.debug('routes login login');
     request.body.loginid=request.body.loginid.toLowerCase();
     var loginObject=request.body;
     var isValidUserEmail=validate.email(loginObject.loginid);
