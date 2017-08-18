@@ -10,17 +10,14 @@
 angular.module('webskeletonApp')
   .controller('LoginCtrl', function ($scope,login,webindex,$window,requrl,md5) {
 
-    if(webindex.userData.useremail!=undefined){
-        $window.location.assign(requrl);
-    }
 
-    //all ng-models declared 
+    //all ng-models declared
       $scope.login={
         loginid:"",
         loginpassword:"",
         RememberMe:undefined
       };
-      
+
      $scope.submitForm=function(loginForm){
         if(loginForm.$valid){
             $scope.result="Checking..";
@@ -30,10 +27,10 @@ angular.module('webskeletonApp')
             $scope.result="Invalid info.";
         }
     };
-    
-    
+
+
     $scope.doLogin=function(){
-        
+
         var hashLoginPassword=md5.createHash($scope.login.loginpassword);
 
         var loginObject = {
@@ -61,5 +58,5 @@ angular.module('webskeletonApp')
             $scope.result = "Error occurred! Try again later.";
         });
     };
-  
+
   });
