@@ -51,12 +51,32 @@ var uploadPic = multer({
 
 // }
 
+var callUpload = function (request, response) {
+    request.fileValidationError = false;
+    try {
+        uploadPic(request, response, function (error) {
+            if (error) {
+                logger.error(error);
+                response.json({ message: "fail" });
+            } else if (request.fileValidationError === true) {
+                logger.error("request.fileValidationError", request.fileValidationError);
+                response.json({ message: "fail" });
+            }
+            else {
+                response.json({ message: "success" });
+            }
+        })
+    }
+    catch (error) {
+        logger.error(error);
+    }
+};
+
 
 router.post('/uploadPic', function(request, response) {
     logger.debug('routes profile uploadPic');
     var isValidSessionid=false;
     var webSessionExist=false;
-    var canUpload=false;
 
     if(request.body.appCall===true && request.body.sessionid!=undefined){
         isValidSessionid=validate.string(request.body.sessionid);
@@ -66,14 +86,14 @@ router.post('/uploadPic', function(request, response) {
     }
     
     if(webSessionExist===true){
-        canUpload=true;
+        callUpload(request, response);
     }
     else if(isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
             if(userData!=undefined){
                 request.session.user={useremail:userData.useremail};
-                canUpload=true;
+                callUpload(request, response);
             }
             else{
                 response.json({message:"unknown"});
@@ -84,27 +104,6 @@ router.post('/uploadPic', function(request, response) {
         response.json({message:"unknown"});
     }
 
-    if(canUpload===true){
-        request.fileValidationError=false;
-        try{
-            uploadPic(request,response,function(error){
-                if(error){
-                    logger.error(error);
-                    response.json({message:"fail"});
-                }else if(request.fileValidationError===true){
-                    logger.error("request.fileValidationError",request.fileValidationError);
-                    response.json({message:"fail"});
-                }
-                else{
-                    response.json({message:"success"});
-                }
-            })
-        }
-        catch(error){
-            logger.error(error);
-        }
-    }
-    
 });
 
 /*Optional call if loading data from session
