@@ -16,7 +16,7 @@ var picStorage = multer.diskStorage({
         callback(null, "./public/User_data");
     },
     filename: function (request, file, callback) {
-        callback(null,request.session.user.useremail+"profile.jpeg");
+        callback(null,request.uploadEmail+"profile.jpeg");
     }
 });
 
@@ -86,13 +86,14 @@ router.post('/uploadPic', function(request, response) {
     }
     
     if(webSessionExist===true){
+        request.uploadEmail =  request.session.user.useremail;
         callUpload(request, response);
     }
     else if(isValidSessionid===true){
         var userData={};
         commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
             if(userData!=undefined){
-                request.session.user={useremail:userData.useremail};
+                request.uploadEmail = userData.useremail;
                 callUpload(request, response);
             }
             else{
