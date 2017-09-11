@@ -1,8 +1,8 @@
 
    <h1>Register</h1>
-   
+
    <form name="regForm"  ng-submit="submitForm(regForm)" novalidate>
-    
+
     <input type="email" name="validemail" ng-model="signup.useremail" placeholder="Email" ng-keyup="enableRegister(regForm);" required/>
     <span  ng-show="regForm.validemail.$touched && regForm.validemail.$invalid &&
      !regForm.validemail.$error.required">Invalid email </span>
@@ -13,8 +13,8 @@
     <span  ng-show="submitted && !regForm.validemail.$touched &&
      regForm.validemail.$invalid && !regForm.validemail.$error.required">
         Invalid email </span>
-        
-        
+
+
     <input type="text" name="validusername" ng-model="signup.username" ng-keyup="checkUsername(regForm);"
     placeholder="Username" pattern="[a-zA-Z0-9_.]{5,20}" required/>
     <span  ng-show="regForm.validusername.$touched &&
@@ -32,7 +32,7 @@
     {{UsernameMessage}}
 
 
-    <input type="password" ng-keyup="checkp(regForm)" ng-model="signup.password1" name="validpass1" 
+    <input type="password" ng-keyup="checkp(regForm)" ng-model="signup.password1" name="validpass1"
      placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required/>
        <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.pattern &&
         !regForm.validpass1.$error.required">
@@ -45,25 +45,23 @@
     <span  ng-show="submitted && !regForm.validpass1.$touched &&
      regForm.validpass1.$error.pattern">
      password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
-    
+
     <input type="password" ng-keyup="checkp(regForm)" ng-model="signup.password2" placeholder="Password" />
     {{passtext}}
-    
+
     <input type="submit" ng-click="submitted=true;"
      value="Register" ng-disabled="isNotValid">
-       
+
         </form>
     {{result}}
-    
+
 
 <H1><a ng-href="#login">LOGIN</a></H1>
 
-<div ng-controller="GoogleCtrl">     
-    <input type="button" ng-click="SignInGoogle()" value="Sign in with google" />
-    {{GoogleMessage}}
+<div>
+    <a href="/social/socialGoogle/" target="_self"`>Login with Google</a>
 </div>
 
-<div ng-controller="FacebookCtrl">     
+<div>
     <a href="/social/socialFacebook/" target="_self"`>Login with Facebook</a>
-    {{FacebookMessage}}
 </div>

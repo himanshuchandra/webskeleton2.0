@@ -15,9 +15,9 @@
     <span  ng-show="submitted && !loginForm.validloginid.$touched &&
      loginForm.validloginid.$error.pattern">
         Invalid email/username </span>
-    
 
-    <input type="password" ng-model="login.loginpassword" placeholder="Password" 
+
+    <input type="password" ng-model="login.loginpassword" placeholder="Password"
     name="validloginpass" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required>
     <span  ng-show="loginForm.validloginpass.$touched &&
      loginForm.validloginpass.$error.pattern && !loginForm.validloginpass.$error.required">
@@ -31,23 +31,21 @@
      password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
 
     <input type="checkbox" ng-model="login.RememberMe" value="false">Remember Me<br>
-    
+
     <input type="submit" ng-click="submitted=true;" value="Login">
 
     </form>
     {{result}}
- 
+
     <H3><a ng-href="#forgotpassword">Forgot Password</a></H3>
 
     <H1><a ng-href="#signup">SIGNUP</a></H1>
- 
 
-<div ng-controller="GoogleCtrl">     
-    <input type="button" ng-click="SignInGoogle()" value="Sign in with google" />
-    {{GoogleMessage}}
+
+<div>
+    <a href="/social/socialGoogle/" target="_self"`>Login with Google</a>
 </div>
 
-<div ng-controller="FacebookCtrl">     
+<div>
     <a href="/social/socialFacebook/" target="_self"`>Login with Facebook</a>
-    {{FacebookMessage}}
 </div>
