@@ -1,13 +1,15 @@
 'use strict';
 
-const User = require("../schemadefine");
+const User = require("../userschema");
 const utils =require("../utils");
 const commonOperations=require("./commonoperations");
+const logger = require("../logger");
 
 const dbOperations={
 
     //Updating username
     changeUsername:function(request,response,session){
+        logger.debug('crud profile changeUsername');
         var UsernameObject=request.body;
         var userEmail= session.useremail;
         
@@ -25,9 +27,10 @@ const dbOperations={
                 },
                 function(error,result){
                     if(error){
-                        console.log("Error Occured",error);
+                        logger.error(error);
                     }
                     else{ 
+                        logger.debug('crud result'+ result); 
                         response.json({message:"success"});
                     }
                 });
@@ -40,6 +43,7 @@ const dbOperations={
 
     ////updating info
     updateProfileData:function (request,response,session){
+        logger.debug('crud profile updateProfileData');
         var profileObject=request.body;
         var userInfo={};
         userInfo.fullname=profileObject.fullname;
@@ -61,9 +65,10 @@ const dbOperations={
         }
         ,function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 response.json({message:"success"});
             }
         });
@@ -71,6 +76,7 @@ const dbOperations={
     /////////////Mobile Number Verifiction 
     ////Send Sms
     sendVerificationCode:function(request,response,session){
+        logger.debug('crud profile sendVerificationCode');
         var MobileObject=request.body;
         var UserEmail= session.useremail;
         var number=MobileObject.CountryCode+MobileObject.MobileNumber;
@@ -88,9 +94,10 @@ const dbOperations={
         },
         function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 utils.sendSms(number,body);
                 //need to be a callback function
                 response.json({message:"success"});
@@ -100,6 +107,7 @@ const dbOperations={
 
     ////verify code
     verifyCode:function(request,response,session){
+        logger.debug('crud profile verifyCode');
         var that=this;
         var UserEmail= session.useremail;
         var CodeObject=request.body;
@@ -116,9 +124,10 @@ const dbOperations={
         }
         ,function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 if(result.length<1){
                     response.json({message:"fail"});
                 }
@@ -131,6 +140,7 @@ const dbOperations={
 
      ////Check if mobile no. already exists
     checkMobileExists:function(result,response){
+        logger.debug('crud profile checkMobileExists');
         var that=this;
         var oldResult=result;
 
@@ -138,9 +148,10 @@ const dbOperations={
             "mobile":result[0].temporarymobile
         },function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{
+                logger.debug('crud result'+ result); 
                 if(result[0]!=undefined){
                     response.json({message:"exists"});
                 }
@@ -153,6 +164,7 @@ const dbOperations={
 
     ////Updating Mobileno.
     setMobile:function(result,response){
+        logger.debug('crud profile setMobile');
         var TemporaryMobile=result[0].temporarymobile;
         var UserEmail=result[0].useremail;
 
@@ -167,9 +179,10 @@ const dbOperations={
             }
         },function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 response.json({message:"pass"});
             }
         });
@@ -177,6 +190,7 @@ const dbOperations={
 
     //////Checking old password
     checkPassword:function (request,response,session){
+        logger.debug('crud profile checkPassword');
         var that=this;
         var passwordObject=request.body;
         var userEmail=session.useremail;
@@ -185,11 +199,15 @@ const dbOperations={
         }
         ,function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 if(result.length<1){
                     response.json({message:"notFound"});
+                }
+                else if(result[0].salt===undefined){
+                    response.json({message:"fail"});
                 }
                 else{
                     const encrypt=require('../encrypt');
@@ -209,6 +227,7 @@ const dbOperations={
     },
     //////////////Setting new password
     setNewPassword:function (request,response,session){
+        logger.debug('crud profile setNewPassword');
         var passwordObject=request.body;
 
         const encrypt=require('../encrypt');
@@ -231,9 +250,10 @@ const dbOperations={
         },
         function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 response.json({message:"success"});
             }
         });

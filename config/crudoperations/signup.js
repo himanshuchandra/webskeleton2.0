@@ -1,13 +1,15 @@
 'use strict';
 
-const User = require("../schemadefine");
+const User = require("../userschema");
 
 const commonOperations=require("./commonoperations");
+const logger = require("../logger");
 
 const dbOperations={
 
     ////Check Email > Username if already exists 
     checkUser:function (request,response){
+        logger.debug('crud signup checkUser');
         var that=this;
         var userObject =request.body;
 
@@ -16,9 +18,10 @@ const dbOperations={
         },
         function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{ 
+                logger.debug('crud result'+ result); 
                 if(result[0]!=undefined){
                     response.json({message:"emailTaken"});
                 }
@@ -42,6 +45,7 @@ const dbOperations={
     },
     /////////////Adding new user
     addUser:function(request,response){
+        logger.debug('crud signup addUser');
         const utils =require("../utils");
 
         var data={};
@@ -57,14 +61,17 @@ const dbOperations={
         data.password1=encryptedData.hash;
         data.salt=encryptedData.salt;
 
+        data.userid = utils.randomStringGenerate(32);
+
         data.registrationdate=new Date();
         data.emailverified=false;
         User.create(data,function(error,result){
             
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{
+                logger.debug('crud result'+ result); 
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 var responseObject={
                     message:"pass",

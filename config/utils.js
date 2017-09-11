@@ -2,10 +2,12 @@
 
 const config =require("./config");
 const AppSession=require('./appsessdbschema');
+const logger = require("./logger");
 
 const utils={
 
     fillWebSession:function(request,userData) {
+        logger.debug('config utils fillWebSession');
         request.session.user=userData;
         if(userData.rememberMe==true){
             var thirtyDays = 30*24*60*60*1000;
@@ -14,6 +16,7 @@ const utils={
     },
     
     fillAppSession:function(userData,responseObject,response){
+        logger.debug('config utils fillAppSession');
         
         userData._id=undefined; //prevent duplicate record error
         userData=userData.toObject();
@@ -21,7 +24,7 @@ const utils={
         
         AppSession.create(userData,function(error,result){
             if(error){
-                console.log("Error Occured",error);
+                logger.error(error);
             }
             else{
                 response.send(responseObject);
@@ -30,6 +33,7 @@ const utils={
     },
 
     fillSession:function(request,response,result,responseObject){
+        logger.debug('config utils fillSession');
 
         //data is freezed object so no issue till not adding any new property
         var userData=result;
@@ -39,13 +43,13 @@ const utils={
         userData.emailactivationtoken=undefined;
         userData.forgotpasswordtoken=undefined;
         userData.mobileverificationcode=undefined;
-        userData.updated=undefined;
+        userData.social=undefined;
         
         if(request.body.appCall===true){
             if(request.body.sessionid!=undefined){
                 AppSession.find({sessionid:request.body.sessionid}).remove(function(error,result){
                     if(error){
-                        console.log(error);
+                        logger.error(error);
                     }
                 });
             }
@@ -62,9 +66,10 @@ const utils={
     },
 
     webSessionDestroy:function(request,response){
+        logger.debug('config utils webSessionDestroy');
         request.session.destroy(function(error) {
             if(error){
-                console.log(error);
+                logger.error(error);
             }
             else{
                 response.json({message:"success"});
@@ -73,18 +78,21 @@ const utils={
     },
 
     appSessionDestroy:function(id,response){
+        logger.debug('config utils appSessionDestroy');
 
         AppSession.find({sessionid:id}).remove(function(error,result){
             if(error){
-                console.log(error);
+                logger.error(error);
             }
             else{
+                logger.debug('crud result'+ result); 
                 response.json({message:"success"});
             }
         });
     },
 
     sendMail:function(To,Subject,EmailText,Html_Body){
+        logger.debug('config utils sendMail');
         const nodeMailer = require("nodemailer");
         var URL="smtps://"+config.SMTPS_EMAIL+":"+config.SMTPS_PASSWORD+"@"+config.SMTPS_URL;
         
@@ -100,19 +108,25 @@ const utils={
 
     // send mail with defined transport object
         transporter.sendMail(mailOptions, function(error, info){
-            if(error){
-                return console.log(error);
+            if (error) {
+                logger.error(error);
             }
-            console.log('Message sent: ' + info.response);
+            if (info != undefined) {
+                logger.info('Message sent: ' + info.response);
+            } else {
+                logger.error("error sending mail");
+            }
         });
     },
 
     randomStringGenerate:function(x){
+        logger.debug('config utils randomStringGenerate');
         const randomString = require("randomstring");
         return randomString.generate(x);
     },
 
     sendSms:function(number,body){
+        logger.debug('config utils sendSms');
         const twilio = require("twilio");
         var accountSid = config.TWILIO_ACCOUNT_SID; 
         var authToken = config.TWILIO_AUTH_TOKEN;   
@@ -123,15 +137,40 @@ const utils={
             body: body,
             to: number,  // Text this number
             from: config.VALID_TWILIO_NUMBER, // From a valid Twilio number
-        }, function(err, message) {
-            if(err){
-                console.log(err);
+        }, function(error, message) {
+            if(error){
+                logger.error(error);
             }
             else{
-                console.log(message.sid);
+                logger.info(message.sid);
             }
         });
     },
+
+    createMail: function (userdata, type) {
+        logger.debug('utils create mail',type,userdata);
+        const emails = require('./emails');
+        var that = this;
+        var text = "";
+        switch (type) {
+            case "verificationlink":
+                text = "Please verify your email by clicking " + userdata.url;
+                that.sendMail(userdata.email, emails.verification.subject, text, emails.verification.htmlBody);
+                break;
+
+            case "forgotpassword":
+                text = "Set a new password by clicking " + userdata.url;
+                that.sendMail(userdata.email, emails.password.subject, text, emails.password.htmlBody);
+                break;
+
+            case "signupadmin":
+                var to = [emails.admin];
+                text = "New " + userdata.role + " registered with email: " + userdata.useremail;
+                that.sendMail(to, emails.signupAdmin.subject, text, emails.signupAdmin.htmlBody);
+                break;
+
+        }
+    }
 
 };
 

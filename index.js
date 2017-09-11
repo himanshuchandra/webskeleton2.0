@@ -37,6 +37,7 @@ app.use(session({
         //mongoOptions: advancedOptions // See below for details 
     })
 }));
+module.exports=app;
 
 const index = require('./routes/index');
 const commonroutes = require('./routes/commonroutes');
@@ -44,6 +45,7 @@ const signup = require('./routes/signup');
 const login = require('./routes/login');
 const profile = require('./routes/profile');
 const forgotpassword = require('./routes/forgotpassword');
+const social =require('./routes/social');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -65,6 +67,7 @@ app.use('/signup',signup);
 app.use('/login',login);
 app.use('/profile',profile);
 app.use('/forgotpassword',forgotpassword);
+app.use('/social',social);
 app.use('*',index);
 
 // catch 404 and forward to error handler
@@ -86,3 +89,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+app.listen(1234,function(){
+    console.log("Server listening at port 1234..");
+})
+

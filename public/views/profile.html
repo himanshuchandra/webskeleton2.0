@@ -12,10 +12,10 @@
       Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
     <span  ng-show="usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.required">Cannot be left empty </span>
-    <span  ng-show="submitted && !usernameForm.newusername.$touched &&
+    <span  ng-show="UsernameSubmitted && !usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.required">
         Cannot be left empty </span>
-    <span  ng-show="submitted && !usernameForm.newusername.$touched &&
+    <span  ng-show="UsernameSubmitted && !usernameForm.newusername.$touched &&
      usernameForm.newusername.$error.pattern">
      Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
 
@@ -28,6 +28,27 @@
 <input type="button" ng-hide="toggleButton" ng-click="toggleUsernameForm()" value={{EditUsername}} />
 
 <h3>
+
+<div>
+    <img ng-src={{profileUrl}} alt="Profile Pic"><br>
+         <form name="uploadForm" ng-hide="uploadPicForm">
+        
+            <input 
+               type="file" 
+               ngf-select 
+               ng-model="profile.pic" 
+               name="file" 
+               ngf-pattern="'image/*'"
+               accept="image/*" 
+               ngf-max-size="1MB" 
+               />
+            Image thumbnail: <img style="width:100px;" ngf-thumbnail="profile.pic || '/thumb.jpg'"/>
+            <i ng-show="uploadForm.file.$error.maxSize">File too large : max 1MB</i>
+            <button type="submit" ng-click="uploadPic()">Upload</button>
+        </form>
+        {{picMessage}}
+        <button ng-click="toggleImageForm()" ng-hide="toggleButton">{{uploadButton}}</button>
+</div>
 
 <div ng-hide="Profile">
     

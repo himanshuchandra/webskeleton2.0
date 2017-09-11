@@ -7,9 +7,13 @@ const router = express.Router();
 
 const dbOperations = require("../config/crudoperations/signup");
 const validate =require("../config/validate");
+const logger = require("../config/logger");
 
 ////User registration
 router.post('/registerUser',function(request,response){
+    logger.debug('routes signup signup');
+    request.body.useremail=request.body.useremail.toLowerCase();
+    request.body.username=request.body.username.toLowerCase();
     var userObject=request.body;
     var isValidUserEmail=validate.email(userObject.useremail);
     var isValidUsername=validate.username(userObject.username);

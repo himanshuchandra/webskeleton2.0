@@ -1,12 +1,14 @@
 'use strict';
 
-const User = require("../schemadefine");
+const User = require("../userschema");
 const commonOperations=require("./commonoperations");
+const logger = require("../logger");
 
 const dbOperations= {
 
     /////Send email activation link
     sendActivationLink:function(email,response){
+        logger.debug('crud index sendActivationLink');
         commonOperations.sendLink(email,"emailactivate","emailactivationtoken");
         //need to be a callback function
         response.json({message:"success"});
@@ -14,6 +16,7 @@ const dbOperations= {
 
     ///////Check and Update session
     checkSession:function(request,response,userData){
+        logger.debug('crud index checkSession');
         var that=this;
         var userEmail=userData.useremail;
         User.find({
@@ -21,9 +24,10 @@ const dbOperations= {
         },
         function(error,result){
             if(error){
-                console.log("Error occured",error);
+                logger.error(error);
             }
             else{
+                logger.debug('crud result'+ result); 
                 if(result.length<1){
                     response.json({message:"fail"});
                 }
@@ -48,6 +52,7 @@ const dbOperations= {
 
     //////Session destroy
     destroySession:function(request,response){
+        logger.debug('crud index destroySession');
         const utils = require("../utils");
         if(request.body.appCall===true && request.body.sessionidValid===true){
             utils.appSessionDestroy(request.body.sessionid,response);

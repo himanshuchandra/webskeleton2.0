@@ -8,6 +8,104 @@ const router = express.Router();
 const dbOperations = require("../config/crudoperations/profile");
 const commonOperations=require("../config/crudoperations/commonoperations");
 const validate =require("../config/validate");
+const multer = require('multer');
+const logger = require("../config/logger");
+
+var picStorage = multer.diskStorage({
+    destination: function (request, file, callback) {
+        callback(null, "./public/User_data");
+    },
+    filename: function (request, file, callback) {
+        callback(null,request.uploadEmail+"profile.jpeg");
+    }
+});
+
+var uploadPic = multer({ 
+    storage: picStorage,
+    limits: { fileSize: 1000000 },
+    fileFilter: function (request, file, cb) {
+        if (file.mimetype != 'image/jpeg' && file.mimetype != 'image/png') {
+            request.fileValidationError = true;
+            return cb(null, false, new Error('Invalid file type'));
+        }
+        cb(null, true);
+    }
+}).single('file');
+
+// serverside file validation{
+// limits - object - Various limits on incoming data. Valid properties are:
+
+// fieldNameSize - integer - Max field name size (in bytes) (Default: 100 bytes).
+
+// fieldSize - integer - Max field value size (in bytes) (Default: 1MB).
+
+// fields - integer - Max number of non-file fields (Default: Infinity).
+
+// fileSize - integer - For multipart forms, the max file size (in bytes) (Default: Infinity).
+
+// files - integer - For multipart forms, the max number of file fields (Default: Infinity).
+
+// parts - integer - For multipart forms, the max number of parts (fields + files) (Default: Infinity).
+
+// headerPairs - integer - For multipart forms, the max number of header key=>value pairs to parse Default: 2000 (same as node's http).
+
+// }
+
+var callUpload = function (request, response) {
+    request.fileValidationError = false;
+    try {
+        uploadPic(request, response, function (error) {
+            if (error) {
+                logger.error(error);
+                response.json({ message: "fail" });
+            } else if (request.fileValidationError === true) {
+                logger.error("request.fileValidationError", request.fileValidationError);
+                response.json({ message: "fail" });
+            }
+            else {
+                response.json({ message: "success" });
+            }
+        })
+    }
+    catch (error) {
+        logger.error(error);
+    }
+};
+
+
+router.post('/uploadPic', function(request, response) {
+    logger.debug('routes profile uploadPic');
+    var isValidSessionid=false;
+    var webSessionExist=false;
+
+    if(request.body.appCall===true && request.body.sessionid!=undefined){
+        isValidSessionid=validate.string(request.body.sessionid);
+    }
+    else if(request.session.user){
+        webSessionExist=true;
+    }
+    
+    if(webSessionExist===true){
+        request.uploadEmail =  request.session.user.useremail;
+        callUpload(request, response);
+    }
+    else if(isValidSessionid===true){
+        var userData={};
+        commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
+            if(userData!=undefined){
+                request.uploadEmail = userData.useremail;
+                callUpload(request, response);
+            }
+            else{
+                response.json({message:"unknown"});
+            }
+        });
+    }
+    else{
+        response.json({message:"unknown"});
+    }
+
+});
 
 /*Optional call if loading data from session
 ///////////Show Profile Data
@@ -34,6 +132,7 @@ router.post('/getData', function(request,response) {
 */
 /////////////Change Username
 router.post('/changeUsername',function(request,response){
+    logger.debug('routes profile changeUsername');
    
     var isValidSessionid=false;
     var webSessionExist=false;
@@ -45,6 +144,7 @@ router.post('/changeUsername',function(request,response){
         webSessionExist=true;
     }
     
+    request.body.Username=request.body.Username.toLowerCase();
     var isValidUsername=validate.username(request.body.Username);
 
     if(isValidUsername===true && webSessionExist===true){
@@ -69,6 +169,7 @@ router.post('/changeUsername',function(request,response){
 
 ////////////Edit/Update profile data
 router.post('/updateProfileData',function(request,response){
+    logger.debug('routes profile updateProfileData');
     var isValidSessionid=false;
     var webSessionExist=false;
 
@@ -112,6 +213,7 @@ router.post('/updateProfileData',function(request,response){
 ////////////Mobile no. verification
 /////Send Code
 router.post('/updateMobile',function(request,response){
+    logger.debug('routes profile updateMobile');
 
     var isValidSessionid=false;
     var webSessionExist=false;
@@ -149,6 +251,7 @@ router.post('/updateMobile',function(request,response){
 
 //////////////Verify Code
 router.post('/verifyCode',function(request,response){
+    logger.debug('routes profile verifyCode');
 
     var isValidSessionid=false;
     var webSessionExist=false;
@@ -185,6 +288,7 @@ router.post('/verifyCode',function(request,response){
 
 ////////////Change Password
 router.post('/setNewPassword',function(request,response){
+    logger.debug('routes profile setNewPassword');
 
     var isValidSessionid=false;
     var webSessionExist=false;

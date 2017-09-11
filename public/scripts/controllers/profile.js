@@ -8,7 +8,7 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('ProfileCtrl', function ($scope,$window,webindex,profile,md5,requrl,$route) {
+  .controller('ProfileCtrl', function ($scope,$window,webindex,profile,md5,requrl,$route,Upload) {
 
     //all ng-models declared
     $scope.profile={
@@ -24,9 +24,9 @@ angular.module('webskeletonApp')
         VCode:"",
         oldPassword:"",
         newPassword:"",
-        newPassword2:""
+        newPassword2:"",
+        pic:"",
     };
-
 
 ///////////////////////////////
 
@@ -34,10 +34,14 @@ angular.module('webskeletonApp')
     $scope.MobileForm=true;
     $scope.PasswordForm=true;
     $scope.UsernameForm=true;
+    $scope.uploadPicForm=true;
     $scope.toggleButton=false;
     $scope.EditUsername="Edit Username";
+    $scope.uploadButton="Upload image";
+    $scope.profileUrl="/User_data/"+webindex.userData.useremail+"profile.jpeg";
 
-//////Loading data from index service 
+//////Loading data from index service
+
     $scope.loadData=function(){
         if(webindex.userData.useremail!=undefined){
             var print=webindex.userData;
@@ -58,19 +62,23 @@ angular.module('webskeletonApp')
                 $scope.FillPlaceholders();
             }
         }
-        else{  
-            $window.location.reload(); 
-            $window.location.assign(requrl+"/#/login");
-        }
     };
 
-    $scope.$watch(function(){return webindex.userData},function(newValue,oldValue){
-        if(!angular.equals(webindex.userData, {})){
-            $scope.loadData(); 
+    var unregister=$scope.$watch(webindex.loaded,function(newValue,oldValue){
+        if(!angular.equals(webindex.loaded, false)){
+            $scope.loadData();
+            unregister();
         }
     },true);
 
-    
+
+    $scope.$watch(function(){return webindex.userData},function(newValue,oldValue){
+        if(!angular.equals(webindex.userData, {})){
+            $scope.loadData();
+        }
+    },true);
+
+
 /*  Optional function to load profile data from session instead of index service
     var promise = profile.getData();
     promise.then(function(data){
@@ -112,9 +120,11 @@ angular.module('webskeletonApp')
       $scope.MobileForm=true;
       $scope.PasswordForm=true;
       $scope.Profile=true;
-      $scope.UsernameForm=true;
       $scope.toggleButton=false;
+      $scope.UsernameForm=true;
       $scope.EditUsername="Edit Username";
+      $scope.uploadPicForm=true;
+      $scope.uploadButton="Upload image";
     };
 
     $scope.ShowMobileForm=function(){
@@ -125,9 +135,11 @@ angular.module('webskeletonApp')
       $scope.PasswordForm=true;
       $scope.ProfileForm=true;
       $scope.Profile=false;
-      $scope.UsernameForm=true;
       $scope.toggleButton=false;
+      $scope.UsernameForm=true;
       $scope.EditUsername="Edit Username";
+      $scope.uploadPicForm=true;
+      $scope.uploadButton="Upload image";
     }
 
     $scope.ShowPasswordForm=function(){
@@ -138,9 +150,11 @@ angular.module('webskeletonApp')
       $scope.MobileForm=true;
       $scope.ProfileForm=true;
       $scope.Profile=false;
-      $scope.UsernameForm=true;
       $scope.toggleButton=false;
+      $scope.UsernameForm=true;
       $scope.EditUsername="Edit Username";
+      $scope.uploadPicForm=true;
+      $scope.uploadButton="Upload image";
     }
 
     $scope.toggleUsernameForm=function(){
@@ -159,7 +173,26 @@ angular.module('webskeletonApp')
       else{
         $scope.UsernameForm=true;
         $scope.EditUsername="Edit Username";
-      }  
+      }
+  };
+
+  $scope.toggleImageForm=function(){
+      $scope.ProfileFormButton=false;
+      $scope.MobileFormButton=false;
+      $scope.PasswordFormButton=false;
+      $scope.ProfileForm=true;
+      $scope.MobileForm=true;
+      $scope.PasswordForm=true;
+      $scope.Profile=false;
+
+      if($scope.uploadPicForm==true){
+        $scope.uploadPicForm=false;
+        $scope.uploadButton="Cancel";
+      }
+      else{
+        $scope.uploadPicForm=true;
+        $scope.uploadButton="Upload image";
+      }
   };
 
 ///////////// Edit profile logic //////////////
@@ -167,12 +200,12 @@ angular.module('webskeletonApp')
           $scope.profile.newName=$scope.Name;
           $scope.profile.newArea=$scope.Area;
           $scope.profile.newCity=$scope.City;
-          $scope.profile.newPincode=$scope.Pincode; 
+          $scope.profile.newPincode=$scope.Pincode;
           $scope.profile.newState=$scope.State;
           $scope.profile.newCountry=$scope.Country;
     }
 
-    $scope.submitProfileForm=function (profForm) {  
+    $scope.submitProfileForm=function (profForm) {
         if(profForm.$valid && $scope.profile.newCountry!=undefined){
           $scope.ProfileResult="Saving";
           $scope.changeProfile();
@@ -195,7 +228,7 @@ angular.module('webskeletonApp')
           "pincode":$scope.profile.newPincode,
           "country":country,
         };
-        
+
         var promise=profile.updateProfileData(profileObject);
         promise.then(function(data) {
           if(data.data.message==="unknown"){
@@ -230,7 +263,7 @@ angular.module('webskeletonApp')
     };
 
     $scope.ChangeMobile=function(){
-  
+
         var MobileObject={
           "CountryCode":"+"+$scope.profile.countryCode,
           "MobileNumber":$scope.profile.newMobile,
@@ -250,13 +283,13 @@ angular.module('webskeletonApp')
           }
         },function(error) {
             $scope.MobileMessage="Error! Try again later";
-        });    
+        });
     };
 
     $scope.submitCode=function(codeForm){
       if(codeForm.$valid){
         $scope.CodeMessage="Checking Code..";
-        $scope.VerifyCode();          
+        $scope.VerifyCode();
       }
       else{
         $scope.CodeMessage="Enter valid code";
@@ -294,7 +327,7 @@ angular.module('webskeletonApp')
           }
         },function(error) {
             $scope.CodeMessage="Error! Try again later";
-        });    
+        });
     };
 
     $scope.SendAgain=function(){
@@ -310,11 +343,11 @@ angular.module('webskeletonApp')
 
     $scope.checkPassword=function(){
       if($scope.profile.newPassword2!=undefined)
-      {   
+      {
           if($scope.profile.newPassword===$scope.profile.newPassword2)
-          {   
+          {
             $scope.PasswordMessage="Passwords match";
-            arePasswordsSame=true;            
+            arePasswordsSame=true;
           }
           else if($scope.profile.newPassword==undefined){
               $scope.PasswordMessage=undefined;
@@ -336,7 +369,7 @@ angular.module('webskeletonApp')
         $scope.PasswordResult="Enter correct passwords";
       }
     };
-    
+
     $scope.changePassword=function () {
 
       var hashOldPassword=md5.createHash($scope.profile.oldPassword);
@@ -345,7 +378,7 @@ angular.module('webskeletonApp')
           "oldpassword":hashOldPassword,
           "password1":hashNewPassword,
     };
-        
+
     var promise=profile.setNewPassword(passwordObject);
     promise.then(function(data) {
       if(data.data.message==="success"){
@@ -366,7 +399,7 @@ angular.module('webskeletonApp')
           $scope.PasswordResult="Error occured! Try again later";
       });
     };
-    
+
 ///////////// Change Username  ////////////////
     $scope.UsernameMessage=null;
     var isUsernameNew=false;
@@ -389,7 +422,7 @@ angular.module('webskeletonApp')
         var usernameObj = {
           "username":$scope.profile.newUsername,
         };
-        
+
         var promise = profile.checkUsername(usernameObj);
         promise.then(function(data){
           if(data.data.message==="found"){
@@ -399,7 +432,7 @@ angular.module('webskeletonApp')
               $scope.UsernameMessage = "Nice Choice!";
               isUsernameNew=true;
               $scope.disableButton=false;
-          }            
+          }
         },function(error){
           $scope.UsernameMessage = "Error occured! Try again later";
         });
@@ -407,7 +440,7 @@ angular.module('webskeletonApp')
 
 
     $scope.submitUsernameForm=function(usernameForm){
-      
+
       if(usernameForm.$valid && isUsernameNew==true){
         $scope.toggleButton=true;
         $scope.UsernameResult="Checking username..";
@@ -419,7 +452,7 @@ angular.module('webskeletonApp')
     };
 
     $scope.ChangeUsername=function(){
-      
+
       var UsernameObject={
         "Username":$scope.profile.newUsername
       }
@@ -448,5 +481,46 @@ angular.module('webskeletonApp')
         $scope.UsernameResult="Error occured!Try again Later";
       });
     };
-       
+
+    ////////////// Profile pic upload //////////////
+    $scope.uploadPic=function(){
+       if ($scope.uploadForm.file.$valid && $scope.profile.pic) {
+            $scope.upload($scope.profile.pic);
+            $scope.picMessage="Uploading.."
+       }
+       else{
+            $scope.picMessage="Invalid image";
+       }
+    }
+
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: requrl+'/profile/uploadPic', //webAPI exposed to upload the file
+            data:{file:file}               //pass file as data, should be user ng-model
+        }).then(function (data) {
+            if(data.data.message==="success"){
+                $scope.picMessage="Upload successfull";
+                var random = (new Date()).toString();
+                $scope.profileUrl = $scope.profileUrl + "?cb=" + random;
+                $scope.uploadPicForm=true;
+                $scope.uploadButton="Upload";
+                $scope.picMessage=undefined;
+            }
+            else if(data.data.message==="unknown"){
+              $scope.picMessage="Not LoggedIn";
+              $window.location.reload();
+            }
+            else{
+                $scope.picMessage="Upload fail";
+            }
+        }, function (error) {
+            $scope.picMessage="Upload fail";
+        });
+    };
+    //Addons possible
+    // can be dynamic path
+    // file size
+    // progress bar
+    // show file size with validation text
+
   });

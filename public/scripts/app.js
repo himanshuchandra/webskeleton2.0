@@ -15,22 +15,10 @@ angular
     'ngRoute',
     'angular-md5',
     'countrySelect',
-    'googleplus',
-    'ngFacebook'
+    'ngFileUpload'
   ])
 
   .constant("requrl","http://localhost:1234")
-
-  .config(function(GooglePlusProvider) {
-     GooglePlusProvider.init({
-        clientId:'clientId',
-        apiKey: 'apiKey'
-     });
-  })
-  .config( function( $facebookProvider ) {
-    $facebookProvider.setAppId('appid');
-  })
-
   
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider

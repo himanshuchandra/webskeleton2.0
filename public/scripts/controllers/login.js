@@ -8,15 +8,16 @@
  * Controller of the webskeletonApp
  */
 angular.module('webskeletonApp')
-  .controller('LoginCtrl', function ($scope,login,$window,requrl,md5) {
+  .controller('LoginCtrl', function ($scope,login,webindex,$window,requrl,md5) {
 
-    //all ng-models declared 
+
+    //all ng-models declared
       $scope.login={
         loginid:"",
         loginpassword:"",
         RememberMe:undefined
       };
-      
+
      $scope.submitForm=function(loginForm){
         if(loginForm.$valid){
             $scope.result="Checking..";
@@ -26,10 +27,10 @@ angular.module('webskeletonApp')
             $scope.result="Invalid info.";
         }
     };
-    
-    
+
+
     $scope.doLogin=function(){
-        
+
         var hashLoginPassword=md5.createHash($scope.login.loginpassword);
 
         var loginObject = {
@@ -41,11 +42,13 @@ angular.module('webskeletonApp')
         promise.then(function(data){
             if(data.data.message==="success"){
                 $scope.result="Logged in successfully";
-                $window.location.reload();
-                $window.location.assign(requrl);
+                webindex.needReload = true;
+            }
+            else if(data.data.message==="conflict"){
+                $scope.result="Please specify country code if using Mobile number";
             }
             else if(data.data.message==="fail"){
-                $scope.result="Wrong email or password";
+                $scope.result="Wrong Email/Username/Mobile or password";
             }
             else{
                 $scope.result="Error occurred! Try again later.";
@@ -54,5 +57,5 @@ angular.module('webskeletonApp')
             $scope.result = "Error occurred! Try again later.";
         });
     };
-  
+
   });
