@@ -72,7 +72,7 @@ router.post('/sendActivationLink',function(request,response){
         }
     }
     else if(request.session.user){
-        var userEmail=request.session.useremail;
+        var userEmail=request.session.user.useremail;
         dbOperations.sendActivationLink(userEmail,response);
     }
     else{
