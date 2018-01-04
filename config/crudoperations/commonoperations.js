@@ -172,9 +172,9 @@ const dbOperations = {
                         var sessionData = result[0];
                         var responseObject = {    //No use
                             message: "loggedIn",
+                            callback: done
                         };
                         utils.fillSession(request, response, sessionData, responseObject);
-                        return done(null);
                     }
                 }
                 else {
@@ -221,9 +221,9 @@ const dbOperations = {
                 logger.debug('crud result'+ result); 
                 var responseObject = {     //No use
                     message: "registered",
+                    callback: done
                 };
                 utils.fillSession(request, response, result, responseObject);
-                return done(null);
             }
         });
     },

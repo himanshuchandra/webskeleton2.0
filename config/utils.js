@@ -55,13 +55,20 @@ const utils={
             }
             var randomString=this.randomStringGenerate(32);
             responseObject.sessionid=randomString+userData.username;
+            var sid = responseObject.sessionid;
             responseObject.userData=userData;
             this.fillAppSession(userData,responseObject,response);
+            if(responseObject.callback){
+                responseObject.callback(null,{sessionid:sid});
+            }
         }
         else{
             this.fillWebSession(request,userData);
             responseObject.userData=userData;
             response.send(responseObject);
+            if(responseObject.callback){
+                responseObject.callback(null);
+            }
         }
     },
 
