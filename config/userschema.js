@@ -11,7 +11,7 @@ const userSchema = new schema({
   username: { type : String , unique : true, required : true },
   password1: String,
   salt: String,
-  mobile: { type : String , unique : true},
+  mobile: { type : String , unique : true, sparse: true },
   userinfo: {
     fullname: String,
     area: String,
