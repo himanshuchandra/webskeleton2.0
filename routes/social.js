@@ -44,6 +44,7 @@ passport.use(new FacebookStrategy({
                 request.body.socialId = profile._json.id;
                 request.body.accessToken = accessToken;
                 request.body.Social = "Facebook";
+                request.body.appCall = (request.query.state==='true');
                 var response = {
                     send: function () {
                         return;
@@ -57,6 +58,17 @@ passport.use(new FacebookStrategy({
 
 
 router.get('/socialFacebook', passport.authenticate('facebook', { scope: ['email'] }));
+
+router.get('/socialFacebookApp', function (req, res, next) {
+    
+    req.query.appCall = true;
+    passport.authenticate(
+        'facebook', {
+            scope: 'email',
+            state: req.query.role
+        }
+    )(req, res, next);
+ });
 
 router.get('/auth/facebook/callback', function (request, response) {
     passport.authenticate('facebook', function (req, res) {
@@ -96,6 +108,7 @@ passport.use(new GoogleStrategy({
                 request.body.socialId = profile.id;
                 request.body.accessToken = accessToken;
                 request.body.Social = "Google";
+                request.body.appCall = (request.query.state==='true');
                 var response = {
                     send: function () {
                         return;
@@ -114,6 +127,20 @@ router.get('/socialGoogle', passport.authenticate('google', {
         'https://www.googleapis.com/auth/userinfo.email'
     ]
 }));
+
+router.get('/socialGoogleApp', function (req, res, next) {
+
+    req.query.appCall = true;
+    passport.authenticate(
+        'google', {
+            state: req.query.appCall,
+            scope: [
+                'https://www.googleapis.com/auth/userinfo.profile',
+                'https://www.googleapis.com/auth/userinfo.email'
+            ]
+        }
+    )(req, res, next);
+});
 
 router.get('/auth/google/callback', function (request, response) {
     passport.authenticate('google', function (req, res) {
