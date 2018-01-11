@@ -9,6 +9,7 @@ const utils={
     fillWebSession:function(request,userData) {
         logger.debug('config utils fillWebSession');
         request.session.user=userData;
+        request.session.save();
         if(userData.rememberMe==true){
             var thirtyDays = 30*24*60*60*1000;
             request.session.cookie.expires = new Date(Date.now() + thirtyDays);
