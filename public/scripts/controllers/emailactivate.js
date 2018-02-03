@@ -9,7 +9,7 @@
  */
 angular.module('webskeletonApp')
   .controller('EmailactivateCtrl', function ($scope,$location,emailactivate,$window,requrl) {
-    
+
     $scope.result="Activating your Email";
 
     $scope.checkToken=function(){
@@ -21,7 +21,6 @@ angular.module('webskeletonApp')
         else{
           $scope.result="Not Found";
         }
-        $window.location.reload();
         $window.location.assign(requrl);
       }
       ,function(error){
@@ -31,7 +30,7 @@ angular.module('webskeletonApp')
 
     var activationObject={
         "userEmail":$location.search().e,
-        "token":$location.search().t,  
+        "token":$location.search().t,
     }
 
     if(activationObject.userEmail!=undefined && activationObject.token!=undefined){

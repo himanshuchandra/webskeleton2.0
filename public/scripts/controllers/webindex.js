@@ -21,12 +21,12 @@ angular.module('webskeletonApp')
     $scope.redirect = function () {
       if (webindex.loaded === true && webindex.loggedIn === true) {
         if ($location.path() === '/login' || $location.path() === '/signup') {
-          $window.location.assign(requrl+'/#/');
+          $location.path('/');
         }
       }
       else if (webindex.loaded === true && webindex.loggedIn != true) {
         if ($location.path() === '/profile') {
-          $window.location.assign(requrl + '/#/login');
+          $location.path('/login');
         }
       }
     };

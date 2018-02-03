@@ -19,7 +19,7 @@ angular
   ])
 
   .constant("requrl","http://localhost:1234")
-  
+
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
@@ -62,5 +62,6 @@ angular
       });
 
       $locationProvider.hashPrefix('');
+      $locationProvider.html5Mode(true);
   });
 
