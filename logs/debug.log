@@ -1,182 +1,240 @@
-[2017-12-11 16:52:39.499] [DEBUG] debug - routes index webindex
-[2017-12-11 16:53:25.735] [DEBUG] debug - routes index webindex
-[2017-12-11 16:53:42.653] [DEBUG] debug - routes index webindex
-[2017-12-11 17:07:57.483] [DEBUG] debug - routes index webindex
-[2017-12-11 17:13:19.716] [DEBUG] debug - routes social google
-[2017-12-11 17:13:19.717] [DEBUG] debug - crud common socialSignin
-[2017-12-11 17:13:20.030] [DEBUG] debug - crud result
-[2017-12-11 17:13:20.031] [DEBUG] debug - crud common socialRegister
-[2017-12-11 17:13:20.031] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:13:20.583] [DEBUG] debug - crud result{ __v: 0,
-  useremail: 'surveyshimanshu@gmail.com',
-  username: 'surveyshimanshu@Google',
-  password1: 'social',
-  role: 'customer',
-  registrationdate: 2017-12-11T11:43:20.031Z,
-  emailverified: true,
-  userid: '0OOQDy3D3wQZOWK36R8jDLpxeQovrpWp',
-  _id: 5a2e6f58f05a032eccf5a65b,
-  social: 
-   [ { connection: 'Google',
-       sId: '117830524079511892007',
-       accessToken: 'ya29.Gl0fBa2xgCDZCmukVvbpy-6auT8m-0lYbzYZ937GCflJTE26aIHpHan4Ap9EPpeE6DxRRQmK3_yGllmGE7jX-r5XPYNpyIzCAz1J-N5lZ_ohB818Wjv5E6S2UiJvTXM',
-       _id: 5a2e6f58f05a032eccf5a65c } ],
-  userinfo: { fullname: 'Himanshu Chandra' } }
-[2017-12-11 17:13:20.584] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:13:20.586] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:13:22.988] [DEBUG] debug - routes index webindex
-[2017-12-11 17:13:22.989] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:13:23.002] [DEBUG] debug - crud result{ _id: 5a2e6f58f05a032eccf5a65b,
-  useremail: 'surveyshimanshu@gmail.com',
-  username: 'surveyshimanshu@Google',
-  password1: 'social',
-  role: 'customer',
-  registrationdate: 2017-12-11T11:43:20.031Z,
-  emailverified: true,
-  userid: '0OOQDy3D3wQZOWK36R8jDLpxeQovrpWp',
-  __v: 0,
-  social: 
-   [ { connection: 'Google',
-       sId: '117830524079511892007',
-       accessToken: 'ya29.Gl0fBa2xgCDZCmukVvbpy-6auT8m-0lYbzYZ937GCflJTE26aIHpHan4Ap9EPpeE6DxRRQmK3_yGllmGE7jX-r5XPYNpyIzCAz1J-N5lZ_ohB818Wjv5E6S2UiJvTXM',
-       _id: 5a2e6f58f05a032eccf5a65c } ],
-  userinfo: { fullname: 'Himanshu Chandra' } }
-[2017-12-11 17:13:23.003] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:13:23.004] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:13:35.853] [DEBUG] debug - routes index logout
-[2017-12-11 17:13:35.854] [DEBUG] debug - crud index destroySession
-[2017-12-11 17:13:35.854] [DEBUG] debug - config utils webSessionDestroy
-[2017-12-11 17:13:37.569] [DEBUG] debug - routes index webindex
-[2017-12-11 17:13:52.424] [DEBUG] debug - routes common checkUsername
-[2017-12-11 17:13:52.425] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:13:52.433] [DEBUG] debug - crud result
-[2017-12-11 17:13:52.444] [DEBUG] debug - routes common checkUsername
-[2017-12-11 17:13:52.445] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:13:52.448] [DEBUG] debug - crud result
-[2017-12-11 17:13:52.507] [DEBUG] debug - routes common checkUsername
-[2017-12-11 17:13:52.507] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:13:52.510] [DEBUG] debug - crud result
-[2017-12-11 17:14:00.482] [DEBUG] debug - routes signup signup
-[2017-12-11 17:14:00.483] [DEBUG] debug - validate email
-[2017-12-11 17:14:00.483] [DEBUG] debug - validate username
-[2017-12-11 17:14:00.484] [DEBUG] debug - validate password
-[2017-12-11 17:14:00.485] [DEBUG] debug - validate string
-[2017-12-11 17:14:00.486] [DEBUG] debug - crud signup checkUser
-[2017-12-11 17:14:00.489] [DEBUG] debug - crud result
-[2017-12-11 17:14:00.489] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:14:00.492] [DEBUG] debug - crud result
-[2017-12-11 17:14:00.493] [DEBUG] debug - crud signup addUser
-[2017-12-11 17:14:00.577] [DEBUG] debug - config encrypt genRandomString
-[2017-12-11 17:14:00.577] [DEBUG] debug - config encrypt sha512
-[2017-12-11 17:14:00.590] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:14:00.600] [DEBUG] debug - crud result{ __v: 0,
+[2018-04-29 15:29:39.709] [DEBUG] debug - session > websession
+[2018-04-29 15:29:39.719] [DEBUG] debug - routes index webindex
+[2018-04-29 15:29:39.721] [DEBUG] debug - crud index checkSession
+[2018-04-29 15:29:39.790] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
   useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
+  username: 'ppppp',
+  password1: '8e6468396899a0d81a48cacaa4dca92429c6943334a8bc65b9ce064d05a3d4867460b42f892d97b2326ab2080ead1f8ee09de19e850de93700d1d48eb8a68708',
   role: 'customer',
-  salt: '15aa3613abf88eb6',
+  salt: '26e8202da44f54f2',
   userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
   registrationdate: 2017-12-11T11:44:00.590Z,
   emailverified: false,
-  _id: 5a2e6f80f05a032eccf5a65d,
-  social: [] }
-[2017-12-11 17:14:00.601] [DEBUG] debug - crud common sendLink
-[2017-12-11 17:14:00.601] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:14:00.606] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:14:00.607] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:14:00.629] [DEBUG] debug - routes index webindex
-[2017-12-11 17:14:00.629] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:14:00.640] [DEBUG] debug - crud result[object Object]
-[2017-12-11 17:14:00.642] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'llkmklmlkm',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:29:39.801] [DEBUG] debug - config utils fillSession
+[2018-04-29 15:29:39.820] [DEBUG] debug - config utils fillWebSession
+[2018-04-29 15:29:47.932] [DEBUG] debug - routes common checkUsername
+[2018-04-29 15:29:47.933] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:29:47.940] [DEBUG] debug - crud result
+[2018-04-29 15:29:47.946] [DEBUG] debug - routes common checkUsername
+[2018-04-29 15:29:47.947] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:29:47.952] [DEBUG] debug - crud result
+[2018-04-29 15:29:47.983] [DEBUG] debug - routes common checkUsername
+[2018-04-29 15:29:47.984] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:29:47.993] [DEBUG] debug - crud result
+[2018-04-29 15:29:50.075] [DEBUG] debug - session > websession
+[2018-04-29 15:29:50.076] [DEBUG] debug - routes profile changeUsername
+[2018-04-29 15:29:50.077] [DEBUG] debug - validate username
+[2018-04-29 15:29:50.078] [DEBUG] debug - crud profile changeUsername
+[2018-04-29 15:29:50.079] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:29:50.083] [DEBUG] debug - crud result
+[2018-04-29 15:29:50.101] [DEBUG] debug - crud result[object Object]
+[2018-04-29 15:29:50.292] [DEBUG] debug - session > websession
+[2018-04-29 15:29:50.293] [DEBUG] debug - routes index webindex
+[2018-04-29 15:29:50.293] [DEBUG] debug - crud index checkSession
+[2018-04-29 15:29:50.302] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
+  useremail: 'prashant@jij.pro',
+  username: 'pppppppp',
+  password1: '8e6468396899a0d81a48cacaa4dca92429c6943334a8bc65b9ce064d05a3d4867460b42f892d97b2326ab2080ead1f8ee09de19e850de93700d1d48eb8a68708',
+  role: 'customer',
+  salt: '26e8202da44f54f2',
+  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
+  registrationdate: 2017-12-11T11:44:00.590Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'llkmklmlkm',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:29:50.303] [DEBUG] debug - config utils fillSession
+[2018-04-29 15:29:50.305] [DEBUG] debug - config utils fillWebSession
+[2018-04-29 15:30:08.769] [DEBUG] debug - session > websession
+[2018-04-29 15:30:08.770] [DEBUG] debug - routes profile uploadPic
+[2018-04-29 15:30:16.339] [DEBUG] debug - session > websession
+[2018-04-29 15:30:16.340] [DEBUG] debug - routes profile updateProfileData
+[2018-04-29 15:30:16.341] [DEBUG] debug - validate name
+[2018-04-29 15:30:16.341] [DEBUG] debug - validate string
+[2018-04-29 15:30:16.342] [DEBUG] debug - validate string
+[2018-04-29 15:30:16.342] [DEBUG] debug - validate string
+[2018-04-29 15:30:16.343] [DEBUG] debug - validate number
+[2018-04-29 15:30:16.343] [DEBUG] debug - validate string
+[2018-04-29 15:30:16.345] [DEBUG] debug - crud profile updateProfileData
+[2018-04-29 15:30:16.353] [DEBUG] debug - crud result[object Object]
+[2018-04-29 15:30:16.539] [DEBUG] debug - session > websession
+[2018-04-29 15:30:16.540] [DEBUG] debug - routes index webindex
+[2018-04-29 15:30:16.540] [DEBUG] debug - crud index checkSession
+[2018-04-29 15:30:16.555] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
+  useremail: 'prashant@jij.pro',
+  username: 'pppppppp',
+  password1: '8e6468396899a0d81a48cacaa4dca92429c6943334a8bc65b9ce064d05a3d4867460b42f892d97b2326ab2080ead1f8ee09de19e850de93700d1d48eb8a68708',
+  role: 'customer',
+  salt: '26e8202da44f54f2',
+  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
+  registrationdate: 2017-12-11T11:44:00.590Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'ooiooooo',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:30:16.556] [DEBUG] debug - config utils fillSession
+[2018-04-29 15:30:16.557] [DEBUG] debug - config utils fillWebSession
+[2018-04-29 15:30:33.163] [DEBUG] debug - session > websession
+[2018-04-29 15:30:33.164] [DEBUG] debug - routes profile setNewPassword
+[2018-04-29 15:30:33.165] [DEBUG] debug - validate password
+[2018-04-29 15:30:33.165] [DEBUG] debug - validate password
+[2018-04-29 15:30:33.166] [DEBUG] debug - crud profile checkPassword
+[2018-04-29 15:30:33.173] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
+  useremail: 'prashant@jij.pro',
+  username: 'pppppppp',
+  password1: '8e6468396899a0d81a48cacaa4dca92429c6943334a8bc65b9ce064d05a3d4867460b42f892d97b2326ab2080ead1f8ee09de19e850de93700d1d48eb8a68708',
+  role: 'customer',
+  salt: '26e8202da44f54f2',
+  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
+  registrationdate: 2017-12-11T11:44:00.590Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'ooiooooo',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:30:33.176] [DEBUG] debug - config encrypt sha512
+[2018-04-29 15:30:37.475] [DEBUG] debug - session > websession
+[2018-04-29 15:30:37.477] [DEBUG] debug - routes profile setNewPassword
+[2018-04-29 15:30:37.477] [DEBUG] debug - validate password
+[2018-04-29 15:30:37.478] [DEBUG] debug - validate password
+[2018-04-29 15:30:37.478] [DEBUG] debug - crud profile checkPassword
+[2018-04-29 15:30:37.483] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
+  useremail: 'prashant@jij.pro',
+  username: 'pppppppp',
+  password1: '8e6468396899a0d81a48cacaa4dca92429c6943334a8bc65b9ce064d05a3d4867460b42f892d97b2326ab2080ead1f8ee09de19e850de93700d1d48eb8a68708',
+  role: 'customer',
+  salt: '26e8202da44f54f2',
+  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
+  registrationdate: 2017-12-11T11:44:00.590Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'ooiooooo',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:30:37.484] [DEBUG] debug - config encrypt sha512
+[2018-04-29 15:30:37.484] [DEBUG] debug - crud profile setNewPassword
+[2018-04-29 15:30:37.485] [DEBUG] debug - config encrypt genRandomString
+[2018-04-29 15:30:37.485] [DEBUG] debug - config encrypt sha512
+[2018-04-29 15:30:37.488] [DEBUG] debug - crud result[object Object]
+[2018-04-29 15:31:25.583] [DEBUG] debug - session > websession
+[2018-04-29 15:31:25.586] [DEBUG] debug - routes index logout
+[2018-04-29 15:31:25.587] [DEBUG] debug - crud index destroySession
+[2018-04-29 15:31:25.590] [DEBUG] debug - config utils webSessionDestroy
+[2018-04-29 15:31:28.905] [DEBUG] debug - session > websession
+[2018-04-29 15:31:38.826] [DEBUG] debug - routes login login
+[2018-04-29 15:31:38.827] [DEBUG] debug - validate email
+[2018-04-29 15:31:38.828] [DEBUG] debug - validate username
+[2018-04-29 15:31:38.829] [DEBUG] debug - validate mobile
+[2018-04-29 15:31:38.830] [DEBUG] debug - validate password
+[2018-04-29 15:31:38.830] [DEBUG] debug - crud login doLogin
+[2018-04-29 15:31:38.840] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
+  useremail: 'prashant@jij.pro',
+  username: 'pppppppp',
+  password1: '30f0cd8cdcaec4c26e205164bd61fa20a5ee9f59e70b0ea7a4278a0a86a21d8d122fc80c86c2de041efba70a3af127fa753f327d4fe4be39f91c26fb280047c2',
+  role: 'customer',
+  salt: '02986b8e5e1aea8c',
+  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
+  registrationdate: 2017-12-11T11:44:00.590Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'ooiooooo',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:31:38.840] [DEBUG] debug - config encrypt sha512
+[2018-04-29 15:31:38.841] [DEBUG] debug - config utils fillSession
+[2018-04-29 15:31:38.842] [DEBUG] debug - config utils fillWebSession
+[2018-04-29 15:31:38.870] [DEBUG] debug - session > websession
+[2018-04-29 15:31:38.871] [DEBUG] debug - routes index webindex
+[2018-04-29 15:31:38.871] [DEBUG] debug - crud index checkSession
+[2018-04-29 15:31:38.882] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
+  useremail: 'prashant@jij.pro',
+  username: 'pppppppp',
+  password1: '30f0cd8cdcaec4c26e205164bd61fa20a5ee9f59e70b0ea7a4278a0a86a21d8d122fc80c86c2de041efba70a3af127fa753f327d4fe4be39f91c26fb280047c2',
+  role: 'customer',
+  salt: '02986b8e5e1aea8c',
+  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
+  registrationdate: 2017-12-11T11:44:00.590Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'lyFgCAcMVaJ8LSwh4x3JYwDuoxayP3rT',
+  social: [],
+  userinfo: 
+   { fullname: 'klmlkm',
+     area: 'ooiooooo',
+     city: 'lkmlkmlkml',
+     state: 'lkmlmlkm',
+     pincode: '9999999',
+     country: 'GB' } }
+[2018-04-29 15:31:38.883] [DEBUG] debug - config utils fillSession
+[2018-04-29 15:31:38.884] [DEBUG] debug - config utils fillWebSession
+[2018-04-29 15:31:41.069] [DEBUG] debug - session > websession
+[2018-04-29 15:31:41.070] [DEBUG] debug - routes index sendActivationLink
+[2018-04-29 15:31:41.071] [DEBUG] debug - crud index sendActivationLink
+[2018-04-29 15:31:41.072] [DEBUG] debug - crud common sendLink
+[2018-04-29 15:31:41.073] [DEBUG] debug - config utils randomStringGenerate
+[2018-04-29 15:31:41.241] [DEBUG] debug - crud result[object Object]
+[2018-04-29 15:31:41.242] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
   email: 'prashant@jij.pro',
-  url: 'http://localhost:1234/#/emailactivate?e=prashant@jij.pro&t=AiOKDUp5ohSogvOVMdH5yqe9qjXPUoIK' }
-[2017-12-11 17:14:00.646] [DEBUG] debug - config utils sendMail
-[2017-12-11 17:14:01.653] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'AiOKDUp5ohSogvOVMdH5yqe9qjXPUoIK',
-  social: [] }
-[2017-12-11 17:14:01.654] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:14:01.655] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:14:05.396] [INFO] debug - Message sent: 250 2.0.0 OK 1512992645 v88sm30102633pfk.31 - gsmtp
-[2017-12-11 17:14:38.831] [DEBUG] debug - routes index webindex
-[2017-12-11 17:14:38.832] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:14:38.836] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'AiOKDUp5ohSogvOVMdH5yqe9qjXPUoIK',
-  social: [] }
-[2017-12-11 17:14:38.837] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:14:38.837] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:18:19.089] [DEBUG] debug - routes index sendActivationLink
-[2017-12-11 17:18:19.090] [DEBUG] debug - crud index sendActivationLink
-[2017-12-11 17:18:19.090] [DEBUG] debug - crud common sendLink
-[2017-12-11 17:18:19.090] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:18:19.095] [DEBUG] debug - crud result[object Object]
-[2017-12-11 17:18:19.095] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
-  email: 'prashant@jij.pro',
-  url: 'http://localhost:1234/#/emailactivate?e=prashant@jij.pro&t=QnHEzRuoPGFaVvskiPp6Fzzag2kVbSbb' }
-[2017-12-11 17:18:19.096] [DEBUG] debug - config utils sendMail
-[2017-12-11 17:18:21.897] [INFO] debug - Message sent: 250 2.0.0 OK 1512992901 e190sm23329062pfe.15 - gsmtp
-[2017-12-11 17:23:59.066] [DEBUG] debug - routes index logout
-[2017-12-11 17:23:59.067] [DEBUG] debug - crud index destroySession
-[2017-12-11 17:23:59.067] [DEBUG] debug - config utils webSessionDestroy
-[2017-12-11 17:24:01.111] [DEBUG] debug - routes index webindex
-[2017-12-11 17:33:19.779] [DEBUG] debug - routes login login
-[2017-12-11 17:33:19.780] [DEBUG] debug - validate email
-[2017-12-11 17:33:19.780] [DEBUG] debug - validate username
-[2017-12-11 17:33:19.780] [DEBUG] debug - validate mobile
-[2017-12-11 17:33:19.781] [DEBUG] debug - validate password
-[2017-12-11 17:33:19.781] [DEBUG] debug - crud login doLogin
-[2017-12-11 17:33:19.936] [DEBUG] debug - crud result
-[2017-12-11 17:33:25.879] [DEBUG] debug - routes login login
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate email
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate username
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate mobile
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate password
-[2017-12-11 17:33:25.880] [DEBUG] debug - crud login doLogin
-[2017-12-11 17:33:25.883] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'QnHEzRuoPGFaVvskiPp6Fzzag2kVbSbb',
-  social: [] }
-[2017-12-11 17:33:25.884] [DEBUG] debug - config encrypt sha512
-[2017-12-11 17:33:25.884] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:33:25.886] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:33:25.903] [DEBUG] debug - routes index webindex
-[2017-12-11 17:33:25.903] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:33:25.907] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'QnHEzRuoPGFaVvskiPp6Fzzag2kVbSbb',
-  social: [] }
-[2017-12-11 17:33:25.908] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:33:25.908] [DEBUG] debug - config utils fillWebSession
+  url: 'http://localhost:1234/#/emailactivate?e=prashant@jij.pro&t=6aGtuymC7n0efnhVraKDrcKcKerLSh4d' }
+[2018-04-29 15:31:41.256] [DEBUG] debug - config utils sendMail
+[2018-04-29 15:31:44.903] [DEBUG] debug - session > websession
+[2018-04-29 15:31:44.904] [DEBUG] debug - routes index logout
+[2018-04-29 15:31:44.904] [DEBUG] debug - crud index destroySession
+[2018-04-29 15:31:44.905] [DEBUG] debug - config utils webSessionDestroy
+[2018-04-29 15:31:46.948] [INFO] debug - Message sent: 250 2.0.0 OK 1524996105 h8-v6sm7356501pgq.56 - gsmtp
+[2018-04-29 15:31:47.833] [DEBUG] debug - session > websession
+[2018-04-29 15:35:44.165] [DEBUG] debug - session > websession
+[2018-04-29 15:35:53.626] [DEBUG] debug - session > websession
+[2018-04-29 15:35:58.086] [DEBUG] debug - routes common checkUsername
+[2018-04-29 15:35:58.086] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:35:58.115] [DEBUG] debug - crud result
+[2018-04-29 15:35:58.158] [DEBUG] debug - routes common checkUsername
+[2018-04-29 15:35:58.159] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:35:58.165] [DEBUG] debug - crud result
+[2018-04-29 15:35:58.182] [DEBUG] debug - routes common checkUsername
+[2018-04-29 15:35:58.183] [DEBUG] debug - crud common checkUsername
+[2018-04-29 15:35:58.198] [DEBUG] debug - crud result
+[2018-04-29 15:35:59.138] [DEBUG] debug - session > websession
+[2018-04-29 15:36:03.338] [DEBUG] debug - session > websession

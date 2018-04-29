@@ -4,7 +4,17 @@ const config = require('./config');
 const logger = require("../config/logger");
 const validate=require("../config/validate");
 const commonOperations = require('./crudoperations/commonoperations');
-const urls = ['/webindex','/sendActivationLink','/logout','/profile/changeUsername','/profile/updateProfileData','/profile/updateMobile','/profile/verifyCode','/profile/setNewPassword','/profile/uploadPic'];
+const allUrls = require('./registeredUrls');
+const authUrls = allUrls.authUrls;
+
+var urls = [];
+
+Object.keys(authUrls).forEach(function(key){
+    for(var i = 0;i<authUrls[key].length;i++){
+        var reqUrl = key + authUrls[key][i];
+        urls.push(reqUrl);
+    }
+});
 
 var authenticator = {
 
