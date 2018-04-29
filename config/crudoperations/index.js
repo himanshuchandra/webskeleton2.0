@@ -54,10 +54,10 @@ const dbOperations= {
     destroySession:function(request,response){
         logger.debug('crud index destroySession');
         const utils = require("../utils");
-        if(request.body.appCall===true && request.body.sessionidValid===true){
+        if(request.sessionMode === 'app'){
             utils.appSessionDestroy(request.body.sessionid,response);
         }
-        else{
+        else if(request.sessionMode === 'web'){
             utils.webSessionDestroy(request,response);
         }
     }

@@ -48,7 +48,7 @@ angular.module('webskeletonApp')
     $scope.loadData = function () {
       var promise = webindex.checkStatus();
       promise.then(function (data) {
-        if (data.data.message === "fail") {
+        if (data.data.message === "unknown") {
           $scope.loginStatus = "Login/SignUp";
         }
         else if (data.data.Message != undefined) {

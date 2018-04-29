@@ -7,6 +7,7 @@ const secrets={
     sessionKey:["ggggg","aaaaa","sssssss","hhhhh","ffff","kkkkkk","ttt","aaaa"],
     reqUrl:"http://localhost:1234",
     defaultSessionDuration:2*60*60,
+    sessionMode: 'classic',
     SMTPS_EMAIL:"surveyshimanshu@gmail.com",
     SMTPS_PASSWORD:"surveys9990",
     SMTPS_URL:'smtp.gmail.com',
