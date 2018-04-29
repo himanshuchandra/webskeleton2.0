@@ -31,7 +31,7 @@ app.use(session({
     //ssl
     //ephemeral: true
     store: new mongoStore({
-        url: config.mongoUrl,
+        url: config.dbUrl,
         //ttl: 14 * 24 * 60 * 60,//14 days 
         ttl: config.defaultSessionDuration,// 2 hours 
         //mongoOptions: advancedOptions // See below for details 
