@@ -54,7 +54,10 @@ const dbOperations= {
     destroySession:function(request,response){
         logger.debug('crud index destroySession');
         const utils = require("../utils");
-        if(request.sessionMode === 'app'){
+        if(request.sessionMode === 'jwt'){
+            utils.appSessionDestroy(request.token,response);
+        }
+        else if(request.sessionMode === 'app'){
             utils.appSessionDestroy(request.body.sessionid,response);
         }
         else if(request.sessionMode === 'web'){

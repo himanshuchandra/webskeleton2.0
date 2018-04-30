@@ -1,5 +1,5 @@
 'use strict';
-//Schema for app session database
+//Schema for session database
 
 const mongoose = require("./connection");
 const config = require("./config");
@@ -26,6 +26,6 @@ const sessionSchema= new schema({
     }
 });
 
-const AppSession = mongoose.model(config.sessionCollection,sessionSchema); 
+const Session = mongoose.model(config.sessionCollection,sessionSchema); 
 
-module.exports=AppSession;
+module.exports = Session;

@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mfavicon(__dirname + '/public/favicon.icon'));
 
 if (config.sessionMode === 'jwt') {
-
+    app.use(authenticator.jwtSession);
 }
 else {
     const session = require('express-session');

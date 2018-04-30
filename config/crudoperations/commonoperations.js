@@ -271,8 +271,8 @@ const dbOperations = {
 
     getProfileData: function (id, userData, callback) {
         logger.debug('crud common getProfileData');
-        const AppSession = require('../appsessdbschema');
-        AppSession.find({ sessionid: id }, function (error, result) {
+        const Session = require('../sessionschema');
+        Session.find({ sessionid: id }, function (error, result) {
             if (error) {
                 logger.error(error);
             }

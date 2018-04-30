@@ -58,6 +58,47 @@ var authenticator = {
         else{
             next();
         } 
+    },
+
+    jwtSession: function (request, response, next) {
+        if(urls.indexOf(request.url)>-1){
+            
+            logger.debug('session > jwtSession');
+            const jwt = require('jsonwebtoken');
+            const jwtOps = require('./jwt');
+
+            const tokenHeader = request.headers["authorization"];
+            if(typeof tokenHeader !== 'undefined'){
+                const tokenArray = tokenHeader.split(" ");
+                const token = tokenArray[1];
+                request.token = token;
+
+                jwtOps.getUserid(token,(userData)=>{
+                    if(userData){
+                        request.userData = userData;
+                        request.sessionMode = 'jwt';
+                        jwt.verify(request.token, config.jwtKey, function (error, result) {
+                            if (error) {
+                                logger.error(error);
+                                response.json({ message: "unknown" });
+                            }
+                            else {
+                                next();
+                            }
+                        })
+                    }
+                    else{
+                        response.json({ message: "unknown" });
+                    }  
+                })
+            }
+            else{
+                response.json({ message: "unknown" });
+            }
+        }
+        else{
+            next();
+        } 
     }
 }
 
