@@ -8,10 +8,10 @@ const config = require("./config");
 
 var TokenOperations = {
 
-    generateJwt : function(id){
+    generateJwt : function(id,duration){
         logger.debug('jwt generateJwt');
         var token = jwt.sign({ userid: id }, config.jwtKey, {
-            expiresIn: config.jwtDuration
+            expiresIn: config.jwtDuration * duration
         });
         return token;
     },
@@ -39,8 +39,11 @@ var TokenOperations = {
         logger.debug('jwt fillJwtSession');
         var that = this;
         if (userData.userid) {
-
-            var token = that.generateJwt(userData.userid);
+            var duration = 1;
+            if(userData.rememberMe){
+                duration = 30;
+            }
+            var token = that.generateJwt(userData.userid,duration);
 
             userData._id=undefined; //prevent duplicate record error
             userData=userData.toObject();
