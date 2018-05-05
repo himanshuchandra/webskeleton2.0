@@ -60,7 +60,6 @@ var init = {
                             process.exit();
                         }
                         else{
-                            console.log(result);
                             if(result){
                                 dbOperations.fillRights(result.roleid, superAdminRights, (error,result)=>{
                                     if(error){
