@@ -4,7 +4,9 @@ const config = require('./config');
 const logger = require("../config/logger");
 const validate=require("../config/validate");
 const commonOperations = require('./crudoperations/commonoperations');
+const roleOps = require('./crudoperations/rolecrud');
 const allUrls = require('./registeredUrls');
+const confUrls = require('./confUrls');
 const authUrls = allUrls.authUrls;
 
 var urls = [];
@@ -16,9 +18,40 @@ Object.keys(authUrls).forEach(function(key){
     }
 });
 
+Object.keys(confUrls).forEach(function(key){
+    for(var i = 0;i<confUrls[key].length;i++){
+        var reqUrl = key + confUrls[key][i];
+        urls.push(reqUrl);
+    }
+});
+
+console.log(urls);
+
+var checkRights=function(request,response,next){
+    roleOps.getRole(request.userData.role,(error,result)=>{
+        if(result[0]){
+            var rights=[];
+            for(var i=0;i<result[0].rights.length;i++){
+                rights.push(result[0].rights[i].url);
+            } 
+            console.log(rights,request.url);  
+            if(rights.indexOf(request.url)>-1){
+                next();
+            }
+            else{
+                response.json({"message":"denied"});
+            }
+        }
+        else{
+            response.json({"message":"unknown"});
+        }
+    });
+};
+
 var authenticator = {
 
     webSession:function(request,response,next){
+
         if(urls.indexOf(request.url)>-1){
             
             logger.debug('session > websession');
@@ -36,7 +69,7 @@ var authenticator = {
             if (webSessionExist) {
                 request.userData = request.session.user;
                 request.sessionMode = 'web';
-                next();
+                checkRights(request,response,next);
             }
             else if (isValidSessionid) {
                 var userData = {};
@@ -44,7 +77,7 @@ var authenticator = {
                     if (userData) {
                         request.userData = userData;
                         request.sessionMode = 'app';
-                        next();
+                        checkRights(request,response,next);
                     }
                     else {
                         response.json({ message: "unknown" });
@@ -61,6 +94,7 @@ var authenticator = {
     },
 
     jwtSession: function (request, response, next) {
+
         if(urls.indexOf(request.url)>-1){
             
             logger.debug('session > jwtSession');
@@ -83,7 +117,7 @@ var authenticator = {
                                 response.json({ message: "unknown" });
                             }
                             else {
-                                next();
+                                checkRights(request,response,next);
                             }
                         })
                     }

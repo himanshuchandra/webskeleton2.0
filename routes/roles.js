@@ -77,13 +77,14 @@ router.post('/updateRights', function (request, response) {
         var newRights = [];
         Object.keys(authUrls).forEach(function (key) {
             for (var i = 0; i < authUrls[key].length; i++) {
-                if (authUrls[key][i].indexOf(input) > -1)
+                if (input.indexOf(authUrls[key][i]) > -1){
                     var right = {
                         name: authUrls[key][i],
                         path: key,
                         url: key + authUrls[key][i]
                     }
-                newRights.push(right);
+                    newRights.push(right);
+                }
             }
         });
 

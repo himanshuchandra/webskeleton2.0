@@ -13,7 +13,7 @@ const dbOperations = {
         Role.find({
             "$or": [
                 { role: role },
-                { id: role }
+                { roleid: role }
             ]
         },
             function (error, result) {
@@ -132,7 +132,9 @@ const dbOperations = {
     },
 
     loadRoles:function(callback){
-        Role.find({},function (error, result) {
+        Role.find({
+            role:{$ne:"superadmin"}
+        },function (error, result) {
             if (error) {
                 logger.debug(error);
                 callback(error,null);
