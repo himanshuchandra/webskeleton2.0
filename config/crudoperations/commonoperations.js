@@ -3,6 +3,7 @@
 const User = require("../userschema");
 const utils = require("../utils");
 const logger = require("../logger");
+const config = require("../config");
 
 const dbOperations = {
 
@@ -84,70 +85,6 @@ const dbOperations = {
     },
 
 
-    // //////////////////Social Signin//////////////////////////
-    // ///////////Check if user exists
-    // socialSignin:function(request,response){
-    //     var that=this;
-    //     var SocialObject=request.body;
-
-    //     User.find({
-    //         "useremail":SocialObject.Email
-    //     }
-    //     ,function(error,result){
-    //         if(error){
-    //             logger.error(error);
-    //         }
-    //         else if(result){
-    //             if(result[0]===undefined){
-    //                 that.socialRegister(request,response);
-    //             }
-    //             else{
-    //                 var sessionData=result[0];
-    //                 var responseObject={
-    //                     message:"loggedIn",
-    //                 };
-    //                 utils.fillSession(request,response,sessionData,responseObject);
-    //             }
-    //         }
-    //         else{
-    //             response.json({message:"fail"});
-    //         }
-    //     })
-    // },   
-
-
-
-
-    // ////////Register new User
-    // socialRegister:function(request,response){
-    //     var SocialObject =request.body;
-    //     var aPosition=SocialObject.Email.indexOf("@");
-    //     var userName=SocialObject.Email.substring(0,aPosition);
-
-    //     var UserData={};
-    //     UserData.userinfo={};
-    //     UserData.useremail=SocialObject.Email;
-    //     UserData.username=userName;
-    //     UserData.password1="social";
-    //     UserData.role="customer";
-    //     UserData.registrationdate=new Date();
-    //     UserData.userinfo.fullname=SocialObject.FullName;
-    //     UserData.emailverified=true;
-    //     UserData.socialconnection=SocialObject.Social;
-
-    //     User.create(UserData,function(error,result){
-    //         if(error){
-    //             response.json({message:"Can't Add Error Occured, Try later"});
-    //         }
-    //         else{
-    //             var responseObject={
-    //                 message:"registered",
-    //             };
-    //             utils.fillSession(request,response,result,responseObject);
-    //         }
-    //     });
-    // },
-
     //////////////////Social Signin//////////////////////////
     ///////////Check if user exists
     socialSignin: function (request, response, done) {
@@ -199,7 +136,7 @@ const dbOperations = {
         UserData.useremail = SocialObject.Email;
         UserData.username = userName;
         UserData.password1 = "social";
-        UserData.role = "customer";
+        UserData.role = config.defaultRole;
         UserData.registrationdate = new Date();
         UserData.userinfo.fullname = SocialObject.FullName;
         UserData.emailverified = true;

@@ -36,6 +36,6 @@ const userSchema = new schema({
   ]
 });
 
-const User = mongoose.model(config.dbCollection, userSchema);
+const User = mongoose.model(config.userCollection, userSchema);
 
 module.exports = User;

@@ -120,6 +120,20 @@ const validate = {
         else {
             return true;
         }
+    },
+    id: function (string) {
+        logger.debug('validate id');
+        if (string === undefined) {
+            return false;
+        }
+        var string = string.trim();
+        var letters = /^[A-Za-z0-9]+$/;
+        if (string.length < 8 || string.length > 32 || string.match(letters) === null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 };
 

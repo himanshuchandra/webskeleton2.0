@@ -11,6 +11,7 @@ const authenticator = require('./config/session');
 const app = express();
 
 const config = require('./config/config');
+const init = require('./config/init');
 
 
 app.use(function (request, response, next) {
@@ -95,6 +96,8 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     //   res.render('error');
 });
+
+init.superAdmin();
 
 module.exports = app;
 
