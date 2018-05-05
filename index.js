@@ -61,6 +61,7 @@ else {
 module.exports = app;
 
 const index = require('./routes/index');
+const roles = require('./routes/roles');
 const commonroutes = require('./routes/commonroutes');
 const signup = require('./routes/signup');
 const login = require('./routes/login');
@@ -71,6 +72,7 @@ const social = require('./routes/social');
 
 //app.use(session({ secret:"string"}));
 app.use('/', index);
+app.use('/roles', roles);
 app.use('/commonroutes', commonroutes);
 app.use('/signup', signup);
 app.use('/login', login);
