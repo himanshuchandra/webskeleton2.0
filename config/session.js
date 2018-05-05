@@ -25,7 +25,6 @@ Object.keys(confUrls).forEach(function(key){
     }
 });
 
-console.log(urls);
 
 var checkRights=function(request,response,next){
     roleOps.getRole(request.userData.role,(error,result)=>{
@@ -33,8 +32,7 @@ var checkRights=function(request,response,next){
             var rights=[];
             for(var i=0;i<result[0].rights.length;i++){
                 rights.push(result[0].rights[i].url);
-            } 
-            console.log(rights,request.url);  
+            }  
             if(rights.indexOf(request.url)>-1){
                 next();
             }
