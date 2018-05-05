@@ -25,7 +25,7 @@ angular.module('webskeletonApp')
         }
       }
       else if (webindex.loaded === true && webindex.loggedIn != true) {
-        if ($location.path() === '/profile') {
+        if ($location.path() === '/profile' || $location.path() === '/superadmin') {
           $location.path('/login');
         }
       }
