@@ -8,8 +8,10 @@ const roleOps = require('./crudoperations/rolecrud');
 const allUrls = require('./registeredUrls');
 const confUrls = require('./confUrls');
 const authUrls = allUrls.authUrls;
+const simpleUrls = allUrls.urls;
 
 var urls = [];
+var surls = [];
 
 Object.keys(authUrls).forEach(function(key){
     for(var i = 0;i<authUrls[key].length;i++){
@@ -22,6 +24,13 @@ Object.keys(confUrls).forEach(function(key){
     for(var i = 0;i<confUrls[key].length;i++){
         var reqUrl = key + confUrls[key][i];
         urls.push(reqUrl);
+    }
+});
+
+Object.keys(simpleUrls).forEach(function(key){
+    for(var i = 0;i<simpleUrls[key].length;i++){
+        var reqUrl = key + simpleUrls[key][i];
+        surls.push(reqUrl);
     }
 });
 
@@ -82,7 +91,10 @@ var authenticator = {
                     }
                 });
             }
-            else {
+            else if(surls.indexOf(request.url)>-1){
+                next();
+            }
+            else{
                 response.json({ message: "unknown" });
             }
         }
@@ -94,7 +106,6 @@ var authenticator = {
     jwtSession: function (request, response, next) {
 
         if(urls.indexOf(request.url)>-1){
-            
             logger.debug('session > jwtSession');
             const jwt = require('jsonwebtoken');
             const jwtOps = require('./jwt');
@@ -123,6 +134,9 @@ var authenticator = {
                         response.json({ message: "unknown" });
                     }  
                 })
+            }
+            else if(surls.indexOf(request.url)>-1){
+                next();
             }
             else{
                 response.json({ message: "unknown" });
