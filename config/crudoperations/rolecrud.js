@@ -144,6 +144,24 @@ const dbOperations = {
                 callback(null,result);
             }
         })
+    },
+    
+    assignRole:function(useremail, role, callback){
+        const User = require('../userschema');
+        User.find({
+            useremail: useremail
+        }).update({
+            role:role
+        },function (error, result) {
+            if (error) {
+                logger.debug(error);
+                callback(error,null);
+            }
+            else {
+                logger.debug('crud result');
+                callback(null,result);
+            }
+        })
     }   
 
 };

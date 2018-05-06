@@ -12,7 +12,7 @@ const allUrls = require("../config/registeredUrls");
 const authUrls = allUrls.authUrls;
 
 router.get('/getRights', function (request, response) {
-    logger.debug('routes sadmin getRights');
+    logger.debug('routes roles getRights');
 
     response.send(authUrls);
 
@@ -20,7 +20,7 @@ router.get('/getRights', function (request, response) {
 
 
 router.get('/loadRoles', function (request, response) {
-    logger.debug('routes sadmin loadRoles');
+    logger.debug('routes roles loadRoles');
 
     dbOperations.loadRoles((error, result) => {
         if (error) {
@@ -34,7 +34,7 @@ router.get('/loadRoles', function (request, response) {
 });
 
 router.post('/createRole', function (request, response) {
-    logger.debug('routes sadmin createRole');
+    logger.debug('routes roles createRole');
 
     var isValidRole = validate.name(request.body.role);
 
@@ -68,7 +68,7 @@ router.post('/createRole', function (request, response) {
 
 
 router.post('/updateRights', function (request, response) {
-    logger.debug('routes sadmin updateRole');
+    logger.debug('routes roles updateRole');
 
     var isValidRoleid = validate.id(request.body.roleid);
 
@@ -104,12 +104,34 @@ router.post('/updateRights', function (request, response) {
 });
 
 router.post('/deleteRole', function (request, response) {
-    logger.debug('routes sadmin deleteRole');
+    logger.debug('routes roles deleteRole');
 
     var isValidRoleid = validate.id(request.body.roleid);
 
     if (isValidRoleid) {
         dbOperations.deleteRole(request.body.roleid, (error, result) => {
+            if (error) {
+                response.json({ "message": "fail" });
+            }
+            else {
+                response.send({ "message": "success" });
+            }
+        });
+    }
+    else{
+            response.json({ "message": "unknown" });
+    }
+
+});
+
+router.post('/assignRole', function (request, response) {
+    logger.debug('routes roles assignRole');
+
+    var isValidEmail = validate.email(request.body.email);
+    var isValidRole = validate.name(request.body.role);
+
+    if (isValidEmail && isValidRole) {
+        dbOperations.assignRole(request.body.email, request.body.role, (error, result) => {
             if (error) {
                 response.json({ "message": "fail" });
             }
