@@ -42,7 +42,7 @@ const dbOperations = {
                 callback(error, null);
             }
             else {
-                logger.debug('crud result' + result);
+                logger.debug('crud result');
                 callback(null, result);
             }
         });
@@ -61,7 +61,7 @@ const dbOperations = {
                     callback(error, null);
                 }
                 else {
-                    logger.debug('crud result' + result);
+                    logger.debug('crud result');
                     if (result.length < 1) {
                         var data = {};
                         data.useremail = config.superadminEmail;
@@ -79,7 +79,7 @@ const dbOperations = {
                                 callback(error, null);
                             }
                             else {
-                                logger.debug('crud result' + result);
+                                logger.debug('crud result');
                                 const commonOps = require("./commonoperations");
                                 commonOps.sendLink(result.useremail, "emailactivate", "emailactivationtoken");
                                 callback(null, result);
@@ -109,7 +109,7 @@ const dbOperations = {
                 callback(error,null);
             }
             else {
-                logger.debug('crud result' + result);
+                logger.debug('crud result');
                 callback(null,result);
             }
         })
@@ -125,7 +125,7 @@ const dbOperations = {
                 callback(error,null);
             }
             else {
-                logger.debug('crud result' + result);
+                logger.debug('crud result');
                 callback(null,result);
             }
         })
@@ -140,7 +140,25 @@ const dbOperations = {
                 callback(error,null);
             }
             else {
-                logger.debug('crud result' + result);
+                logger.debug('crud result');
+                callback(null,result);
+            }
+        })
+    },
+    
+    assignRole:function(useremail, role, callback){
+        const User = require('../userschema');
+        User.find({
+            useremail: useremail
+        }).update({
+            role:role
+        },function (error, result) {
+            if (error) {
+                logger.debug(error);
+                callback(error,null);
+            }
+            else {
+                logger.debug('crud result');
                 callback(null,result);
             }
         })

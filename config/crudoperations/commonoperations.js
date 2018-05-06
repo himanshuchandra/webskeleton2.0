@@ -16,7 +16,7 @@ const dbOperations = {
                 logger.error(error);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if (result[0] != undefined) {
                     object.notFound = false;
                 }
@@ -50,7 +50,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     if (result.length < 1) {
                         response.json({ message: "fail" });
                     }
@@ -78,7 +78,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     response.json({ message: "success" });
                 }
             });
@@ -101,7 +101,7 @@ const dbOperations = {
                     return done(null);
                 }
                 else if (result) {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     if (result[0] === undefined) {
                         that.socialRegister(request, response, done);
                     }
@@ -125,6 +125,7 @@ const dbOperations = {
 
     ////////Register new User
     socialRegister: function (request, response, done) {
+        var that = this;
         logger.debug('crud common socialRegister');
         var SocialObject = request.body;
         var aPosition = SocialObject.Email.indexOf("@");
@@ -139,7 +140,7 @@ const dbOperations = {
         UserData.role = config.defaultRole;
         UserData.registrationdate = new Date();
         UserData.userinfo.fullname = SocialObject.FullName;
-        UserData.emailverified = true;
+        UserData.emailverified = SocialObject.verified;
         UserData.userid = utils.randomStringGenerate(32);
 
         UserData.social = [];
@@ -155,7 +156,10 @@ const dbOperations = {
                 return done(null);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
+                if(!UserData.emailverified){
+                    that.sendLink(result.useremail,"emailactivate","emailactivationtoken");
+                }
                 var responseObject = {     //No use
                     message: "registered",
                     callback: done
@@ -194,7 +198,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result' + result);
+                    logger.debug('crud result');
                     userData.email = UserEmail;
                     userData.url = Url;
 
@@ -214,7 +218,7 @@ const dbOperations = {
                 logger.error(error);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 userData = result[0];
             }
             callback(userData);

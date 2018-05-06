@@ -21,7 +21,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result[0]!=undefined){
                     response.json({message:"emailTaken"});
                 }
@@ -71,7 +71,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 var responseObject={
                     message:"pass",

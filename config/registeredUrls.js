@@ -7,7 +7,7 @@ const urls = {
         '/signup/': ['registerUser'],
         '/forgotpassword/': ['sendLink', 'passwordReset'],
         '/commonroutes/': ['activateEmail', 'checkUsername'],
-        '/social/': ['socialFacebook', 'socialFacebookApp', 'auth/facebook/callback', 'socialGoogle', 'socialGoogleApp', 'auth/google/callback']
+        '/social/': ['socialFacebook', 'socialFacebookApp', '/auth/facebook', 'auth/facebook/callback', 'socialGoogle', 'socialGoogleApp', '/auth/google', 'auth/google/callback']
     },
     authUrls: {
         '/': ['webindex', 'sendActivationLink', 'logout'],
