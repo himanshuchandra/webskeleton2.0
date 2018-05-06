@@ -16,7 +16,7 @@ const dbOperations = {
                 logger.error(error);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if (result[0] != undefined) {
                     object.notFound = false;
                 }
@@ -50,7 +50,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     if (result.length < 1) {
                         response.json({ message: "fail" });
                     }
@@ -78,7 +78,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     response.json({ message: "success" });
                 }
             });
@@ -101,7 +101,7 @@ const dbOperations = {
                     return done(null);
                 }
                 else if (result) {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     if (result[0] === undefined) {
                         that.socialRegister(request, response, done);
                     }
@@ -156,7 +156,7 @@ const dbOperations = {
                 return done(null);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(!UserData.emailverified){
                     that.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 }
@@ -198,7 +198,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result' + result);
+                    logger.debug('crud result');
                     userData.email = UserEmail;
                     userData.url = Url;
 
@@ -218,7 +218,7 @@ const dbOperations = {
                 logger.error(error);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 userData = result[0];
             }
             callback(userData);

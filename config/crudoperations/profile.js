@@ -30,7 +30,7 @@ const dbOperations={
                         logger.error(error);
                     }
                     else{ 
-                        logger.debug('crud result'+ result); 
+                        logger.debug('crud result'); 
                         response.json({message:"success"});
                     }
                 });
@@ -68,7 +68,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 response.json({message:"success"});
             }
         });
@@ -97,7 +97,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 utils.sendSms(number,body);
                 //need to be a callback function
                 response.json({message:"success"});
@@ -127,7 +127,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result.length<1){
                     response.json({message:"fail"});
                 }
@@ -151,7 +151,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result[0]!=undefined){
                     response.json({message:"exists"});
                 }
@@ -182,7 +182,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 response.json({message:"pass"});
             }
         });
@@ -202,7 +202,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result.length<1){
                     response.json({message:"notFound"});
                 }
@@ -253,7 +253,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 response.json({message:"success"});
             }
         });

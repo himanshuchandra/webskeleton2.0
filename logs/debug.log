@@ -151,3 +151,83 @@
   social: [] }
 [2018-05-06 01:07:11.955] [DEBUG] debug - config utils fillSession
 [2018-05-06 01:07:11.955] [DEBUG] debug - config utils fillWebSession
+[2018-05-06 21:54:16.832] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06 21:54:16.841] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06 21:54:16.851] [DEBUG] debug - crud role getRole
+[2018-05-06 21:54:17.172] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
+  useremail: 'surveyshimanshu@gmail.com',
+  username: 'superadmin',
+  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
+  role: 'superadmin',
+  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
+  registrationdate: 2018-05-05T11:16:04.380Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
+  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  forgotpasswordtoken: null,
+  salt: '545f2e7393a25499',
+  social: [] }
+[2018-05-06 21:54:17.206] [DEBUG] debug - crud role fillRights
+[2018-05-06 21:54:17.438] [DEBUG] debug - crud result[object Object]
+[2018-05-06 22:09:14.265] [DEBUG] debug - routes login login
+[2018-05-06 22:09:14.270] [DEBUG] debug - validate email
+[2018-05-06 22:09:14.271] [DEBUG] debug - validate username
+[2018-05-06 22:09:14.272] [DEBUG] debug - validate mobile
+[2018-05-06 22:09:14.272] [DEBUG] debug - validate password
+[2018-05-06 22:16:44.288] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06 22:16:44.320] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06 22:16:44.339] [DEBUG] debug - crud role getRole
+[2018-05-06 22:16:44.875] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
+  useremail: 'surveyshimanshu@gmail.com',
+  username: 'superadmin',
+  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
+  role: 'superadmin',
+  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
+  registrationdate: 2018-05-05T11:16:04.380Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
+  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  forgotpasswordtoken: null,
+  salt: '545f2e7393a25499',
+  social: [] }
+[2018-05-06 22:16:44.879] [DEBUG] debug - crud role fillRights
+[2018-05-06 22:16:44.971] [DEBUG] debug - crud result[object Object]
+[2018-05-06 22:16:59.833] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06 22:16:59.845] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06 22:16:59.857] [DEBUG] debug - crud role getRole
+[2018-05-06 22:17:00.168] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
+  useremail: 'surveyshimanshu@gmail.com',
+  username: 'superadmin',
+  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
+  role: 'superadmin',
+  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
+  registrationdate: 2018-05-05T11:16:04.380Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
+  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  forgotpasswordtoken: null,
+  salt: '545f2e7393a25499',
+  social: [] }
+[2018-05-06 22:17:00.172] [DEBUG] debug - crud role fillRights
+[2018-05-06 22:17:00.228] [DEBUG] debug - crud result[object Object]
+[2018-05-06 22:17:17.434] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06 22:17:17.444] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06 22:17:17.455] [DEBUG] debug - crud role getRole
+[2018-05-06 22:17:17.720] [DEBUG] debug - crud result
+[2018-05-06 22:17:17.723] [DEBUG] debug - crud role fillRights
+[2018-05-06 22:17:17.770] [DEBUG] debug - crud result
+[2018-05-06 22:17:37.938] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06 22:17:37.953] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06 22:17:37.972] [DEBUG] debug - crud role getRole
+[2018-05-06 22:17:38.310] [DEBUG] debug - crud result
+[2018-05-06 22:17:38.313] [DEBUG] debug - crud role fillRights
+[2018-05-06 22:17:38.383] [DEBUG] debug - crud result
+[2018-05-06 22:17:43.236] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06 22:17:43.246] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06 22:17:43.258] [DEBUG] debug - crud role getRole
+[2018-05-06 22:17:43.514] [DEBUG] debug - crud result
+[2018-05-06 22:17:43.516] [DEBUG] debug - crud role fillRights
+[2018-05-06 22:17:43.580] [DEBUG] debug - crud result

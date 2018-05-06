@@ -107,7 +107,7 @@ const utils={
                 logger.error(error);
             }
             else{
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 response.json({message:"success"});
             }
         });

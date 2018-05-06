@@ -16,7 +16,7 @@ const dbOperations= {
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result[0]!=undefined){
                     commonOperations.sendLink(ForgotObject.Email,"forgotpassword","forgotpasswordtoken");
                     //need to be a callback function
@@ -51,7 +51,7 @@ const dbOperations= {
             logger.error(error);
         }
         else{ 
-            logger.debug('crud result'+ result); 
+            logger.debug('crud result'); 
             var date=new Date();
             
             if(result.length<1){
@@ -100,7 +100,7 @@ const dbOperations= {
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 response.json({message:"success"});
             }
         });
