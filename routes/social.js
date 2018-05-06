@@ -31,12 +31,26 @@ var signinFacebook = function (request, accessToken, refreshToken, profile, done
             done(null, user);
         });
 
-        if (profile._json.email === undefined) {
-            return done(null);
+        const validate = require('../config/validate');
+        
+        var validEmail = validate.email(request.query.state);
+        
+        var email;
+        if (profile._json.email) {
+            email = profile._json.email;
+            request.body.verified = true;
+        }
+        else if (validEmail) {
+            email = request.query.state;
+            request.body.verified = false;
+        }
+        
+        if (!email || !accessToken) {
+            return done(null, { "email": "false" });
         }
         else {
             logger.debug('routes social fb');
-            request.body.Email = profile._json.email.toLowerCase();
+            request.body.Email = email.toLowerCase();
             request.body.FullName = profile._json.first_name + " " + profile._json.last_name;
             request.body.socialId = profile._json.id;
             request.body.accessToken = accessToken;
@@ -58,10 +72,18 @@ passport.use(new FacebookStrategy({
     clientSecret: secrets.FACEBOOK_CLIENT_SECRET,  // AppSecret
     callbackURL: secrets.reqUrl + "/social/auth/facebook/callback",
     profileFields: ['id', 'email', 'name']
-},signinFacebook));
+}, signinFacebook));
 
 
-router.get('/socialFacebook', passport.authenticate('facebook', { scope: ['email'] }));
+router.get('/socialFacebook', function (req, res, next) {
+
+    passport.authenticate(
+        'facebook', {
+            scope: 'email',
+            state: req.query.state
+        }
+    )(req, res, next);
+});
 
 router.get('/socialFacebookApp', function (req, res, next) {
 
@@ -82,7 +104,7 @@ passport.use('facebookToken', new FacebookTokenStrategy({
     clientSecret: secrets.FACEBOOK_CLIENT_SECRET,
     callbackURL: secrets.reqUrl + "/social/auth/facebook/callback",
     profileFields: ['id', 'email', 'name']
-},signinFacebook));
+}, signinFacebook));
 
 
 router.post('/auth/facebook', passport.authenticate('facebookToken', { scope: ['email'] }));
@@ -91,8 +113,11 @@ router.post('/auth/facebook', passport.authenticate('facebookToken', { scope: ['
 
 router.get('/auth/facebook/callback', function (request, response) {
     passport.authenticate('facebook', function (req, res) {
-        if (res.sessionid) {
-            response.redirect('/#/?sid=' + res.sessionid);
+        if (res && res.sessionid) {
+            response.redirect('/?sid=' + res.sessionid);
+        }
+        else if (res && res.email) {
+            response.redirect('/?email=false');
         }
         else {
             response.redirect('/');
@@ -113,12 +138,26 @@ var signinGoogle = function (request, accessToken, refreshToken, profile, done) 
             done(null, user);
         });
 
-        if (!profile.emails[0].value) {
-            return done(null);
+        const validate = require('../config/validate');
+
+        var validEmail = validate.email(request.query.state);
+
+        var email;
+        if (profile.emails[0].value) {
+            email = profile.emails[0].value;
+            request.body.verified = true;
+        }
+        else if (validEmail) {
+            email = request.query.state;
+            request.body.verified = false;
+        }
+
+        if (!email || !accessToken) {
+            return done(null, { "email": "false" });
         }
         else {
             logger.debug('routes social google');
-            request.body.Email = profile.emails[0].value.toLowerCase();
+            request.body.Email = email.toLowerCase();
             request.body.FullName = profile._json.displayName;
             request.body.socialId = profile.id;
             request.body.accessToken = accessToken;
@@ -143,12 +182,18 @@ passport.use(new GoogleStrategy({
 }, signinGoogle));
 
 
-router.get('/socialGoogle', passport.authenticate('google', {
-    scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-    ]
-}));
+router.get('/socialGoogle', function (req, res, next) {
+
+    passport.authenticate(
+        'google', {
+            state: req.query.state,
+            scope: [
+                'https://www.googleapis.com/auth/userinfo.profile',
+                'https://www.googleapis.com/auth/userinfo.email'
+            ]
+        }
+    )(req, res, next);
+});
 
 router.get('/socialGoogleApp', function (req, res, next) {
 
@@ -179,8 +224,11 @@ router.post('/auth/google', passport.authenticate('googleToken'));
 
 router.get('/auth/google/callback', function (request, response) {
     passport.authenticate('google', function (req, res) {
-        if (res.sessionid) {
-            response.redirect('/#/?sid=' + res.sessionid);
+        if (res && res.sessionid) {
+            response.redirect('/?sid=' + res.sessionid);
+        }
+        else if (res && res.email) {
+            response.redirect('/?email=false');
         }
         else {
             response.redirect('/');
