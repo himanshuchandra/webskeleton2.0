@@ -125,6 +125,7 @@ const dbOperations = {
 
     ////////Register new User
     socialRegister: function (request, response, done) {
+        var that = this;
         logger.debug('crud common socialRegister');
         var SocialObject = request.body;
         var aPosition = SocialObject.Email.indexOf("@");
@@ -139,7 +140,7 @@ const dbOperations = {
         UserData.role = config.defaultRole;
         UserData.registrationdate = new Date();
         UserData.userinfo.fullname = SocialObject.FullName;
-        UserData.emailverified = true;
+        UserData.emailverified = SocialObject.verified;
         UserData.userid = utils.randomStringGenerate(32);
 
         UserData.social = [];
@@ -156,6 +157,9 @@ const dbOperations = {
             }
             else {
                 logger.debug('crud result'+ result); 
+                if(!UserData.emailverified){
+                    that.sendLink(result.useremail,"emailactivate","emailactivationtoken");
+                }
                 var responseObject = {     //No use
                     message: "registered",
                     callback: done
