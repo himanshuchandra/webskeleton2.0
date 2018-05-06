@@ -1,153 +1,157 @@
-[2018-05-06 01:03:21.601] [DEBUG] debug - crud role fillRights
-[2018-05-06 01:03:21.652] [DEBUG] debug - crud result[object Object]
-[2018-05-06 01:03:25.631] [DEBUG] debug - session > websession
-[2018-05-06 01:05:06.601] [DEBUG] debug - routes forgotpass sendlink
-[2018-05-06 01:05:06.602] [DEBUG] debug - validate email
-[2018-05-06 01:05:06.603] [DEBUG] debug - crud forgotpass checkEmail
-[2018-05-06 01:05:06.648] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
+[2018-05-06T17:02:04.476] [DEBUG] debug - crud role fillRights
+[2018-05-06T17:02:04.500] [DEBUG] debug - crud result[object Object]
+[2018-05-06T17:02:28.953] [DEBUG] debug - session > websession
+[2018-05-06T17:02:28.953] [DEBUG] debug - crud role getRole
+[2018-05-06T17:02:28.969] [DEBUG] debug - routes index webindex
+[2018-05-06T17:02:28.969] [DEBUG] debug - crud index checkSession
+[2018-05-06T17:02:28.977] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
   username: 'superadmin',
-  password1: 'd9a9f5451b3679ca9b9d3d2f15b95c933fd962668c6ded2497c01a67d7aae19c11872ab0eaa504fcd15ef89b35187673ee9c9cbeabcaf52b16ad3b2cb5d81c6a',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
   role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
   emailverified: true,
   __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T17:59:07.744Z,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
   forgotpasswordtoken: null,
-  salt: '30ef93d54e2fc95d',
+  salt: 'f25a62d30bca4a0a',
   social: [] }
-[2018-05-06 01:05:06.649] [DEBUG] debug - crud common sendLink
-[2018-05-06 01:05:06.650] [DEBUG] debug - config utils randomStringGenerate
-[2018-05-06 01:05:06.856] [DEBUG] debug - crud result[object Object]
-[2018-05-06 01:05:06.857] [DEBUG] debug - utils create mail forgotpassword { type: 'forgotpassword',
-  email: 'surveyshimanshu@gmail.com',
-  url: 'http://localhost:1234/#/forgotpassword?e=surveyshimanshu@gmail.com&t=8KCxFWjDLxYygza3gqbdzuyhH9Row2yP' }
-[2018-05-06 01:05:06.876] [DEBUG] debug - config utils sendMail
-[2018-05-06 01:05:12.841] [INFO] debug - Message sent: 250 2.0.0 OK 1525548911 k127-v6sm8949587pga.83 - gsmtp
-[2018-05-06 01:06:21.488] [DEBUG] debug - session > websession
-[2018-05-06 01:06:21.980] [DEBUG] debug - routes forgotpass passwordReset
-[2018-05-06 01:06:21.980] [DEBUG] debug - validate email
-[2018-05-06 01:06:21.981] [DEBUG] debug - validate string
-[2018-05-06 01:06:21.983] [DEBUG] debug - crud forgotpass passwordReset
-[2018-05-06 01:06:21.996] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
+[2018-05-06T17:02:28.978] [DEBUG] debug - config utils fillSession
+[2018-05-06T17:02:28.980] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T17:02:29.066] [DEBUG] debug - session > websession
+[2018-05-06T17:02:29.067] [DEBUG] debug - crud role getRole
+[2018-05-06T17:02:29.090] [DEBUG] debug - routes sadmin getRights
+[2018-05-06T17:03:25.179] [DEBUG] debug - session > websession
+[2018-05-06T17:03:25.181] [DEBUG] debug - crud role getRole
+[2018-05-06T17:03:25.198] [DEBUG] debug - routes index webindex
+[2018-05-06T17:03:25.198] [DEBUG] debug - crud index checkSession
+[2018-05-06T17:03:25.210] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
   username: 'superadmin',
-  password1: 'd9a9f5451b3679ca9b9d3d2f15b95c933fd962668c6ded2497c01a67d7aae19c11872ab0eaa504fcd15ef89b35187673ee9c9cbeabcaf52b16ad3b2cb5d81c6a',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
   role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
   emailverified: true,
   __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
-  forgotpasswordtoken: '8KCxFWjDLxYygza3gqbdzuyhH9Row2yP',
-  salt: '30ef93d54e2fc95d',
-  social: [] }
-[2018-05-06 01:06:35.752] [DEBUG] debug - routes forgotpass passwordReset
-[2018-05-06 01:06:35.753] [DEBUG] debug - validate email
-[2018-05-06 01:06:35.753] [DEBUG] debug - validate string
-[2018-05-06 01:06:35.754] [DEBUG] debug - validate password
-[2018-05-06 01:06:35.755] [DEBUG] debug - crud forgotpass passwordReset
-[2018-05-06 01:06:35.762] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
-  username: 'superadmin',
-  password1: 'd9a9f5451b3679ca9b9d3d2f15b95c933fd962668c6ded2497c01a67d7aae19c11872ab0eaa504fcd15ef89b35187673ee9c9cbeabcaf52b16ad3b2cb5d81c6a',
-  role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
-  emailverified: true,
-  __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
-  forgotpasswordtoken: '8KCxFWjDLxYygza3gqbdzuyhH9Row2yP',
-  salt: '30ef93d54e2fc95d',
-  social: [] }
-[2018-05-06 01:06:35.763] [DEBUG] debug - crud forgotpass saveNewPassword
-[2018-05-06 01:06:35.766] [DEBUG] debug - config encrypt genRandomString
-[2018-05-06 01:06:35.766] [DEBUG] debug - config encrypt sha512
-[2018-05-06 01:06:35.773] [DEBUG] debug - crud result[object Object]
-[2018-05-06 01:06:51.282] [DEBUG] debug - routes login login
-[2018-05-06 01:06:51.283] [DEBUG] debug - validate email
-[2018-05-06 01:06:51.285] [DEBUG] debug - validate username
-[2018-05-06 01:06:51.287] [DEBUG] debug - validate mobile
-[2018-05-06 01:06:51.287] [DEBUG] debug - validate password
-[2018-05-06 01:06:51.288] [DEBUG] debug - crud login doLogin
-[2018-05-06 01:06:51.298] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
-  username: 'superadmin',
-  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
-  role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
-  emailverified: true,
-  __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
   forgotpasswordtoken: null,
-  salt: '545f2e7393a25499',
+  salt: 'f25a62d30bca4a0a',
   social: [] }
-[2018-05-06 01:06:51.298] [DEBUG] debug - config encrypt sha512
-[2018-05-06 01:06:51.300] [DEBUG] debug - config utils fillSession
-[2018-05-06 01:06:51.307] [DEBUG] debug - config utils fillWebSession
-[2018-05-06 01:06:51.573] [DEBUG] debug - session > websession
-[2018-05-06 01:06:51.574] [DEBUG] debug - crud role getRole
-[2018-05-06 01:06:51.589] [DEBUG] debug - routes index webindex
-[2018-05-06 01:06:51.590] [DEBUG] debug - crud index checkSession
-[2018-05-06 01:06:51.595] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
+[2018-05-06T17:03:25.210] [DEBUG] debug - config utils fillSession
+[2018-05-06T17:03:25.211] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T17:03:25.285] [DEBUG] debug - session > websession
+[2018-05-06T17:03:25.286] [DEBUG] debug - crud role getRole
+[2018-05-06T17:03:25.293] [DEBUG] debug - routes sadmin getRights
+[2018-05-06T17:04:11.638] [DEBUG] debug - session > websession
+[2018-05-06T17:04:11.640] [DEBUG] debug - crud role getRole
+[2018-05-06T17:04:11.649] [DEBUG] debug - routes index webindex
+[2018-05-06T17:04:11.650] [DEBUG] debug - crud index checkSession
+[2018-05-06T17:04:11.654] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
   username: 'superadmin',
-  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
   role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
   emailverified: true,
   __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
   forgotpasswordtoken: null,
-  salt: '545f2e7393a25499',
+  salt: 'f25a62d30bca4a0a',
   social: [] }
-[2018-05-06 01:06:51.598] [DEBUG] debug - config utils fillSession
-[2018-05-06 01:06:51.599] [DEBUG] debug - config utils fillWebSession
-[2018-05-06 01:06:57.767] [DEBUG] debug - session > websession
-[2018-05-06 01:06:57.768] [DEBUG] debug - crud role getRole
-[2018-05-06 01:06:57.778] [DEBUG] debug - routes index webindex
-[2018-05-06 01:06:57.778] [DEBUG] debug - crud index checkSession
-[2018-05-06 01:06:57.790] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
+[2018-05-06T17:04:11.655] [DEBUG] debug - config utils fillSession
+[2018-05-06T17:04:11.657] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T17:04:11.724] [DEBUG] debug - session > websession
+[2018-05-06T17:04:11.725] [DEBUG] debug - crud role getRole
+[2018-05-06T17:04:11.733] [DEBUG] debug - routes sadmin getRights
+[2018-05-06T20:27:34.508] [DEBUG] debug - init>createSuperAdmin
+[2018-05-06T20:27:34.515] [DEBUG] debug - crud role createsuperadmin
+[2018-05-06T20:27:34.522] [DEBUG] debug - crud role getRole
+[2018-05-06T20:27:34.637] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
   username: 'superadmin',
-  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
   role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
   emailverified: true,
   __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
   forgotpasswordtoken: null,
-  salt: '545f2e7393a25499',
+  salt: 'f25a62d30bca4a0a',
   social: [] }
-[2018-05-06 01:06:57.791] [DEBUG] debug - config utils fillSession
-[2018-05-06 01:06:57.792] [DEBUG] debug - config utils fillWebSession
-[2018-05-06 01:07:11.929] [DEBUG] debug - session > websession
-[2018-05-06 01:07:11.930] [DEBUG] debug - crud role getRole
-[2018-05-06 01:07:11.945] [DEBUG] debug - routes index webindex
-[2018-05-06 01:07:11.946] [DEBUG] debug - crud index checkSession
-[2018-05-06 01:07:11.951] [DEBUG] debug - crud result{ _id: 5aed9274b0a85e0dfcf4074a,
-  useremail: 'surveyshimanshu@gmail.com',
+[2018-05-06T20:27:34.672] [DEBUG] debug - crud role fillRights
+[2018-05-06T20:27:34.716] [DEBUG] debug - crud result[object Object]
+[2018-05-06T20:27:35.076] [DEBUG] debug - session > websession
+[2018-05-06T20:27:46.335] [DEBUG] debug - routes login login
+[2018-05-06T20:27:46.335] [DEBUG] debug - validate email
+[2018-05-06T20:27:46.335] [DEBUG] debug - validate username
+[2018-05-06T20:27:46.336] [DEBUG] debug - validate mobile
+[2018-05-06T20:27:46.336] [DEBUG] debug - validate password
+[2018-05-06T20:27:46.336] [DEBUG] debug - crud login doLogin
+[2018-05-06T20:27:46.345] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
   username: 'superadmin',
-  password1: '1a7d2460f7fe4745596d196e5bf35b8e8b462160105137387f8bd0a59bb841eed699639607ac864d90d592bdc3614209fcfe6d78cf0b945a1300592117f809ad',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
   role: 'superadmin',
-  userid: 'zko8JEyAZ6S1gAyFmgPgE07iA7WK4DPF',
-  registrationdate: 2018-05-05T11:16:04.380Z,
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
   emailverified: true,
   __v: 0,
-  emailactivationtoken: 'U5mlPtGbylEBZSXrn3gKFbncgjmZfRBI',
-  passwordtokenstamp: 2018-05-05T19:35:06.830Z,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
   forgotpasswordtoken: null,
-  salt: '545f2e7393a25499',
+  salt: 'f25a62d30bca4a0a',
   social: [] }
-[2018-05-06 01:07:11.955] [DEBUG] debug - config utils fillSession
-[2018-05-06 01:07:11.955] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T20:27:46.347] [DEBUG] debug - config encrypt sha512
+[2018-05-06T20:27:46.347] [DEBUG] debug - config utils fillSession
+[2018-05-06T20:27:46.349] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T20:27:46.367] [DEBUG] debug - session > websession
+[2018-05-06T20:27:46.367] [DEBUG] debug - crud role getRole
+[2018-05-06T20:27:46.373] [DEBUG] debug - routes index webindex
+[2018-05-06T20:27:46.373] [DEBUG] debug - crud index checkSession
+[2018-05-06T20:27:46.380] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
+  username: 'superadmin',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
+  role: 'superadmin',
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
+  forgotpasswordtoken: null,
+  salt: 'f25a62d30bca4a0a',
+  social: [] }
+[2018-05-06T20:27:46.382] [DEBUG] debug - config utils fillSession
+[2018-05-06T20:27:46.382] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T20:27:53.519] [DEBUG] debug - session > websession
+[2018-05-06T20:27:53.520] [DEBUG] debug - crud role getRole
+[2018-05-06T20:27:53.527] [DEBUG] debug - routes index webindex
+[2018-05-06T20:27:53.527] [DEBUG] debug - crud index checkSession
+[2018-05-06T20:27:53.533] [DEBUG] debug - crud result{ _id: 5aeedc13e88253676c2a100c,
+  useremail: 'junejamukul7@gmail.com',
+  username: 'superadmin',
+  password1: '8ff5a70327b7b4a84f78d2a05e6044a7f558d9265d0943fc8db3be41ef19e81831ed238adaba423720a4ff66cfaf550c7c2fb128a6ba9996a327e7f12be632ec',
+  role: 'superadmin',
+  userid: '6KdHaA6NK0mxo3BRTwYLbkRmcZT9kbCj',
+  registrationdate: 2018-05-06T10:42:27.081Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null,
+  passwordtokenstamp: 2018-05-06T10:42:34.457Z,
+  forgotpasswordtoken: null,
+  salt: 'f25a62d30bca4a0a',
+  social: [] }
+[2018-05-06T20:27:53.534] [DEBUG] debug - config utils fillSession
+[2018-05-06T20:27:53.534] [DEBUG] debug - config utils fillWebSession
+[2018-05-06T20:27:53.571] [DEBUG] debug - session > websession
+[2018-05-06T20:27:53.572] [DEBUG] debug - crud role getRole
+[2018-05-06T20:27:53.577] [DEBUG] debug - routes sadmin getRights

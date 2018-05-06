@@ -14,7 +14,7 @@ angular.module('webskeletonApp')
 
         loadRights:function(){
           var defer = $q.defer();
-          $http.get(requrl+'/roles/loadRights')
+          $http.get(requrl+'/roles/getRights')
           .then(function(data){
                defer.resolve(data);
            },function(error){

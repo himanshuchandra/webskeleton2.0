@@ -1,1 +1,14 @@
 <h2>Admin dashboard</h2>
+
+
+
+<table class="table" ng-repeat="(key, value) in allocateRight track by $index">
+    <thead>
+        <th ng-click="play($index)">{{key}}</th>
+    </thead>
+    <tbody ng-show="$index==showname">
+        <tr ng-repeat="right in value"><td><input type="checkbox" value="right">{{right}}</td></tr>
+    </tbody>    
+</table>
+
+
