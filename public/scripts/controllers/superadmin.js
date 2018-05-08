@@ -18,7 +18,19 @@ $scope.allocateRight={};
 $scope.selectedRole="";
 
 //functions
-$scope.returnRight =(right)=>{
+$scope.callMe = ()=>{
+  console.log("before",$scope.selectRight);
+  $scope.selectRight = [];
+  $scope.selectedRole.rights.forEach(ele=>{
+    $scope.selectRight.push(ele.name);
+  });
+  console.log("after",$scope.selectRight);
+}
+
+$scope.returnRight =(right)=>{ 
+  if(right==null){
+    return false;
+  }
   var flag=0;
   if($scope.selectedRole){
   $scope.selectedRole.rights.forEach(x=>{
