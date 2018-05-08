@@ -10,16 +10,16 @@
     </thead>
     <tbody ng-show="$index==showname">
         <tr ng-repeat="right in value"><td><input type="checkbox" ng-click="checkright(right)"  ng-checked="returnRight(right)">&nbsp; {{right}}</td></tr>
-    </tbody>    
+    </tbody>
 </table>
-<button class="btn btn-default" ng-click="AllocateRight()">Allocate Rights</button>
+<button class="btn btn-success" ng-click="AllocateRight()">Allocate Rights</button>
 <br>
 {{allocateRightMsg}}
 <br>
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Role</button>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assignRole">Assign Role</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteRole">Delete Role</button>
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteRole">Delete Role</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -33,8 +33,8 @@
       </div>
       <div class="modal-body">
           <form ng-submit="submitRole()">
-              <input type="text" ng-model="role_name">
-              <input type="submit" value="Craete">
+              <input type="text" placeholder="New Role" ng-model="role_name">
+              <input type="submit" class="btn btn-success" value="Create">
           </form>
         {{createRoleMsg}}
       </div>
@@ -58,8 +58,8 @@
       </div>
       <div class="modal-body">
           <form ng-submit="allocateRole()">
-              <input type="email" ng-model="user_email">
-              <input type="submit" value="Assign">
+              <input type="email" placeholder="Email of user" ng-model="user_email">
+              <input type="submit" class="btn btn-success" value="Assign">
           </form>
         {{allocateRoleMsg}}
       </div>
@@ -82,7 +82,7 @@
         <h4 class="modal-title">Allocate Role</h4>
       </div>
       <div class="modal-body">
-          Are you sure about deleting {{selectedRole.role}} role ?
+          Are you sure about deleting the role <span style="color:red">{{selectedRole.role}}</span> ?
           <button class="btn btn-danger" ng-click="deleteRole()">Yes</button>
           <button class="btn btn-default" data-dismiss="modal">No</button>
         {{deleteRoleMsg}}
