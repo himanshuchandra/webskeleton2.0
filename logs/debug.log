@@ -240,3 +240,70 @@
 [2018-05-06 22:17:43.516] [DEBUG] debug - crud role fillRights
 [2018-05-06 22:17:43.580] [DEBUG] debug - crud result
 >>>>>>> c221b73b7f0530526dcc8edbda84438a4d90fc83
+[2018-05-20 12:14:16.966] [DEBUG] debug - init>createSuperAdmin
+[2018-05-20 12:14:16.984] [DEBUG] debug - crud role createsuperadmin
+[2018-05-20 12:14:16.998] [DEBUG] debug - crud role getRole
+[2018-05-20 12:14:17.576] [DEBUG] debug - crud result
+[2018-05-20 12:14:17.681] [DEBUG] debug - crud role fillRights
+[2018-05-20 12:14:18.946] [DEBUG] debug - crud result
+[2018-05-20 12:15:40.676] [DEBUG] debug - routes signup signup
+[2018-05-20 12:15:40.682] [DEBUG] debug - validate email
+[2018-05-20 12:15:40.683] [DEBUG] debug - validate username
+[2018-05-20 12:15:40.684] [DEBUG] debug - validate password
+[2018-05-20 12:15:40.685] [DEBUG] debug - validate string
+[2018-05-20 12:19:06.479] [DEBUG] debug - routes login login
+[2018-05-20 12:19:06.480] [DEBUG] debug - validate email
+[2018-05-20 12:19:06.480] [DEBUG] debug - validate username
+[2018-05-20 12:19:06.481] [DEBUG] debug - validate mobile
+[2018-05-20 12:19:06.481] [DEBUG] debug - validate password
+[2018-05-20 12:19:06.482] [DEBUG] debug - crud login doLogin
+[2018-05-20 12:19:06.808] [DEBUG] debug - crud result
+[2018-05-20 12:19:06.843] [DEBUG] debug - config encrypt sha512
+[2018-05-20 12:19:06.867] [DEBUG] debug - config utils fillSession
+[2018-05-20 12:19:06.874] [DEBUG] debug - config utils fillWebSession
+[2018-05-20 12:20:26.931] [DEBUG] debug - init>createSuperAdmin
+[2018-05-20 12:20:26.940] [DEBUG] debug - crud role createsuperadmin
+[2018-05-20 12:20:26.951] [DEBUG] debug - crud role getRole
+[2018-05-20 12:20:27.140] [DEBUG] debug - crud result
+[2018-05-20 12:20:27.142] [DEBUG] debug - crud role fillRights
+[2018-05-20 12:20:27.200] [DEBUG] debug - crud result
+[2018-05-20 12:20:30.558] [DEBUG] debug - routes login login
+[2018-05-20 12:20:30.559] [DEBUG] debug - validate email
+[2018-05-20 12:20:30.560] [DEBUG] debug - validate username
+[2018-05-20 12:20:30.561] [DEBUG] debug - validate mobile
+[2018-05-20 12:20:30.562] [DEBUG] debug - validate password
+[2018-05-20 12:20:30.563] [DEBUG] debug - crud login doLogin
+[2018-05-20 12:20:30.574] [DEBUG] debug - crud result
+[2018-05-20 12:20:30.577] [DEBUG] debug - config encrypt sha512
+[2018-05-20 12:20:30.579] [DEBUG] debug - config utils fillSession
+[2018-05-20 12:20:31.994] [DEBUG] debug - jwt fillJwtSession
+[2018-05-20 12:20:31.994] [DEBUG] debug - jwt generateJwt
+[2018-05-20 12:20:32.031] [DEBUG] debug - jwt storeToken
+[2018-05-20 12:22:07.886] [DEBUG] debug - session > jwtSession
+[2018-05-20 12:22:07.887] [DEBUG] debug - jwt getuserid
+[2018-05-20 12:22:07.907] [DEBUG] debug - crud role getRole
+[2018-05-20 12:22:07.925] [DEBUG] debug - routes profile updateMobile
+[2018-05-20 12:22:07.925] [DEBUG] debug - validate code
+[2018-05-20 12:22:07.926] [DEBUG] debug - validate mobile
+[2018-05-20 12:22:07.927] [DEBUG] debug - crud profile sendVerificationCode
+[2018-05-20 12:22:07.927] [DEBUG] debug - config utils randomStringGenerate
+[2018-05-20 12:22:08.182] [DEBUG] debug - crud result
+[2018-05-20 12:22:08.182] [DEBUG] debug - config utils sendSms
+[2018-05-20 12:22:18.019] [ERROR] debug - { status: 400,
+  message: 'The From phone number +13148885390 is not a valid, SMS-capable inbound phone number or short code for your account.',
+  code: 21606,
+  moreInfo: 'https://www.twilio.com/docs/errors/21606' }
+[2018-05-20 12:22:42.408] [DEBUG] debug - session > jwtSession
+[2018-05-20 12:22:42.408] [DEBUG] debug - jwt getuserid
+[2018-05-20 12:22:42.414] [DEBUG] debug - crud role getRole
+[2018-05-20 12:22:42.431] [DEBUG] debug - routes profile updateMobile
+[2018-05-20 12:22:42.431] [DEBUG] debug - validate code
+[2018-05-20 12:22:42.431] [DEBUG] debug - validate mobile
+[2018-05-20 12:22:42.432] [DEBUG] debug - crud profile sendVerificationCode
+[2018-05-20 12:22:42.432] [DEBUG] debug - config utils randomStringGenerate
+[2018-05-20 12:22:42.441] [DEBUG] debug - crud result
+[2018-05-20 12:22:42.442] [DEBUG] debug - config utils sendSms
+[2018-05-20 12:22:43.304] [ERROR] debug - { status: 400,
+  message: 'The From phone number +13148885390 is not a valid, SMS-capable inbound phone number or short code for your account.',
+  code: 21606,
+  moreInfo: 'https://www.twilio.com/docs/errors/21606' }

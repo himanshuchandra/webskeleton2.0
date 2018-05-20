@@ -25,6 +25,7 @@ const userSchema = new schema({
   passwordtokenstamp: Date,
   mobileverificationcode: String,
   temporarymobile: String,
+  mobiletokenstamp: Date,
   role: String,
   registrationdate: Date,
   social: [

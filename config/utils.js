@@ -44,6 +44,7 @@ const utils={
         userData.emailactivationtoken=undefined;
         userData.forgotpasswordtoken=undefined;
         userData.mobileverificationcode=undefined;
+        userData.mobiletokenstamp = undefined;
         userData.social=undefined;
         
         if (config.sessionMode === 'jwt'){

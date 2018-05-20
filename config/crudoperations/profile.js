@@ -77,32 +77,51 @@ const dbOperations={
     ////Send Sms
     sendVerificationCode:function(request,response,session){
         logger.debug('crud profile sendVerificationCode');
-        var MobileObject=request.body;
-        var UserEmail= session.useremail;
-        var number=MobileObject.CountryCode+MobileObject.MobileNumber;
-        var code=utils.randomStringGenerate(6);
-        var body='Your verification code is '+code;
-       
-        User.update({
-            "useremail":UserEmail
-        }, 
-        {
-            $set:{
-                "temporarymobile":number,
-                "mobileverificationcode":code
-            }
+        var MobileObject = request.body;
+        var UserEmail = session.useremail;
+        var number = MobileObject.CountryCode + MobileObject.MobileNumber;
+        var code = utils.randomStringGenerate(6);
+        var body = 'Your verification code is ' + code;
+        var newTimeStamp = new Date();
+
+        User.findOne({
+            "useremail": UserEmail,
+            "temporarymobile": number
         },
-        function(error,result){
-            if(error){
-                logger.error(error);
-            }
-            else{ 
-                logger.debug('crud result'); 
-                utils.sendSms(number,body);
-                //need to be a callback function
-                response.json({message:"success"});
-            }
-        });
+            function (error, result) {
+                if (error) {
+                    logger.error(error);
+                }
+                else if (result && result.mobiletokenstamp && (Math.abs(newTimeStamp - result.mobiletokenstamp)) < 900000) {
+                    logger.debug('crud result');
+                    body = 'Your verification code is ' + result.mobileverificationcode;
+                    utils.sendSms(number, body);
+                    response.json({ message: "success" });
+                }
+                else {
+                    User.update({
+                        "useremail": UserEmail
+                    },
+                        {
+                            $set: {
+                                "mobiletokenstamp": newTimeStamp,
+                                "temporarymobile": number,
+                                "mobileverificationcode": code
+                            }
+                        },
+                        function (error, result) {
+                            if (error) {
+                                logger.error(error);
+                            }
+                            else {
+                                logger.debug('crud result');
+                                utils.sendSms(number, body);
+                                //need to be a callback function
+                                response.json({ message: "success" });
+                            }
+                        });
+                }
+            });
     },
 
     ////verify code
@@ -111,6 +130,7 @@ const dbOperations={
         var that=this;
         var UserEmail= session.useremail;
         var CodeObject=request.body;
+        var date = new Date();
         
         User.find({
         "$and":[
@@ -131,13 +151,15 @@ const dbOperations={
                 if(result.length<1){
                     response.json({message:"fail"});
                 }
+                else if((Math.abs(date-result[0].mobiletokenstamp))>900000){
+                    response.json({message:"expired"});
+                }
                 else{
                     that.checkMobileExists(result,response);
                 }
             } 
         });
     },
-
      ////Check if mobile no. already exists
     checkMobileExists:function(result,response){
         logger.debug('crud profile checkMobileExists');
