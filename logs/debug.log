@@ -307,3 +307,51 @@
   message: 'The From phone number +13148885390 is not a valid, SMS-capable inbound phone number or short code for your account.',
   code: 21606,
   moreInfo: 'https://www.twilio.com/docs/errors/21606' }
+[2018-05-20 13:51:41.293] [DEBUG] debug - init>createSuperAdmin
+[2018-05-20 13:51:41.310] [DEBUG] debug - crud role createsuperadmin
+[2018-05-20 13:51:41.322] [DEBUG] debug - crud role getRole
+[2018-05-20 13:51:41.739] [DEBUG] debug - crud result
+[2018-05-20 13:51:41.741] [DEBUG] debug - crud role fillRights
+[2018-05-20 13:51:41.819] [DEBUG] debug - crud result
+[2018-05-20 13:52:04.171] [DEBUG] debug - session > websession
+[2018-05-20 13:52:04.172] [DEBUG] debug - crud role getRole
+[2018-05-20 13:52:04.192] [DEBUG] debug - routes index webindex
+[2018-05-20 13:52:04.193] [DEBUG] debug - crud index checkSession
+[2018-05-20 13:52:04.209] [DEBUG] debug - crud result
+[2018-05-20 13:52:04.210] [DEBUG] debug - config utils fillSession
+[2018-05-20 13:52:04.215] [DEBUG] debug - config utils fillWebSession
+[2018-05-20 13:52:15.769] [DEBUG] debug - session > websession
+[2018-05-20 13:52:15.769] [DEBUG] debug - crud role getRole
+[2018-05-20 13:52:15.788] [DEBUG] debug - routes index webindex
+[2018-05-20 13:52:15.788] [DEBUG] debug - crud index checkSession
+[2018-05-20 13:52:15.798] [DEBUG] debug - crud result
+[2018-05-20 13:52:15.798] [DEBUG] debug - config utils fillSession
+[2018-05-20 13:52:15.799] [DEBUG] debug - config utils fillWebSession
+[2018-05-20 13:52:44.490] [DEBUG] debug - init>createSuperAdmin
+[2018-05-20 13:52:44.499] [DEBUG] debug - crud role createsuperadmin
+[2018-05-20 13:52:44.512] [DEBUG] debug - crud role getRole
+[2018-05-20 13:52:44.680] [DEBUG] debug - crud result
+[2018-05-20 13:52:44.682] [DEBUG] debug - crud role fillRights
+[2018-05-20 13:52:44.765] [DEBUG] debug - crud result
+[2018-05-20 13:53:09.423] [DEBUG] debug - session > jwtSession
+[2018-05-20 13:53:10.533] [DEBUG] debug - jwt getuserid
+[2018-05-20 13:53:10.559] [DEBUG] debug - crud role getRole
+[2018-05-20 13:53:10.577] [DEBUG] debug - routes index webindex
+[2018-05-20 13:53:10.578] [DEBUG] debug - crud index checkSession
+[2018-05-20 13:53:10.587] [DEBUG] debug - crud result
+[2018-05-20 13:53:10.588] [DEBUG] debug - config utils fillSession
+[2018-05-20 13:53:10.592] [DEBUG] debug - jwt fillJwtSession
+[2018-05-20 13:53:10.593] [DEBUG] debug - jwt generateJwt
+[2018-05-20 13:53:10.605] [DEBUG] debug - jwt storeToken
+[2018-05-20 13:53:18.740] [DEBUG] debug - session > jwtSession
+[2018-05-20 13:53:18.741] [DEBUG] debug - jwt getuserid
+[2018-05-20 13:53:27.799] [DEBUG] debug - session > jwtSession
+[2018-05-20 13:53:27.801] [DEBUG] debug - jwt getuserid
+[2018-05-20 13:53:27.809] [DEBUG] debug - crud role getRole
+[2018-05-20 13:53:27.824] [DEBUG] debug - routes index webindex
+[2018-05-20 13:53:27.824] [DEBUG] debug - crud index checkSession
+[2018-05-20 13:53:27.835] [DEBUG] debug - crud result
+[2018-05-20 13:53:27.836] [DEBUG] debug - config utils fillSession
+[2018-05-20 13:53:27.838] [DEBUG] debug - jwt fillJwtSession
+[2018-05-20 13:53:27.838] [DEBUG] debug - jwt generateJwt
+[2018-05-20 13:53:27.845] [DEBUG] debug - jwt storeToken

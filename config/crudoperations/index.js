@@ -19,7 +19,7 @@ const dbOperations= {
         logger.debug('crud index checkSession');
         var that=this;
         var userEmail=userData.useremail;
-        User.find({
+        User.findOne({
             useremail:userEmail
         },
         function(error,result){
@@ -28,23 +28,23 @@ const dbOperations= {
             }
             else{
                 logger.debug('crud result'); 
-                if(result.length<1){
+                if(!result){
                     response.json({message:"fail"});
                 }
                 else{
                     var status={};
-                    status.Message="Hello "+result[0].username;
-                    status.Email=result[0].useremail;
-                    status.ActivationStatus=result[0].emailverified;
-                    if(result[0].username!=userData.username || result[0].userinfo!=userData.userinfo){
-                        var sessionData=result[0];
+                    status.Message="Hello "+result.username;
+                    status.Email=result.useremail;
+                    status.ActivationStatus=result.emailverified;
+                    // if(result.username!=userData.username || result.userinfo!=userData.userinfo){
+                        var sessionData=result;
                         const utils = require("../utils");
                         utils.fillSession(request,response,sessionData,status); 
-                    }
-                    else{
-                        status.userData=userData;
-                        response.send(status);
-                    }
+                    // }
+                    // else{
+                    //     status.userData=userData;
+                    //     response.send(status);
+                    // }
                 }
             }
         })
