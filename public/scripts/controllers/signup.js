@@ -122,7 +122,7 @@ angular.module('webskeletonApp')
 
       var promise = signup.registerUser(userObject);
         promise.then(function(data){
-           if(data.data.message==="pass"){
+           if(data.data.message==="success"){
                $scope.result = "Registered Successfully";
                webindex.needReload = true;
            }

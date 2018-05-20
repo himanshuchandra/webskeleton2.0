@@ -205,7 +205,7 @@ const dbOperations={
             }
             else{ 
                 logger.debug('crud result'); 
-                response.json({message:"pass"});
+                response.json({message:"success"});
             }
         });
     },

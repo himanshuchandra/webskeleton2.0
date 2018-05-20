@@ -65,7 +65,7 @@ const dbOperations= {
                     that.saveNewPassword(request,response);
                 }
                 else{
-                    response.json({message:"pass"});
+                    response.json({message:"success"});
                 }
             }
         } 

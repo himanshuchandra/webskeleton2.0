@@ -74,7 +74,7 @@ const dbOperations={
                 logger.debug('crud result'); 
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 var responseObject={
-                    message:"pass",
+                    message:"success",
                 };
                 utils.fillSession(request,response,result,responseObject);
             }
