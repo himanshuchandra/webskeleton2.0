@@ -66,6 +66,14 @@ angular.module('webskeletonApp')
       }
     }
 
+    $scope.callMe = ()=>{
+      $scope.selectRight = [];
+      $scope.selectedRole.rights.forEach(ele=>{
+        $scope.selectRight.push(ele.name);
+      })
+      console.log($scope.selectRight);
+    }
+
     function loadRights() {
       superadmin.loadRights().then((data) => {
         Object.keys(data.data).forEach(ele => {

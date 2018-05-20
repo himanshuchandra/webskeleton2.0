@@ -1,6 +1,6 @@
 <h2>Admin dashboard</h2>
 
- Select Role : <select ng-model="selectedRole"  ng-options="role as role.role for role in roles"></select>
+ Select Role : <select ng-model="selectedRole" ng-change="callMe()"  ng-options="role as role.role for role in roles"></select>
 
 
 <h3>Allocate New Rights</h3>
