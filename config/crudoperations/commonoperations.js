@@ -93,7 +93,10 @@ const dbOperations = {
         var SocialObject = request.body;
 
         User.find({
-            "useremail": SocialObject.Email
+            "$or":[
+                {"useremail": SocialObject.Email},
+                {"social": {$elemMatch: {"sId": SocialObject.socialId}}}
+            ]
         }
             , function (error, result) {
                 if (error) {

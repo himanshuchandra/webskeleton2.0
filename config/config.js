@@ -10,7 +10,7 @@ const secrets={
     jwtDuration: 86400,  //expires in 24 hours 
     reqUrl:"http://localhost:1234",
     defaultSessionDuration:2*60*60,
-    sessionMode: 'classic',
+    sessionMode: 'jwt',
     superadminEmail:'surveyshimanshu@gmail.com',
     defaultRole:"customer",
     SMTPS_EMAIL:"surveyshimanshu@gmail.com",
