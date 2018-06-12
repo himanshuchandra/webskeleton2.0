@@ -22,6 +22,7 @@ const utils={
         userData._id=undefined; //prevent duplicate record error
         userData=userData.toObject();
         userData.sessionid=responseObject.sessionid;
+        userData.uuid="xxxxxxxxxx"; 
         
         Session.create(userData,function(error,result){
             if(error){
@@ -46,11 +47,13 @@ const utils={
         userData.mobileverificationcode=undefined;
         userData.mobiletokenstamp = undefined;
         userData.social=undefined;
-        
+
         if (config.sessionMode === 'jwt'){
             const jwtOps = require('./jwt');
-            jwtOps.fillJwtSession(userData,function(userData2){
+    
+            jwtOps.fillJwtSession(request, userData ,function(userData2){
                 if(userData2){
+                    userData2.uuid = undefined;
                     responseObject.userData = userData2;
                     response.send(responseObject);
                     if (responseObject.callback) {

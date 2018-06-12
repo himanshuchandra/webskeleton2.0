@@ -35,7 +35,7 @@ var TokenOperations = {
     },
 
 
-    fillJwtSession: function(userData , callback){
+    fillJwtSession: function(request, userData, callback){
         logger.debug('jwt fillJwtSession');
         var that = this;
         if (userData.userid) {
@@ -48,8 +48,15 @@ var TokenOperations = {
             userData._id=undefined; //prevent duplicate record error
             userData=userData.toObject();
             userData.sessionid=token;
+            userData.uuid = "xxxxxxxxxx";
+            if(request.body.uuid && config.sessionType !== 'single'){
+                userData.uuid = request.body.uuid;
+            }
 
-            Session.find({ userid : userData.userid }).remove(function (error, result) {
+            Session.find({ 
+                userid : userData.userid ,
+                uuid: userData.uuid
+            }).remove(function (error, result) {
                 if (error) {
                     logger.error(error);
                     callback(null);

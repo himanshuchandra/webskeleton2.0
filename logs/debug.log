@@ -1,39 +1,159 @@
-[2018-06-11 12:26:14.109] [DEBUG] debug - crud result
-[2018-06-11 12:26:23.071] [DEBUG] debug - init>createSuperAdmin
-[2018-06-11 12:26:23.081] [DEBUG] debug - crud role createsuperadmin
-[2018-06-11 12:26:23.094] [DEBUG] debug - crud role getRole
-[2018-06-11 12:26:23.252] [DEBUG] debug - crud result
-[2018-06-11 12:26:23.255] [DEBUG] debug - crud role fillRights
-[2018-06-11 12:26:23.312] [DEBUG] debug - crud result
-[2018-06-11 12:26:48.735] [DEBUG] debug - routes login login
-[2018-06-11 12:26:48.736] [DEBUG] debug - validate email
-[2018-06-11 12:26:48.736] [DEBUG] debug - validate username
-[2018-06-11 12:26:48.737] [DEBUG] debug - validate mobile
-[2018-06-11 12:26:48.738] [DEBUG] debug - validate password
-[2018-06-11 12:26:48.739] [DEBUG] debug - crud login doLogin
-[2018-06-11 12:26:48.773] [DEBUG] debug - crud result
-[2018-06-11 12:27:02.970] [DEBUG] debug - routes login login
-[2018-06-11 12:27:02.971] [DEBUG] debug - validate email
-[2018-06-11 12:27:02.971] [DEBUG] debug - validate username
-[2018-06-11 12:27:02.972] [DEBUG] debug - validate mobile
-[2018-06-11 12:27:02.972] [DEBUG] debug - validate password
-[2018-06-11 12:27:02.972] [DEBUG] debug - crud login doLogin
-[2018-06-11 12:27:02.984] [DEBUG] debug - crud result
-[2018-06-11 12:27:03.004] [DEBUG] debug - config encrypt sha512
-[2018-06-11 12:27:03.006] [DEBUG] debug - config utils fillSession
-[2018-06-11 12:27:04.198] [DEBUG] debug - jwt fillJwtSession
-[2018-06-11 12:27:04.199] [DEBUG] debug - jwt generateJwt
-[2018-06-11 12:27:04.214] [DEBUG] debug - jwt storeToken
-[2018-06-11 12:27:29.933] [DEBUG] debug - routes login login
-[2018-06-11 12:27:29.934] [DEBUG] debug - validate email
-[2018-06-11 12:27:29.935] [DEBUG] debug - validate username
-[2018-06-11 12:27:29.935] [DEBUG] debug - validate mobile
-[2018-06-11 12:27:29.936] [DEBUG] debug - validate password
-[2018-06-11 12:27:29.936] [DEBUG] debug - crud login doLogin
-[2018-06-11 12:27:29.943] [DEBUG] debug - crud result
-[2018-06-11 12:29:07.778] [DEBUG] debug - init>createSuperAdmin
-[2018-06-11 12:29:07.788] [DEBUG] debug - crud role createsuperadmin
-[2018-06-11 12:29:07.800] [DEBUG] debug - crud role getRole
-[2018-06-11 12:29:07.944] [DEBUG] debug - crud result
-[2018-06-11 12:29:07.946] [DEBUG] debug - crud role fillRights
-[2018-06-11 12:29:08.003] [DEBUG] debug - crud result
+[2018-06-11 15:45:43.822] [DEBUG] debug - validate mobile
+[2018-06-11 15:45:43.822] [DEBUG] debug - validate password
+[2018-06-11 15:45:43.823] [DEBUG] debug - crud login doLogin
+[2018-06-11 15:45:43.847] [DEBUG] debug - crud result
+[2018-06-11 15:45:43.852] [DEBUG] debug - config encrypt sha512
+[2018-06-11 15:45:43.867] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:45:44.002] [DEBUG] debug - jwt fillJwtSession
+[2018-06-11 15:45:44.003] [DEBUG] debug - jwt generateJwt
+[2018-06-11 15:45:44.029] [DEBUG] debug - jwt storeToken
+[2018-06-11 15:45:56.579] [DEBUG] debug - routes login login
+[2018-06-11 15:45:56.579] [DEBUG] debug - validate email
+[2018-06-11 15:45:56.580] [DEBUG] debug - validate username
+[2018-06-11 15:45:56.580] [DEBUG] debug - validate mobile
+[2018-06-11 15:45:56.580] [DEBUG] debug - validate password
+[2018-06-11 15:45:56.581] [DEBUG] debug - crud login doLogin
+[2018-06-11 15:45:56.605] [DEBUG] debug - crud result
+[2018-06-11 15:45:56.606] [DEBUG] debug - config encrypt sha512
+[2018-06-11 15:45:56.606] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:45:56.609] [DEBUG] debug - jwt fillJwtSession
+[2018-06-11 15:45:56.609] [DEBUG] debug - jwt generateJwt
+[2018-06-11 15:45:56.614] [DEBUG] debug - jwt storeToken
+[2018-06-11 15:46:06.501] [DEBUG] debug - routes login login
+[2018-06-11 15:46:06.501] [DEBUG] debug - validate email
+[2018-06-11 15:46:06.503] [DEBUG] debug - validate username
+[2018-06-11 15:46:06.504] [DEBUG] debug - validate mobile
+[2018-06-11 15:46:06.504] [DEBUG] debug - validate password
+[2018-06-11 15:46:06.504] [DEBUG] debug - crud login doLogin
+[2018-06-11 15:46:06.513] [DEBUG] debug - crud result
+[2018-06-11 15:46:06.513] [DEBUG] debug - config encrypt sha512
+[2018-06-11 15:46:06.514] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:46:06.515] [DEBUG] debug - jwt fillJwtSession
+[2018-06-11 15:46:06.515] [DEBUG] debug - jwt generateJwt
+[2018-06-11 15:46:06.519] [DEBUG] debug - jwt storeToken
+[2018-06-11 15:50:46.680] [DEBUG] debug - session > jwtSession
+[2018-06-11 15:50:58.835] [DEBUG] debug - session > jwtSession
+[2018-06-11 15:50:58.836] [DEBUG] debug - jwt getuserid
+[2018-06-11 15:50:58.916] [DEBUG] debug - crud role getRole
+[2018-06-11 15:50:58.934] [DEBUG] debug - routes index webindex
+[2018-06-11 15:50:58.935] [DEBUG] debug - crud index checkSession
+[2018-06-11 15:50:58.947] [DEBUG] debug - crud result
+[2018-06-11 15:50:58.948] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:50:58.950] [DEBUG] debug - jwt fillJwtSession
+[2018-06-11 15:50:58.950] [DEBUG] debug - jwt generateJwt
+[2018-06-11 15:50:58.955] [DEBUG] debug - jwt storeToken
+[2018-06-11 15:52:06.392] [DEBUG] debug - session > jwtSession
+[2018-06-11 15:52:06.392] [DEBUG] debug - jwt getuserid
+[2018-06-11 15:52:06.400] [DEBUG] debug - crud role getRole
+[2018-06-11 15:52:06.410] [DEBUG] debug - routes index webindex
+[2018-06-11 15:52:06.412] [DEBUG] debug - crud index checkSession
+[2018-06-11 15:52:06.418] [DEBUG] debug - crud result
+[2018-06-11 15:52:06.418] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:52:06.419] [DEBUG] debug - jwt fillJwtSession
+[2018-06-11 15:52:06.419] [DEBUG] debug - jwt generateJwt
+[2018-06-11 15:52:06.423] [DEBUG] debug - jwt storeToken
+[2018-06-11 15:54:16.390] [DEBUG] debug - init>createSuperAdmin
+[2018-06-11 15:54:16.404] [DEBUG] debug - crud role createsuperadmin
+[2018-06-11 15:54:16.416] [DEBUG] debug - crud role getRole
+[2018-06-11 15:54:16.766] [DEBUG] debug - crud result
+[2018-06-11 15:54:16.768] [DEBUG] debug - crud role fillRights
+[2018-06-11 15:54:16.823] [DEBUG] debug - crud result
+[2018-06-11 15:54:33.914] [DEBUG] debug - routes login login
+[2018-06-11 15:54:33.916] [DEBUG] debug - validate email
+[2018-06-11 15:54:33.917] [DEBUG] debug - validate username
+[2018-06-11 15:54:33.918] [DEBUG] debug - validate mobile
+[2018-06-11 15:54:33.919] [DEBUG] debug - validate password
+[2018-06-11 15:54:33.920] [DEBUG] debug - crud login doLogin
+[2018-06-11 15:54:33.932] [DEBUG] debug - crud result
+[2018-06-11 15:54:33.936] [DEBUG] debug - config encrypt sha512
+[2018-06-11 15:54:33.938] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:54:33.943] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-11 15:54:34.143] [DEBUG] debug - config utils fillAppSession
+[2018-06-11 15:54:34.176] [ERROR] debug - { ValidationError: appsessions validation failed
+    at MongooseError.ValidationError (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\error\validation.js:23:11)
+    at model.Document.invalidate (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\document.js:1524:32)
+    at D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\document.js:1399:17
+    at validate (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\schematype.js:706:7)
+    at D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\schematype.js:743:9
+    at Array.forEach (native)
+    at SchemaString.SchemaType.doValidate (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\schematype.js:711:19)
+    at D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\document.js:1397:9
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)
+    at process._tickCallback (internal/process/next_tick.js:104:9)
+  errors: 
+   { uuid: 
+      { ValidatorError: Path `uuid` is required.
+          at MongooseError.ValidatorError (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\error\validator.js:24:11)
+          at validate (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\schematype.js:705:13)
+          at D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\schematype.js:743:9
+          at Array.forEach (native)
+          at SchemaString.SchemaType.doValidate (D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\schematype.js:711:19)
+          at D:\workspace\git-projects\webskeleton2.0\node_modules\mongoose\lib\document.js:1397:9
+          at _combinedTickCallback (internal/process/next_tick.js:73:7)
+          at process._tickCallback (internal/process/next_tick.js:104:9)
+        message: 'Path `uuid` is required.',
+        name: 'ValidatorError',
+        properties: [Object],
+        kind: 'required',
+        path: 'uuid',
+        value: undefined } },
+  message: 'appsessions validation failed',
+  name: 'ValidationError' }
+[2018-06-11 15:57:54.913] [DEBUG] debug - init>createSuperAdmin
+[2018-06-11 15:57:54.944] [DEBUG] debug - crud role createsuperadmin
+[2018-06-11 15:57:54.970] [DEBUG] debug - crud role getRole
+[2018-06-11 15:57:55.501] [DEBUG] debug - crud result
+[2018-06-11 15:57:55.504] [DEBUG] debug - crud role fillRights
+[2018-06-11 15:57:55.590] [DEBUG] debug - crud result
+[2018-06-11 15:57:59.496] [DEBUG] debug - routes login login
+[2018-06-11 15:57:59.498] [DEBUG] debug - validate email
+[2018-06-11 15:57:59.500] [DEBUG] debug - validate username
+[2018-06-11 15:57:59.501] [DEBUG] debug - validate mobile
+[2018-06-11 15:57:59.502] [DEBUG] debug - validate password
+[2018-06-11 15:57:59.506] [DEBUG] debug - crud login doLogin
+[2018-06-11 15:57:59.553] [DEBUG] debug - crud result
+[2018-06-11 15:57:59.558] [DEBUG] debug - config encrypt sha512
+[2018-06-11 15:57:59.561] [DEBUG] debug - config utils fillSession
+[2018-06-11 15:57:59.568] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-11 15:57:59.592] [DEBUG] debug - config utils fillAppSession
+[2018-06-11 16:19:50.389] [DEBUG] debug - init>createSuperAdmin
+[2018-06-11 16:19:50.399] [DEBUG] debug - crud role createsuperadmin
+[2018-06-11 16:19:50.412] [DEBUG] debug - crud role getRole
+[2018-06-11 16:19:50.740] [DEBUG] debug - crud result
+[2018-06-11 16:19:50.743] [DEBUG] debug - crud role fillRights
+[2018-06-11 16:19:50.804] [DEBUG] debug - crud result
+[2018-06-11 16:20:06.528] [DEBUG] debug - routes login login
+[2018-06-11 16:20:06.529] [DEBUG] debug - validate email
+[2018-06-11 16:20:06.529] [DEBUG] debug - validate username
+[2018-06-11 16:20:06.530] [DEBUG] debug - validate mobile
+[2018-06-11 16:20:06.531] [DEBUG] debug - validate password
+[2018-06-11 16:20:06.532] [DEBUG] debug - crud login doLogin
+[2018-06-11 16:20:06.550] [DEBUG] debug - crud result
+[2018-06-11 16:20:06.553] [DEBUG] debug - config encrypt sha512
+[2018-06-11 16:20:06.555] [DEBUG] debug - config utils fillSession
+[2018-06-11 16:20:06.561] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-11 16:20:06.576] [DEBUG] debug - config utils fillAppSession
+[2018-06-11 16:21:13.780] [DEBUG] debug - init>createSuperAdmin
+[2018-06-11 16:21:13.796] [DEBUG] debug - crud role createsuperadmin
+[2018-06-11 16:21:13.816] [DEBUG] debug - crud role getRole
+[2018-06-11 16:21:14.384] [DEBUG] debug - crud result
+[2018-06-11 16:21:14.386] [DEBUG] debug - crud role fillRights
+[2018-06-11 16:21:14.525] [DEBUG] debug - crud result
+[2018-06-11 16:21:33.597] [DEBUG] debug - init>createSuperAdmin
+[2018-06-11 16:21:33.650] [DEBUG] debug - crud role createsuperadmin
+[2018-06-11 16:21:33.695] [DEBUG] debug - crud role getRole
+[2018-06-11 16:21:34.192] [DEBUG] debug - crud result
+[2018-06-11 16:21:34.195] [DEBUG] debug - crud role fillRights
+[2018-06-11 16:21:34.273] [DEBUG] debug - crud result
+[2018-06-11 16:21:43.030] [DEBUG] debug - routes login login
+[2018-06-11 16:21:43.031] [DEBUG] debug - validate email
+[2018-06-11 16:21:43.033] [DEBUG] debug - validate username
+[2018-06-11 16:21:43.035] [DEBUG] debug - validate mobile
+[2018-06-11 16:21:43.036] [DEBUG] debug - validate password
+[2018-06-11 16:21:43.039] [DEBUG] debug - crud login doLogin
+[2018-06-11 16:21:43.051] [DEBUG] debug - crud result
+[2018-06-11 16:21:43.055] [DEBUG] debug - config encrypt sha512
+[2018-06-11 16:21:43.060] [DEBUG] debug - config utils fillSession
+[2018-06-11 16:21:43.219] [DEBUG] debug - jwt fillJwtSession
+[2018-06-11 16:21:43.220] [DEBUG] debug - jwt generateJwt
+[2018-06-11 16:21:43.247] [DEBUG] debug - jwt storeToken

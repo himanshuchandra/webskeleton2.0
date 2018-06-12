@@ -11,6 +11,7 @@ const secrets={
     reqUrl:"http://localhost:1234",
     defaultSessionDuration:2*60*60,
     sessionMode: 'jwt',
+    sessionType: 'multi',
     superadminEmail:'surveyshimanshu@gmail.com',
     defaultRole:"customer",
     SMTPS_EMAIL:"surveyshimanshu@gmail.com",
