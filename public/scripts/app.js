@@ -57,6 +57,11 @@ angular
         controller: 'ForgotpasswordCtrl',
         controllerAs: 'forgotpassword'
       })
+      .when('/superadmin', {
+        templateUrl: 'views/superadmin.html',
+        controller: 'SuperadminCtrl',
+        controllerAs: 'superadmin'
+      })
       .otherwise({
         redirectTo: '/'
       });

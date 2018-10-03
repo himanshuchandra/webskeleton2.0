@@ -21,78 +21,21 @@ router.get('/', function(req, res, next) {
 ///Check login Status
 router.post('/webindex', function(request,response) {
     logger.debug('routes index webindex');
-    if(request.body.appCall===true && request.body.sessionid!=undefined){
-        const validate=require("../config/validate");
-        var isValidSessionid=validate.string(request.body.sessionid);
-        if(isValidSessionid===true){
-            var userData={};
-            const commonOperations=require("../config/crudoperations/commonoperations");
-            commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-                if(userData!=undefined){
-                    dbOperations.checkSession(request,response,userData);
-                }
-                else{
-                    response.json({message:"fail"});
-                }
-            });
-        }
-        else{
-            response.json({message:"fail"});
-        }
-    }
-    else if(request.session.user){
-        dbOperations.checkSession(request,response,request.session.user);
-    }
-    else{
-        response.json({message:"fail"});
-    }
+ 
+    dbOperations.checkSession(request,response,request.userData);
+           
 });
 
 ///Send email activation link
 router.post('/sendActivationLink',function(request,response){
     logger.debug('routes index sendActivationLink');
-    if(request.body.appCall===true && request.body.sessionid!=undefined){
-        const validate=require("../config/validate");
-        var isValidSessionid=validate.string(request.body.sessionid);
-        if(isValidSessionid===true){
-            var userData={};
-            const commonOperations=require("../config/crudoperations/commonoperations");
-            commonOperations.getProfileData(request.body.sessionid,userData,function(userData){
-                if(userData!=undefined){
-                    var userEmail=userData.useremail;
-                    dbOperations.sendActivationLink(userEmail,response);
-                }
-                else{
-                    response.json({message:"unknown"});
-                }
-            });
-        }
-        else{
-            response.json({message:"unknown"});
-        }
-    }
-    else if(request.session.user){
-        var userEmail=request.session.user.useremail;
-        dbOperations.sendActivationLink(userEmail,response);
-    }
-    else{
-        response.json({message:"unknown"});
-    }
+
+    dbOperations.sendActivationLink(request.userData.useremail,response);
 });
 
 ///Logging out
 router.post('/logout',function(request,response){
     logger.debug('routes index logout');
-    if(request.body.appCall===true && request.body.sessionid!=undefined){
-        const validate=require('../config/validate');
-        var isValidSessionid=validate.string(request.body.sessionid)
-        if(isValidSessionid===true){
-            request.body.sessionidValid=true;
-        }
-        else{
-            response.json({message:"success"});
-        }
-    }
     dbOperations.destroySession(request,response);
 });
 

@@ -1,13 +1,19 @@
 'use strict';
 
 const secrets={
-    dbUrl:"mongodb://localhost:27017/webskeleton",
-    dbCollection:"users",
+    dbUrl:"mongodb://localhost:27017/webskeleton3",
+    userCollection:"users",
     sessionCollection:"appsessions",
+    roleCollection:"roles",
     sessionKey:["ggggg","aaaaa","sssssss","hhhhh","ffff","kkkkkk","ttt","aaaa"],
+    jwtKey:'supersecret',
+    jwtDuration: 86400,  //expires in 24 hours 
     reqUrl:"http://localhost:1234",
-    mongoUrl:'mongodb://localhost:27017/webskeleton',
     defaultSessionDuration:2*60*60,
+    sessionMode: 'jwt',
+    sessionType: 'multi',
+    superadminEmail:'surveyshimanshu@gmail.com',
+    defaultRole:"customer",
     SMTPS_EMAIL:"surveyshimanshu@gmail.com",
     SMTPS_PASSWORD:"surveys9990",
     SMTPS_URL:'smtp.gmail.com',
@@ -28,7 +34,6 @@ const secrets={
     sessionCollection:"appsessions",
     sessionKey:["ggggg","aaaaa","sssssss","hhhhh","ffff","kkkkkk","ttt","aaaa"],
     reqUrl:"http://localhost:1234",
-    mongoUrl:'mongodb://localhost:27017/iluzexdb',
     defaultSessionDuraion:2*60*60,
     SMTPS_EMAIL:"Senders Email",
     SMTPS_PASSWORD:"Password",

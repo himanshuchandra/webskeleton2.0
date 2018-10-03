@@ -1,7 +1,7 @@
 'use strict';
 
 const config =require("./config");
-const AppSession=require('./appsessdbschema');
+const Session=require('./sessionschema');
 const logger = require("./logger");
 
 const utils={
@@ -22,8 +22,9 @@ const utils={
         userData._id=undefined; //prevent duplicate record error
         userData=userData.toObject();
         userData.sessionid=responseObject.sessionid;
+        userData.uuid="xxxxxxxxxx"; 
         
-        AppSession.create(userData,function(error,result){
+        Session.create(userData,function(error,result){
             if(error){
                 logger.error(error);
             }
@@ -44,31 +45,48 @@ const utils={
         userData.emailactivationtoken=undefined;
         userData.forgotpasswordtoken=undefined;
         userData.mobileverificationcode=undefined;
+        userData.mobiletokenstamp = undefined;
         userData.social=undefined;
-        
-        if(request.body.appCall===true){
-            if(request.body.sessionid!=undefined){
-                AppSession.find({sessionid:request.body.sessionid}).remove(function(error,result){
-                    if(error){
-                        logger.error(error);
+
+        if (config.sessionMode === 'jwt'){
+            const jwtOps = require('./jwt');
+    
+            jwtOps.fillJwtSession(request, userData ,function(userData2){
+                if(userData2){
+                    userData2.uuid = undefined;
+                    responseObject.userData = userData2;
+                    response.send(responseObject);
+                    if (responseObject.callback) {
+                        responseObject.callback(null, { sessionid: userData2.sessionid });
                     }
-                });
-            }
-            var randomString=this.randomStringGenerate(32);
-            responseObject.sessionid=randomString+userData.username;
-            var sid = responseObject.sessionid;
-            responseObject.userData=userData;
-            this.fillAppSession(userData,responseObject,response);
-            if(responseObject.callback){
-                responseObject.callback(null,{sessionid:sid});
-            }
+                }
+            });
         }
         else{
-            this.fillWebSession(request,userData);
-            responseObject.userData=userData;
-            response.send(responseObject);
-            if(responseObject.callback){
-                responseObject.callback(null);
+            if (request.body.appCall === true) {
+                if (request.body.sessionid != undefined) {
+                    Session.find({ sessionid: request.body.sessionid }).remove(function (error, result) {
+                        if (error) {
+                            logger.error(error);
+                        }
+                    });
+                }
+                var randomString = this.randomStringGenerate(32);
+                responseObject.sessionid = randomString + userData.username;
+                var sid = responseObject.sessionid;
+                responseObject.userData = userData;
+                this.fillAppSession(userData, responseObject, response);
+                if (responseObject.callback) {
+                    responseObject.callback(null, { sessionid: sid });
+                }
+            }
+            else {
+                this.fillWebSession(request, userData);
+                responseObject.userData = userData;
+                response.send(responseObject);
+                if (responseObject.callback) {
+                    responseObject.callback(null);
+                }
             }
         }
     },
@@ -88,12 +106,12 @@ const utils={
     appSessionDestroy:function(id,response){
         logger.debug('config utils appSessionDestroy');
 
-        AppSession.find({sessionid:id}).remove(function(error,result){
+        Session.find({sessionid:id}).remove(function(error,result){
             if(error){
                 logger.error(error);
             }
             else{
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 response.json({message:"success"});
             }
         });

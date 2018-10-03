@@ -1,0 +1,100 @@
+<h2>Admin dashboard</h2>
+
+ Select Role : <select ng-model="selectedRole" ng-change="callMe()"  ng-options="role as role.role for role in roles"></select>
+
+
+<h3>Allocate New Rights</h3>
+<table class="table" ng-repeat="(key, value) in allocateRight track by $index">
+    <thead>
+        <th style="cursor:pointer;" ng-click="hideRightHead($index)">{{key}}</th>
+    </thead>
+    <tbody ng-show="$index==showname">
+        <tr ng-repeat="right in value"><td><input type="checkbox" ng-click="checkright(right)"  ng-checked="returnRight(right)">&nbsp; {{right}}</td></tr>
+    </tbody>
+</table>
+<button class="btn btn-success" ng-click="AllocateRight()">Allocate Rights</button>
+<br>
+{{allocateRightMsg}}
+<br>
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Role</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assignRole">Assign Role</button>
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteRole">Delete Role</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create Role</h4>
+      </div>
+      <div class="modal-body">
+          <form ng-submit="submitRole()">
+              <input type="text" placeholder="New Role" ng-model="role_name">
+              <input type="submit" class="btn btn-success" value="Create">
+          </form>
+        {{createRoleMsg}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AssignRole modal -->
+<div id="assignRole" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- AssignRole modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Allocate Role</h4>
+      </div>
+      <div class="modal-body">
+          <form ng-submit="allocateRole()">
+              <input type="email" placeholder="Email of user" ng-model="user_email">
+              <input type="submit" class="btn btn-success" value="Assign">
+          </form>
+        {{allocateRoleMsg}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DeleteRole modal -->
+<div id="deleteRole" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- DeleteRole modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Allocate Role</h4>
+      </div>
+      <div class="modal-body">
+          Are you sure about deleting the role <span style="color:red">{{selectedRole.role}}</span> ?
+          <button class="btn btn-danger" ng-click="deleteRole()">Yes</button>
+          <button class="btn btn-default" data-dismiss="modal">No</button>
+        {{deleteRoleMsg}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+

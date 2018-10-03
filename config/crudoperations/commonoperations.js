@@ -3,6 +3,7 @@
 const User = require("../userschema");
 const utils = require("../utils");
 const logger = require("../logger");
+const config = require("../config");
 
 const dbOperations = {
 
@@ -15,7 +16,7 @@ const dbOperations = {
                 logger.error(error);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if (result[0] != undefined) {
                     object.notFound = false;
                 }
@@ -49,7 +50,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     if (result.length < 1) {
                         response.json({ message: "fail" });
                     }
@@ -77,76 +78,12 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     response.json({ message: "success" });
                 }
             });
     },
 
-
-    // //////////////////Social Signin//////////////////////////
-    // ///////////Check if user exists
-    // socialSignin:function(request,response){
-    //     var that=this;
-    //     var SocialObject=request.body;
-
-    //     User.find({
-    //         "useremail":SocialObject.Email
-    //     }
-    //     ,function(error,result){
-    //         if(error){
-    //             logger.error(error);
-    //         }
-    //         else if(result){
-    //             if(result[0]===undefined){
-    //                 that.socialRegister(request,response);
-    //             }
-    //             else{
-    //                 var sessionData=result[0];
-    //                 var responseObject={
-    //                     message:"loggedIn",
-    //                 };
-    //                 utils.fillSession(request,response,sessionData,responseObject);
-    //             }
-    //         }
-    //         else{
-    //             response.json({message:"fail"});
-    //         }
-    //     })
-    // },   
-
-
-
-
-    // ////////Register new User
-    // socialRegister:function(request,response){
-    //     var SocialObject =request.body;
-    //     var aPosition=SocialObject.Email.indexOf("@");
-    //     var userName=SocialObject.Email.substring(0,aPosition);
-
-    //     var UserData={};
-    //     UserData.userinfo={};
-    //     UserData.useremail=SocialObject.Email;
-    //     UserData.username=userName;
-    //     UserData.password1="social";
-    //     UserData.role="customer";
-    //     UserData.registrationdate=new Date();
-    //     UserData.userinfo.fullname=SocialObject.FullName;
-    //     UserData.emailverified=true;
-    //     UserData.socialconnection=SocialObject.Social;
-
-    //     User.create(UserData,function(error,result){
-    //         if(error){
-    //             response.json({message:"Can't Add Error Occured, Try later"});
-    //         }
-    //         else{
-    //             var responseObject={
-    //                 message:"registered",
-    //             };
-    //             utils.fillSession(request,response,result,responseObject);
-    //         }
-    //     });
-    // },
 
     //////////////////Social Signin//////////////////////////
     ///////////Check if user exists
@@ -156,7 +93,10 @@ const dbOperations = {
         var SocialObject = request.body;
 
         User.find({
-            "useremail": SocialObject.Email
+            "$or":[
+                {"useremail": SocialObject.Email},
+                {"social": {$elemMatch: {"sId": SocialObject.socialId}}}
+            ]
         }
             , function (error, result) {
                 if (error) {
@@ -164,7 +104,7 @@ const dbOperations = {
                     return done(null);
                 }
                 else if (result) {
-                    logger.debug('crud result'+ result); 
+                    logger.debug('crud result'); 
                     if (result[0] === undefined) {
                         that.socialRegister(request, response, done);
                     }
@@ -188,6 +128,7 @@ const dbOperations = {
 
     ////////Register new User
     socialRegister: function (request, response, done) {
+        var that = this;
         logger.debug('crud common socialRegister');
         var SocialObject = request.body;
         var aPosition = SocialObject.Email.indexOf("@");
@@ -199,10 +140,10 @@ const dbOperations = {
         UserData.useremail = SocialObject.Email;
         UserData.username = userName;
         UserData.password1 = "social";
-        UserData.role = "customer";
+        UserData.role = config.defaultRole;
         UserData.registrationdate = new Date();
         UserData.userinfo.fullname = SocialObject.FullName;
-        UserData.emailverified = true;
+        UserData.emailverified = SocialObject.verified;
         UserData.userid = utils.randomStringGenerate(32);
 
         UserData.social = [];
@@ -218,7 +159,10 @@ const dbOperations = {
                 return done(null);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
+                if(!UserData.emailverified){
+                    that.sendLink(result.useremail,"emailactivate","emailactivationtoken");
+                }
                 var responseObject = {     //No use
                     message: "registered",
                     callback: done
@@ -257,7 +201,7 @@ const dbOperations = {
                     logger.error(error);
                 }
                 else {
-                    logger.debug('crud result' + result);
+                    logger.debug('crud result');
                     userData.email = UserEmail;
                     userData.url = Url;
 
@@ -271,13 +215,13 @@ const dbOperations = {
 
     getProfileData: function (id, userData, callback) {
         logger.debug('crud common getProfileData');
-        const AppSession = require('../appsessdbschema');
-        AppSession.find({ sessionid: id }, function (error, result) {
+        const Session = require('../sessionschema');
+        Session.find({ sessionid: id }, function (error, result) {
             if (error) {
                 logger.error(error);
             }
             else {
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 userData = result[0];
             }
             callback(userData);

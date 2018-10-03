@@ -303,7 +303,7 @@ angular.module('webskeletonApp')
 
         var promise=profile.verifyCode(CodeObject);
         promise.then(function(data) {
-          if(data.data.message==="pass"){
+          if(data.data.message==="success"){
             $scope.CodeMessage="Verified & Updated";
             webindex.needReload=true;
             $route.reload();

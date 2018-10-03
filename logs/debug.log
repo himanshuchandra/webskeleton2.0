@@ -1,182 +1,187 @@
-[2017-12-11 16:52:39.499] [DEBUG] debug - routes index webindex
-[2017-12-11 16:53:25.735] [DEBUG] debug - routes index webindex
-[2017-12-11 16:53:42.653] [DEBUG] debug - routes index webindex
-[2017-12-11 17:07:57.483] [DEBUG] debug - routes index webindex
-[2017-12-11 17:13:19.716] [DEBUG] debug - routes social google
-[2017-12-11 17:13:19.717] [DEBUG] debug - crud common socialSignin
-[2017-12-11 17:13:20.030] [DEBUG] debug - crud result
-[2017-12-11 17:13:20.031] [DEBUG] debug - crud common socialRegister
-[2017-12-11 17:13:20.031] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:13:20.583] [DEBUG] debug - crud result{ __v: 0,
-  useremail: 'surveyshimanshu@gmail.com',
-  username: 'surveyshimanshu@Google',
-  password1: 'social',
-  role: 'customer',
-  registrationdate: 2017-12-11T11:43:20.031Z,
-  emailverified: true,
-  userid: '0OOQDy3D3wQZOWK36R8jDLpxeQovrpWp',
-  _id: 5a2e6f58f05a032eccf5a65b,
-  social: 
-   [ { connection: 'Google',
-       sId: '117830524079511892007',
-       accessToken: 'ya29.Gl0fBa2xgCDZCmukVvbpy-6auT8m-0lYbzYZ937GCflJTE26aIHpHan4Ap9EPpeE6DxRRQmK3_yGllmGE7jX-r5XPYNpyIzCAz1J-N5lZ_ohB818Wjv5E6S2UiJvTXM',
-       _id: 5a2e6f58f05a032eccf5a65c } ],
-  userinfo: { fullname: 'Himanshu Chandra' } }
-[2017-12-11 17:13:20.584] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:13:20.586] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:13:22.988] [DEBUG] debug - routes index webindex
-[2017-12-11 17:13:22.989] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:13:23.002] [DEBUG] debug - crud result{ _id: 5a2e6f58f05a032eccf5a65b,
-  useremail: 'surveyshimanshu@gmail.com',
-  username: 'surveyshimanshu@Google',
-  password1: 'social',
-  role: 'customer',
-  registrationdate: 2017-12-11T11:43:20.031Z,
-  emailverified: true,
-  userid: '0OOQDy3D3wQZOWK36R8jDLpxeQovrpWp',
-  __v: 0,
-  social: 
-   [ { connection: 'Google',
-       sId: '117830524079511892007',
-       accessToken: 'ya29.Gl0fBa2xgCDZCmukVvbpy-6auT8m-0lYbzYZ937GCflJTE26aIHpHan4Ap9EPpeE6DxRRQmK3_yGllmGE7jX-r5XPYNpyIzCAz1J-N5lZ_ohB818Wjv5E6S2UiJvTXM',
-       _id: 5a2e6f58f05a032eccf5a65c } ],
-  userinfo: { fullname: 'Himanshu Chandra' } }
-[2017-12-11 17:13:23.003] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:13:23.004] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:13:35.853] [DEBUG] debug - routes index logout
-[2017-12-11 17:13:35.854] [DEBUG] debug - crud index destroySession
-[2017-12-11 17:13:35.854] [DEBUG] debug - config utils webSessionDestroy
-[2017-12-11 17:13:37.569] [DEBUG] debug - routes index webindex
-[2017-12-11 17:13:52.424] [DEBUG] debug - routes common checkUsername
-[2017-12-11 17:13:52.425] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:13:52.433] [DEBUG] debug - crud result
-[2017-12-11 17:13:52.444] [DEBUG] debug - routes common checkUsername
-[2017-12-11 17:13:52.445] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:13:52.448] [DEBUG] debug - crud result
-[2017-12-11 17:13:52.507] [DEBUG] debug - routes common checkUsername
-[2017-12-11 17:13:52.507] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:13:52.510] [DEBUG] debug - crud result
-[2017-12-11 17:14:00.482] [DEBUG] debug - routes signup signup
-[2017-12-11 17:14:00.483] [DEBUG] debug - validate email
-[2017-12-11 17:14:00.483] [DEBUG] debug - validate username
-[2017-12-11 17:14:00.484] [DEBUG] debug - validate password
-[2017-12-11 17:14:00.485] [DEBUG] debug - validate string
-[2017-12-11 17:14:00.486] [DEBUG] debug - crud signup checkUser
-[2017-12-11 17:14:00.489] [DEBUG] debug - crud result
-[2017-12-11 17:14:00.489] [DEBUG] debug - crud common checkUsername
-[2017-12-11 17:14:00.492] [DEBUG] debug - crud result
-[2017-12-11 17:14:00.493] [DEBUG] debug - crud signup addUser
-[2017-12-11 17:14:00.577] [DEBUG] debug - config encrypt genRandomString
-[2017-12-11 17:14:00.577] [DEBUG] debug - config encrypt sha512
-[2017-12-11 17:14:00.590] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:14:00.600] [DEBUG] debug - crud result{ __v: 0,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  _id: 5a2e6f80f05a032eccf5a65d,
-  social: [] }
-[2017-12-11 17:14:00.601] [DEBUG] debug - crud common sendLink
-[2017-12-11 17:14:00.601] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:14:00.606] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:14:00.607] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:14:00.629] [DEBUG] debug - routes index webindex
-[2017-12-11 17:14:00.629] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:14:00.640] [DEBUG] debug - crud result[object Object]
-[2017-12-11 17:14:00.642] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
-  email: 'prashant@jij.pro',
-  url: 'http://localhost:1234/#/emailactivate?e=prashant@jij.pro&t=AiOKDUp5ohSogvOVMdH5yqe9qjXPUoIK' }
-[2017-12-11 17:14:00.646] [DEBUG] debug - config utils sendMail
-[2017-12-11 17:14:01.653] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'AiOKDUp5ohSogvOVMdH5yqe9qjXPUoIK',
-  social: [] }
-[2017-12-11 17:14:01.654] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:14:01.655] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:14:05.396] [INFO] debug - Message sent: 250 2.0.0 OK 1512992645 v88sm30102633pfk.31 - gsmtp
-[2017-12-11 17:14:38.831] [DEBUG] debug - routes index webindex
-[2017-12-11 17:14:38.832] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:14:38.836] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'AiOKDUp5ohSogvOVMdH5yqe9qjXPUoIK',
-  social: [] }
-[2017-12-11 17:14:38.837] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:14:38.837] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:18:19.089] [DEBUG] debug - routes index sendActivationLink
-[2017-12-11 17:18:19.090] [DEBUG] debug - crud index sendActivationLink
-[2017-12-11 17:18:19.090] [DEBUG] debug - crud common sendLink
-[2017-12-11 17:18:19.090] [DEBUG] debug - config utils randomStringGenerate
-[2017-12-11 17:18:19.095] [DEBUG] debug - crud result[object Object]
-[2017-12-11 17:18:19.095] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
-  email: 'prashant@jij.pro',
-  url: 'http://localhost:1234/#/emailactivate?e=prashant@jij.pro&t=QnHEzRuoPGFaVvskiPp6Fzzag2kVbSbb' }
-[2017-12-11 17:18:19.096] [DEBUG] debug - config utils sendMail
-[2017-12-11 17:18:21.897] [INFO] debug - Message sent: 250 2.0.0 OK 1512992901 e190sm23329062pfe.15 - gsmtp
-[2017-12-11 17:23:59.066] [DEBUG] debug - routes index logout
-[2017-12-11 17:23:59.067] [DEBUG] debug - crud index destroySession
-[2017-12-11 17:23:59.067] [DEBUG] debug - config utils webSessionDestroy
-[2017-12-11 17:24:01.111] [DEBUG] debug - routes index webindex
-[2017-12-11 17:33:19.779] [DEBUG] debug - routes login login
-[2017-12-11 17:33:19.780] [DEBUG] debug - validate email
-[2017-12-11 17:33:19.780] [DEBUG] debug - validate username
-[2017-12-11 17:33:19.780] [DEBUG] debug - validate mobile
-[2017-12-11 17:33:19.781] [DEBUG] debug - validate password
-[2017-12-11 17:33:19.781] [DEBUG] debug - crud login doLogin
-[2017-12-11 17:33:19.936] [DEBUG] debug - crud result
-[2017-12-11 17:33:25.879] [DEBUG] debug - routes login login
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate email
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate username
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate mobile
-[2017-12-11 17:33:25.879] [DEBUG] debug - validate password
-[2017-12-11 17:33:25.880] [DEBUG] debug - crud login doLogin
-[2017-12-11 17:33:25.883] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'QnHEzRuoPGFaVvskiPp6Fzzag2kVbSbb',
-  social: [] }
-[2017-12-11 17:33:25.884] [DEBUG] debug - config encrypt sha512
-[2017-12-11 17:33:25.884] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:33:25.886] [DEBUG] debug - config utils fillWebSession
-[2017-12-11 17:33:25.903] [DEBUG] debug - routes index webindex
-[2017-12-11 17:33:25.903] [DEBUG] debug - crud index checkSession
-[2017-12-11 17:33:25.907] [DEBUG] debug - crud result{ _id: 5a2e6f80f05a032eccf5a65d,
-  useremail: 'prashant@jij.pro',
-  username: 'ppppppp',
-  password1: 'b853b678d89b1715e97fdac23938005724881971c476976a583421cc1b76d4bff68b792ad5ea22b277769e07e2c9974bed6d8b1a6ab12ca53a5b485a90b14a12',
-  role: 'customer',
-  salt: '15aa3613abf88eb6',
-  userid: 'wQzWAyLTSq5C0QkUIS03RMB47Oc5pfx0',
-  registrationdate: 2017-12-11T11:44:00.590Z,
-  emailverified: false,
-  __v: 0,
-  emailactivationtoken: 'QnHEzRuoPGFaVvskiPp6Fzzag2kVbSbb',
-  social: [] }
-[2017-12-11 17:33:25.908] [DEBUG] debug - config utils fillSession
-[2017-12-11 17:33:25.908] [DEBUG] debug - config utils fillWebSession
+[2018-06-25 21:56:12.561] [DEBUG] debug - crud login doLogin
+[2018-06-25 21:56:12.573] [DEBUG] debug - crud result
+[2018-06-25 21:56:12.576] [DEBUG] debug - config encrypt sha512
+[2018-06-25 21:56:12.578] [DEBUG] debug - config utils fillSession
+[2018-06-25 21:56:12.682] [DEBUG] debug - jwt fillJwtSession
+[2018-06-25 21:56:12.683] [DEBUG] debug - jwt generateJwt
+[2018-06-25 21:56:12.710] [DEBUG] debug - jwt storeToken
+[2018-06-25 22:35:12.716] [DEBUG] debug - routes login login
+[2018-06-25 22:35:12.734] [DEBUG] debug - validate email
+[2018-06-25 22:35:12.735] [DEBUG] debug - validate username
+[2018-06-25 22:35:12.735] [DEBUG] debug - validate mobile
+[2018-06-25 22:35:12.735] [DEBUG] debug - validate password
+[2018-06-25 22:35:12.735] [DEBUG] debug - crud login doLogin
+[2018-06-25 22:35:12.868] [DEBUG] debug - crud result
+[2018-06-25 22:35:12.869] [DEBUG] debug - config encrypt sha512
+[2018-06-25 22:35:12.906] [DEBUG] debug - config utils fillSession
+[2018-06-25 22:35:12.910] [DEBUG] debug - jwt fillJwtSession
+[2018-06-25 22:35:12.911] [DEBUG] debug - jwt generateJwt
+[2018-06-25 22:35:12.986] [DEBUG] debug - jwt storeToken
+[2018-06-25 23:40:49.267] [DEBUG] debug - init>createSuperAdmin
+[2018-06-25 23:40:49.276] [DEBUG] debug - crud role createsuperadmin
+[2018-06-25 23:40:49.287] [DEBUG] debug - crud role getRole
+[2018-06-25 23:40:49.484] [DEBUG] debug - crud result
+[2018-06-25 23:40:49.525] [DEBUG] debug - crud role fillRights
+[2018-06-25 23:40:49.578] [DEBUG] debug - crud result
+[2018-06-25 23:41:06.855] [DEBUG] debug - routes login login
+[2018-06-25 23:41:06.856] [DEBUG] debug - validate email
+[2018-06-25 23:41:06.856] [DEBUG] debug - validate username
+[2018-06-25 23:41:06.857] [DEBUG] debug - validate mobile
+[2018-06-25 23:41:06.858] [DEBUG] debug - validate password
+[2018-06-25 23:41:06.860] [DEBUG] debug - crud login doLogin
+[2018-06-25 23:41:06.874] [DEBUG] debug - crud result
+[2018-06-25 23:41:06.908] [DEBUG] debug - config encrypt sha512
+[2018-06-25 23:41:06.910] [DEBUG] debug - config utils fillSession
+[2018-06-25 23:41:09.515] [DEBUG] debug - jwt fillJwtSession
+[2018-06-25 23:41:09.516] [DEBUG] debug - jwt generateJwt
+[2018-06-25 23:41:09.565] [DEBUG] debug - jwt storeToken
+[2018-06-26 00:00:01.703] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:00:01.711] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:00:01.722] [DEBUG] debug - crud role getRole
+[2018-06-26 00:00:01.946] [DEBUG] debug - crud result
+[2018-06-26 00:00:01.948] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:00:02.003] [DEBUG] debug - crud result
+[2018-06-26 00:00:19.463] [DEBUG] debug - routes login login
+[2018-06-26 00:00:19.464] [DEBUG] debug - validate email
+[2018-06-26 00:00:19.465] [DEBUG] debug - validate username
+[2018-06-26 00:00:19.466] [DEBUG] debug - validate mobile
+[2018-06-26 00:00:19.468] [DEBUG] debug - validate password
+[2018-06-26 00:00:19.470] [DEBUG] debug - crud login doLogin
+[2018-06-26 00:00:19.485] [DEBUG] debug - crud result
+[2018-06-26 00:00:19.538] [DEBUG] debug - config encrypt sha512
+[2018-06-26 00:00:19.540] [DEBUG] debug - config utils fillSession
+[2018-06-26 00:00:20.547] [DEBUG] debug - jwt fillJwtSession
+[2018-06-26 00:00:20.548] [DEBUG] debug - jwt generateJwt
+[2018-06-26 00:00:20.563] [DEBUG] debug - jwt storeToken
+[2018-06-26 00:05:05.218] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:05:05.227] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:05:05.239] [DEBUG] debug - crud role getRole
+[2018-06-26 00:05:05.515] [DEBUG] debug - crud result
+[2018-06-26 00:05:05.517] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:05:05.598] [DEBUG] debug - crud result
+[2018-06-26 00:06:28.244] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:06:28.253] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:06:28.264] [DEBUG] debug - crud role getRole
+[2018-06-26 00:06:28.610] [DEBUG] debug - crud result
+[2018-06-26 00:06:28.613] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:06:28.684] [DEBUG] debug - crud result
+[2018-06-26 00:09:49.078] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:09:49.087] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:09:49.097] [DEBUG] debug - crud role getRole
+[2018-06-26 00:09:49.263] [DEBUG] debug - crud result
+[2018-06-26 00:09:49.265] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:09:49.316] [DEBUG] debug - crud result
+[2018-06-26 00:10:37.030] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:10:37.039] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:10:37.050] [DEBUG] debug - crud role getRole
+[2018-06-26 00:10:37.251] [DEBUG] debug - crud result
+[2018-06-26 00:10:37.252] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:10:37.301] [DEBUG] debug - crud result
+[2018-06-26 00:12:31.140] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:12:31.149] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:12:31.160] [DEBUG] debug - crud role getRole
+[2018-06-26 00:12:31.346] [DEBUG] debug - crud result
+[2018-06-26 00:12:31.347] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:12:31.394] [DEBUG] debug - crud result
+[2018-06-26 00:13:05.741] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:13:05.751] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:13:05.762] [DEBUG] debug - crud role getRole
+[2018-06-26 00:13:05.933] [DEBUG] debug - crud result
+[2018-06-26 00:13:05.935] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:13:05.985] [DEBUG] debug - crud result
+[2018-06-26 00:13:16.656] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:13:16.664] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:13:16.674] [DEBUG] debug - crud role getRole
+[2018-06-26 00:13:16.839] [DEBUG] debug - crud result
+[2018-06-26 00:13:16.841] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:13:16.904] [DEBUG] debug - crud result
+[2018-06-26 00:13:43.356] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:13:43.364] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:13:43.374] [DEBUG] debug - crud role getRole
+[2018-06-26 00:13:43.550] [DEBUG] debug - crud result
+[2018-06-26 00:13:43.552] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:13:43.605] [DEBUG] debug - crud result
+[2018-06-26 00:16:04.984] [DEBUG] debug - routes login login
+[2018-06-26 00:16:04.985] [DEBUG] debug - validate email
+[2018-06-26 00:16:04.986] [DEBUG] debug - validate username
+[2018-06-26 00:16:04.987] [DEBUG] debug - validate mobile
+[2018-06-26 00:16:04.987] [DEBUG] debug - validate password
+[2018-06-26 00:16:04.988] [DEBUG] debug - crud login doLogin
+[2018-06-26 00:16:05.003] [DEBUG] debug - crud result
+[2018-06-26 00:16:05.006] [DEBUG] debug - config encrypt sha512
+[2018-06-26 00:16:05.008] [DEBUG] debug - config utils fillSession
+[2018-06-26 00:16:05.102] [DEBUG] debug - jwt fillJwtSession
+[2018-06-26 00:16:05.103] [DEBUG] debug - jwt generateJwt
+[2018-06-26 00:16:05.118] [DEBUG] debug - jwt storeToken
+[2018-06-26 00:54:51.887] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:54:51.895] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:54:51.905] [DEBUG] debug - crud role getRole
+[2018-06-26 00:54:52.079] [DEBUG] debug - crud result
+[2018-06-26 00:54:52.081] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:54:52.131] [DEBUG] debug - crud result
+[2018-06-26 00:56:14.563] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:56:14.572] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:56:14.583] [DEBUG] debug - crud role getRole
+[2018-06-26 00:56:14.750] [DEBUG] debug - crud result
+[2018-06-26 00:56:14.752] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:56:14.874] [DEBUG] debug - crud result
+[2018-06-26 00:56:43.728] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 00:56:43.738] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 00:56:43.748] [DEBUG] debug - crud role getRole
+[2018-06-26 00:56:43.932] [DEBUG] debug - crud result
+[2018-06-26 00:56:43.934] [DEBUG] debug - crud role fillRights
+[2018-06-26 00:56:43.990] [DEBUG] debug - crud result
+[2018-06-26 01:01:56.391] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:01:56.400] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:01:56.409] [DEBUG] debug - crud role getRole
+[2018-06-26 01:01:56.577] [DEBUG] debug - crud result
+[2018-06-26 01:01:56.579] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:01:56.638] [DEBUG] debug - crud result
+[2018-06-26 01:02:21.263] [DEBUG] debug - routes login login
+[2018-06-26 01:02:21.265] [DEBUG] debug - validate email
+[2018-06-26 01:02:21.267] [DEBUG] debug - validate username
+[2018-06-26 01:02:21.267] [DEBUG] debug - validate mobile
+[2018-06-26 01:02:21.268] [DEBUG] debug - validate password
+[2018-06-26 01:02:21.270] [DEBUG] debug - crud login doLogin
+[2018-06-26 01:02:21.283] [DEBUG] debug - crud result
+[2018-06-26 01:02:21.308] [DEBUG] debug - config encrypt sha512
+[2018-06-26 01:02:21.310] [DEBUG] debug - config utils fillSession
+[2018-06-26 01:02:22.084] [DEBUG] debug - jwt fillJwtSession
+[2018-06-26 01:02:22.085] [DEBUG] debug - jwt generateJwt
+[2018-06-26 01:02:22.098] [DEBUG] debug - jwt storeToken
+[2018-06-26 01:07:37.671] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:07:37.680] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:07:37.690] [DEBUG] debug - crud role getRole
+[2018-06-26 01:07:37.856] [DEBUG] debug - crud result
+[2018-06-26 01:07:37.858] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:07:37.910] [DEBUG] debug - crud result
+[2018-06-26 01:07:48.700] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:07:48.711] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:07:48.722] [DEBUG] debug - crud role getRole
+[2018-06-26 01:07:48.931] [DEBUG] debug - crud result
+[2018-06-26 01:07:48.933] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:07:48.993] [DEBUG] debug - crud result
+[2018-06-26 01:08:29.474] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:08:29.483] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:08:29.494] [DEBUG] debug - crud role getRole
+[2018-06-26 01:08:29.663] [DEBUG] debug - crud result
+[2018-06-26 01:08:29.665] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:08:29.720] [DEBUG] debug - crud result
+[2018-06-26 01:08:47.141] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:08:47.153] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:08:47.166] [DEBUG] debug - crud role getRole
+[2018-06-26 01:08:47.337] [DEBUG] debug - crud result
+[2018-06-26 01:08:47.338] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:08:47.391] [DEBUG] debug - crud result
+[2018-06-26 01:09:16.549] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:09:16.558] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:09:16.570] [DEBUG] debug - crud role getRole
+[2018-06-26 01:09:16.739] [DEBUG] debug - crud result
+[2018-06-26 01:09:16.741] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:09:16.789] [DEBUG] debug - crud result
+[2018-06-26 01:09:36.742] [DEBUG] debug - init>createSuperAdmin
+[2018-06-26 01:09:36.750] [DEBUG] debug - crud role createsuperadmin
+[2018-06-26 01:09:36.761] [DEBUG] debug - crud role getRole
+[2018-06-26 01:09:36.932] [DEBUG] debug - crud result
+[2018-06-26 01:09:36.935] [DEBUG] debug - crud role fillRights
+[2018-06-26 01:09:36.982] [DEBUG] debug - crud result

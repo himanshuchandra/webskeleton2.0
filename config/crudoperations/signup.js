@@ -21,7 +21,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result[0]!=undefined){
                     response.json({message:"emailTaken"});
                 }
@@ -47,12 +47,12 @@ const dbOperations={
     addUser:function(request,response){
         logger.debug('crud signup addUser');
         const utils =require("../utils");
-
+        const config = require('../config');
         var data={};
         data.useremail=request.body.useremail;
         data.username=request.body.username;
         data.password1=request.body.password1;
-        data.role="customer";
+        data.role=config.defaultRole;
     
         const encrypt=require('../encrypt');
         var salt=encrypt.genRandomString(16);
@@ -71,10 +71,10 @@ const dbOperations={
                 logger.error(error);
             }
             else{
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 var responseObject={
-                    message:"pass",
+                    message:"success",
                 };
                 utils.fillSession(request,response,result,responseObject);
             }

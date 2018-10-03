@@ -25,7 +25,7 @@ angular.module('webskeletonApp')
         }
       }
       else if (webindex.loaded === true && webindex.loggedIn != true) {
-        if ($location.path() === '/profile') {
+        if ($location.path() === '/profile' || $location.path() === '/superadmin') {
           $location.path('/login');
         }
       }
@@ -48,7 +48,7 @@ angular.module('webskeletonApp')
     $scope.loadData = function () {
       var promise = webindex.checkStatus();
       promise.then(function (data) {
-        if (data.data.message === "fail") {
+        if (data.data.message === "unknown") {
           $scope.loginStatus = "Login/SignUp";
         }
         else if (data.data.Message != undefined) {

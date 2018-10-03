@@ -11,7 +11,10 @@ const dbOperations={
         logger.debug('crud login doLogin');
         const utils =require("../utils");
         var loginObject=request.body;
-
+        var mobileId = loginObject.loginid; 
+        if(loginObject.loginid.length!=10){
+            mobileId = "xxxxxxxxxxxxxxx";
+        }
         User.find({
             "$or": [{
                     "useremail":loginObject.loginid
@@ -20,7 +23,7 @@ const dbOperations={
                     "username": loginObject.loginid
                 },
                 {
-                    "mobile": { "$regex": loginObject.loginid, "$options": "i" }
+                    "mobile": { "$regex": mobileId }
                 }]
         },
         function(error,result){
@@ -28,7 +31,7 @@ const dbOperations={
                 logger.error(error);
             }
             else{ 
-                logger.debug('crud result'+ result); 
+                logger.debug('crud result'); 
                 if(result.length<1){
                     response.json({message:"fail"});
                 }

@@ -1,10 +1,9 @@
 'use strict';
-// Step -3 Represent Schema
 
 const mongoose = require("./connection");
 const config = require("./config");
 const schema = mongoose.Schema;
-// Step -4  Creating Schema for the Collection
+
 const userSchema = new schema({
   userid: { type : String , unique : true, required : true },
   useremail: { type : String , unique : true, required : true },
@@ -26,6 +25,7 @@ const userSchema = new schema({
   passwordtokenstamp: Date,
   mobileverificationcode: String,
   temporarymobile: String,
+  mobiletokenstamp: Date,
   role: String,
   registrationdate: Date,
   social: [
@@ -37,6 +37,6 @@ const userSchema = new schema({
   ]
 });
 
-const User = mongoose.model(config.dbCollection, userSchema);
+const User = mongoose.model(config.userCollection, userSchema);
 
 module.exports = User;
